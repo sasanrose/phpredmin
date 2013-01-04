@@ -60,22 +60,6 @@ final class Router
         return isset($this->_query_strings[$key]) ? $this->_query_strings[$key] : Null;
     }
 
-    public function input($key, $default = Null) {
-        switch ($this->method) {
-            case self::POST:
-                $result = isset($_POST[$key]) ? $_POST[$key] : $default;
-                break;
-            case self::PUT:
-                parse_str(file_get_contents("php://input"), $vars);
-                $result = isset($vars[$key]) ? $vars[$key] : $default;
-                break;
-            default:
-                $result = $default;
-        }
-
-        return $result;
-    }
-
     public function route() {
         $class      = $this->_controller.'_Controller';
         $method     = $this->_action.'Action';
