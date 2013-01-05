@@ -24,9 +24,18 @@ final class Router
     }
 
     protected function parse() {
-        $this->method = $_SERVER['REQUEST_METHOD'];
-        $this->host   = $_SERVER['HTTP_HOST'];
-        $this->path   = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
+        $this->method   = $_SERVER['REQUEST_METHOD'];
+        $this->protocol = isset($_SERVER['HTTPS']) ? 'https' : 'http';
+        $this->host     = $_SERVER['HTTP_HOST'];
+        $this->baseUrl  = $this->protocol.'://'.$this->host;
+        $this->url      = $this->protocol.'://'.$this->host.$_SERVER['SCRIPT_NAME'];
+        $this->path     = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
+
+        if ($this->path == $_SERVER['REQUEST_URI'])
+            $this->path = '';
+
+        if (preg_match('/^(.*)\/(.*)$/', $_SERVER['SCRIPT_NAME'], $matches))
+            $this->baseUrl .= $matches[1];
 
         if (preg_match('/^(.*)\?(.*)$/', $this->path, $matches)) {
             $this->path = $matches[1];
