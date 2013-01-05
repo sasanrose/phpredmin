@@ -4,8 +4,13 @@ class PhpTemplate
     protected $_dir  = Null;
     protected $_data = Array();
 
+    public $app    = Null;
+    public $router = Null;
+
     public function __construct() {
-        $this->_dir  = '..'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR;
+        $this->_dir   = '..'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR;
+        $this->app    = App::instance();
+        $this->router = Router::instance();
     }
 
     public function render($__view, $data = Array()) {
