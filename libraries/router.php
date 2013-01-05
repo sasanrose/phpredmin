@@ -8,8 +8,6 @@ final class Router
 
     protected $_data          = Array();
     protected $_params        = Array();
-    protected $_controller    = Null;
-    protected $_action        = Null;
     protected $_query_strings = Array();
 
     protected static $_instance = Null;
@@ -41,11 +39,11 @@ final class Router
 
         $this->_params = explode('/', trim($this->path, '/'));
 
-        if (!$this->_controller = ucwords(strtolower(array_shift($this->_params))))
-            $this->_controller = App::instance()->config['default_controller'];
+        if (!$this->controller = ucwords(strtolower(array_shift($this->_params))))
+            $this->controller = App::instance()->config['default_controller'];
 
-        if (!$this->_action = array_shift($this->_params))
-            $this->_action = App::instance()->config['default_action'];
+        if (!$this->action = array_shift($this->_params))
+            $this->action = App::instance()->config['default_action'];
     }
 
     public function __get($key) {
@@ -61,8 +59,8 @@ final class Router
     }
 
     public function route() {
-        $class      = $this->_controller.'_Controller';
-        $method     = $this->_action.'Action';
+        $class      = $this->controller.'_Controller';
+        $method     = $this->action.'Action';
         $controller = new $class;
 
         call_user_func_array(array($controller, $method), $this->_params);
