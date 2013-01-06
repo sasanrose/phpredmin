@@ -7,19 +7,22 @@ class PhpTemplate
     public $app    = Null;
     public $router = Null;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->_dir   = '..'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR;
         $this->app    = App::instance();
         $this->router = Router::instance();
     }
 
-    public function render($__view, $data = Array()) {
+    public function render($__view, $data = Array())
+    {
         $content = $this->renderPartial($__view, $data);
 
         echo $this->renderPartial(App::instance()->config['default_layout'], array('content' => $content));
     }
 
-    public function renderPartial($__view, $__data = Array()) {
+    public function renderPartial($__view, $__data = Array())
+    {
         $this->_data = array_merge($__data, $this->_data);
 
         ob_start();
@@ -33,11 +36,13 @@ class PhpTemplate
         return $content;
     }
 
-    public function __set($key, $value) {
+    public function __set($key, $value)
+    {
         $this->_data[$key] = $value;
     }
 
-    public function __get($key) {
+    public function __get($key)
+    {
         return isset($this->_data[$key]) ? $this->_data[$key] : Null;
     }
 }

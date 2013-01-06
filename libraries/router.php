@@ -12,18 +12,21 @@ final class Router
 
     protected static $_instance = Null;
 
-    protected function __construct() {
+    protected function __construct()
+    {
         $this->parse();
     }
 
-    public static function instance() {
+    public static function instance()
+    {
         if (!self::$_instance)
             self::$_instance = new self;
 
         return self::$_instance;
     }
 
-    protected function parse() {
+    protected function parse()
+    {
         $this->method   = $_SERVER['REQUEST_METHOD'];
         $this->protocol = isset($_SERVER['HTTPS']) ? 'https' : 'http';
         $this->host     = $_SERVER['HTTP_HOST'];
@@ -55,19 +58,23 @@ final class Router
             $this->action = App::instance()->config['default_action'];
     }
 
-    public function __get($key) {
+    public function __get($key)
+    {
         return isset($this->_data[$key]) ? $this->_data[$key] : Null;
     }
 
-    public function __set($key, $value) {
+    public function __set($key, $value)
+    {
         $this->_data[$key] = $value;
     }
 
-    public function query($key, $default = Null) {
+    public function query($key, $default = Null)
+    {
         return isset($this->_query_strings[$key]) ? $this->_query_strings[$key] : Null;
     }
 
-    public function route() {
+    public function route()
+    {
         $class      = $this->controller.'_Controller';
         $method     = $this->action.'Action';
         $controller = new $class;

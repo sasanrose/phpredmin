@@ -3,7 +3,8 @@ final class Template
 {
     protected static $_instances = Array();
 
-    public static function factory($driver = 'php') {
+    public static function factory($driver = 'php')
+    {
         if (!isset(self::$_instances[$driver])) {
             include_once(App::instance()->drivers.'template'.DIRECTORY_SEPARATOR.(strtolower($driver)).'.php');
 

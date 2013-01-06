@@ -1,6 +1,7 @@
 <?php
 
-function __autoload($class) {
+function __autoload($class)
+{
     $path = '..'.DIRECTORY_SEPARATOR;
     if (preg_match('/^(.*)_Controller$/', $class, $matches)) {
         $class = $matches[1];

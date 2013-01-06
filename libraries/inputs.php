@@ -3,14 +3,16 @@ class Inputs
 {
     protected static $_instance = Null;
 
-    public static function instance() {
+    public static function instance()
+    {
         if (!self::$_instance)
             self::$_instance = new self;
 
         return self::$_instance;
     }
 
-    public function input($key, $default = Null) {
+    public function input($key, $default = Null)
+    {
         switch (Router::instance()->method) {
             case Router::POST:
                 $result = isset($_POST[$key]) ? filter_var($_POST[$key], FILTER_SANITIZE_STRING) : $default;

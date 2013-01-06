@@ -3,7 +3,8 @@ final class Db
 {
     protected static $_instances = Array();
 
-    public static function factory($driver = Null) {
+    public static function factory($driver = Null)
+    {
         if (!isset(self::$_instances[$driver])) {
             $driver = isset($driver) ? $driver : App::instance()->config['database']['driver'];
 
