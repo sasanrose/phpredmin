@@ -81,7 +81,9 @@ final class Router
 
         if (method_exists($controller, $method))
             call_user_func_array(array($controller, $method), $this->_params);
-        else
+        else {
+            header("HTTP/1.0 404 Not Found");
             Template::factory()->render('404');
+        }
     }
 }
