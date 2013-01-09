@@ -79,6 +79,9 @@ final class Router
         $method     = $this->action.'Action';
         $controller = new $class;
 
-        call_user_func_array(array($controller, $method), $this->_params);
+        if (method_exists($controller, $method))
+            call_user_func_array(array($controller, $method), $this->_params);
+        else
+            Template::factory()->render('404');
     }
 }
