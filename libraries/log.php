@@ -12,9 +12,9 @@ final class Log
 
     public static function factory($driver = Null)
     {
-        if (!isset(self::$_instances[$driver])) {
-            $driver = isset($driver) ? $driver : App::instance()->config['log']['driver'];
+        $driver = isset($driver) ? $driver : App::instance()->config['log']['driver'];
 
+        if (!isset(self::$_instances[$driver])) {
             include_once(App::instance()->drivers.'log/'.(strtolower($driver)).'.php');
 
             $class  = ucwords(strtolower($driver)).'Log';
