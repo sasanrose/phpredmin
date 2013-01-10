@@ -2,7 +2,7 @@
 
 function __autoload($class)
 {
-    $path = '..'.DIRECTORY_SEPARATOR;
+    $path = '../';
     if (preg_match('/^(.*)_Controller$/', $class, $matches)) {
         $class = $matches[1];
         $dir   = 'controllers';
@@ -15,7 +15,7 @@ function __autoload($class)
     } else
         $dir = 'libraries';
 
-    include_once($path.$dir.DIRECTORY_SEPARATOR.(strtolower($class)).'.php');
+    include_once($path.$dir.'/'.(strtolower($class)).'.php');
 }
 
 Router::instance()->route();

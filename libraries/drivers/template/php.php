@@ -9,7 +9,7 @@ class PhpTemplate
 
     public function __construct()
     {
-        $this->_dir   = '..'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR;
+        $this->_dir   = '../views/';
         $this->app    = App::instance();
         $this->router = Router::instance();
     }

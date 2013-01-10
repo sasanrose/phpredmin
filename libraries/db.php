@@ -8,7 +8,7 @@ final class Db
         if (!isset(self::$_instances[$driver])) {
             $driver = isset($driver) ? $driver : App::instance()->config['database']['driver'];
 
-            include_once(App::instance()->drivers.'db'.DIRECTORY_SEPARATOR.(strtolower($driver)).'.php');
+            include_once(App::instance()->drivers.'db/'.(strtolower($driver)).'.php');
 
             $class  = ucwords(strtolower($driver)).'Db';
             self::$_instances[$driver] = new $class;

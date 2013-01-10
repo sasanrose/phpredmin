@@ -7,8 +7,8 @@ final class App
 
     protected function __construct()
     {
-        $this->_data['config']  = include_once('..'.DIRECTORY_SEPARATOR.'config.php');
-        $this->_data['drivers'] = 'drivers'.DIRECTORY_SEPARATOR;
+        $this->_data['config']  = include_once('../config.php');
+        $this->_data['drivers'] = 'drivers/';
     }
 
     public static function instance()
