@@ -13,11 +13,17 @@ $config = Array(
         )
     ),
     'database'  => Array(
-        'driver' => 'mysql',
+        'driver' => 'redis',
         'mysql'  => Array(
             'host'     => 'localhost',
             'username' => 'root',
             'password' => 'root'
+        ),
+        'redis' => Array(
+            'host'     => 'localhost',
+            'port'     => '6379',
+            'password' => Null,
+            'database' => 0
         )
     )
 );
