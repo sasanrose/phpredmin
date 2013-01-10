@@ -13,6 +13,6 @@ class Model
 
     public function __get($object)
     {
-        return isset($this->_objects[$key]) ? $this->_objects[$key] : Null;
+        return isset($this->_objects[$object]) ? $this->_objects[$object] : Null;
     }
 }
