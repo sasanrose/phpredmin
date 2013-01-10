@@ -32,12 +32,16 @@ final class Router
         $this->host     = $_SERVER['HTTP_HOST'];
         $this->baseUrl  = $this->protocol.'://'.$this->host;
         $this->url      = $this->protocol.'://'.$this->host.$_SERVER['SCRIPT_NAME'];
-        $this->path     = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
+        $this->path     = '';
 
-        Log::factory()->write(Log::INFO, $_SERVER['REQUEST_URI'], 'Router');
+        if (PHP_SAPI != 'cli') {
+            $this->path = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
+            Log::factory()->write(Log::INFO, $_SERVER['REQUEST_URI'], 'Router');
 
-        if ($this->path == $_SERVER['REQUEST_URI'])
-            $this->path = '';
+            if ($this->path == $_SERVER['REQUEST_URI'])
+                $this->path = '';
+        } else if (isset($_SERVER['argv'][1]))
+                $this->path = $_SERVER['argv'][1];
 
         if (preg_match('/^(.*)\/(.*)$/', $_SERVER['SCRIPT_NAME'], $matches))
             $this->baseUrl .= $matches[1];
