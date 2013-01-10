@@ -8,6 +8,7 @@ class Model
         $this->_objects['app']    = App::instance();
         $this->_objects['router'] = Router::instance();
         $this->_objects['db']     = Db::instance();
+        $this->_objects['log']    = Log::factory();
     }
 
     public function __get($object)

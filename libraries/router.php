@@ -34,6 +34,8 @@ final class Router
         $this->url      = $this->protocol.'://'.$this->host.$_SERVER['SCRIPT_NAME'];
         $this->path     = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
 
+        Log::factory()->write(Log::INFO, $_SERVER['REQUEST_URI'], 'Router');
+
         if ($this->path == $_SERVER['REQUEST_URI'])
             $this->path = '';
 
