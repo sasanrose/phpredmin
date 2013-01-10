@@ -20,6 +20,9 @@ class FileLog
 
     public function write($type, $msg, $namespace = Null)
     {
+        if (App::instance()->config['log']['threshold'] < Log::instance()->$type)
+            return;
+
         $logfile = $this->_dir.date('Y-m-d').'.log';
 
         if (($file = fopen($logfile, 'a+')) === False)

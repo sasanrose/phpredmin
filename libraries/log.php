@@ -3,12 +3,30 @@
 final class Log
 {
     protected static $_instances = Array();
+    protected static $_instance  = Null;
+
+	protected $_levels = array
+	(
+		'error'   => 1,
+		'notice'  => 2,
+		'info'    => 3,
+        'warning' => 4,
+		'debug'   => 5
+	);
 
     const INFO    = 'info';
     const DEBUG   = 'debug';
     const ERROR   = 'error';
     const WARNING = 'warning';
     const NOTICE  = 'notice';
+
+    public static function instance()
+    {
+        if (!isset(self::$_instance))
+            self::$_instance = new self;
+
+        return self::$_instance;
+    }
 
     public static function factory($driver = Null)
     {
@@ -22,5 +40,10 @@ final class Log
         }
 
         return self::$_instances[$driver];
+    }
+
+    public function __get($key)
+    {
+        return isset($this->_levels[$key]) ? $this->_levels[$key] : 0;
     }
 }
