@@ -81,15 +81,18 @@ final class Router
 
     public function route()
     {
-        $class      = $this->controller.'_Controller';
-        $method     = $this->action.'Action';
-        $controller = new $class;
+        $class  = $this->controller.'_Controller';
+        $method = $this->action.'Action';
 
-        if (method_exists($controller, $method))
-            call_user_func_array(array($controller, $method), $this->_params);
-        else {
-            header("HTTP/1.0 404 Not Found");
-            Template::factory()->render('404');
+        if (class_exists($class)) {
+            $controller = new $class;
+            if (method_exists($controller, $method))
+                call_user_func_array(array($controller, $method), $this->_params);
+
+            return;
         }
+
+        header("HTTP/1.0 404 Not Found");
+        Template::factory()->render('404');
     }
 }
