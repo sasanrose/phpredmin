@@ -10,8 +10,8 @@ final class Session
         ini_set('session.gc_divisor', 100);
         ini_set('session.gc_maxlifetime', App::instance()->config['session']['lifetime']);
 
-        session_start();
         session_name(App::instance()->config['session']['name']);
+        session_start();
     }
 
     public static function instance()
