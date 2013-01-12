@@ -25,6 +25,11 @@ $config = Array(
             'password' => Null,
             'database' => 0
         )
+    ),
+    'session' => Array(
+        'lifetime'       => 7200,
+        'gc_probability' => 2,
+        'name'           => 'nanophpsession'
     )
 );
 
