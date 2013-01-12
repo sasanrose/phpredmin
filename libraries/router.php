@@ -43,6 +43,8 @@ final class Router
         } else if (isset($_SERVER['argv'][1]))
                 $this->path = $_SERVER['argv'][1];
 
+        $this->request = $this->url.$this->path;
+
         if (preg_match('/^(.*)\/(.*)$/', $_SERVER['SCRIPT_NAME'], $matches))
             $this->baseUrl .= $matches[1];
 
