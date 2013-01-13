@@ -6,11 +6,11 @@ function __autoload($class)
     if (preg_match('/^(.*)_Controller$/', $class, $matches)) {
         $class = $matches[1];
         $dir   = 'controllers';
-    } elseif (preg_match('/^(.*)_Models$/', $class, $matches)) {
-        $class = $matches[2];
+    } elseif (preg_match('/^(.*)_Model$/', $class, $matches)) {
+        $class = $matches[1];
         $dir   = 'models';
-    } elseif (preg_match('/^(.*)_Helpers$/', $class, $matches)) {
-        $class = $matches[2];
+    } elseif (preg_match('/^(.*)_Helper$/', $class, $matches)) {
+        $class = $matches[1];
         $dir   = 'helpers';
     } else
         $dir = 'libraries';

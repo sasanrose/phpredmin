@@ -5,7 +5,7 @@ class RedisDb extends Redis
         $config = App::instance()->config;
 
         $this->connect($config['database']['redis']['host'], $config['database']['redis']['port']);
-        $this->select($config['database']['redis']['database']);
+        $this->select(Session::instance()->has('db') ? Session::instance()->db : $config['database']['redis']['database']);
 
         if (isset($config['database']['redis']['password']))
             $this->auth($config['database']['redis']['password']);

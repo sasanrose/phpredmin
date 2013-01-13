@@ -29,7 +29,7 @@ $config = Array(
     'session' => Array(
         'lifetime'       => 7200,
         'gc_probability' => 2,
-        'name'           => 'nanophpsession'
+        'name'           => 'phpredminsession'
     )
 );
 
