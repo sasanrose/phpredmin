@@ -45,4 +45,9 @@ class PhpTemplate
     {
         return isset($this->_data[$key]) ? $this->_data[$key] : Null;
     }
+
+    public function __isset($key)
+    {
+        return isset($this->_data[$key]);
+    }
 }
