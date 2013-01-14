@@ -19,6 +19,13 @@ class Welcome_Controller extends Controller
         $dbs        = $this->infoModel->getDbs($info);
         $selectedDb = $this->session->has('db') ? $this->session->db : $this->app->config['database']['redis']['database'];
 
+        if (!in_array($selectedDb, $dbs)) {
+            $this->db->select($dbs[0]);
+
+            $selectedDb        = $dbs[0];
+            $this->session->db = $dbs[0];
+        }
+
         Template::factory()->render('welcome/index', array('dbs'        => $dbs,
                                                            'selectedDb' => $selectedDb));
     }

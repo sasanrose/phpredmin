@@ -1,3 +1,11 @@
 [class*="span"] {
 	margin-left: 0;
 }
+.action {
+	color: #000;
+	text-decoration: none;
+}
+.action:hover {
+	color: #000;
+	text-decoration: none;
+}
