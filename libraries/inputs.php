@@ -15,14 +15,13 @@ class Inputs
     {
         switch (Router::instance()->method) {
             case Router::POST:
-                $result = isset($_POST[$key]) ? filter_var($_POST[$key], FILTER_SANITIZE_STRING) : $default;
+                $result = $this->post($key, $default);
                 break;
             case Router::PUT:
-                parse_str(file_get_contents("php://input"), $vars);
-                $result = isset($vars[$key]) ? filter_var($vars[$key], FILTER_SANITIZE_STRING) : $default;
+                $result = $this->put($key, $default);
                 break;
             case Router::GET:
-                $result = filter_var(Router::instance()->query($key, $default), FILTER_SANITIZE_STRING);
+                $result = $this->get($key, $default);
                 break;
             default:
                 $result = $default;
@@ -31,4 +30,19 @@ class Inputs
         return $result;
     }
 
+    public function post($key, $default = Null)
+    {
+        return isset($_POST[$key]) ? filter_var($_POST[$key], FILTER_SANITIZE_STRING) : $default;
+    }
+
+    public function get($key, $default = Null)
+    {
+        return filter_var(Router::instance()->query($key, $default), FILTER_SANITIZE_STRING);
+    }
+
+    public function put($key, $default = Null)
+    {
+        parse_str(file_get_contents("php://input"), $vars);
+        return isset($vars[$key]) ? filter_var($vars[$key], FILTER_SANITIZE_STRING) : $default;
+    }
 }
