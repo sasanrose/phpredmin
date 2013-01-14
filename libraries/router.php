@@ -1,10 +1,10 @@
 <?php
 final class Router
 {
-    const POST   = 'post';
-    const GET    = 'get';
-    const DELETE = 'delete';
-    const PUT    = 'put';
+    const POST   = 'POST';
+    const GET    = 'GET';
+    const DELETE = 'DELETE';
+    const PUT    = 'PUT';
 
     protected $_data          = Array();
     protected $_params        = Array();
