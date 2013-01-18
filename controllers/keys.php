@@ -80,4 +80,25 @@ class Keys_Controller extends Controller
     {
         Template::factory('json')->render($this->db->del(urldecode($key)));
     }
+
+    public function viewAction($key)
+    {
+        switch ($this->db->type(urldecode($key))) {
+            case Redis::REDIS_STRING:
+                $this->router->redirect("strings/view/{$key}");
+                break;
+            case Redis::REDIS_SET:
+                $this->router->redirect("sets/view/{$key}");
+                break;
+            case Redis::REDIS_LIST:
+                $this->router->redirect("lists/view/{$key}");
+                break;
+            case Redis::REDIS_ZSET:
+                $this->router->redirect("zsets/view/{$key}");
+                break;
+            case Redis::REDIS_HASH:
+                $this->router->redirect("hashes/view/{$key}");
+                break;
+        }
+    }
 }

@@ -94,7 +94,7 @@
 <div id="del_confirmation" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="confirmation" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="confirmation">Are you sure?</h3>
+        <h3>Are you sure?</h3>
     </div>
     <div class="modal-body">
         <p>You can not undo this action</p>

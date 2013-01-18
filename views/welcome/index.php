@@ -6,6 +6,7 @@
         })
     });
 </script>
+<?=$this->renderPartial('generalmodals')?>
 <span class="span12" style="margin-bottom: 20px;">
     <?php foreach($this->dbs as $db) {
         if($db == $this->selectedDb) {
@@ -39,7 +40,6 @@
             <a href="#sorted_sets">Sorted Sets</a>
         </li>
     </ul>
-
     <div class="tab-content">
         <div class="tab-pane fade active in" id="keys">
             <form class="form-search" action="<?=$this->router->url?>/keys/search" method="post">
@@ -52,54 +52,19 @@
             </form>
         </div>
         <div class="tab-pane fade" id="strings">
-            <form class="form-inline" action="actions/addstr">
-                <legend>Add string</legend>
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-key"></i></span>
-                    <input type="text" placeholder="Key" name="key">
-                </div>
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-pencil"></i></span>
-                    <input type="text" placeholder="Value" name="value">
-                </div>
-                <button type="submit" class="btn"><i class="icon-plus"></i> Add</button>
-            </form>
+            <?=$this->renderPartial('strings/add')?>
         </div>
         <div class="tab-pane fade" id="hashes">
+            <?=$this->renderPartial('hashes/add')?>
         </div>
         <div class="tab-pane fade" id="lists">
+            <?=$this->renderPartial('lists/add')?>
         </div>
         <div class="tab-pane fade" id="sets">
-            <form class="form-inline" action="actions/addset">
-                <legend>Add set</legend>
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-key"></i></span>
-                    <input type="text" placeholder="Key" name="key">
-                </div>
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-pencil"></i></span>
-                    <input type="text" placeholder="Value" name="value">
-                </div>
-                <button type="submit" class="btn"><i class="icon-plus"></i> Add</button>
-            </form>
+            <?=$this->renderPartial('sets/add')?>
         </div>
         <div class="tab-pane fade" id="sorted_sets">
-            <form class="form-inline" action="actions/addzkey">
-                <legend>Add sorted lists</legend>
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-key"></i></span>
-                    <input type="text" placeholder="Key" name="key">
-                </div>
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-trophy"></i></span>
-                    <input type="text" placeholder="score" name="score">
-                </div>
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-pencil"></i></span>
-                    <input type="text" placeholder="Value" name="value">
-                </div>
-                <button type="submit" class="btn"><i class="icon-plus"></i> Add</button>
-            </form>
+            <?=$this->renderPartial('zsets/add')?>
         </div>
     </div>
 </span>

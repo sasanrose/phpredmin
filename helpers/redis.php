@@ -60,9 +60,25 @@ class Redis_Helper
 
     public function getSize($key)
     {
-        if (($size = $this->db->lSize($key)) === False)
-            if (($size = $this->db->zCard($key)) === False)
+        switch ($this->db->type($key)) {
+            case Redis::REDIS_LIST:
+                $size = $this->db->lSize($key);
+                break;
+            case Redis::REDIS_SET:
+                $size = $this->db->sCard($key);
+                break;
+            case Redis::REDIS_HASH:
+                $size = $this->db->hLen($key);
+                break;
+            case Redis::REDIS_ZSET:
+                $size = $this->db->zCard($key);
+                break;
+            case Redis::REDIS_STRING:
+                $size = $this->db->strlen($key);
+                break;
+            default:
                 $size = '-';
+        }
 
         return $size <=0 ? '-' : $size;
     }

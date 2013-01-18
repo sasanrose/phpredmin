@@ -15,7 +15,11 @@
     <script type="text/javascript" src="<?=$this->router->baseUrl?>/js/nvd3/nv.d3.js"></script>
     <script type="text/javascript" src="<?=$this->router->baseUrl?>/js/moment.min.js"></script>
     <script type="text/javascript" src="<?=$this->router->baseUrl?>/js/jquery-ui/js/jquery-ui.min.js"></script>
+    <?php foreach($this->getHeaders() as $header) {
+        echo $header."\n";
+    } ?>
     <script type="text/javascript">
+        baseurl = "<?=$this->router->url?>";
         $(document).ready(function() {
             $('.disabled').click(function(e) {
                 e.preventDefault();
@@ -175,7 +179,7 @@
     <div id="confirmation" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="confirmation" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="confirmation">Are you sure?</h3>
+            <h3>Are you sure?</h3>
         </div>
         <div class="modal-body">
             <p>You can not undo this action</p>

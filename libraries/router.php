@@ -97,4 +97,10 @@ final class Router
         header("HTTP/1.0 404 Not Found");
         Template::factory()->render('404');
     }
+
+    public function redirect($url)
+    {
+        header("Location: {$this->url}/{$url}");
+        exit;
+    }
 }
