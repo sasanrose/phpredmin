@@ -1,8 +1,9 @@
 <?php
 class PhpTemplate
 {
-    protected $_dir  = Null;
-    protected $_data = Array();
+    protected $_dir     = Null;
+    protected $_data    = Array();
+    protected $_headers = Array();
 
     public $app    = Null;
     public $router = Null;
@@ -34,6 +35,17 @@ class PhpTemplate
         ob_clean();
 
         return $content;
+    }
+
+    public function addHeader($header)
+    {
+        if (!in_array($header, $this->_headers))
+            $this->_headers[] = $header;
+    }
+
+    public function getHeaders($header)
+    {
+        return $this->_headers;
     }
 
     public function __set($key, $value)
