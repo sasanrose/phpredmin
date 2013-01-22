@@ -10,7 +10,7 @@ class Keys_Controller extends Controller
             if (isset($key) && trim($key) != '') {
                 $keys = $this->db->keys("{$key}*");
 
-                Template::factory()->render('keys/search', Array('keys' => $keys));
+                Template::factory()->render('keys/search', Array('keys' => $keys, 'search' => $key));
             } else
                 Template::factory()->render('invalid_input');
         }
@@ -74,6 +74,19 @@ class Keys_Controller extends Controller
 
 
         Template::factory()->render('keys/ttl', array('updated' => $updated, 'key' => urldecode($key), 'ttl' => $oldttl));
+    }
+
+    public function delallAction()
+    {
+        if ($this->router->method == Router::POST) {
+            $results = Array();
+            $values  = $this->inputs->post('values');
+
+            foreach ($values as $key => $value)
+                $results[$value] = $this->db->del($value);
+
+            Template::factory('json')->render($results);
+        }
     }
 
     public function deleteAction($key)
