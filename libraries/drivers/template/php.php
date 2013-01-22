@@ -10,6 +10,8 @@ class PhpTemplate
 
     public function __construct()
     {
+        ini_set('output_buffering', 'On');
+
         $this->_dir   = '../views/';
         $this->app    = App::instance();
         $this->router = Router::instance();
