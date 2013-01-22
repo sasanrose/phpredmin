@@ -32,7 +32,18 @@ class Inputs
 
     public function post($key, $default = Null)
     {
-        return isset($_POST[$key]) ? filter_var($_POST[$key], FILTER_SANITIZE_STRING) : $default;
+        if (isset($_POST[$key])) {
+            if (is_array($_POST[$key])) {
+                $results = Array();
+
+                foreach ($_POST[$key] as $index => $value)
+                    $results[$index] = filter_var($value, FILTER_SANITIZE_STRING);
+
+                return $results;
+            } else
+                return filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+        } else
+            return $default;
     }
 
     public function get($key, $default = Null)
