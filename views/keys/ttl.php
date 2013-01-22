@@ -18,14 +18,13 @@
         <form class="form-search" action="<?=$this->router->url?>/keys/expire" method="post">
             <legend>key's Expiration</legend>
             <?php if ($this->ttl !== False && $this->ttl > 0) { ?>
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-key"></i></span>
-                    <input value="<?=$this->ttl?>" type="text" disabled="disabled" />
+                <div>
+                    Time in seconds
                 </div>
             <?php } ?>
             <div class="input-prepend">
                 <span class="add-on"><i class="icon-time"></i></span>
-                <input type="text" placeholder="Time in seconds" name="ttl">
+                <input type="text" value="<?php if ($this->ttl > 0) { echo $this->ttl; } else { echo "0";}?>" name="ttl">
             </div>
             <input name="key" value="<?=$this->key?>" type="hidden" />
             <button type="submit" class="btn"><i class="icon-pencil"></i> Update</button>

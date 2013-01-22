@@ -5,8 +5,7 @@
             
             var tr = $(e.target).parents('tr');
 
-            console.log(tr);
-
+            $('.modal-footer .deletekey').unbind();
             $('.modal-footer .deletekey').click(function() {
                 $.ajax({
                     url: '<?=$this->router->url?>/keys/delete/'+encodeURIComponent($(e.target).attr('id')),
@@ -20,10 +19,56 @@
 
             $('#del_confirmation').modal('show');
         });
+
+        $('#checkall').click(function(e) {
+            $("input[name=keys\\[\\]]").attr('checked', $(e.target).is(':checked'));
+        });
+
+        $('.delall').click(function(e) {
+            e.preventDefault();
+            var checkboxes = $("input[name=keys\\[\\]]:checked");
+
+            if (checkboxes.length > 0) {
+                $('.modal-footer .deletekey').unbind();
+                $('.modal-footer .deletekey').click(function() {
+                    var values = [];
+                    checkboxes.each(function() {
+                        values.push($(this).val());
+                    });
+
+                    $.post(
+                        baseurl+'/keys/delall',
+                        {'values[]': values}, 
+                        function(data) {
+                            $('#del_confirmation').modal('hide');
+
+                            checkboxes.each(function() {
+                                $(this).parents('tr').remove();
+                            });
+                        }
+                    );
+                });
+                $('#del_confirmation').modal('show');
+            } else {
+                invalid();
+            }
+        });
     });
 </script>
+<?=$this->renderPartial('generalmodals')?>
 <span class="span12">
+    <div class="alert alert-info">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+        Number of results: <?=count($this->keys)?>
+    </div>
     <h5><i class="icon-key"></i> Redis Keys</h5>
+    <form class="form-search" action="<?=$this->router->url?>/keys/search" method="post">
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-key"></i></span>
+            <input type="text" value="<?=$this->search?>" name="key">
+        </div>
+        <button type="submit" class="btn"><i class="icon-search"></i> Search</button>
+    </form>
     <table class="table table-striped">
         <tr>
             <th>Key</th>
@@ -38,6 +83,7 @@
             <th>View</th>
             <th>Move</th>
             <th>Delete</th>
+            <th></th>
         </tr>
         <?php foreach($this->keys as $key) {?>
             <tr>
@@ -86,6 +132,28 @@
                     <a href="#" class="action del">
                         <i class="icon-trash" id="<?=$key?>"></i>
                     </a>
+                </td>
+                <td>
+                    <input type="checkbox" name="keys[]" value="<?=$key?>" />
+                </td>
+            </tr>
+        <?php } ?>
+        <?php if (!empty($this->keys)) { ?>
+            <tr>
+                <td colspan="10">
+                </td>
+                <td>
+                    <a href="#" class="action moveall">
+                        <i class="icon-move"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="#" class="action delall">
+                        <i class="icon-trash"></i>
+                    </a>
+                </td>
+                <td>
+                    <input type="checkbox" name="checkall" id="checkall" />
                 </td>
             </tr>
         <?php } ?>

@@ -15,13 +15,9 @@
             <legend>Rename key</legend>
             <div class="input-prepend">
                 <span class="add-on"><i class="icon-key"></i></span>
-                <input value="<?=$this->key?>" type="text" disabled="disabled" />
-                <input name="key" value="<?=$this->key?>" type="hidden" />
+                <input type="text" value="<?=$this->key?>" name="newkey">
             </div>
-            <div class="input-prepend">
-                <span class="add-on"><i class="icon-key"></i></span>
-                <input type="text" placeholder="New Key" name="newkey">
-            </div>
+            <input name="key" value="<?=$this->key?>" type="hidden" />
             <button type="submit" class="btn"><i class="icon-pencil"></i> Rename</button>
         </form>
     <?php } ?>

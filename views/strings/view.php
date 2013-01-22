@@ -14,12 +14,9 @@
         <form class="form" action="<?=$this->router->url?>/strings/view" method="post">
             <legend>Edit key</legend>
             <div>
-                <textarea disabled="disabled" /><?=$this->value?></textarea>
-                <input name="key" value="<?=$this->key?>" type="hidden" />
+                <textarea placeholder="New Value" name="newvalue"><?=$this->value?></textarea>
             </div>
-            <div>
-                <textarea placeholder="New Value" name="newvalue"></textarea>
-            </div>
+            <input name="key" value="<?=$this->key?>" type="hidden" />
             <button type="submit" class="btn"><i class="icon-edit"></i> Edit</button>
         </form>
     <?php } ?>
