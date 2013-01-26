@@ -76,11 +76,25 @@ class Keys_Controller extends Controller
         Template::factory()->render('keys/ttl', array('updated' => $updated, 'key' => urldecode($key), 'ttl' => $oldttl));
     }
 
+    public function moveallAction()
+    {
+        if ($this->router->method == Router::POST) {
+            $results     = Array();
+            $values      = $this->inputs->post('values', array());
+            $destination = $this->inputs->post('destination');
+
+            foreach ($values as $key => $value)
+                $results[$value] = $this->db->move($value, $destination);
+
+            Template::factory('json')->render($results);
+        }
+    }
+
     public function delallAction()
     {
         if ($this->router->method == Router::POST) {
             $results = Array();
-            $values  = $this->inputs->post('values');
+            $values  = $this->inputs->post('values', array());
 
             foreach ($values as $key => $value)
                 $results[$value] = $this->db->del($value);

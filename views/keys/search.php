@@ -1,61 +1,4 @@
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.del').click(function(e) {
-            e.preventDefault();
-            
-            var tr = $(e.target).parents('tr');
-
-            $('.modal-footer .deletekey').unbind();
-            $('.modal-footer .deletekey').click(function() {
-                $.ajax({
-                    url: '<?=$this->router->url?>/keys/delete/'+encodeURIComponent($(e.target).attr('id')),
-                    dataType: 'json',
-                    success: function(data) {
-                        $('#del_confirmation').modal('hide');
-                        tr.remove();
-                    }
-                });
-            });
-
-            $('#del_confirmation').modal('show');
-        });
-
-        $('#checkall').click(function(e) {
-            $("input[name=keys\\[\\]]").attr('checked', $(e.target).is(':checked'));
-        });
-
-        $('.delall').click(function(e) {
-            e.preventDefault();
-            var checkboxes = $("input[name=keys\\[\\]]:checked");
-
-            if (checkboxes.length > 0) {
-                $('.modal-footer .deletekey').unbind();
-                $('.modal-footer .deletekey').click(function() {
-                    var values = [];
-                    checkboxes.each(function() {
-                        values.push($(this).val());
-                    });
-
-                    $.post(
-                        baseurl+'/keys/delall',
-                        {'values[]': values}, 
-                        function(data) {
-                            $('#del_confirmation').modal('hide');
-
-                            checkboxes.each(function() {
-                                $(this).parents('tr').remove();
-                            });
-                        }
-                    );
-                });
-                $('#del_confirmation').modal('show');
-            } else {
-                invalid();
-            }
-        });
-    });
-</script>
-<?=$this->renderPartial('generalmodals')?>
+<?=$this->renderPartial('actions')?>
 <span class="span12">
     <div class="alert alert-info">
         <a class="close" data-dismiss="alert" href="#">×</a>
@@ -130,7 +73,7 @@
                 </td>
                 <td>
                     <a href="#" class="action del">
-                        <i class="icon-trash" id="<?=$key?>"></i>
+                        <i class="icon-trash" id="<?=$key?>" keytype="keys"></i>
                     </a>
                 </td>
                 <td>
@@ -144,12 +87,12 @@
                 </td>
                 <td>
                     <a href="#" class="action moveall">
-                        <i class="icon-move"></i>
+                        <i class="icon-move" keytype="keys" modaltitle="Move key to?" modaltip="Database Number"></i>
                     </a>
                 </td>
                 <td>
                     <a href="#" class="action delall">
-                        <i class="icon-trash"></i>
+                        <i class="icon-trash" keytype="keys"></i>
                     </a>
                 </td>
                 <td>
@@ -159,16 +102,3 @@
         <?php } ?>
     </table>
 </span>
-<div id="del_confirmation" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="confirmation" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3>Are you sure?</h3>
-    </div>
-    <div class="modal-body">
-        <p>You can not undo this action</p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-danger deletekey">I am sure</button>
-    </div>
-</div>

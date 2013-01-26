@@ -13,12 +13,22 @@ $(document).ready(function() {
                 type: 'POST',
                 data: 'key='+key+'&value='+str,
                 success: function(data) {
-                    form.find('input').val('');
-                    form.find('textarea').val('');
+                    if (data) {
+                        var oldkey = form.find('input[name="oldkey"]');
+                        form.find('textarea').val('');
+                        if (oldkey.length > 0) {
+                            var tr = $('.settable tr:first');
+                            $('<tr><td>'+str+'</td><td><a href="#" class="action del"><i class="icon-trash" keytype="sets" keyinfo="'+key+'" id="'+str+'"></i></a></td>'+
+                              '<td><input type="checkbox" name="keys[]" value="'+str+'" /></td></tr>').insertAfter(tr);
+                            $('.settable tr').eq(1).find('a').click(function(e) {
+                                deleteRow(e);
+                            });
+                        } else {
+                            form.find('input').val('');
+                        }
 
-                    if (data)
                         saved();
-                    else
+                    } else
                         error();
                 }
             });

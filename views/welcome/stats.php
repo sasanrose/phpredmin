@@ -1,3 +1,7 @@
+<?php $this->addHeader("<script type=\"text/javascript\" src=\"{$this->router->baseUrl}/js/nvd3/lib/d3.v2.min.js\"></script>"); ?>
+<?php $this->addHeader("<script type=\"text/javascript\" src=\"{$this->router->baseUrl}/js/nvd3/nv.d3.js\"></script>"); ?>
+<?php $this->addHeader("<script type=\"text/javascript\" src=\"{$this->router->baseUrl}/js/moment.min.js\"></script>"); ?>
+<?php $this->addHeader("<script type=\"text/javascript\" src=\"{$this->router->baseUrl}/js/jquery-ui/js/jquery-ui.min.js\"></script>"); ?>
 <script type="text/javascript">
     $(document).ready(function() {
         getStats(['memory', 'cpu', 'clients', 'keys', 'commands', 'dbkeys', 'dbexpires']);
