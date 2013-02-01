@@ -3,7 +3,12 @@
     <legend>Add sorted lists</legend>
     <div class="input-prepend">
         <span class="add-on"><i class="icon-key"></i></span>
-        <input type="text" placeholder="Key" name="key">
+        <?php if (isset($this->oldkey)) { ?>
+            <input type="text" value="<?=$this->oldkey?>" name="oldkey" disabled/>
+            <input type="hidden" value="<?=$this->oldkey?>" name="key"/>
+        <?php } else { ?>
+            <input type="text" placeholder="Key" name="key">
+        <?php } ?>
     </div>
     <div class="input-prepend">
         <span class="add-on"><i class="icon-trophy"></i></span>
