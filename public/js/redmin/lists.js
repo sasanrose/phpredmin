@@ -24,8 +24,15 @@ $(document).ready(function() {
                     type: 'POST',
                     data: 'key='+key+'&value='+str+'&type='+type+'&pivot='+pivot,
                     success: function(data) {
-                        form.find('input').val('');
+                        var oldkey = form.find('input[name="oldkey"]');
                         form.find('textarea').val('');
+
+                        if (oldkey.length > 0) {
+                            if (data)
+                                location.reload();
+                        } else {
+                            form.find('input').val('');
+                        }
 
                         if (data)
                             saved();

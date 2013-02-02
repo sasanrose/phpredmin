@@ -41,3 +41,4 @@
         <?php } ?>
     </table>
 </div>
+<?=$this->renderPartial('generalmodals')?>

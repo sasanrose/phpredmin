@@ -1,9 +1,14 @@
 <?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/lists.js\" type=\"text/javascript\"></script>"); ?>
 <form class="form">
-    <legend>Add List</legend>
+    <legend><?php if (isset($this->oldkey)) { echo "Add to List"; } else { echo "Add List";} ?></legend>
     <div class="input-prepend">
         <span class="add-on"><i class="icon-key"></i></span>
-        <input type="text" placeholder="Key" name="key">
+        <?php if (isset($this->oldkey)) { ?>
+            <input type="text" value="<?=$this->oldkey?>" name="oldkey" disabled/>
+            <input type="hidden" value="<?=$this->oldkey?>" name="key"/>
+        <?php } else { ?>
+            <input type="text" placeholder="Key" name="key">
+        <?php } ?>
     </div>
     <div>
         <textarea placeholder="Value" name="value"></textarea>

@@ -1,43 +1,36 @@
-<?=$this->renderPartial('actions', array('nomove' => True))?>
+<?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/remlists.js\" type=\"text/javascript\"></script>"); ?>
 <div class="span12">
-    <?=$this->renderPartial('zsets/add', array('oldkey' => $this->key))?>
+    <?=$this->renderPartial('lists/add', array('oldkey' => $this->key))?>
+    <form class="form" action="<?=$this->router->url?>/lists/del" method="post">
+        <legend>Remove from List</legend>
+        <div class="input-prepend" style="padding-right: 20px;">
+            <span class="add-on"><i class="icon-key"></i></span>
+            <input type="hidden" value="<?=$this->key?>" name="key"/>
+            <input type="text" placeholder="Value" name="value">
+        </div>
+        <div>
+            <select name="type_options" id="list_remove_options">
+                <option value="all">All Occurrences</option>
+                <option value="count">Occurrences Count</option>
+            </select>
+        </div>
+        <div id="list_remove_type">
+        </div>
+        <button type="submit" class="btn" id="add_list"><i class="icon-minus"></i> Remove</button>
+    </form>
     <h5><i class="icon-key"></i> <?=$this->key?></h5>
     <table class="table table-striped settable">
         <tr>
             <th>Value</th>
-            <th>Score</th>
             <th>Delete</th>
-            <th></th>
         </tr>
         <?php foreach ($this->values as $member => $value) { ?>
             <tr>
                 <td>
-                    <?=$member?>
+                    <?=$member+1?>
                 </td>
                 <td>
                     <?=$value?>
-                </td>
-                <td>
-                    <a href="#" class="action del">
-                        <i class="icon-trash" id="<?=$member?>" keytype="zsets" keyinfo="<?=$this->key?>"></i>
-                    </a>
-                </td>
-                <td>
-                    <input type="checkbox" name="keys[]" value="<?=$member?>" />
-                </td>
-            </tr>
-        <?php } ?>
-        <?php if (!empty($this->values)) { ?>
-            <tr>
-                <td colspan="2">
-                </td>
-                <td>
-                    <a href="#" class="action delall">
-                        <i class="icon-trash" keytype="zsets" keyinfo="<?=$this->key?>"></i>
-                    </a>
-                </td>
-                <td>
-                    <input type="checkbox" name="checkall" id="checkall" />
                 </td>
             </tr>
         <?php } ?>

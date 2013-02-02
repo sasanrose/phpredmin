@@ -35,4 +35,32 @@ class Lists_Controller extends Controller
 
         Template::factory('json')->render($added);
     }
+
+    public function viewAction($key, $page = 0)
+    {
+        $count  = $this->db->lSize(urldecode($key));
+        $start  = $page * 30;
+        $values = $this->db->lRange(urldecode($key), $start, $start + 29);
+
+        Template::factory()->render('lists/view', array('count' => $count, 'values' => $values, 'key' => urldecode($key),
+                                                        'page'  => $page));
+    }
+
+    public function delAction()
+    {
+        if ($this->router->method == Router::POST) {
+            $key   = $this->inputs->post('key');
+            $value = $this->inputs->post('value');
+            $type  = $this->inputs->post('type_options');
+
+            if ($type == 'all') {
+                $this->db->lRem($key, $value, 0);
+            } elseif ($type == 'count') {
+                $count = $this->inputs->post('count');
+                $this->db->lRem($key, $value, $count);
+            }
+        }
+
+        $this->router->redirect("lists/view/{$key}");
+    }
 }
