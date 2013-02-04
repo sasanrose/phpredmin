@@ -117,6 +117,13 @@
                                         <i class="icon-white icon-bar-chart"></i> Stats
                                     </a>
                                 </li>
+                                <li <?php if($this->router->request == $this->router->url."/welcome/slowlog") {?>
+                                    class="active"<
+                                <?php } ?>>
+                                    <a href="<?=$this->router->url?>/welcome/slowlog">
+                                        <i class="icon-white icon-warning-sign"></i> Slow Log
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="https://github.com/sasanrose/phpredmin" target="_blank">
                                         <i class="icon-white icon-github"></i> Github
