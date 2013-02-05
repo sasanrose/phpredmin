@@ -147,6 +147,17 @@
                                         </li>
                                         <li class="divider"></li>
                                         <li>
+                                            <a href="<?=$this->router->url?>/welcome/save/1" target="_blank">
+                                                <i class="icon-save"></i> Asynchronous Save
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?=$this->router->url?>/welcome/save" target="_blank">
+                                                <i class="icon-save"></i> Synchronous Save
+                                            </a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
                                             <a href="#" id="reset_stats">
                                                 <i class="icon-refresh"></i> Reset Stats
                                             </a>

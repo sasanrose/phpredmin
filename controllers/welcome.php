@@ -56,6 +56,14 @@ class Welcome_Controller extends Controller
                                                           'lastSave'   => $lastSave));
     }
 
+    public function saveAction($async = Null)
+    {
+        $saved    = isset($async) ? $this->db->save() : $this->db->bgSave();
+        $filename = current($this->db->config('GET', 'dbfilename'));
+
+        Template::factory()->render('welcome/save', array('saved' => $saved, 'filename' => $filename));
+    }
+
     public function slowlogAction()
     {
         $support    = False;
