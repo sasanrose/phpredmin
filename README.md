@@ -27,8 +27,22 @@ Statistics
 
 Note: If you want this feature to work, you have to setup the cron to gather data from your redis server as follows:
 
+```bash
 * * * * * root cd /var/www/phpmyredis/public && php index.php cron/index
+```
 
 Memory
 
-![] (http://dl.dropbox.com/u/5413590/memoryphpredmin.jpg)
+![](http://dl.dropbox.com/u/5413590/memoryphpredmin.jpg)
+
+CPU And Clients
+
+![](http://dl.dropbox.com/u/5413590/cpuphpredmin.jpg)
+
+Keys and Connections
+
+![](http://dl.dropbox.com/u/5413590/keyspacephpredmin.jpg)
+
+Databases
+
+![](http://dl.dropbox.com/u/5413590/dbkeysphpredmin.jpg)
