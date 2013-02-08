@@ -5,15 +5,15 @@ PHP Administrator Panel for REDIS. PHPRedMin is a simple web panel to manage you
 
 ## Technologies Used
 
-[Nanophp](https://github.com/sasanrose/NanoPHP) framework
+![Nanophp](https://github.com/sasanrose/NanoPHP) framework
 
-[phpredis](https://github.com/nicolasff/phpredis) redis module for PHP
+![phpredis](https://github.com/nicolasff/phpredis) redis module for PHP
 
-[Bootstrap](http://twitter.github.com/bootstrap) front-end framework
+![Bootstrap](http://twitter.github.com/bootstrap) front-end framework
 
-[JQuery](http://jquery.com/) JavaScript library
+![JQuery](http://jquery.com/) JavaScript library
 
-[Nvd3](https://github.com/novus/nvd3) reusable chart library for d3.JS
+![Nvd3](https://github.com/novus/nvd3) reusable chart library for d3.JS
 
 ## Installation
 
