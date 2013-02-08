@@ -80,6 +80,7 @@ You can flush selected database or all databases. You can also save database to 
 #### Search
 
 The search box will let you to easily search keys in the selected database:
+_Note:_ Becareful, since this still doesn't support pagination, try to limit your search otherwise if your search result is too long (e.g. *) then your browser might crash.
 
 ![](http://dl.dropbox.com/u/5413590/phpredmin/search.jpg)
 
@@ -92,3 +93,11 @@ The search results will be shown to you as a table. In this table besides the ba
 * Delete
 
 ![](http://dl.dropbox.com/u/5413590/phpredmin/results.jpg)
+
+#### Add key-Value
+
+From the main page of PHPRedMin you can add different types of key-values.
+
+##### String
+
+![](http://dl.dropbox.com/u/5413590/phpredmin/addstring.jpg)
