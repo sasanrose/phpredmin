@@ -71,6 +71,24 @@ You can switch between databases easily:
 
 ![](http://dl.dropbox.com/u/5413590/dbselectphpredmin.jpg)
 
-You can flush selected database or all databases. You can also save database to a file in disk
+You can flush selected database or all databases. You can also save database to a file on disk:
 
 ![](http://dl.dropbox.com/u/5413590/actionsphpredmin.jpg)
+
+### Key-Value Manipulation
+
+#### Search
+
+The search box will let you to easily search keys in the selected database:
+
+![](http://dl.dropbox.com/u/5413590/searchphpredmin.jpg)
+
+The search results will be shown to you as a table. In this table besides the basic information about each key, PHPRedMin provides you with some actions:
+
+* Expire (Sets TTL for a key)
+* View (Shows keys' value/values and lets you manipulate it/them)
+* Rename
+* Move (Moves key to another database)
+* Delete
+
+![](http://dl.dropbox.com/u/5413590/resultsphpredmin.jpg)
