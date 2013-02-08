@@ -31,31 +31,31 @@ Note: If you want this feature to work, you have to setup the cron to gather dat
 
 #### Memory
 
-![](http://dl.dropbox.com/u/5413590/memoryphpredmin.jpg)
+![](http://dl.dropbox.com/u/5413590/phpredmin/memory.jpg)
 
 #### CPU And Clients
 
-![](http://dl.dropbox.com/u/5413590/cpuphpredmin.jpg)
+![](http://dl.dropbox.com/u/5413590/phpredmin/cpu.jpg)
 
 #### Keys and Connections
 
-![](http://dl.dropbox.com/u/5413590/keyspacephpredmin.jpg)
+![](http://dl.dropbox.com/u/5413590/phpredmin/keyspace.jpg)
 
 #### Databases
 
-![](http://dl.dropbox.com/u/5413590/dbkeysphpredmin.jpg)
+![](http://dl.dropbox.com/u/5413590/phpredmin/dbkeys.jpg)
 
 ### Info
 
 Information about your redis setup
 
-![](http://dl.dropbox.com/u/5413590/infophpredmin.jpg)
+![](http://dl.dropbox.com/u/5413590/phpredmin/info.jpg)
 
 ### Configurations
 
 View your redis runtime configurations
 
-![](http://dl.dropbox.com/u/5413590/configphpredmin.jpg)
+![](http://dl.dropbox.com/u/5413590/phpredmin/config.jpg)
 
 ### Slowlog
 
@@ -63,17 +63,17 @@ Find slow redis commands
 
 Note: PHPRedMin uses eval to fetch slow log. So to use this feature you need redis version >= 2.6.0
 
-![](http://dl.dropbox.com/u/5413590/slowlogphpredmin.jpg)
+![](http://dl.dropbox.com/u/5413590/phpredmin/slowlog.jpg)
 
 ### Database Manipulation
 
 You can switch between databases easily:
 
-![](http://dl.dropbox.com/u/5413590/dbselectphpredmin.jpg)
+![](http://dl.dropbox.com/u/5413590/phpredmin/dbselect.jpg)
 
 You can flush selected database or all databases. You can also save database to a file on disk:
 
-![](http://dl.dropbox.com/u/5413590/actionsphpredmin.jpg)
+![](http://dl.dropbox.com/u/5413590/phpredmin/actions.jpg)
 
 ### Key-Value Manipulation
 
@@ -81,7 +81,7 @@ You can flush selected database or all databases. You can also save database to 
 
 The search box will let you to easily search keys in the selected database:
 
-![](http://dl.dropbox.com/u/5413590/searchphpredmin.jpg)
+![](http://dl.dropbox.com/u/5413590/phpredmin/search.jpg)
 
 The search results will be shown to you as a table. In this table besides the basic information about each key, PHPRedMin provides you with some actions:
 
@@ -91,4 +91,4 @@ The search results will be shown to you as a table. In this table besides the ba
 * Move (Moves key to another database)
 * Delete
 
-![](http://dl.dropbox.com/u/5413590/resultsphpredmin.jpg)
+![](http://dl.dropbox.com/u/5413590/phpredmin/results.jpg)
