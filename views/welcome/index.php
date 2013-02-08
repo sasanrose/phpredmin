@@ -44,6 +44,10 @@
         <div class="tab-pane fade active in" id="keys">
             <form class="form-search" action="<?=$this->router->url?>/keys/search" method="post">
                 <legend>Search keys</legend>
+                <div class="alert alert-warning">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    Since this doesn't support pagination yet, try to limit your search. Otherwise your browser might crash
+                </div>
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-key"></i></span>
                     <input type="text" placeholder="Key" name="key">
