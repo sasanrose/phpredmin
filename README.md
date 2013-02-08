@@ -40,3 +40,22 @@ Note: If you want this feature to work, you have to setup the cron to gather dat
 #### Databases
 
 ![](http://dl.dropbox.com/u/5413590/dbkeysphpredmin.jpg)
+
+### Info
+
+Information about your redis setup
+
+![](http://dl.dropbox.com/u/5413590/infophpredmin.jpg)
+
+### Configurations
+
+View your redis runtime configurations
+
+![](http://dl.dropbox.com/u/5413590/configphpredmin.jpg)
+
+### Slowlog
+
+Find slow redis commands
+Note: PHPRedMin uses eval to fetch slow log. So to use this feature you need redis version >= 2.6.0
+
+![](http://dl.dropbox.com/u/5413590/slowlogphpredmin.jpg)
