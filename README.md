@@ -23,7 +23,7 @@ Just drop phpredmin in your webserver's root directory and point your browser to
 
 ### Statistics
 
-Note: If you want this feature to work, you have to setup the cron to gather data from your redis server as follows:
+_Note:_ If you want this feature to work, you have to setup the cron to gather data from your redis server as follows:
 
 ```bash
 * * * * * root cd /var/www/phpmyredis/public && php index.php cron/index
@@ -61,7 +61,7 @@ View your redis runtime configurations
 
 Find slow redis commands
 
-Note: PHPRedMin uses eval to fetch slow log. So to use this feature you need redis version >= 2.6.0
+_Note:_ PHPRedMin uses eval to fetch slow log. So to use this feature you need redis version >= 2.6.0
 
 ![](http://dl.dropbox.com/u/5413590/phpredmin/slowlog.jpg)
 
