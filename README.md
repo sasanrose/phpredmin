@@ -6,9 +6,13 @@ PHP Administrator Panel for REDIS. PHPRedMin is a simple web panel to manage you
 ## Technologies Used
 
 [Nanophp](https://github.com/sasanrose/NanoPHP) framework
+
 [phpredis](https://github.com/nicolasff/phpredis) redis module for PHP
+
 [Bootstrap](http://twitter.github.com/bootstrap) front-end framework
+
 [JQuery](http://jquery.com/) JavaScript library
+
 [Nvd3](https://github.com/novus/nvd3) reusable chart library for d3.JS
 
 ## Installation
@@ -56,6 +60,17 @@ View your redis runtime configurations
 ### Slowlog
 
 Find slow redis commands
+
 Note: PHPRedMin uses eval to fetch slow log. So to use this feature you need redis version >= 2.6.0
 
 ![](http://dl.dropbox.com/u/5413590/slowlogphpredmin.jpg)
+
+### Database Manipulation
+
+You can switch between databases easily:
+
+![](http://dl.dropbox.com/u/5413590/dbselectphpredmin.jpg)
+
+You can flush selected database or all databases. You can also save database to a file in disk
+
+![](http://dl.dropbox.com/u/5413590/actionsphpredmin.jpg)
