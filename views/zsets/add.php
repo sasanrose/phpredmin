@@ -1,6 +1,6 @@
 <?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/zsets.js\" type=\"text/javascript\"></script>"); ?>
 <form class="form">
-    <legend><?php if (isset($this->oldkey)) { echo "Add to Sorted List"; } else { echo "Add Sorted List";} ?></legend>
+    <legend><?php if (isset($this->oldkey)) { echo "Add to Sorted Set"; } else { echo "Add Sorted Set";} ?></legend>
     <div class="input-prepend">
         <span class="add-on"><i class="icon-key"></i></span>
         <?php if (isset($this->oldkey)) { ?>
