@@ -1,5 +1,9 @@
 <?=$this->renderPartial('actions')?>
 <span class="span12">
+    <div class="alert alert-warning">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+        Since this doesn't support pagination yet, try to limit your search. Otherwise your browser might crash
+    </div>
     <div class="alert alert-info">
         <a class="close" data-dismiss="alert" href="#">×</a>
         Number of results: <?=count($this->keys)?>
