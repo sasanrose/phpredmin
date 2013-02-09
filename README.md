@@ -117,3 +117,29 @@ From the main page of PHPRedMin you can add different types of key-values.
 ##### Sorted Sets
 
 ![](http://dl.dropbox.com/u/5413590/phpredmin/addzset.jpg)
+
+### View keys' values
+
+PHPRedMin makes it easier for you to manage your lists, hashes, sets and sorted sets. After searching for a special key, you can choose view action to see the contents of that key (According to its type) and manipulate them.
+
+#### Lists
+
+_Note:_ This supports pagination
+
+![](http://dl.dropbox.com/u/5413590/phpredmin/listresult.jpg)
+
+#### Hashes
+
+![](http://dl.dropbox.com/u/5413590/phpredmin/hashresult.jpg)
+
+#### Sets
+
+_Note:_ This supports pagination
+
+![](http://dl.dropbox.com/u/5413590/phpredmin/setresult.jpg)
+
+#### Sorted Sets
+
+_Note:_ This supports pagination
+
+![](http://dl.dropbox.com/u/5413590/phpredmin/zsetresult.jpg)
