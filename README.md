@@ -1,7 +1,7 @@
 PHPRedMin
 =========
 
-PHPRedMin is a simple web interface to manage your redis database.
+PHPRedMin is a simple web interface to manage and monitor your Redis.
 
 ## Technologies Used
 
