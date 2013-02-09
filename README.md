@@ -98,6 +98,22 @@ The search results will be shown to you as a table. In this table besides the ba
 
 From the main page of PHPRedMin you can add different types of key-values.
 
-##### String
+##### Strings
 
 ![](http://dl.dropbox.com/u/5413590/phpredmin/addstring.jpg)
+
+##### Hashes
+
+![](http://dl.dropbox.com/u/5413590/phpredmin/addhash.jpg)
+
+##### Lists
+
+![](http://dl.dropbox.com/u/5413590/phpredmin/addlist.jpg)
+
+##### Sets
+
+![](http://dl.dropbox.com/u/5413590/phpredmin/addset.jpg)
+
+##### Sorted Sets
+
+![](http://dl.dropbox.com/u/5413590/phpredmin/addzset.jpg)
