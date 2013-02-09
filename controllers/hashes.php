@@ -23,7 +23,7 @@ class Hashes_Controller extends Controller
     {
         $members = $this->db->hGetAll(urldecode($key));
 
-        Template::factory()->render('hashes/view', Array('members' => $members, 'key' => $key));
+        Template::factory()->render('hashes/view', Array('members' => $members, 'key' => urldecode($key)));
     }
 
     public function deleteAction($key, $member)

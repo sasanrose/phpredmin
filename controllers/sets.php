@@ -21,7 +21,7 @@ class Sets_Controller extends Controller
     {
         $members = $this->db->sMembers(urldecode($key));
 
-        Template::factory()->render('sets/view', Array('members' => $members, 'key' => $key));
+        Template::factory()->render('sets/view', Array('members' => $members, 'key' => urldecode($key)));
     }
 
     public function deleteAction($key, $value)
