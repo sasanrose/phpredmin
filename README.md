@@ -1,7 +1,7 @@
 PHPRedMin
 =========
 
-PHP Administrator Panel for REDIS. PHPRedMin is a simple web panel to manage your redis database from web.
+PHPRedMin is a simple web interface to manage your redis database.
 
 ## Technologies Used
 
