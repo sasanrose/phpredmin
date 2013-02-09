@@ -19,6 +19,8 @@ PHPRedMin is a simple web interface to manage and monitor your Redis.
 
 Just drop phpredmin in your webserver's root directory and point your browser to it (You also need [phpredis](https://github.com/nicolasff/phpredis) installed)
 
+_Note:_ If your redis server is on an IP or port other than defaults (localhost:6379), you should edit config.php file
+
 ## Features
 
 ### Statistics
