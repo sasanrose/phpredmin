@@ -28,7 +28,7 @@ final class Router
     protected function parse()
     {
         $this->method   = $_SERVER['REQUEST_METHOD'];
-        $this->protocol = isset($_SERVER['HTTPS']) ? 'https' : 'http';
+        $this->protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']) ? 'https' : 'http';
         $this->host     = $_SERVER['HTTP_HOST'];
         $this->baseUrl  = $this->protocol.'://'.$this->host;
         $this->url      = $this->protocol.'://'.$this->host.$_SERVER['SCRIPT_NAME'];
