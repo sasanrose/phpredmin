@@ -45,7 +45,7 @@ class PhpTemplate
             $this->_headers[] = $header;
     }
 
-    public function getHeaders($header)
+    public function getHeaders()
     {
         return $this->_headers;
     }
