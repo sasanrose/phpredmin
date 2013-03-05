@@ -19,6 +19,36 @@ PHPRedMin is a simple web interface to manage and monitor your Redis.
 
 Just drop phpredmin in your webserver's root directory and point your browser to it (You also need [phpredis](https://github.com/nicolasff/phpredis) installed)
 
+Apache configuration example (/etc/httpd/conf.d/phpredmin.conf):
+
+```
+# phpredmin - Simple web interface to manage and monitor your Redis
+# 
+# Allows only localhost by default
+
+Alias /phpredmin /usr/share/phpredmin
+
+<Directory /usr/share/phpredmin/>
+   AllowOverride All 
+
+   <IfModule mod_authz_core.c>
+     # Apache 2.4
+     <RequireAny>
+       Require ip localhost
+       Require local
+     </RequireAny>
+   </IfModule>
+
+   <IfModule !mod_authz_core.c>
+     # Apache 2.2
+     Order Deny,Allow
+     Deny from All
+     Allow from 127.0.0.1
+     Allow from ::1
+   </IfModule>
+</Directory>
+```
+
 _Note:_ If your redis server is on an IP or port other than defaults (localhost:6379), you should edit config.php file
 
 ## Features
