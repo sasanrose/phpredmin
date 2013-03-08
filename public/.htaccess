@@ -1,0 +1,2 @@
+# Enable the short tags for PHP scripts
+php_value short_open_tag 1
