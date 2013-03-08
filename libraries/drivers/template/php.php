@@ -11,6 +11,7 @@ class PhpTemplate
     public function __construct()
     {
         ini_set('output_buffering', 'On');
+        ini_set('short_open_tag', 'On');
 
         $this->_dir   = '../views/';
         $this->app    = App::instance();
