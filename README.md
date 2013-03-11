@@ -26,7 +26,7 @@ Apache configuration example (/etc/httpd/conf.d/phpredmin.conf):
 # 
 # Allows only localhost by default
 
-Alias /phpredmin /var/www/phpredmin
+Alias /phpredmin /var/www/phpredmin/public
 
 <Directory /var/www/phpredmin/>
    AllowOverride All 
