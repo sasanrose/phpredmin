@@ -21,8 +21,8 @@
     <h5><i class="icon-key"></i> <?=$this->key?></h5>
     <table class="table table-striped settable">
         <tr>
+            <th>Index</th>
             <th>Value</th>
-            <th>Delete</th>
         </tr>
         <?php foreach ($this->values as $member => $value) { ?>
             <tr>
