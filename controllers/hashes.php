@@ -63,6 +63,6 @@ class Hashes_Controller extends Controller
 
         $value = $this->db->hGet(urldecode($key), urldecode($member));
 
-        Template::factory()->render('hashes/edit', Array('member' => $member, 'key' => $key, 'value' => $value, 'edited' => $edited));
+        Template::factory()->render('hashes/edit', Array('member' => urldecode($member), 'key' => urldecode($key), 'value' => $value, 'edited' => $edited));
     }
 }
