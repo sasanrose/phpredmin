@@ -29,7 +29,7 @@ class Stats_Model extends Model
     public function getKeys($key, $from, $to)
     {
         $results = Array();
-        $keys    = $this->db->zRevRangeByScore("phpredmin:{$key}", $to, $from, Array('withscores' => True));
+        $keys    = $this->db->changeDB(0)->zRevRangeByScore("phpredmin:{$key}", $to, $from, Array('withscores' => True));
 
         foreach ($keys as $key => $value) {
             $results[] = array($value, $key);
