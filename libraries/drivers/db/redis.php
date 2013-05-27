@@ -11,4 +11,10 @@ class RedisDb extends Redis
             $this->auth($config['database']['redis']['password']);
     }
 
+    public function changeDB($db) {
+        $this->select($db);
+
+        return $this;
+    }
+
 }
