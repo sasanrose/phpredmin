@@ -1,11 +1,11 @@
 var deleteRow = function(e) {
     e.preventDefault();
-    
+
     var tr      = $(e.target).parents('tr');
     var type    = $(e.target).attr('keytype');
     var keyinfo = $(e.target).attr('keyinfo');
     var id      = $(e.target).attr('id');
-    
+
     if (typeof(keyinfo) == 'undefined') {
         var url = baseurl+'/'+type+'/delete/'+encodeURIComponent(id);
     } else {

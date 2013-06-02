@@ -103,6 +103,38 @@ class Keys_Controller extends Controller
         }
     }
 
+    public function bulkdeleteAction()
+    {
+        if ($this->router->method == Router::POST) {
+            $key = $this->inputs->post('key', Null);
+
+            if (isset($key) && trim($key) != '') {
+                $config = App::instance()->config;
+                $client = new GearmanClient();
+
+                $client->addServer($config['gearman']['host'], $config['gearman']['port']);
+                $client->doBackground('delete_keys', $key);
+            }
+        }
+    }
+
+    public function deleteinfoAction($key)
+    {
+        $this->db->incrBy("phpredmin:requests:{$key}", 1);
+
+        $key      = urldecode($key);
+        $total    = $this->db->get("phpredmin:deletecount:{$key}");
+        $count    = $this->db->get("phpredmin:deleted:{$key}");
+        $requests = $this->db->get("phpredmin:requests:{$key}");
+
+        if ($total === false && $count !== false && $requests == 1)
+            $total = $count;
+
+        $result = array($total, $count);
+
+        Template::factory('json')->render($result);
+    }
+
     public function deleteAction($key)
     {
         Template::factory('json')->render($this->db->del(urldecode($key)));
