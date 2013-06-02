@@ -30,6 +30,10 @@ $config = Array(
         'lifetime'       => 7200,
         'gc_probability' => 2,
         'name'           => 'phpredminsession'
+    ),
+    'gearman' => Array(
+        'host' => '127.0.0.1',
+        'port' => 4730
     )
 );
 
