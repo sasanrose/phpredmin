@@ -5,6 +5,8 @@ PHPRedMin is a simple web interface to manage and monitor your Redis.
 
 ## Technologies Used
 
+[Gearman](https://gearman.org) application framework
+
 [Nanophp](https://github.com/sasanrose/NanoPHP) framework
 
 [phpredis](https://github.com/nicolasff/phpredis) redis module for PHP
@@ -175,6 +177,39 @@ _Note:_ This supports pagination
 _Note:_ This supports pagination
 
 ![](http://dl.dropbox.com/u/5413590/phpredmin/zsetresult.jpg)
+
+### Bulk Actions
+
+#### Bulk Delete
+
+This feature lets you delete a key or a bunch of keys using wild cards
+
+![](http://dl.dropbox.com/u/5413590/phpredmin/bulk-delete.png)
+
+![](http://dl.dropbox.com/u/5413590/phpredmin/bulk-delete-progress.png)
+
+_Note:_ This feature needs gearman. You have to both install gearman and php gearman extension
+
+#### Gearman Worker
+
+You can run gearman worker using the following command:
+
+```bash
+php index.php gearman/index
+```
+You can also setup a service for this command. I prefer supervisord to make it always running. Here is my config file:
+
+```bash
+[program:phpredmin]
+directory=/var/www/phpredmin/public
+command=php index.php gearman/index
+process_name=%(program_name)s
+numprocs=1
+stdout_logfile=/var/log/supervisor/phpredmin.log
+autostart=true
+autorestart=true
+user=sasan
+```
 
 ## License
 
