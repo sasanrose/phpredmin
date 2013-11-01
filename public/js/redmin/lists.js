@@ -19,7 +19,7 @@ $(document).ready(function() {
                     pivot = '';
 
                 $.ajax({
-                    url: baseurl+'/lists/add',
+                    url: baseurl+'/lists/add/' + currentServerDb,
                     dataType: 'json',
                     type: 'POST',
                     data: 'key='+key+'&value='+str+'&type='+type+'&pivot='+pivot,

@@ -83,19 +83,7 @@
 
 </script>
 <?=$this->renderPartial('generalmodals')?>
-<span class="span12" style="margin-bottom: 20px;">
-    <?php foreach($this->dbs as $db) {
-        if($db == $this->selectedDb) {
-        ?>
-            <a href="#" class="btn btn-primary disabled">
-        <?php } else { ?>
-            <a href="<?=$this->router->url?>/welcome/index/<?=$db?>" class="btn">
-        <?php } ?>
-            DB <?=$db?>
-        </a>
-    <?php } ?>
-</span>
-<span class="span12">
+<div>
     <ul class="nav nav-tabs" id="redisTab">
         <li class="active">
             <a href="#keys">Keys</a>
@@ -121,7 +109,7 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade active in" id="keys">
-            <form class="form-search" action="<?=$this->router->url?>/keys/search" method="post">
+            <form class="form-search" action="<?=$this->router->url?>/keys/search/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
                 <legend>Search keys</legend>
                 <div class="alert alert-warning">
                     <a class="close" data-dismiss="alert" href="#">×</a>
@@ -179,4 +167,4 @@
             <?=$this->renderPartial('zsets/add')?>
         </div>
     </div>
-</span>
+</div>

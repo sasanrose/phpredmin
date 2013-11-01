@@ -7,7 +7,7 @@ $config = Array(
     'timezone'           => 'Asia/Tehran',
     'log' => Array(
         'driver'    => 'file',
-        'threshold' => 3, /* 0: Disable Logging 1: Error 2: Notice 3: Info 4: Warning 5: Debug */
+        'threshold' => 5, /* 0: Disable Logging 1: Error 2: Notice 3: Info 4: Warning 5: Debug */
         'file'      => Array(
             'directory' => 'logs'
         )
@@ -20,10 +20,18 @@ $config = Array(
             'password' => 'root'
         ),
         'redis' => Array(
-            'host'     => 'localhost',
-            'port'     => '6379',
-            'password' => Null,
-            'database' => 0
+            Array(
+                'host'     => 'localhost',
+                'port'     => '6379',
+                'password' => Null,
+                'database' => 0
+            ),
+            Array(
+                'host'     => '127.0.0.1',
+                'port'     => '6379',
+                'password' => Null,
+                'database' => 0
+            ),
         )
     ),
     'session' => Array(

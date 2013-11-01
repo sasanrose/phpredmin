@@ -2,12 +2,11 @@
 
 class Actions_Controller extends Controller
 {
-    public function __construct()
+    public function __construct($config)
     {
-        parent::__construct();
+        parent::__construct($config);
 
-        $this->infoModel  = new Info_Model();
-        $this->statsModel = new Stats_Model();
+        $this->statsModel = new Stats_Model($this->app->current);
         $this->template   = Template::factory('json');
     }
 

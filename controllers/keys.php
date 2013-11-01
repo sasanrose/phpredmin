@@ -144,19 +144,19 @@ class Keys_Controller extends Controller
     {
         switch ($this->db->type(urldecode($key))) {
             case Redis::REDIS_STRING:
-                $this->router->redirect("strings/view/{$key}");
+                $this->router->redirect("strings/view/{$this->app->current['serverId']}/{$this->app->current['database']}/{$key}");
                 break;
             case Redis::REDIS_SET:
-                $this->router->redirect("sets/view/{$key}");
+                $this->router->redirect("sets/view/{$this->app->current['serverId']}/{$this->app->current['database']}/{$key}");
                 break;
             case Redis::REDIS_LIST:
-                $this->router->redirect("lists/view/{$key}");
+                $this->router->redirect("lists/view/{$this->app->current['serverId']}/{$this->app->current['database']}/{$key}");
                 break;
             case Redis::REDIS_ZSET:
-                $this->router->redirect("zsets/view/{$key}");
+                $this->router->redirect("zsets/view/{$this->app->current['serverId']}/{$this->app->current['database']}/{$key}");
                 break;
             case Redis::REDIS_HASH:
-                $this->router->redirect("hashes/view/{$key}");
+                $this->router->redirect("hashes/view/{$this->app->current['serverId']}/{$this->app->current['database']}/{$key}");
                 break;
         }
     }

@@ -1,11 +1,11 @@
-<span class="span12">
+<span>
     <div class="alert alert-info">
         <a class="close" data-dismiss="alert" href="#">×</a>
         PHPRedmin uses Eval to fetch slowlogs
     </div>
     <?php if ($this->support) { ?>
         <h5><i class="icon-warning-sign"></i> Redis Slow Log (<?=$this->count?> most recent)</h5>
-        <form class="form-inline" action="<?=$this->router->url?>/welcome/slowlog" method="post">
+        <form class="form-inline" action="<?=$this->router->url?>/welcome/slowlog/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
             <div class="input-prepend">
                 <span class="add-on"><i class="icon-search"></i></span>
                 <input value="<?=$this->count?>" name="count" type="text" />

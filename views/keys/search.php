@@ -1,5 +1,5 @@
 <?=$this->renderPartial('actions')?>
-<span class="span12">
+<div>
     <div class="alert alert-warning">
         <a class="close" data-dismiss="alert" href="#">×</a>
         Since this doesn't support pagination yet, try to limit your search. Otherwise your browser might crash
@@ -9,7 +9,7 @@
         Number of results: <?=count($this->keys)?>
     </div>
     <h5><i class="icon-key"></i> Redis Keys</h5>
-    <form class="form-search" action="<?=$this->router->url?>/keys/search" method="post">
+    <form class="form-search" action="<?=$this->router->url?>/keys/search/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
         <div class="input-prepend">
             <span class="add-on"><i class="icon-key"></i></span>
             <input type="text" value="<?=$this->search?>" name="key">
@@ -56,22 +56,22 @@
                     <?=Redis_Helper::instance()->getSize($key)?>
                 </td>
                 <td>
-                    <a href="<?=$this->router->url?>/keys/expire/<?=urlencode($key)?>" target="_blank" class="action">
+                    <a href="<?=$this->router->url?>/keys/expire/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($key)?>" target="_blank" class="action">
                         <i class="icon-time"></i>
                     </a>
                 </td>
                 <td>
-                    <a href="<?=$this->router->url?>/keys/rename/<?=urlencode($key)?>" target="_blank" class="action">
+                    <a href="<?=$this->router->url?>/keys/rename/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($key)?>" target="_blank" class="action">
                         <i class="icon-edit"></i>
                     </a>
                 </td>
                 <td>
-                    <a href="<?=$this->router->url?>/keys/view/<?=urlencode($key)?>" target="_blank" class="action">
+                    <a href="<?=$this->router->url?>/keys/view/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($key)?>" target="_blank" class="action">
                         <i class="icon-folder-open-alt"></i>
                     </a>
                 </td>
                 <td>
-                    <a href="<?=$this->router->url?>/keys/move/<?=urlencode($key)?>" target="_blank" class="action">
+                    <a href="<?=$this->router->url?>/keys/move/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($key)?>" target="_blank" class="action">
                         <i class="icon-move"></i>
                     </a>
                 </td>
@@ -105,4 +105,4 @@
             </tr>
         <?php } ?>
     </table>
-</span>
+</div>

@@ -16,6 +16,7 @@
     } ?>
     <script type="text/javascript">
         baseurl = "<?=$this->router->url?>";
+        currentServerDb = "<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>";
         $(document).ready(function() {
             $('.disabled').click(function(e) {
                 e.preventDefault();
@@ -27,10 +28,10 @@
                 $('.modal-footer .save').unbind();
                 $('.modal-footer .save').click(function() {
                     $.ajax({
-                        url: '<?=$this->router->url?>/actions/reset',
+                        url: '<?=$this->router->url?>/actions/reset/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>',
                         dataType: 'json',
                         success: function(data) {
-                            location.href = '<?=$this->router->url?>';
+                            location.href = '<?=$this->router->url?>/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>';
                         }
                     });
                 });
@@ -44,10 +45,10 @@
                 $('.modal-footer .save').unbind();
                 $('.modal-footer .save').click(function() {
                     $.ajax({
-                        url: '<?=$this->router->url?>/actions/fall',
+                        url: '<?=$this->router->url?>/actions/fall/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>',
                         dataType: 'json',
                         success: function(data) {
-                            location.href = '<?=$this->router->url?>';
+                            location.href = '<?=$this->router->url?>/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>';
                         }
                     });
 
@@ -62,10 +63,10 @@
                 $('.modal-footer .save').unbind();
                 $('.modal-footer .save').click(function() {
                     $.ajax({
-                        url: '<?=$this->router->url?>/actions/fdb',
+                        url: '<?=$this->router->url?>/actions/fdb/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>',
                         dataType: 'json',
                         success: function(data) {
-                            location.href = '<?=$this->router->url?>';
+                            location.href = '<?=$this->router->url?>/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>';
                         }
                     });
                 });
@@ -92,35 +93,35 @@
                                 <li <?php if($this->router->request == $this->router->url) {?>
                                     class="active"<
                                 <?php } ?>>
-                                    <a href="<?=$this->router->url?>">
+                                    <a href="<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
                                         <i class="icon-white icon-home"></i> Home
                                     </a>
                                 </li>
-                                <li <?php if($this->router->request == $this->router->url."/welcome/info") {?>
+                                <li <?php if($this->router->request == $this->router->url."/welcome/info/") {?>
                                     class="active"<
                                 <?php } ?>>
-                                    <a href="<?=$this->router->url?>/welcome/info">
+                                    <a href="<?=$this->router->url?>/welcome/info/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
                                         <i class="icon-white icon-info-sign"></i> Info
                                     </a>
                                 </li>
                                 <li <?php if($this->router->request == $this->router->url."/welcome/config") {?>
                                     class="active"<
                                 <?php } ?>>
-                                    <a href="<?=$this->router->url?>/welcome/config">
+                                    <a href="<?=$this->router->url?>/welcome/config/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
                                         <i class="icon-white icon-cogs"></i> Configurations
                                     </a>
                                 </li>
                                 <li <?php if($this->router->request == $this->router->url."/welcome/stats") {?>
                                     class="active"<
                                 <?php } ?>>
-                                    <a href="<?=$this->router->url?>/welcome/stats">
+                                    <a href="<?=$this->router->url?>/welcome/stats/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
                                         <i class="icon-white icon-bar-chart"></i> Stats
                                     </a>
                                 </li>
                                 <li <?php if($this->router->request == $this->router->url."/welcome/slowlog") {?>
                                     class="active"<
                                 <?php } ?>>
-                                    <a href="<?=$this->router->url?>/welcome/slowlog">
+                                    <a href="<?=$this->router->url?>/welcome/slowlog/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
                                         <i class="icon-white icon-warning-sign"></i> Slow Log
                                     </a>
                                 </li>
@@ -147,12 +148,12 @@
                                         </li>
                                         <li class="divider"></li>
                                         <li>
-                                            <a href="<?=$this->router->url?>/welcome/save/1" target="_blank">
+                                            <a href="<?=$this->router->url?>/welcome/save/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/1" target="_blank">
                                                 <i class="icon-save"></i> Asynchronous Save
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="<?=$this->router->url?>/welcome/save" target="_blank">
+                                            <a href="<?=$this->router->url?>/welcome/save/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" target="_blank">
                                                 <i class="icon-save"></i> Synchronous Save
                                             </a>
                                         </li>
@@ -172,22 +173,21 @@
         </div>
         <div class="row">
             <div class="span12">
-                <div class="alert alert-success">
-                    <a class="close" data-dismiss="alert" href="#">×</a>
-                    <?php
-                        echo sprintf('redis://%s:%s', $this->app->config['database']['redis']['host'],
-                                                      $this->app->config['database']['redis']['port']);
-                    ?>
-                </div>
-                <?php $password = isset($this->app->config['database']['redis']['password']) ? True : False; ?>
-                <div class="alert alert-<?php if ($password) echo "info"; else echo "warning"?>">
-                    <a class="close" data-dismiss="alert" href="#">×</a>
-                    Using Password: <?php if ($password) echo "Yes"; else echo "No"?>
-                </div>
+                <ul class="breadcrumb">
+                    <li>
+                        <?= isset($this->app->current['password']) ? '<i class="icon-lock" title="With password"></i>' : '<i class="icon-eye-open" title="No password"></i>' ?> 
+                        <?= $this->app->current['host'] ?>:<?= $this->app->current['port'] ?> <span class="divider">/</span></li>
+                    <li>DB <?= $this->app->current['database'] ?></li>
+                </ul>
             </div>
         </div>
         <div class="row">
-            <?=$this->content?>
+            <div class="span2">
+                <?= $this->navigation ?>
+            </div>
+            <div class="span10">
+                <?= $this->content ?>
+            </div>
         </div>
     </div>
     <div id="confirmation" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="confirmation" aria-hidden="true">

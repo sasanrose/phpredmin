@@ -1,4 +1,4 @@
-<span class="span12">
+<div>
     <h5><i class="icon-cogs"></i> Redis Config</h5>
     <table class="table table-striped">
         <?php foreach($this->config as $key => $value) {?>
@@ -12,4 +12,4 @@
             </tr>
         <?php } ?>
     </table>
-</span>
+</div>

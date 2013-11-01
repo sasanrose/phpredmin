@@ -9,7 +9,7 @@ $(document).ready(function() {
 
         if (key != '' && str != '' && score != '') {
             $.ajax({
-                url: baseurl+'/zsets/add',
+                url: baseurl+'/zsets/add/' + currentServerDb,
                 dataType: 'json',
                 type: 'POST',
                 data: 'key='+key+'&value='+str+'&score='+score,

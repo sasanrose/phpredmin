@@ -76,7 +76,7 @@
         $.each(methods, function(index, method) {
             $('#'+method+'_chart').empty();
             $.ajax({
-                url: '<?=$this->router->url?>/stats/'+method,
+                url: '<?=$this->router->url?>/stats/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/'+method,
                 dataType: 'json',
                 data: 'from='+from+'&to='+to,
                 success: function(data) {
@@ -87,14 +87,14 @@
     }
 
 </script>
-<span class="span12">
+<div>
     <div class="alert alert-info">
         <a class="close" data-dismiss="alert" href="#">×</a>
         In order to view stats, you have to setup cron located in controllers directory
     </div>
     <h5><i class="icon-bar-chart"></i> Redis Stats</h5>
-</span>
-<span class="span12">
+</div>
+<div>
     <form class="form-inline">
         <input type="text" id="from" placeholder="From">
         <input type="text" id="to" placeholder="To">
@@ -102,8 +102,8 @@
             <i class="icon-search"></i> Filter
         </button>
     </form>
-</span>
-<span class="span12">
+</div>
+<div>
     <div style="padding: 20px">
         <svg id="memory_chart" style="height: 300px; display: block;" />
         <svg id="cpu_chart" style="height: 300px; display: block;" />
@@ -113,4 +113,4 @@
         <svg id="dbkeys_chart" style="height: 300px; display: block;" />
         <svg id="dbexpires_chart" style="height: 300px; display: block;" />
     </div>
-</span>
+</div>
