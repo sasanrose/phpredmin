@@ -23,4 +23,9 @@ final class App
     {
         return isset($this->_data[$key]) ? $this->_data[$key] : Null;
     }
+    
+    public function __set($key, $value)
+    {
+        $this->_data[$key] = $value;
+    }
 }

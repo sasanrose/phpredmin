@@ -3,7 +3,7 @@ final class Db
 {
     protected static $_instances = Array();
 
-    public static function factory($driver = Null)
+    public static function factory($driver = Null, $config)
     {
         $driver = isset($driver) ? $driver : App::instance()->config['database']['driver'];
 
@@ -11,7 +11,7 @@ final class Db
             include_once(App::instance()->drivers.'db/'.(strtolower($driver)).'.php');
 
             $class = ucwords(strtolower($driver)).'Db';
-            self::$_instances[$driver] = new $class;
+            self::$_instances[$driver] = new $class($config);
         }
 
         return self::$_instances[$driver];

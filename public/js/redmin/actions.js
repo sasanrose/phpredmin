@@ -7,9 +7,9 @@ var deleteRow = function(e) {
     var id      = $(e.target).attr('id');
 
     if (typeof(keyinfo) == 'undefined') {
-        var url = baseurl+'/'+type+'/delete/'+encodeURIComponent(id);
+        var url = baseurl+'/'+type+'/delete/'+currentServerDb+'/'+encodeURIComponent(id);
     } else {
-        var url = baseurl+'/'+type+'/delete/'+encodeURIComponent(keyinfo)+'/'+encodeURIComponent(id);
+        var url = baseurl+'/'+type+'/delete/'+currentServerDb+'/'+encodeURIComponent(keyinfo)+'/'+encodeURIComponent(id);
     }
 
     $('.modal-footer .deletekey').unbind();
@@ -63,7 +63,7 @@ $(document).ready(function() {
                     }
 
                     $.post(
-                        baseurl+'/'+type+'/moveall',
+                        baseurl+'/'+type+'/moveall/'+currentServerDb,
                         postdata,
                         function(data) {
                             $('#move_confirmation').modal('hide');
@@ -110,7 +110,7 @@ $(document).ready(function() {
                 }
 
                 $.post(
-                    baseurl+'/'+type+'/delall',
+                    baseurl+'/'+type+'/delall/'+currentServerDb,
                     postdata,
                     function(data) {
                         $('#del_confirmation').modal('hide');

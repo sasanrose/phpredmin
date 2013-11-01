@@ -64,6 +64,12 @@ final class Router
 
         if (!$this->action = array_shift($this->_params))
             $this->action = App::instance()->config['default_action'];
+        
+        if (!$this->serverId = array_shift($this->_params))
+            $this->serverId = 0;
+        
+        if (!$this->dbId = array_shift($this->_params))
+            $this->dbId = 0;
     }
 
     public function __get($key)
@@ -87,9 +93,15 @@ final class Router
         $method = $this->action.'Action';
 
         if (class_exists($class)) {
-            $controller = new $class;
-            if (method_exists($controller, $method))
+            $controller = new $class(
+                array(
+                    'serverId' => $this->serverId,
+                    'dbId' => $this->dbId,
+                )
+            );
+            if (method_exists($controller, $method)) {
                 call_user_func_array(array($controller, $method), $this->_params);
+            }    
 
             return;
         }

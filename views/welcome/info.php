@@ -1,4 +1,4 @@
-<span class="span12">
+<span>
     <h5><i class="icon-info-sign"></i> Redis Info</h5>
     <table class="table table-striped">
         <tr>

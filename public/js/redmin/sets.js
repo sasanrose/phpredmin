@@ -8,7 +8,7 @@ $(document).ready(function() {
 
         if (key != '' && str != '') {
             $.ajax({
-                url: baseurl+'/sets/add',
+                url: baseurl+'/sets/add/' + currentServerDb,
                 dataType: 'json',
                 type: 'POST',
                 data: 'key='+key+'&value='+str,

@@ -1,4 +1,4 @@
-<div class="span12">
+<div>
     <?php if (isset($this->moved) && $this->moved) { ?>
         <div class="alert alert-info">
             <a class="close" data-dismiss="alert" href="#">×</a>
@@ -11,7 +11,7 @@
         </div>
     <?php } ?>
     <?php if (!isset($this->moved) || (isset($this->moved) && !$this->moved)) { ?>
-        <form class="form-search" action="<?=$this->router->url?>/keys/move" method="post">
+        <form class="form-search" action="<?=$this->router->url?>/keys/move/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
             <legend>Move key</legend>
             <input name="key" value="<?=$this->key?>" type="hidden" />
             <div class="input-prepend">

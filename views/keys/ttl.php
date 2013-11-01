@@ -1,4 +1,4 @@
-<div class="span12">
+<div>
     <div class="alert alert-success">
         <a class="close" data-dismiss="alert" href="#">×</a>
         0 means no ttl (Values lower than 0, make the key persistant)
@@ -15,7 +15,7 @@
         </div>
     <?php } ?>
     <?php if (!isset($this->updated) || (isset($this->updated) && !$this->updated)) { ?>
-        <form class="form-search" action="<?=$this->router->url?>/keys/expire" method="post">
+        <form class="form-search" action="<?=$this->router->url?>/keys/expire/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
             <legend>key's Expiration</legend>
             <?php if ($this->ttl !== False && $this->ttl > 0) { ?>
                 <div>

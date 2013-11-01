@@ -9,7 +9,7 @@ $(document).ready(function() {
 
         if (key != '' && str != '' && hashkey != '') {
             $.ajax({
-                url: baseurl+'/hashes/add',
+                url: baseurl+'/hashes/add/' + currentServerDb,
                 dataType: 'json',
                 type: 'POST',
                 data: 'key='+key+'&value='+str+'&hashkey='+hashkey,
