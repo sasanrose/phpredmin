@@ -31,7 +31,7 @@
                         url: '<?=$this->router->url?>/actions/reset/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>',
                         dataType: 'json',
                         success: function(data) {
-                            location.href = '<?=$this->router->url?>/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>';
+                            location.href = '<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>';
                         }
                     });
                 });

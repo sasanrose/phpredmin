@@ -11,8 +11,13 @@ class Keys_Controller extends Controller
                 $keys = $this->db->keys("{$key}*");
                 asort($keys);
                 Template::factory()->render('keys/search', Array('keys' => $keys, 'search' => $key));
-            } else
+            } 
+            else {
                 Template::factory()->render('invalid_input');
+            }    
+        } 
+        else {
+            Template::factory()->render('invalid_input');
         }
     }
 

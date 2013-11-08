@@ -4,7 +4,7 @@ $config = Array(
     'default_action'     => 'Index',
     'production'         => True,
     'default_layout'     => 'layout',
-    'timezone'           => 'Asia/Tehran',
+    'timezone'           => 'Europe/Amsterdam',
     'log' => Array(
         'driver'    => 'file',
         'threshold' => 5, /* 0: Disable Logging 1: Error 2: Notice 3: Info 4: Warning 5: Debug */
@@ -24,7 +24,11 @@ $config = Array(
                 'host'     => 'localhost',
                 'port'     => '6379',
                 'password' => Null,
-                'database' => 0
+                'database' => 0,
+                'stats'    => Array(
+                    'enable'   => 1,
+                    'database' => 0,
+                ),
             ),
             Array(
                 'host'     => '127.0.0.1',

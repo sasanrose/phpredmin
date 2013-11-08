@@ -12,9 +12,7 @@ class Actions_Controller extends Controller
 
     public function resetAction()
     {
-        $info = $this->db->info();
-
-        $this->db->resetStats($info);
+        $this->statsModel->resetStats();
 
         $this->template->render(True);
     }

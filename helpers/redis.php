@@ -8,7 +8,7 @@ class Redis_Helper
 
     protected function __construct()
     {
-        $this->db = Db::factory();
+       $this->db = Db::factory(Null, App::instance()->current);
     }
 
     public static function instance()
