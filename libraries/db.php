@@ -7,13 +7,15 @@ final class Db
     {
         $driver = isset($driver) ? $driver : App::instance()->config['database']['driver'];
 
-        if (!isset(self::$_instances[$driver])) {
+        $instanceName = $driver . ':' . $config['host'] . ':' . $config['port'];
+
+        if (!isset(self::$_instances[$instanceName])) {
             include_once(App::instance()->drivers.'db/'.(strtolower($driver)).'.php');
 
             $class = ucwords(strtolower($driver)).'Db';
-            self::$_instances[$driver] = new $class($config);
+            self::$_instances[$instanceName] = new $class($config);
         }
 
-        return self::$_instances[$driver];
+        return self::$_instances[$instanceName];
     }
 }
