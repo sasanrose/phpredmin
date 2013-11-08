@@ -84,7 +84,7 @@ final class Router
 
     public function query($key, $default = Null)
     {
-        return isset($this->_query_strings[$key]) ? filter_var($this->_query_strings[$key], FILTER_SANITIZE_STRING) : Null;
+        return isset($this->_query_strings[$key]) ? filter_var($this->_query_strings[$key], FILTER_SANITIZE_STRING) : $default;
     }
 
     public function route()
