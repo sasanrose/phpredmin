@@ -95,7 +95,7 @@
         $.each(methods, function(index, method) {
             $('#'+method+'_chart').empty();
             $.ajax({
-                url: '<?=$this->router->url?>/stats/'+method + '/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>',
+                url: '<?=$this->router->url?>/stats/'+ method + '/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>',
                 dataType: 'json',
                 data: 'from='+from+'&to='+to,
                 success: function(data) {

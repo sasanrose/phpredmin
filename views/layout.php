@@ -183,7 +183,7 @@
         </div>
         <div class="row">
             <div class="span2">
-                <?= $this->navigation ?>
+                <?= $this->renderPartial('navigation') ?>
             </div>
             <div class="span10">
                 <?= $this->content ?>
