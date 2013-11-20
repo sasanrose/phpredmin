@@ -8,7 +8,7 @@ class Model
         $this->_objects['app']     = App::instance();
         $this->_objects['router']  = Router::instance();
         $this->_objects['session'] = Session::instance();
-        $this->_objects['db']      = Db::factory(Null, $config);
+        $this->_objects['db']      = Db::factory($config);
         $this->_objects['log']     = Log::factory();
     }
 

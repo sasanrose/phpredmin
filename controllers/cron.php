@@ -10,7 +10,7 @@ class Cron_Controller extends Controller
             if (!empty($server['stats']['enable'])) {
                 $time = time();
                 
-                $db = Db::factory(Null, $server);
+                $db = Db::factory($server);
                 $info = $db->info();
 
                 $statsModel->addKey('memory', $info['used_memory'], $time);
