@@ -61,6 +61,6 @@ class Lists_Controller extends Controller
             }
         }
 
-        $this->router->redirect("lists/view/{$key}");
+        $this->router->redirect("lists/view/{$this->app->current['serverId']}/{$this->app->current['database']}/" . urlencode($key));
     }
 }
