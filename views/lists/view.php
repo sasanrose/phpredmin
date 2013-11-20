@@ -27,7 +27,7 @@
         <?php foreach ($this->values as $member => $value) { ?>
             <tr>
                 <td>
-                    <?=$member+1?>
+                    <?=$member?>
                 </td>
                 <td>
                     <?=$value?>
