@@ -21,7 +21,10 @@ class Stats_Model extends Model
     {
         $this->db->changeDB($this->app->current['stats']['database']);
         
-        $this->db->zAdd(self::STATS_MODEL_KEY . $key, $time, $value);
+        // add value with timestamp prefix to make it unique
+        // in other case non-unique value won't be added
+        // @see http://redis.io/commands/zadd
+        $this->db->zAdd(self::STATS_MODEL_KEY . $key, $time, $time . ':' . $value);
         
         $this->db->changeDB($this->app->current['database']);
     }
@@ -33,8 +36,9 @@ class Stats_Model extends Model
         $results = Array();
         $keys = $this->db->zRevRangeByScore(self::STATS_MODEL_KEY . $key, $to, $from, Array('withscores' => True));
 
-        foreach ($keys as $key => $value) {
-            $results[] = array($value, $key);
+        foreach ($keys as $value => $time) {
+            $value = explode(':', $value);
+            $results[] = array($time, (float)$value[1]);
         }
 
         $this->db->changeDB($this->app->current['database']);
