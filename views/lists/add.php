@@ -1,6 +1,6 @@
 <?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/lists.js\" type=\"text/javascript\"></script>"); ?>
 <form class="form">
-    <legend><?php if (isset($this->oldkey)) { echo "Add to List"; } else { echo "Add List";} ?></legend>
+    <legend><?php if (isset($this->oldkey)) { echo "Edit List"; } else { echo "Add List";} ?></legend>
     <div class="input-prepend">
         <span class="add-on"><i class="icon-key"></i></span>
         <?php if (isset($this->oldkey)) { ?>
@@ -24,4 +24,7 @@
     <div id="list_type">
     </div>
     <button type="submit" class="btn" id="add_list"><i class="icon-plus"></i> Add</button>
+    <?php if (!isset($this->oldkey)) { ?>
+        <button type="submit" class="btn" id="add_edit_list"><i class="icon-plus-sign"></i> Add & Edit</button>
+    <?php } ?> 
 </form>
