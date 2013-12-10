@@ -5,13 +5,20 @@
     <table class="table table-striped settable">
         <tr>
             <th>Value</th>
+            <th>Edit</th>
             <th>Delete</th>
             <th></th>
+            
         </tr>
         <?php foreach ($this->members as $member) { ?>
             <tr>
                 <td>
                     <?=$member?>
+                </td>
+                <td>
+                    <a href="<?=$this->router->url?>/sets/edit/<?=urlencode($this->key)?>/<?=urlencode($member)?>" target="_blank" class="action">
+                        <i class="icon-edit"></i>
+                    </a>
                 </td>
                 <td>
                     <a href="#" class="action del">
@@ -25,7 +32,7 @@
         <?php } ?>
         <?php if (!empty($this->members)) { ?>
             <tr>
-                <td colspan="2">
+                <td colspan="3">
                 </td>
                 <td>
                     <input type="checkbox" name="checkall" id="checkall" />

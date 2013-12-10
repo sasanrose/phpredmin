@@ -23,6 +23,38 @@ class Sets_Controller extends Controller
 
         Template::factory()->render('sets/view', Array('members' => $members, 'key' => urldecode($key)));
     }
+    
+    /** 
+     * Edit action ( edit members in Sets )
+     * 
+     * @param string $key
+     * @param string $member
+     */
+    
+    public function editAction($key,$member)  
+    {
+        $edited = Null;
+
+        if ($this->router->method == Router::POST) {
+            $member = $this->inputs->post('oldmember',NULL);
+            $newmember = $this->inputs->post('newmember', Null);
+            $key      = $this->inputs->post('key', Null);
+
+            if (!isset($newmember) || trim($newmember) == '' || !isset($key) || trim($key) == '' ){
+             
+               $edited = False;
+            }elseif ($this->db->sRem($key, $member)){
+                
+                $edited = $this->db->sAdd($key,$newmember);
+                
+            }
+                
+        }
+
+        Template::factory()->render('sets/edit', Array('member' => urldecode($member), 'key' => urldecode($key),'edited' => $edited));
+        
+        
+    }            
 
     public function deleteAction($key, $value)
     {

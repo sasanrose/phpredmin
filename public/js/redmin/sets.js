@@ -18,9 +18,9 @@ $(document).ready(function() {
                         form.find('textarea').val('');
                         if (oldkey.length > 0) {
                             var tr = $('.settable tr:first');
-                            $('<tr><td>'+str+'</td><td><a href="#" class="action del"><i class="icon-trash" keytype="sets" keyinfo="'+key+'" id="'+str+'"></i></a></td>'+
+                            $('<tr><td>'+str+'</td><td><a href="'+baseurl+'/sets/edit/'+encodeURIComponent(key)+'/'+encodeURIComponent(str)+'" target="_blank" class="action"><i class="icon-edit"></i></a></td><td><a href="#" class="action del"><i class="icon-trash" keytype="sets" keyinfo="'+key+'" id="'+str+'"></i></a></td>'+
                               '<td><input type="checkbox" name="keys[]" value="'+str+'" /></td></tr>').insertAfter(tr);
-                            $('.settable tr').eq(1).find('a').click(function(e) {
+                            $('.settable tr').eq(1).find('a.del').click(function(e) {
                                 deleteRow(e);
                             });
                         } else {
