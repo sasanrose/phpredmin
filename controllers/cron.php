@@ -4,8 +4,6 @@ class Cron_Controller extends Controller
 {
     public function indexAction()
     {
-        $statsModel = new Stats_Model($this->app->current);
-        
         foreach($this->app->config['database']['redis'] as $serverId => $server) {
             if (!empty($server['stats']['enable'])) {
                 $time = time();
@@ -13,6 +11,7 @@ class Cron_Controller extends Controller
                 $db = Db::factory($server);
                 $info = $db->info();
 
+                $statsModel = new Stats_Model($server);
                 $statsModel->addKey('memory', $info['used_memory'], $time);
                 $statsModel->addKey('connections', $info['total_connections_received'], $time);
                 $statsModel->addKey('commands', $info['total_commands_processed'], $time);
