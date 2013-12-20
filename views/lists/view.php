@@ -16,7 +16,7 @@
         </div>
         <div id="list_remove_type">
         </div>
-        <button type="submit" class="btn" id="add_list"><i class="icon-minus"></i> Remove</button>
+        <button type="submit" class="btn" id="rem_list"><i class="icon-minus"></i> Remove</button>
     </form>
     <h5><i class="icon-key"></i> <?=$this->key?></h5>
     <table class="table table-striped settable">
@@ -27,7 +27,7 @@
         <?php foreach ($this->values as $member => $value) { ?>
             <tr>
                 <td>
-                    <?=$member+1?>
+                    <?=$member?>
                 </td>
                 <td>
                     <?=$value?>

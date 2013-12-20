@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#add_list').click(function(e) {
+    $('#add_list, #add_edit_list').click(function(e) {
         e.preventDefault();
 
         var form  = $(e.target).parents('form');
@@ -11,12 +11,13 @@ $(document).ready(function() {
         if (key != '' && str != '' && (type == 'append' || type == 'prepend' || type == 'before' || type == 'after')) {
             if ((type == 'before' || type == 'after') && pivot.val().trim() == '') {
                 invalid();
-            } else{
-                console.log(pivot, typeof(pivot),typeof(pivot) != 'undefined');
-                if (pivot.length > 0)
+            } else {
+                if (pivot.length > 0) {
                     pivot = pivot.val().trim();
-                else
+                }    
+                else {
                     pivot = '';
+                }    
 
                 $.ajax({
                     url: baseurl+'/lists/add/' + currentServerDb,
@@ -24,20 +25,23 @@ $(document).ready(function() {
                     type: 'POST',
                     data: 'key='+key+'&value='+str+'&type='+type+'&pivot='+pivot,
                     success: function(data) {
-                        var oldkey = form.find('input[name="oldkey"]');
-                        form.find('textarea').val('');
+                        if (data) {
+                            var oldkey = form.find('input[name="oldkey"]');
+                            form.find('textarea').val('');
 
-                        if (oldkey.length > 0) {
-                            if (data)
+                            if (oldkey.length > 0) {
                                 location.reload();
+                            } else {
+                                if (e.target.id == 'add_edit_list') {
+                                    location.href = baseurl + '/keys/view/' + currentServerDb + '/' + encodeURIComponent(key);
+                                } else {
+                                    form.find('input').val('');
+                                    saved();
+                                } 
+                            }
                         } else {
-                            form.find('input').val('');
-                        }
-
-                        if (data)
-                            saved();
-                        else
                             error();
+                        }
                     }
                 });
             }

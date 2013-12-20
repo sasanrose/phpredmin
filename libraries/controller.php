@@ -18,7 +18,7 @@ class Controller
         $current = $this->app->config['database']['redis'][$config['serverId']];
         $current['serverId'] = $config['serverId'];
         
-        $this->_objects['db']      = Db::factory(Null, $current);
+        $this->_objects['db']      = Db::factory($current);
         $this->_objects['infoModel'] = new Info_Model($current);
         
         $info = $this->db->info();

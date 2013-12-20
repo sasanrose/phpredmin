@@ -19,8 +19,8 @@ class Stats_Controller extends Controller
         $misses      = $this->statsModel->getKeys('misses', $from, $to);
         $expiredKeys = $this->statsModel->getKeys('expired_keys', $from, $to);
 
-        $result[] = Array('key' => 'Keysapce Misses', 'values' => $hits);
-        $result[] = Array('key' => 'Keysapce Hits', 'values' => $misses);
+        $result[] = Array('key' => 'Keyspace Misses', 'values' => $hits);
+        $result[] = Array('key' => 'Keyspace Hits', 'values' => $misses);
         $result[] = Array('key' => 'Expired Keys', 'values' => $expiredKeys);
 
         $this->template->render($result);
@@ -102,6 +102,20 @@ class Stats_Controller extends Controller
 
         $result[] = Array('key' => 'User CPU Usage', 'values' => $user_cpu);
         $result[] = Array('key' => 'System CPU Usage', 'values' => $system_cpu);
+
+        $this->template->render($result);
+    }
+    
+    public function aofAction()
+    {
+        $result     = Array();
+        $from       = $this->router->query('from', strtotime('-12 hours'));
+        $to         = $this->router->query('to', time());
+        $aof_size   = $this->statsModel->getKeys('aof_size', $from, $to);
+        $aof_base   = $this->statsModel->getKeys('aof_base', $from, $to);
+
+        $result[] = Array('key' => 'AOF current size', 'values' => $aof_size);
+        $result[] = Array('key' => 'AOF base size', 'values' => $aof_base);
 
         $this->template->render($result);
     }

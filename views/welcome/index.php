@@ -7,7 +7,7 @@
 
         $('#bulkdelete').submit(function(e) {
             e.preventDefault();
-            var url = baseurl+'/keys/bulkdelete';
+            var url = baseurl+'/keys/bulkdelete/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>';
             var val = $('#bulkkey').val();
 
             if ($('#delete_interval').val().trim() != '') {
@@ -45,7 +45,7 @@
     });
 
     var updateDeleteInfo = function(key) {
-        var url = baseurl+'/keys/deleteinfo/'+key;
+        var url = baseurl+'/keys/deleteinfo/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/'+key;
         int = window.setInterval(function() {
             $.ajax({
                 url: url,

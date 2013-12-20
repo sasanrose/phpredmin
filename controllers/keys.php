@@ -11,8 +11,13 @@ class Keys_Controller extends Controller
                 $keys = $this->db->keys("{$key}*");
                 asort($keys);
                 Template::factory()->render('keys/search', Array('keys' => $keys, 'search' => $key));
-            } else
+            } 
+            else {
                 Template::factory()->render('invalid_input');
+            }    
+        } 
+        else {
+            Template::factory()->render('invalid_input');
         }
     }
 
@@ -113,22 +118,29 @@ class Keys_Controller extends Controller
                 $client = new GearmanClient();
 
                 $client->addServer($config['gearman']['host'], $config['gearman']['port']);
-                $client->doBackground('delete_keys', $key);
+                $client->doBackground('delete_keys', 
+                    serialize(array(
+                        'key' => $key,
+                        'server' => $this->app->current,
+                    ))               
+                );
             }
         }
     }
 
     public function deleteinfoAction($key)
     {
-        $this->db->incrBy("phpredmin:requests:{$key}", 1);
+        $this->db->incrBy("phpredmin:gearman:requests:{$key}", 1);
+        $this->db->expireAt("phpredmin:gearman:requests:{$key}", strtotime('+10 minutes'));
 
         $key      = urldecode($key);
-        $total    = $this->db->get("phpredmin:deletecount:{$key}");
-        $count    = $this->db->get("phpredmin:deleted:{$key}");
-        $requests = $this->db->get("phpredmin:requests:{$key}");
+        $total    = $this->db->get("phpredmin:gearman:deletecount:{$key}");
+        $count    = $this->db->get("phpredmin:gearman:deleted:{$key}");
+        $requests = $this->db->get("phpredmin:gearman:requests:{$key}");
 
-        if ($total === false && $count !== false && $requests == 1)
+        if ($total === false && $count !== false && $requests == 1) {
             $total = $count;
+        }    
 
         $result = array($total, $count);
 

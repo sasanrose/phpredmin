@@ -10,15 +10,13 @@
             There was a problem editing the key
         </div>
     <?php } ?>
-    <?php if (!isset($this->edited) || (isset($this->edited) && !$this->edited)) { ?>
-        <form class="form" action="<?=$this->router->url?>/strings/view/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
-            <legend>Edit key</legend>
-            <h5><?=$this->key?></h5>
-            <div>
-                <textarea name="newvalue"><?=$this->value?></textarea>
-            </div>
-            <input name="key" value="<?=$this->key?>" type="hidden" />
-            <button type="submit" class="btn"><i class="icon-edit"></i> Edit</button>
-        </form>
-    <?php } ?>
+    <form class="form" action="<?=$this->router->url?>/strings/view/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
+        <legend>Edit key</legend>
+        <h5><?=$this->key?></h5>
+        <div>
+            <textarea name="newvalue"><?=$this->value?></textarea>
+        </div>
+        <input name="key" value="<?=$this->key?>" type="hidden" />
+        <button type="submit" class="btn"><i class="icon-edit"></i> Edit</button>
+    </form>
 </div>

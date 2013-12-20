@@ -20,13 +20,7 @@ class PhpTemplate
 
     public function render($__view, $data = Array())
     {
-        echo $this->renderPartial(
-            App::instance()->config['default_layout'], 
-            array(
-                'content' => $this->renderPartial($__view, $data),
-                'navigation' => $this->renderPartial('navigation'),
-            )
-        );
+        echo $this->renderPartial(App::instance()->config['default_layout'], array('content' => $this->renderPartial($__view, $data)));
     }
 
     public function renderPartial($__view, $__data = Array())
