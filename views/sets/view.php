@@ -8,7 +8,7 @@
             <th>Edit</th>
             <th>Delete</th>
             <th></th>
-            
+
         </tr>
         <?php foreach ($this->members as $member) { ?>
             <tr>
@@ -16,7 +16,7 @@
                     <?=$member?>
                 </td>
                 <td>
-                    <a href="<?=$this->router->url?>/sets/edit/<?=urlencode($this->key)?>/<?=urlencode($member)?>" target="_blank" class="action">
+                    <a href="<?=$this->router->url?>/sets/edit/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($this->key)?>/<?=urlencode($member)?>" target="_blank" class="action">
                         <i class="icon-edit"></i>
                     </a>
                 </td>

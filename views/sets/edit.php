@@ -11,7 +11,7 @@
         </div>
     <?php } ?>
     <?php if (!isset($this->edited) || (isset($this->edited) && !$this->edited)) { ?>
-        <form class="form" action="<?=$this->router->url?>/sets/edit" method="post">
+        <form class="form" action="<?=$this->router->url?>/sets/edit/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
             <legend>Edit Set key</legend>
             <h5><?=$this->key?> / <?=$this->member?></h5>
             <div>
