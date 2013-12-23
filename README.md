@@ -55,6 +55,14 @@ _Note:_ If your redis server is on an IP or port other than defaults (localhost:
 
 ## Features
 
+### Multi-Server functionality
+
+You can add as many redis servers as you want to your config.php file and choose between the defined servers from the menu available on the left side of all pages in PHPRedMin:
+
+![](http://dl.dropbox.com/u/5413590/phpredmin/multiserver.png)
+
+We must credit [Eugene Fidelin](https://github.com/eugef) for his great contributions to implement this feature
+
 ### Statistics
 
 _Note:_ If you want this feature to work, you have to setup the cron to gather data from your redis server as follows:
