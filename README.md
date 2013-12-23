@@ -170,6 +170,8 @@ _Note:_ This supports pagination
 
 _Note:_ This supports pagination
 
+_Note:_ Thanks to [Ahmed Hamdy](https://github.com/ahmed-hamdy90) you can now edit members of a set
+
 ![](http://dl.dropbox.com/u/5413590/phpredmin/setresult.jpg)
 
 #### Sorted Sets
