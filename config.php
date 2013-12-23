@@ -4,10 +4,10 @@ $config = Array(
     'default_action'     => 'Index',
     'production'         => True,
     'default_layout'     => 'layout',
-    'timezone'           => 'Asia/Tehran',
+    'timezone'           => 'Europe/Amsterdam',
     'log' => Array(
         'driver'    => 'file',
-        'threshold' => 3, /* 0: Disable Logging 1: Error 2: Notice 3: Info 4: Warning 5: Debug */
+        'threshold' => 1, /* 0: Disable Logging 1: Error 2: Notice 3: Info 4: Warning 5: Debug */
         'file'      => Array(
             'directory' => 'logs'
         )
@@ -20,10 +20,16 @@ $config = Array(
             'password' => 'root'
         ),
         'redis' => Array(
-            'host'     => 'localhost',
-            'port'     => '6379',
-            'password' => Null,
-            'database' => 0
+            Array(
+                'host'     => 'localhost',
+                'port'     => '6379',
+                'password' => Null,
+                'database' => 0,
+                'stats'    => Array(
+                    'enable'   => 1,
+                    'database' => 0,
+                ),
+            ),
         )
     ),
     'session' => Array(

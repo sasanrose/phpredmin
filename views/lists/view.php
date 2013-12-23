@@ -1,7 +1,7 @@
 <?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/remlists.js\" type=\"text/javascript\"></script>"); ?>
-<div class="span12">
+<div>
     <?=$this->renderPartial('lists/add', array('oldkey' => $this->key))?>
-    <form class="form" action="<?=$this->router->url?>/lists/del" method="post">
+    <form class="form" action="<?=$this->router->url?>/lists/del/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
         <legend>Remove from List</legend>
         <div class="input-prepend" style="padding-right: 20px;">
             <span class="add-on"><i class="icon-key"></i></span>
@@ -16,7 +16,7 @@
         </div>
         <div id="list_remove_type">
         </div>
-        <button type="submit" class="btn" id="add_list"><i class="icon-minus"></i> Remove</button>
+        <button type="submit" class="btn" id="rem_list"><i class="icon-minus"></i> Remove</button>
     </form>
     <h5><i class="icon-key"></i> <?=$this->key?></h5>
     <table class="table table-striped settable">
@@ -27,7 +27,7 @@
         <?php foreach ($this->values as $member => $value) { ?>
             <tr>
                 <td>
-                    <?=$member+1?>
+                    <?=$member?>
                 </td>
                 <td>
                     <?=$value?>
@@ -40,10 +40,10 @@
     ?>
         <ul class="pager">
             <li class="previous <?php if ($this->page == 0) echo "disabled";?>">
-                <a href="<?=$this->router->url?>/zsets/view/<?=urlencode($this->key)?>/<?=$this->page - 1?>">&larr; Previous</a>
+                <a href="<?=$this->router->url?>/zsets/view/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($this->key)?>/<?=$this->page - 1?>">&larr; Previous</a>
             </li>
             <li class="next <?php if ($this->page == $ceil) echo "disabled";?>">
-                <a href="<?=$this->router->url?>/zsets/view/<?=urlencode($this->key)?>/<?=$this->page + 1?>">Next &rarr;</a>
+                <a href="<?=$this->router->url?>/zsets/view/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($this->key)?>/<?=$this->page + 1?>">Next &rarr;</a>
             </li>
         </ul>
     <?php } ?>

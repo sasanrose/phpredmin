@@ -11,8 +11,13 @@ class Keys_Controller extends Controller
                 $keys = $this->db->keys("{$key}*");
                 asort($keys);
                 Template::factory()->render('keys/search', Array('keys' => $keys, 'search' => $key));
-            } else
+            } 
+            else {
                 Template::factory()->render('invalid_input');
+            }    
+        } 
+        else {
+            Template::factory()->render('invalid_input');
         }
     }
 
@@ -113,22 +118,29 @@ class Keys_Controller extends Controller
                 $client = new GearmanClient();
 
                 $client->addServer($config['gearman']['host'], $config['gearman']['port']);
-                $client->doBackground('delete_keys', $key);
+                $client->doBackground('delete_keys', 
+                    serialize(array(
+                        'key' => $key,
+                        'server' => $this->app->current,
+                    ))               
+                );
             }
         }
     }
 
     public function deleteinfoAction($key)
     {
-        $this->db->incrBy("phpredmin:requests:{$key}", 1);
+        $this->db->incrBy("phpredmin:gearman:requests:{$key}", 1);
+        $this->db->expireAt("phpredmin:gearman:requests:{$key}", strtotime('+10 minutes'));
 
         $key      = urldecode($key);
-        $total    = $this->db->get("phpredmin:deletecount:{$key}");
-        $count    = $this->db->get("phpredmin:deleted:{$key}");
-        $requests = $this->db->get("phpredmin:requests:{$key}");
+        $total    = $this->db->get("phpredmin:gearman:deletecount:{$key}");
+        $count    = $this->db->get("phpredmin:gearman:deleted:{$key}");
+        $requests = $this->db->get("phpredmin:gearman:requests:{$key}");
 
-        if ($total === false && $count !== false && $requests == 1)
+        if ($total === false && $count !== false && $requests == 1) {
             $total = $count;
+        }    
 
         $result = array($total, $count);
 
@@ -144,19 +156,19 @@ class Keys_Controller extends Controller
     {
         switch ($this->db->type(urldecode($key))) {
             case Redis::REDIS_STRING:
-                $this->router->redirect("strings/view/{$key}");
+                $this->router->redirect("strings/view/{$this->app->current['serverId']}/{$this->app->current['database']}/{$key}");
                 break;
             case Redis::REDIS_SET:
-                $this->router->redirect("sets/view/{$key}");
+                $this->router->redirect("sets/view/{$this->app->current['serverId']}/{$this->app->current['database']}/{$key}");
                 break;
             case Redis::REDIS_LIST:
-                $this->router->redirect("lists/view/{$key}");
+                $this->router->redirect("lists/view/{$this->app->current['serverId']}/{$this->app->current['database']}/{$key}");
                 break;
             case Redis::REDIS_ZSET:
-                $this->router->redirect("zsets/view/{$key}");
+                $this->router->redirect("zsets/view/{$this->app->current['serverId']}/{$this->app->current['database']}/{$key}");
                 break;
             case Redis::REDIS_HASH:
-                $this->router->redirect("hashes/view/{$key}");
+                $this->router->redirect("hashes/view/{$this->app->current['serverId']}/{$this->app->current['database']}/{$key}");
                 break;
         }
     }

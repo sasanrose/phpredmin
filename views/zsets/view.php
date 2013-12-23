@@ -1,5 +1,5 @@
 <?=$this->renderPartial('actions', array('nomove' => True))?>
-<div class="span12">
+<div>
     <?=$this->renderPartial('zsets/add', array('oldkey' => $this->key))?>
     <h5><i class="icon-key"></i> <?=$this->key?></h5>
     <table class="table table-striped settable">
@@ -47,10 +47,10 @@
     ?>
         <ul class="pager">
             <li class="previous <?php if ($this->page == 0) echo "disabled";?>">
-                <a href="<?=$this->router->url?>/zsets/view/<?=urlencode($this->key)?>/<?=$this->page - 1?>">&larr; Previous</a>
+                <a href="<?=$this->router->url?>/zsets/view/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($this->key)?>/<?=$this->page - 1?>">&larr; Previous</a>
             </li>
             <li class="next <?php if ($this->page == $ceil) echo "disabled";?>">
-                <a href="<?=$this->router->url?>/zsets/view/<?=urlencode($this->key)?>/<?=$this->page + 1?>">Next &rarr;</a>
+                <a href="<?=$this->router->url?>/zsets/view/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($this->key)?>/<?=$this->page + 1?>">Next &rarr;</a>
             </li>
         </ul>
     <?php } ?>

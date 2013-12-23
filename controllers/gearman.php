@@ -16,26 +16,31 @@ class Gearman_Controller extends Controller
 
     public function deleteKeys($job)
     {
-        $data = $job->workload();
+        $data = unserialize($job->workload());
 
-        Log::factory()->write(Log::INFO, "Try to delete: {$data}", 'Gearman');
-
-        $keys  = $this->db->keys($data);
+        Log::factory()->write(Log::NOTICE, "Try to delete: {$data['key']} at {$data['server']['host']}:{$data['server']['port']}, DB: {$data['server']['database']}", 'Gearman');
+        
+        $db = Db::factory($data['server']);
+        $db->changeDB($data['server']['database']);
+        
+        $keys  = $db->keys($data['key']);
         $count = count($keys);
 
-        $this->db->set("phpredmin:deletecount:{$data}", $count);
-        $this->db->del("phpredmin:deleted:{$data}");
-        $this->db->del("phpredmin:requests:{$data}");
+        if ($count) {
+            $db->set("phpredmin:gearman:deletecount:{$data['key']}", $count);
+            $db->del("phpredmin:gearman:deleted:{$data['key']}");
+            $db->del("phpredmin:gearman:requests:{$data['key']}");
 
-        foreach ($keys as $key) {
-            if ($this->db->delete($key) !== False) {
-                $this->db->incrBy("phpredmin:deleted:{$data}", 1);
-                $this->db->expireAt("phpredmin:deleted:{$data}", strtotime('+10 minutes'));
-            } else
-                Log::factory()->write(Log::INFO, "Unable to delete {$key}", 'Gearman');
+            foreach ($keys as $key) {
+                if ($db->delete($key) !== False) {
+                    $db->incrBy("phpredmin:gearman:deleted:{$data['key']}", 1);
+                    $db->expireAt("phpredmin:gearman:deleted:{$data['key']}", strtotime('+10 minutes'));
+                } else
+                    Log::factory()->write(Log::INFO, "Unable to delete {$key}", 'Gearman');
+            }
+
+            $db->del("phpredmin:gearman:deletecount:{$data['key']}");
         }
-
-        $this->db->del("phpredmin:deletecount:{$data}");
     }
 
     public function moveKeys($job)

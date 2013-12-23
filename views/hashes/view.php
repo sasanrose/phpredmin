@@ -1,5 +1,5 @@
 <?=$this->renderPartial('actions')?>
-<div class="span12">
+<div>
     <?=$this->renderPartial('hashes/add', array('oldkey' => $this->key))?>
     <h5><i class="icon-key"></i> <?=$this->key?></h5>
     <table class="table table-striped settable">
@@ -19,7 +19,7 @@
                     <?=$value?>
                 </td>
                 <td>
-                    <a href="<?=$this->router->url?>/hashes/edit/<?=urlencode($this->key)?>/<?=urlencode($member)?>" target="_blank" class="action">
+                    <a href="<?=$this->router->url?>/hashes/edit/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($this->key)?>/<?=urlencode($member)?>" target="_blank" class="action">
                         <i class="icon-edit"></i>
                     </a>
                 </td>

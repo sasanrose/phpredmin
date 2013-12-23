@@ -1,5 +1,5 @@
 <?=$this->renderPartial('actions')?>
-<div class="span12">
+<div>
     <?=$this->renderPartial('sets/add', array('oldkey' => $this->key))?>
     <h5><i class="icon-key"></i> <?=$this->key?></h5>
     <table class="table table-striped settable">
