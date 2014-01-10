@@ -27,9 +27,17 @@ class Controller
         if (!in_array($config['dbId'], $dbs)) {
             $config['dbId'] = $dbs[0];
         }
-        
         $current['database'] = $config['dbId'];
-        $current['dbs'] = $dbs;
+
+        // Extract number of keys
+        foreach ($dbs as $i) {
+            if (preg_match('/^keys=([0-9]+),expires=([0-9]+)$/', $info["db{$i}"], $matches)) {
+                $current['dbs'][] = array(
+                    'id' => $i,
+                    'keys' => $matches[1],
+                );
+            }
+        }
         
         $this->db->select($current['database']);
         

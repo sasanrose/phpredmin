@@ -7,7 +7,7 @@
     </li>
     <?php foreach ($this->app->current['dbs'] as $database): ?>
         <?php 
-            if ($database == $this->app->current['database']) {
+            if ($database['id'] == $this->app->current['database']) {
                 $dbClass = 'active';
                 $dbIcon = 'icon-ok-sign';
             } 
@@ -17,8 +17,8 @@
             }
         ?>
         <li class="database <?= $dbClass ?>">
-            <a href="<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $database ?>">
-                <i class="<?= $dbIcon ?>"></i> DB <?= $database ?>
+            <a href="<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $database['id'] ?>">
+                <i class="<?= $dbIcon ?>"></i> DB <?= $database['id'] ?> <span class="label pull-right" title="Number of keys"><?= $database['keys'] ?></span>
             </a>
         </li>
     <?php endforeach; ?>
