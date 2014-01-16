@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Phpredmin by sasanrose</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Phpredmin</h1>
+        <p>Yet another web interface for Redis</p>
+
+        <p class="view"><a href="https://github.com/sasanrose/phpredmin">View the Project on GitHub <small>sasanrose/phpredmin</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/sasanrose/phpredmin/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/sasanrose/phpredmin/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/sasanrose/phpredmin">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="phpredmin" class="anchor" href="#phpredmin"><span class="octicon octicon-link"></span></a>PHPRedMin</h1>
+
+<p>PHPRedMin is a simple web interface to manage and monitor your Redis.</p>
+
+<h2>
+<a name="technologies-used" class="anchor" href="#technologies-used"><span class="octicon octicon-link"></span></a>Technologies Used</h2>
+
+<p><a href="https://gearman.org">Gearman</a> application framework</p>
+
+<p><a href="https://github.com/sasanrose/NanoPHP">Nanophp</a> framework</p>
+
+<p><a href="https://github.com/nicolasff/phpredis">phpredis</a> redis module for PHP</p>
+
+<p><a href="http://twitter.github.com/bootstrap">Bootstrap</a> front-end framework</p>
+
+<p><a href="http://jquery.com/">JQuery</a> JavaScript library</p>
+
+<p><a href="https://github.com/novus/nvd3">Nvd3</a> reusable chart library for d3.JS</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Just drop phpredmin in your webserver's root directory and point your browser to it (You also need <a href="https://github.com/nicolasff/phpredis">phpredis</a> installed)</p>
+
+<p>Apache configuration example (/etc/httpd/conf.d/phpredmin.conf):</p>
+
+<div class="highlight highlight-ApacheConf"><pre><span class="c"># phpredmin - Simple web interface to manage and monitor your Redis</span>
+<span class="c"># </span>
+<span class="c"># Allows only localhost by default</span>
+
+<span class="nb">Alias</span> <span class="sx">/phpredmin</span> <span class="sx">/var/www/phpredmin/public</span>
+
+<span class="nt">&lt;Directory</span> <span class="s">/var/www/phpredmin/</span><span class="nt">&gt;</span>
+   <span class="nb">AllowOverride</span> <span class="k">All</span> 
+
+   <span class="nt">&lt;IfModule</span> <span class="s">mod_authz_core.c</span><span class="nt">&gt;</span>
+     <span class="c"># Apache 2.4</span>
+     <span class="nt">&lt;RequireAny&gt;</span>
+       <span class="nb">Require</span> ip localhost
+       <span class="nb">Require</span> local
+     <span class="nt">&lt;/RequireAny&gt;</span>
+   <span class="nt">&lt;/IfModule&gt;</span>
+
+   <span class="nt">&lt;IfModule</span> <span class="s">!mod_authz_core.c</span><span class="nt">&gt;</span>
+     <span class="c"># Apache 2.2</span>
+     <span class="nb">Order</span> Deny,Allow
+     <span class="nb">Deny</span> from <span class="k">All</span>
+     <span class="nb">Allow</span> from <span class="m">127.0.0.1</span>
+     <span class="nb">Allow</span> from ::1
+   <span class="nt">&lt;/IfModule&gt;</span>
+<span class="nt">&lt;/Directory&gt;</span>
+</pre></div>
+
+<p><em>Note:</em> If your redis server is on an IP or port other than defaults (localhost:6379), you should edit config.php file</p>
+
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<h3>
+<a name="multi-server-functionality" class="anchor" href="#multi-server-functionality"><span class="octicon octicon-link"></span></a>Multi-Server functionality</h3>
+
+<p>You can add as many redis servers as you want to your config.php file and choose between the defined servers from the menu available on the left side of all pages in PHPRedMin:</p>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/multiserver.png" alt=""></p>
+
+<p>We must credit <a href="https://github.com/eugef">Eugene Fidelin</a> for his great contributions to implement this feature</p>
+
+<h3>
+<a name="statistics" class="anchor" href="#statistics"><span class="octicon octicon-link"></span></a>Statistics</h3>
+
+<p><em>Note:</em> If you want this feature to work, you have to setup the cron to gather data from your redis server as follows:</p>
+
+<div class="highlight highlight-bash"><pre>* * * * * root <span class="nb">cd</span> /var/www/phpredmin/public <span class="o">&amp;&amp;</span> php index.php cron/index
+</pre></div>
+
+<h4>
+<a name="memory" class="anchor" href="#memory"><span class="octicon octicon-link"></span></a>Memory</h4>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/memory.jpg" alt=""></p>
+
+<h4>
+<a name="cpu-and-clients" class="anchor" href="#cpu-and-clients"><span class="octicon octicon-link"></span></a>CPU And Clients</h4>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/cpu.jpg" alt=""></p>
+
+<h4>
+<a name="keys-and-connections" class="anchor" href="#keys-and-connections"><span class="octicon octicon-link"></span></a>Keys and Connections</h4>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/keyspace.jpg" alt=""></p>
+
+<h4>
+<a name="databases" class="anchor" href="#databases"><span class="octicon octicon-link"></span></a>Databases</h4>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/dbkeys.jpg" alt=""></p>
+
+<h3>
+<a name="info" class="anchor" href="#info"><span class="octicon octicon-link"></span></a>Info</h3>
+
+<p>Information about your redis setup</p>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/info.jpg" alt=""></p>
+
+<h3>
+<a name="configurations" class="anchor" href="#configurations"><span class="octicon octicon-link"></span></a>Configurations</h3>
+
+<p>View your redis runtime configurations</p>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/config.jpg" alt=""></p>
+
+<h3>
+<a name="slowlog" class="anchor" href="#slowlog"><span class="octicon octicon-link"></span></a>Slowlog</h3>
+
+<p>Find slow redis commands</p>
+
+<p><em>Note:</em> PHPRedMin uses eval to fetch slow log. So to use this feature you need redis version &gt;= 2.6.0</p>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/slowlog.jpg" alt=""></p>
+
+<h3>
+<a name="database-manipulation" class="anchor" href="#database-manipulation"><span class="octicon octicon-link"></span></a>Database Manipulation</h3>
+
+<p>You can easily switch between databases belonging to different servers easily:</p>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/multiserver.png" alt=""></p>
+
+<p>You can flush selected database or all databases. You can also save database to a file on disk:</p>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/actions.jpg" alt=""></p>
+
+<h3>
+<a name="key-value-manipulation" class="anchor" href="#key-value-manipulation"><span class="octicon octicon-link"></span></a>Key-Value Manipulation</h3>
+
+<h4>
+<a name="search" class="anchor" href="#search"><span class="octicon octicon-link"></span></a>Search</h4>
+
+<p>The search box will let you to easily search keys in the selected database:
+<em>Note:</em> Becareful, since this still doesn't support pagination, try to limit your search otherwise if your search result is too long (e.g. *) then your browser might crash.</p>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/search.jpg" alt=""></p>
+
+<p>The search results will be shown to you as a table. In this table besides the basic information about each key, PHPRedMin provides you with some actions:</p>
+
+<ul>
+<li>Expire (Sets TTL for a key)</li>
+<li>View (Shows keys' value/values and lets you manipulate it/them)</li>
+<li>Rename</li>
+<li>Move (Moves key to another database)</li>
+<li>Delete</li>
+</ul><p><img src="http://dl.dropbox.com/u/5413590/phpredmin/results.jpg" alt=""></p>
+
+<h4>
+<a name="add-key-value" class="anchor" href="#add-key-value"><span class="octicon octicon-link"></span></a>Add key-Value</h4>
+
+<p>From the main page of PHPRedMin you can add different types of key-values.</p>
+
+<h5>
+<a name="strings" class="anchor" href="#strings"><span class="octicon octicon-link"></span></a>Strings</h5>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/addstring.jpg" alt=""></p>
+
+<h5>
+<a name="hashes" class="anchor" href="#hashes"><span class="octicon octicon-link"></span></a>Hashes</h5>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/addhash.jpg" alt=""></p>
+
+<h5>
+<a name="lists" class="anchor" href="#lists"><span class="octicon octicon-link"></span></a>Lists</h5>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/addlist.jpg" alt=""></p>
+
+<h5>
+<a name="sets" class="anchor" href="#sets"><span class="octicon octicon-link"></span></a>Sets</h5>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/addset.jpg" alt=""></p>
+
+<h5>
+<a name="sorted-sets" class="anchor" href="#sorted-sets"><span class="octicon octicon-link"></span></a>Sorted Sets</h5>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/addzset.jpg" alt=""></p>
+
+<h3>
+<a name="view-keys-values" class="anchor" href="#view-keys-values"><span class="octicon octicon-link"></span></a>View keys' values</h3>
+
+<p>PHPRedMin makes it easier for you to manage your lists, hashes, sets and sorted sets. After searching for a special key, you can choose view action to see the contents of that key (According to its type) and manipulate them.</p>
+
+<h4>
+<a name="lists-1" class="anchor" href="#lists-1"><span class="octicon octicon-link"></span></a>Lists</h4>
+
+<p><em>Note:</em> This supports pagination</p>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/listresult.jpg" alt=""></p>
+
+<h4>
+<a name="hashes-1" class="anchor" href="#hashes-1"><span class="octicon octicon-link"></span></a>Hashes</h4>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/hashresult.jpg" alt=""></p>
+
+<h4>
+<a name="sets-1" class="anchor" href="#sets-1"><span class="octicon octicon-link"></span></a>Sets</h4>
+
+<p><em>Note:</em> This supports pagination</p>
+
+<p><em>Note:</em> Thanks to <a href="https://github.com/ahmed-hamdy90">Ahmed Hamdy</a> you can now edit members of a set</p>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/setresult.jpg" alt=""></p>
+
+<h4>
+<a name="sorted-sets-1" class="anchor" href="#sorted-sets-1"><span class="octicon octicon-link"></span></a>Sorted Sets</h4>
+
+<p><em>Note:</em> This supports pagination</p>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/zsetresult.jpg" alt=""></p>
+
+<h3>
+<a name="bulk-actions" class="anchor" href="#bulk-actions"><span class="octicon octicon-link"></span></a>Bulk Actions</h3>
+
+<h4>
+<a name="bulk-delete" class="anchor" href="#bulk-delete"><span class="octicon octicon-link"></span></a>Bulk Delete</h4>
+
+<p>This feature lets you delete a key or a bunch of keys using wild cards</p>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/bulk-delete.png" alt=""></p>
+
+<p><img src="http://dl.dropbox.com/u/5413590/phpredmin/bulk-delete-progress.png" alt=""></p>
+
+<p><em>Note:</em> This feature needs gearman. You have to both install gearman and php gearman extension</p>
+
+<h4>
+<a name="gearman-worker" class="anchor" href="#gearman-worker"><span class="octicon octicon-link"></span></a>Gearman Worker</h4>
+
+<p>You can run gearman worker using the following command:</p>
+
+<div class="highlight highlight-bash"><pre>php index.php gearman/index
+</pre></div>
+
+<p>You can also setup a service for this command. I prefer supervisord to make it always running. Here is my config file:</p>
+
+<div class="highlight highlight-bash"><pre><span class="o">[</span>program:phpredmin<span class="o">]</span>
+<span class="nv">directory</span><span class="o">=</span>/var/www/phpredmin/public
+<span class="nb">command</span><span class="o">=</span>php index.php gearman/index
+<span class="nv">process_name</span><span class="o">=</span>%<span class="o">(</span>program_name<span class="o">)</span>s
+<span class="nv">numprocs</span><span class="o">=</span>1
+<span class="nv">stdout_logfile</span><span class="o">=</span>/var/log/supervisor/phpredmin.log
+<span class="nv">autostart</span><span class="o">=</span><span class="nb">true</span>
+<span class="nv">autorestart</span><span class="o">=</span><span class="nb">true</span>
+<span class="nv">user</span><span class="o">=</span>sasan
+</pre></div>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>BSD License</p>
+
+<p>Copyright © 2013, Sasan Rose</p>
+
+<p>All rights reserved.</p>
+
+<p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
+
+<ul>
+<li>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</li>
+<li>Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</li>
+<li>Neither the name of the PHPRedMin nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.</li>
+</ul><p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/sasanrose">sasanrose</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-47222038-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
