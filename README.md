@@ -109,9 +109,9 @@ _Note:_ PHPRedMin uses eval to fetch slow log. So to use this feature you need r
 
 ### Database Manipulation
 
-You can switch between databases easily:
+You can easily switch between databases belonging to different servers easily:
 
-![](http://dl.dropbox.com/u/5413590/phpredmin/dbselect.jpg)
+![](http://dl.dropbox.com/u/5413590/phpredmin/multiserver.png)
 
 You can flush selected database or all databases. You can also save database to a file on disk:
 
