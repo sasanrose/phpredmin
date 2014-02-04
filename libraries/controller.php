@@ -34,7 +34,7 @@ class Controller
                 $current['dbs'][] = array(
                     'id' => $i,
                     'keys' => $matches[1],
-                    'name' => $this->app->config['database']['names'][$i],
+                    'name' => (isset($this->app->config['database']['names'][$i]) ? $this->app->config['database']['names'][$i] : null),
                 );
             }
         }
