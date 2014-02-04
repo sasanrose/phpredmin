@@ -23,7 +23,6 @@ class Controller
         
         $info = $this->db->info();
         $dbs = $this->infoModel->getDbs($info);
-
         if (!in_array($config['dbId'], $dbs)) {
             $config['dbId'] = $dbs[0];
         }
@@ -31,16 +30,16 @@ class Controller
 
         // Extract number of keys
         foreach ($dbs as $i) {
-            if (preg_match('/^keys=([0-9]+),expires=([0-9]+)$/', $info["db{$i}"], $matches)) {
+            if (preg_match('/^keys=([0-9]+),expires=([0-9]+)/', $info["db{$i}"], $matches)) {
                 $current['dbs'][] = array(
                     'id' => $i,
                     'keys' => $matches[1],
+                    'name' => $this->app->config['database']['names'][$i],
                 );
             }
         }
-        
         $this->db->select($current['database']);
-        
+
         $this->app->current = $current;
     }
 

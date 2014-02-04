@@ -30,7 +30,8 @@ $config = Array(
                     'database' => 0,
                 ),
             ),
-        )
+        ),
+        'names' => Array(), /* Name databases. key should be database id and value is the name */
     ),
     'session' => Array(
         'lifetime'       => 7200,

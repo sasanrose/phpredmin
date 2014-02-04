@@ -18,7 +18,8 @@
         ?>
         <li class="database <?= $dbClass ?>">
             <a href="<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $database['id'] ?>">
-                <i class="<?= $dbIcon ?>"></i> DB <?= $database['id'] ?> <span class="label pull-right" title="Number of keys"><?= $database['keys'] ?></span>
+                <i class="<?= $dbIcon ?>"></i> <?= ($database['name'] !== null ? $database['name'] : "DB ".$database['id']) ?>
+                <span class="label pull-right" title="Number of keys"><?= $database['keys'] ?></span>
             </a>
         </li>
     <?php endforeach; ?>
