@@ -23,7 +23,6 @@ class Controller
         
         $info = $this->db->info();
         $dbs = $this->infoModel->getDbs($info);
-
         if (!in_array($config['dbId'], $dbs)) {
             $config['dbId'] = $dbs[0];
         }
@@ -35,12 +34,12 @@ class Controller
                 $current['dbs'][] = array(
                     'id' => $i,
                     'keys' => $matches[1],
+                    'name' => $this->app->config['database']['names'][$i],
                 );
             }
         }
-        
         $this->db->select($current['database']);
-        
+
         $this->app->current = $current;
     }
 
