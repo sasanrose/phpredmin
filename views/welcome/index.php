@@ -91,20 +91,20 @@
         <li>
             <a href="#delete">Bulk Delete</a>
         </li>
-        <li>
-            <a href="#strings">Strings</a>
+        <li class='pull-right'>
+            <a href="#sorted_sets">Sorted Sets</a>
         </li>
-        <li>
-            <a href="#hashes">Hashes</a>
-        </li>
-        <li>
-            <a href="#lists">Lists</a>
-        </li>
-        <li>
+        <li class='pull-right'>
             <a href="#sets">Sets</a>
         </li>
-        <li>
-            <a href="#sorted_sets">Sorted Sets</a>
+        <li class='pull-right'>
+            <a href="#lists">Lists</a>
+        </li>
+        <li class='pull-right'>
+            <a href="#hashes">Hashes</a>
+        </li>
+        <li class='pull-right'>
+            <a href="#strings">Strings</a>
         </li>
     </ul>
     <div class="tab-content">

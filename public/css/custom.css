@@ -16,3 +16,42 @@ textarea {
 .nav-pills>li.database .label {
     margin-top: -2px;
 }
+
+#dbTabs {
+    margin-right: -15px;
+    margin-top: -42px;
+}
+
+#dbTabs ul {
+    margin: 0px 0px 0px 15px;
+    padding-top: 30px;
+    width: 100%;
+}
+
+#redisTab {
+    margin: 0px; 
+}
+
+.tab-content {
+    padding: 10px 0 0 20px;
+}
+
+#srvList { 
+    margin-right: -31px;
+    padding: 0 31px 100% 0;
+    border-right: 1px solid #ddd;
+}
+
+#mainContainer {
+    padding-left: 1em;
+}
+
+#mainContainer > h3 {
+    margin-left: -14px;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding: 10px 0 0 15px;
+    margin-top: 0px;
+    border-radius: 4px 0 0 0;
+}
+    
