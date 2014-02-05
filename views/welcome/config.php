@@ -7,7 +7,7 @@
                     <?=$key?>
                 </td>
                 <td>
-                    <?=$value?>
+                    <?=is_numeric($value) ? number_format($value) : $value?>
                 </td>
             </tr>
         <?php } ?>

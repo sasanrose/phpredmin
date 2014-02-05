@@ -105,7 +105,7 @@
                 Total Connections Received:
             </td>
             <td>
-                <?=$this->info['total_connections_received']?>
+                <?=number_format($this->info['total_connections_received'])?>
             </td>
         </tr>
         <tr>
@@ -113,7 +113,7 @@
                 Total Commands Processed:
             </td>
             <td>
-                <?=$this->info['total_commands_processed']?>
+                <?=number_format($this->info['total_commands_processed'])?>
             </td>
         </tr>
         <tr>
@@ -121,7 +121,7 @@
                 Expired Keys:
             </td>
             <td>
-                <?=$this->info['expired_keys']?>
+                <?=number_format($this->info['expired_keys'])?>
             </td>
         </tr>
         <tr>
@@ -129,7 +129,7 @@
                 Keyspace Hits:
             </td>
             <td>
-                <?=$this->info['keyspace_hits']?>
+                <?=number_format($this->info['keyspace_hits'])?>
             </td>
         </tr>
         <tr>
@@ -137,7 +137,7 @@
                 Keyspace Misses:
             </td>
             <td>
-                <?=$this->info['keyspace_misses']?>
+                <?=number_format($this->info['keyspace_misses'])?>
             </td>
         </tr>
         <tr>
@@ -161,7 +161,7 @@
                 Database Size:
             </td>
             <td>
-                <?=$this->dbSize?>
+                <?=number_format($this->dbSize)?>
             </td>
         </tr>
         <tr>
