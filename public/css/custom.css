@@ -16,3 +16,25 @@ textarea {
 .nav-pills>li.database .label {
     margin-top: -2px;
 }
+
+#dbTabs {
+    margin-right: -15px;
+    margin-top: -42px;
+}
+
+#dbTabs ul {
+    margin: 0px 0px 0px 15px;
+    padding-top: 30px;
+    width: 100%;
+}
+
+#redisTab {
+    margin: 0px; 
+}
+
+.tab-content {padding: 10px 0 0 20px;}
+
+#srvList { 
+    margin-right: -31px;
+    padding: 0 31px 100% 0;
+    border-right: 1px solid #ddd;}
