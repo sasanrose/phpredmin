@@ -176,11 +176,11 @@
             <div class="span12">
                 <ul class="breadcrumb">
                     <li>
-                        <?= isset($this->app->current['password']) ? '<i class="icon-lock" title="With password"></i>' : '<i class="icon-eye-open" title="No password"></i>' ?> 
+                        <?= isset($this->app->current['password']) ? '<i class="icon-lock" title="With password"></i>' : '<i class="icon-eye-open" title="No password"></i>' ?>
                         <?= $this->app->current['host'] ?>:<?= $this->app->current['port'] ?> <span class="divider">/</span>
                     </li>
                     <li>
-                        <?= ($this->app->current['dbs'][$this->app->current['database']]['name'] ? $this->app->current['dbs'][$this->app->current['database']]['name'] : 'DB ' . $this->app->current['database']) ?>
+                        <?= ($this->app->current['dbs'][$this->app->current['database']]['name'] ? $this->app->current['dbs'][$this->app->current['database']]['name'] . " (DB {$this->app->current['database']})" : "DB {$this->app->current['database']}") ?>
                     </li>
                 </ul>
             </div>
