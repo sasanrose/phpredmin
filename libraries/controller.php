@@ -34,9 +34,7 @@ class Controller
                 $current['dbs'][] = array(
                     'id' => $i,
                     'keys' => $matches[1],
-                    'name' => ( isset($this->app->config['database']['redis'][$current['serverId']]['dbNames'][$i]) ?
-                            $this->app->config['database']['redis'][$current['serverId']]['dbNames'][$i] :
-                            null ),
+                    'name' => (isset($current['dbNames'][$i]) ? $current['dbNames'][$i] : null ),
                 );
             }
         }
