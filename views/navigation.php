@@ -18,19 +18,21 @@
         ?>
         <li class="database <?= $dbClass ?>">
             <a href="<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $database['id'] ?>">
-                <i class="<?= $dbIcon ?>"></i> <?= ($database['name'] !== null ? $database['name'] : "DB ".$database['id']) ?>
+                <i class="<?= $dbIcon ?>"></i> <?= ($database['name'] ? $database['name'] : 'DB ' . $database['id']) ?>
                 <span class="label pull-right" title="Number of keys"><?= $database['keys'] ?></span>
             </a>
         </li>
     <?php endforeach; ?>
-    <li class="nav-header">Other servers</li>    
-    <?php foreach ($this->app->config['database']['redis'] as $serverId => $server): ?>
-        <?php if ($serverId != $this->app->current['serverId']) : ?>
-            <li class="server">
-                <a href="<?=$this->router->url?>/welcome/index/<?= $serverId . '/0' ?>">
-                    <i class="icon-chevron-right"></i> <?= $server['host'] ?>:<?= $server['port'] ?>
-                </a>
-            </li>
-        <?php endif; ?>
-    <?php endforeach; ?>  
+    <?php if (count($this->app->config['database']['redis']) > 1) : ?>
+        <li class="nav-header">Other servers</li>    
+        <?php foreach ($this->app->config['database']['redis'] as $serverId => $server): ?>
+            <?php if ($serverId != $this->app->current['serverId']) : ?>
+                <li class="server">
+                    <a href="<?=$this->router->url?>/welcome/index/<?= $serverId . '/0' ?>">
+                        <i class="icon-chevron-right"></i> <?= $server['host'] ?>:<?= $server['port'] ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>  
+    <?php endif; ?>
 </ul>                                

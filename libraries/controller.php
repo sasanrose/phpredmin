@@ -31,7 +31,7 @@ class Controller
         // Extract number of keys
         foreach ($dbs as $i) {
             if (preg_match('/^keys=([0-9]+),expires=([0-9]+)/', $info["db{$i}"], $matches)) {
-                $current['dbs'][] = array(
+                $current['dbs'][$i] = array(
                     'id' => $i,
                     'keys' => $matches[1],
                     'name' => (isset($current['dbNames'][$i]) ? $current['dbNames'][$i] : null ),
