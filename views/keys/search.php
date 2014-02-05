@@ -1,12 +1,10 @@
 <?=$this->renderPartial('actions')?>
-<div>
+<div id='mainContainer'>
+    <h3>Search Results <small><?=count($this->keys)?> results found</small></h3>
+
     <div class="alert alert-warning">
         <a class="close" data-dismiss="alert" href="#">×</a>
         Since this doesn't support pagination yet, try to limit your search. Otherwise your browser might crash
-    </div>
-    <div class="alert alert-info">
-        <a class="close" data-dismiss="alert" href="#">×</a>
-        Number of results: <?=count($this->keys)?>
     </div>
     <h5><i class="icon-key"></i> Redis Keys</h5>
     <form class="form-search" action="<?=$this->router->url?>/keys/search/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">

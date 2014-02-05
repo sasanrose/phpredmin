@@ -1,5 +1,5 @@
-<div>
-    <h5><i class="icon-cogs"></i> Redis Config</h5>
+<div id='mainContainer'>
+    <h3>Redis Config</h3>
     <table class="table table-striped">
         <?php foreach($this->config as $key => $value) {?>
             <tr>

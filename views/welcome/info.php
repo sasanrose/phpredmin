@@ -1,5 +1,5 @@
-<span>
-    <h5><i class="icon-info-sign"></i> Redis Info</h5>
+<div id='mainContainer'>
+    <h3>Redis Info</h3>
     <table class="table table-striped">
         <tr>
             <td>
@@ -173,4 +173,4 @@
             </td>
         </tr>
     </table>
-</span>
+</div>
