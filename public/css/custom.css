@@ -39,11 +39,7 @@ textarea {
 #srvList { 
     margin-right: -31px;
     padding: 0 31px 100% 0;
-    
     border-right: 1px solid #ddd;
-    min-height:100%;
-  height:auto !important;
-  height:100%;
 }
 
 #mainContainer {
@@ -54,8 +50,7 @@ textarea {
     margin-left: -14px;
     border-left: 1px solid #ddd;
     border-top: 1px solid #ddd;
-    padding-left: 10px;
-    padding-top: 10px;
+    padding: 10px 0 0 15px;
     margin-top: 0px;
     border-radius: 4px 0 0 0;
 }
