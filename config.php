@@ -29,9 +29,10 @@ $config = Array(
                     'enable'   => 1,
                     'database' => 0,
                 ),
+                'dbNames' => Array( /* Name databases. key should be database id and value is the name */
+                ),
             ),
         ),
-        'names' => Array(), /* Name databases. key should be database id and value is the name */
     ),
     'session' => Array(
         'lifetime'       => 7200,
