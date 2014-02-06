@@ -1,4 +1,5 @@
-<div>
+<div id='mainContainer'>
+    <h3>Rename key</h3>
     <?php if (isset($this->renamed) && $this->renamed) { ?>
         <div class="alert alert-info">
             <a class="close" data-dismiss="alert" href="#">×</a>
@@ -12,7 +13,6 @@
     <?php } ?>
     <?php if (!isset($this->renamed) || (isset($this->renamed) && !$this->renamed)) { ?>
         <form class="form-search" action="<?=$this->router->url?>/keys/rename/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
-            <legend>Rename key</legend>
             <div class="input-prepend">
                 <span class="add-on"><i class="icon-key"></i></span>
                 <input type="text" value="<?=$this->key?>" name="newkey">
