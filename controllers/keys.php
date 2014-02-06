@@ -4,20 +4,15 @@ class Keys_Controller extends Controller
 {
     public function searchAction()
     {
-        if ($this->router->method == Router::POST) {
-            $key = $this->inputs->post('key', Null);
-            $keys = array();
+        $key = $this->inputs->get('key', Null);
+        $keys = array();
 
-            if (isset($key) && trim($key) != '') {
-                $keys = $this->db->keys("{$key}*");
-                asort($keys);
-            } 
-            
-            Template::factory()->render('keys/search', Array('keys' => $keys, 'search' => $key));
+        if (isset($key) && trim($key) != '') {
+            $keys = $this->db->keys($key);
+            asort($keys);
         } 
-        else {
-            Template::factory()->render('invalid_input');
-        }
+
+        Template::factory()->render('keys/search', Array('keys' => $keys, 'search' => $key));
     }
 
     public function moveAction($key)

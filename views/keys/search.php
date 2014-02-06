@@ -19,7 +19,7 @@
     </div>
     <?php endif; ?>
     <h5><i class="icon-key"></i> Redis Keys</h5>
-    <form class="form-search" action="<?=$this->router->url?>/keys/search/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
+    <form class="form-search" action="<?=$this->router->url?>/keys/search/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="get">
         <div class="input-prepend">
             <span class="add-on"><i class="icon-key"></i></span>
             <input type="text" value="<?=$this->search?>" name="key">
