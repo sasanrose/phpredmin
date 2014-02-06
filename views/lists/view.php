@@ -1,5 +1,6 @@
 <?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/remlists.js\" type=\"text/javascript\"></script>"); ?>
-<div>
+<div id='mainContainer'>
+    <h3>Edit List</h3>
     <?=$this->renderPartial('lists/add', array('oldkey' => $this->key))?>
     <form class="form" action="<?=$this->router->url?>/lists/del/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
         <legend>Remove from List</legend>
