@@ -33,6 +33,7 @@ class Terminal_Controller extends Controller
             $historykey   = "phpredmin:terminal:history";
 
             if ($historylimit > 0) {
+                $this->db->lRem($historykey, $command, 0);
                 $this->db->rPush($historykey, $command);
                 $this->db->lTrim($historykey, $historylimit * -1, -1);
 
