@@ -49,7 +49,7 @@ class Inputs
     public function get($key, $default = Null)
     {
         $result = Router::instance()->query($key, $default);
-        return $result != $default ? filter_var($result, FILTER_SANITIZE_STRING) : $default;
+        return $result ? $result : $default;
     }
 
     public function put($key, $default = Null)
