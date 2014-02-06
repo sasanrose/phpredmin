@@ -54,7 +54,7 @@ final class Router
             foreach(explode('&', $matches[2]) as $match)
                 if (preg_match('/^(.*)=(.*)$/', $match, $strings))
                     if ($strings[2])
-                        $this->_query_strings[$strings[1]] = $strings[2];
+                        $this->_query_strings[$strings[1]] = urldecode($strings[2]);
         }
 
         $this->_params = explode('/', trim($this->path, '/'));
