@@ -55,3 +55,6 @@ textarea {
     border-radius: 4px 0 0 0;
 }
     
+#dbTabs .nav-tabs > .active > a:hover {
+    cursor: pointer;
+}
