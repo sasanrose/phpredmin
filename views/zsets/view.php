@@ -1,5 +1,6 @@
 <?=$this->renderPartial('actions', array('nomove' => True))?>
-<div>
+<div id='mainContainer'>
+    <h3>Edit Sorted Set</h3>
     <?=$this->renderPartial('zsets/add', array('oldkey' => $this->key))?>
     <h5><i class="icon-key"></i> <?=$this->key?></h5>
     <table class="table table-striped settable">

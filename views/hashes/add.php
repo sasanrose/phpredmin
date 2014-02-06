@@ -1,6 +1,6 @@
 <?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/hashes.js\" type=\"text/javascript\"></script>"); ?>
 <form class="form">
-    <legend><?php if (isset($this->oldkey)) { echo "Edit Hash"; } else { echo "Add Hash";} ?></legend>
+    <legend><?php if (isset($this->oldkey)) { echo ""; } else { echo "Add Hash";} ?></legend>
     <div class="input-prepend">
         <span class="add-on"><i class="icon-key"></i></span>
         <?php if (isset($this->oldkey)) { ?>
