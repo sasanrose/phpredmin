@@ -17,6 +17,8 @@
     } ?>
     <script type="text/javascript">
         baseurl = "<?=$this->router->url?>";
+        currentHost = "<?= $this->app->current['host'] ?>";
+        currentPort = "<?= $this->app->current['port'] ?>";
         currentServerDb = "<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>";
         $(document).ready(function() {
             $('.disabled').click(function(e) {
@@ -126,6 +128,15 @@
                                         <i class="icon-white icon-warning-sign"></i> Slow Log
                                     </a>
                                 </li>
+                                <?php if (App::instance()->config['terminal']['enable']): ?>
+                                    <li <?php if($this->router->request == $this->router->url."/terminal/") {?>
+                                        class="active"<
+                                    <?php } ?>>
+                                        <a href="<?=$this->router->url?>/terminal/index/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
+                                            <i class="icon-white icon-terminal"></i> Terminal
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
                                 <li>
                                     <a href="https://github.com/sasanrose/phpredmin" target="_blank">
                                         <i class="icon-white icon-github"></i> Github
@@ -190,7 +201,9 @@
                 <?= $this->renderPartial('navigation') ?>
             </div>
             <div class="span10">
-                <?= $this->content ?>
+                <div class="row-fluid">
+                    <?= $this->content ?>
+                </div>
             </div>
         </div>
     </div>

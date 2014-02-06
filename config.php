@@ -42,6 +42,10 @@ $config = Array(
     'gearman' => Array(
         'host' => '127.0.0.1',
         'port' => 4730
+    ),
+    'terminal' => Array(
+        'enable'  => True,
+        'history' => 200
     )
 );
 

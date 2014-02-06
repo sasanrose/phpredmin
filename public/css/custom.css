@@ -16,3 +16,48 @@ textarea {
 .nav-pills>li.database .label {
     margin-top: -2px;
 }
+.terminal {
+    background-color: #002b36;
+    color: #657b83;
+    padding: 10px;
+    font-family: monospace;
+}
+.terminal-console {
+    border: #073642 1px solid;
+    height: 370px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    overflow-y: scroll;
+}
+.terminal-command-line {
+    color: #002b36;
+    background-color: #657b83;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-left: #073642 1px solid;
+    border-right: #073642 1px solid;
+    border-bottom: #073642 1px solid;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+#terminal-input {
+    color: #002b36;
+    background-color: #657b83;
+    border: 0px;
+}
+.terminal-prompt {
+    padding-top: 5px;
+    padding-left: 4px;
+}
+.ajax-loading {
+    background-image: url(../img/ajax-loader.gif);
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+.terminal-clear {
+    color: #657b83;
+    float: left;
+    margin: 10px;
+    cursor: pointer;
+}

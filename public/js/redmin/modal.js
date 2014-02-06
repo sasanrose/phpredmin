@@ -24,3 +24,12 @@ var invalid = function() {
 
     $('#generalmodal').modal('show');
 }
+
+var runerror = function() {
+    $('#generalmodal').find('h3').text('Error');
+    $('#generalmodal').find('p').text('Could not run the command');
+    $('#generalmodal').find('button').removeClass('btn-success');
+    $('#generalmodal').find('button').addClass('btn-danger');
+
+    $('#generalmodal').modal('show');
+}
