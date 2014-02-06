@@ -18,15 +18,17 @@
         <?php endforeach; ?>
     </ul>
 </div>
-<ul class="nav nav-pills nav-stacked" id="srvList">
-    <li class="nav-header">Other servers</li>    
-    <?php foreach ($this->app->config['database']['redis'] as $serverId => $server): ?>
-        <?php if ($serverId != $this->app->current['serverId']) : ?>
-            <li class="server">
-                <a href="<?=$this->router->url?>/welcome/index/<?= $serverId . '/0' ?>">
-                    <i class="icon-chevron-right"></i> <?= $server['host'] ?>:<?= $server['port'] ?>
-                </a>
-            </li>
-        <?php endif; ?>
-    <?php endforeach; ?>  
-</ul>                                
+<?php if (count($this->app->config['database']['redis']) > 1) : ?>
+    <ul class="nav nav-pills nav-stacked" id="srvList">
+        <li class="nav-header">Other servers</li>    
+        <?php foreach ($this->app->config['database']['redis'] as $serverId => $server): ?>
+            <?php if ($serverId != $this->app->current['serverId']) : ?>
+                <li class="server">
+                    <a href="<?=$this->router->url?>/welcome/index/<?= $serverId . '/0' ?>">
+                        <i class="icon-chevron-right"></i> <?= $server['host'] ?>:<?= $server['port'] ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>  
+    </ul>    
+<?php endif; ?>
