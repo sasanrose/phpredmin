@@ -23,9 +23,9 @@ class Controller
         
         $info = $this->db->info();
         $dbs = $this->infoModel->getDbs($info);
-        if (!in_array($config['dbId'], $dbs)) {
-            $config['dbId'] = $dbs[0];
-        }
+        
+        $current['newDB'] = (!in_array($config['dbId'], $dbs) ? true : false );
+        
         $current['database'] = $config['dbId'];
 
         // Extract number of keys
