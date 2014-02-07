@@ -17,13 +17,13 @@ textarea {
     margin-top: -2px;
 }
 .terminal {
-    background-color: #002b36;
+    background-color: #fff;
     color: #657b83;
     padding: 10px;
     font-family: monospace;
 }
 .terminal-console {
-    border: #073642 1px solid;
+    border: #ddd 1px solid;
     height: 370px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -32,18 +32,18 @@ textarea {
 }
 .terminal-command-line {
     color: #002b36;
-    background-color: #657b83;
+    background-color: #fff;
     margin-left: auto !important;
     margin-right: auto !important;
-    border-left: #073642 1px solid;
-    border-right: #073642 1px solid;
-    border-bottom: #073642 1px solid;
+    border-left: #ddd 1px solid;
+    border-right: #ddd 1px solid;
+    border-bottom: #ddd 1px solid;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
 }
 #terminal-input {
     color: #002b36;
-    background-color: #657b83;
+    background-color: #fff;
     border: 0px;
 }
 .terminal-prompt {
