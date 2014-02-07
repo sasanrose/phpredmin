@@ -17,7 +17,8 @@ textarea {
     margin-top: -2px;
 }
 .terminal {
-    background-color: #fff;
+    margin-left: 0;
+    background-color: #f5f5f5;
     color: #657b83;
     padding: 10px;
     font-family: monospace;
@@ -32,7 +33,7 @@ textarea {
 }
 .terminal-command-line {
     color: #002b36;
-    background-color: #fff;
+    background-color: #f5f5f5;
     margin-left: auto !important;
     margin-right: auto !important;
     border-left: #ddd 1px solid;
@@ -43,7 +44,7 @@ textarea {
 }
 #terminal-input {
     color: #002b36;
-    background-color: #fff;
+    background-color: #f5f5f5;
     border: 0px;
 }
 .terminal-prompt {

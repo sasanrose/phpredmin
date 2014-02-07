@@ -1,6 +1,8 @@
 <?php if (App::instance()->config['terminal']['enable']): ?>
+<div id='mainContainer'>
+    <h3>Terminal</h3>
     <?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/terminal.js\" type=\"text/javascript\"></script>"); ?>
-    <div class="row-fluid span12 terminal terminal-console">
+    <div class="terminal terminal-console">
         redis <?= $this->app->current['host'] ?>:<?= $this->app->current['port'] ?>>
     </div>
     <div class="clearfix"></div>
@@ -16,6 +18,7 @@
         <a class="close" data-dismiss="alert" href="#">×</a>
         This functionaliy takes advantage of <a href="http://www.php.net/manual/en/function.exec.php" target="_blank">PHP's exec function</a>. Although, all the commands are escaped for security, you can disable terminal from configuration file.
     </div>
+</div>
     <?=$this->renderPartial('generalmodals')?>
 <?php else: ?>
     <div class="alert alert-danger">
