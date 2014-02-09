@@ -239,8 +239,24 @@
             <h3>Add Database</h3>
         </div>
         <div class="modal-body">
-            <p>Databases are not 'created' until data is added and they are initialized. To begin, specify the database index you want to initialize. You will be redirected and able to add data to database</p>
-            <p>Database index: <input type="text" name="dbIdx" id="dbIdx" /></p>
+            <p>Databases are not created until data is added and they are initialized. To begin, 
+            specify the database index you want to initialize. You will be redirected and able to 
+            add data to the database</p>
+            <hr />
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">Database: </label>
+                    <div class="controls">
+                        <select name="dbIdx" id="dbIdx">
+                        <?php for ($x=0; $x < $this->app->current['max_databases']; $x++): ?>
+                            <?php if (!array_key_exists($x, $this->app->current['dbs'])): ?>
+                            <option value='<?=$x?>'>DB <?=$x?></option>
+                            <?php endif; ?>
+                        <?php endfor; ?>
+                        </select>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

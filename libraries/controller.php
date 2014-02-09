@@ -24,16 +24,18 @@ class Controller
         $info = $this->db->info();
         $dbs = $this->infoModel->getDbs($info);
 
+        $current['max_databases'] = $this->_objects['db']->config('GET', 'databases')['databases'];
+
         // Take care of invalid dbId's. If invalid, set to 0
         if (!is_numeric($config['dbId'])
             || $config['dbId'] < 0
-            || $config['dbId'] >= $this->_objects['db']->config('GET', 'databases')['databases']
+            || $config['dbId'] >= $current['max_databases']
         ) {
             $config['dbId'] = 0;
         }
-        
+
         $current['newDB'] = (!in_array($config['dbId'], $dbs) ? true : false );
-        
+
         $current['database'] = $config['dbId'];
 
         // Extract number of keys
