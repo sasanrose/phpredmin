@@ -59,7 +59,7 @@
 
                 $('#confirmation').modal('show');
             });
-
+            
             $('#flush_db').click(function(e) {
                 e.preventDefault();
 
@@ -75,6 +75,18 @@
                 });
 
                 $('#confirmation').modal('show');
+            });
+                        
+            $('#add_db').click(function(e) {
+                e.preventDefault();
+
+                $('.modal-footer .save').unbind();
+                $('.modal-footer .save').click(function() {
+                    var dbIdx = parseInt($('#dbIdx').val());
+                    location.href = '<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' ?>'+dbIdx;
+                });
+
+                $('#addDB').modal('show');
             });
         });
     </script>
@@ -218,6 +230,21 @@
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
             <button class="btn btn-danger save">I am sure</button>
+        </div>
+    </div>
+    
+    <div id="addDB" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addDb" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3>Add Database</h3>
+        </div>
+        <div class="modal-body">
+            <p>Databases are not 'created' until data is added and they are initialized. To begin, specify the database index you want to initialize. You will be redirected and able to add data to database</p>
+            <p>Database index: <input type="text" name="dbIdx" id="dbIdx" /></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary save">Create</button>
         </div>
     </div>
 </body>

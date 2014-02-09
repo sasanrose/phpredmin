@@ -17,10 +17,14 @@
             </li>
         <?php endforeach; if ($this->app->current['newDB']): ?>
             <li class="database active">
-                <a href="<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $database['id'] ?>">
+                <a href="<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
                    <i class="icon-plus"></i> DB <?=$this->app->current['database']?>
                     <span class="label pull-right" title="Number of keys">0</span>
                 </a>
+            </li>
+        <?php else: ?>
+            <li class="database">
+                <a href="#" id="add_db"><i class="icon-plus"></i> Add DB</a>
             </li>
         <?php endif; ?>
     </ul>
