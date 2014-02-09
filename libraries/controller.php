@@ -26,12 +26,12 @@ class Controller
 
         $current['max_databases'] = $this->_objects['db']->config('GET', 'databases')['databases'];
 
-        // Take care of invalid dbId's. If invalid, set to 0
+        // Take care of invalid dbId's. If invalid, set to first available database
         if (!is_numeric($config['dbId'])
             || $config['dbId'] < 0
             || $config['dbId'] >= $current['max_databases']
         ) {
-            $config['dbId'] = 0;
+            $config['dbId'] = $dbs[0];
         }
 
         $current['newDB'] = (!in_array($config['dbId'], $dbs) ? true : false );
