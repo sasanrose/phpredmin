@@ -229,7 +229,7 @@ user=sasan
 
 ## License
 
-BSD License
+BSD 3-Clause License
 
 Copyright © 2013, Sasan Rose
 
