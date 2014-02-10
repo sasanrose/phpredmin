@@ -47,6 +47,13 @@ textarea {
     background-color: #f5f5f5;
     border: 0px;
 }
+.dark_theme  #terminal-input { background-color: #696969 !important; color: #D2D2D2; }
+.dark_theme .terminal { background-color: #3C3C3C !important; color: #D2D2D2; }
+.dark_theme .terminal-console { border: #073642 1px solid !important; }
+.dark_theme .terminal-command-line {
+    background-color: #696969 !important;
+    border-color:  #073642 !important;
+}
 .terminal-prompt {
     padding-top: 5px;
     padding-left: 4px;
@@ -55,6 +62,20 @@ textarea {
     background-image: url(../img/ajax-loader.gif);
     background-repeat: no-repeat;
     background-position: left center;
+}
+.term_theme {
+    display: inline-block;
+    font-size: 1px;
+    overflow: hidden;
+    text-indent: 100px;
+    width: 16px;
+    height: 16px;
+}
+#term_light {
+    background: url(../img/theme_light.png) no-repeat;
+}
+#term_dark {
+    background: url(../img/theme_dark.png) no-repeat;
 }
 .terminal-clear {
     color: #657b83;
