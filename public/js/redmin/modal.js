@@ -1,35 +1,34 @@
-var error = function() {
-    $('#generalmodal').find('h3').text('Error');
-    $('#generalmodal').find('p').text('There was a problem saving the value');
-    $('#generalmodal').find('button').removeClass('btn-success');
-    $('#generalmodal').find('button').addClass('btn-danger');
-
-    $('#generalmodal').modal('show');
-}
-
-var saved = function() {
-    $('#generalmodal').find('h3').text('Saved');
-    $('#generalmodal').find('p').text('New value inserted');
-    $('#generalmodal').find('button').removeClass('btn-danger');
-    $('#generalmodal').find('button').addClass('btn-success');
-
-    $('#generalmodal').modal('show');
-}
-
-var invalid = function() {
-    $('#generalmodal').find('h3').text('Invalid');
-    $('#generalmodal').find('p').text('Please enter a valid input');
-    $('#generalmodal').find('button').removeClass('btn-success');
-    $('#generalmodal').find('button').addClass('btn-danger');
-
-    $('#generalmodal').modal('show');
-}
-
-var runerror = function() {
-    $('#generalmodal').find('h3').text('Error');
-    $('#generalmodal').find('p').text('Could not run the command');
-    $('#generalmodal').find('button').removeClass('btn-success');
-    $('#generalmodal').find('button').addClass('btn-danger');
-
+var modalShow = function(type, message, title) {
+    if (typeof type === 'undefined') {
+        type = 'saved';
+    }
+    
+    var modalDefault = {
+        saved : {
+            title : 'Saved',
+            message : 'New value inserted',
+            btn_class : 'btn-success'
+        },
+        error : {
+            title : 'Error',
+            message : 'There was a problem saving the value',
+            btn_class : 'btn-danger'
+        },
+        invalid : {
+            title : 'Invalid',
+            message : 'Please enter a valid input',
+            btn_class : 'btn-danger'
+        }
+    };
+    
+    if (typeof title === 'undefined') {
+        title = modalDefault[type]['title'];
+    }
+    if (typeof message === 'undefined') {
+        message = modalDefault[type]['message'];
+    }
+    $('#generalmodal').find('h3').text(title);
+    $('#generalmodal').find('p').text(message);
+    $('#generalmodal').find('button').attr('class', 'btn ' + modalDefault[type]['btn_class']);
     $('#generalmodal').modal('show');
 }

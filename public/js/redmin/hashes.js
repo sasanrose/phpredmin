@@ -25,16 +25,16 @@ $(document).ready(function() {
                                 location.href = baseurl + '/keys/view/' + currentServerDb + '/' + encodeURIComponent(key);
                             } else {
                                 form.find('input').val('');
-                                saved();
+                                modalShow('saved');
                             } 
                         }
                     } else {
-                        error();
+                        modalShow('error');
                     }
                 }
             });
         } else {
-            invalid();
+            modalShow('invalid')
         }
     });
 });

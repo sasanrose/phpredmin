@@ -17,13 +17,13 @@ $(document).ready(function() {
                     form.find('textarea').val('');
 
                     if (data)
-                        saved();
+                        modalShow('saved');
                     else
-                        error();
+                        modalShow('error');
                 }
             });
         } else {
-            invalid();
+            modalShow('invalid')
         }
     });
 });

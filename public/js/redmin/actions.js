@@ -84,7 +84,7 @@ $(document).ready(function() {
             $('#move_confirmation').find('input').attr('placeholder', tip);
             $('#move_confirmation').modal('show');
         } else {
-            invalid();
+            modalShow('invalid')
         }
     });
 
@@ -125,7 +125,7 @@ $(document).ready(function() {
             });
             $('#del_confirmation').modal('show');
         } else {
-            invalid();
+            modalShow('invalid')
         }
     });
 });
