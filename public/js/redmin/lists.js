@@ -10,7 +10,7 @@ $(document).ready(function() {
 
         if (key != '' && str != '' && (type == 'append' || type == 'prepend' || type == 'before' || type == 'after')) {
             if ((type == 'before' || type == 'after') && pivot.val().trim() == '') {
-                modalShow('invalid')
+                modalPopup.alert('invalid')
             } else {
                 if (pivot.length > 0) {
                     pivot = pivot.val().trim();
@@ -36,17 +36,17 @@ $(document).ready(function() {
                                     location.href = baseurl + '/keys/view/' + currentServerDb + '/' + encodeURIComponent(key);
                                 } else {
                                     form.find('input').val('');
-                                    modalShow('saved');
+                                    modalPopup.alert('saved');
                                 } 
                             }
                         } else {
-                            modalShow('error');
+                            modalPopup.alert('error');
                         }
                     }
                 });
             }
         } else {
-            modalShow('invalid')
+            modalPopup.alert('invalid')
         }
     });
 

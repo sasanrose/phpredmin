@@ -22,24 +22,23 @@
             $('.delete_details').html('');
 
             if (val.trim() != '') {
-                $('.modal-footer .save').unbind();
-                $('.modal-footer .save').click(function() {
-                    $.ajax({
-                        url: url,
-                        type: "POST",
-                        data: {key: val},
-                        dataType: 'json',
-                        success: function(data) {
-                            $('#confirmation').modal('hide');
-                            $('#bulkkey').val('');
-                            $('.delete_progress').addClass('active');
-                            $('.delete_progress').show();
-                            updateDeleteInfo(val);
-                        }
-                    });
-                });
-
-                $('#confirmation').modal('show');
+                modalPopup.confirm(
+                    function() {
+                        $.ajax({
+                            url: url,
+                            type: "POST",
+                            data: {key: val},
+                            dataType: 'json',
+                            success: function(data) {
+                                modalPopup.hide('confirm');
+                                $('#bulkkey').val('');
+                                $('.delete_progress').addClass('active');
+                                $('.delete_progress').show();
+                                updateDeleteInfo(val);
+                            }
+                        });
+                    }
+                );    
             }
         });
     });
@@ -82,7 +81,6 @@
     }
 
 </script>
-<?=$this->renderPartial('generalmodals')?>
 <div>
     <ul class="nav nav-tabs" id="redisTab">
         <li class="active">
