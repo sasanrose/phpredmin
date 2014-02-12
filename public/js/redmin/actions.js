@@ -65,7 +65,7 @@ $(document).ready(function() {
                             baseurl+'/'+type+'/moveall/'+currentServerDb,
                             postdata,
                             function(data) {
-                                modalMoveHide();
+                                modalPopup.hide('moveKeys');
 
                                 checkboxes.each(function() {
                                     if (data[$(this).val()]) {
