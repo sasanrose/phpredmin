@@ -1,4 +1,4 @@
-<?=$this->renderPartial('actions', array('nomove' => True))?>
+<?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/actions.js\" type=\"text/javascript\"></script>"); ?>
 <div id='mainContainer'>
     <h3>Edit Sorted Set</h3>
     <?=$this->renderPartial('zsets/add', array('oldkey' => $this->key))?>
@@ -56,4 +56,3 @@
         </ul>
     <?php } ?>
 </div>
-<?=$this->renderPartial('generalmodals')?>

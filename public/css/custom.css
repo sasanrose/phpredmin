@@ -103,3 +103,11 @@ textarea {
 #dbTabs .nav-tabs > .active > a:hover {
     cursor: pointer;
 }
+
+.dropdown-menu li>a.danger-action {
+    color: #d62728;
+}
+
+.dropdown-menu li>a.warning-action {
+    color: #c67605;
+}

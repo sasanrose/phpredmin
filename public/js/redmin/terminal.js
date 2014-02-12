@@ -49,7 +49,7 @@ $(document).ready(function() {
                         else
                             $('#terminal-input').val(data.command);
                     } else {
-                        runerror();
+                        modalPopup.alert('error', 'Could not run the command');
                     }
                 }
             });
@@ -76,7 +76,7 @@ $(document).ready(function() {
                             $(".terminal-console").html(terminal);
                             $(".terminal-console").animate({ scrollTop: $('.terminal-console')[0].scrollHeight}, 1000);
                         } else {
-                            runerror();
+                            modalPopup.alert('error', 'Could not run the command');
                         }
 
                         $('#terminal-input').val('');

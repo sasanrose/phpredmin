@@ -19,7 +19,6 @@
         This functionaliy takes advantage of <a href="http://www.php.net/manual/en/function.exec.php" target="_blank">PHP's exec function</a>. Although, all the commands are escaped for security, you can disable terminal from configuration file.
     </div>
 </div>
-    <?=$this->renderPartial('generalmodals')?>
 <?php else: ?>
     <div class="alert alert-danger">
         Terminal is not enabled.

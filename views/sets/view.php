@@ -1,4 +1,4 @@
-<?=$this->renderPartial('actions')?>
+<?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/actions.js\" type=\"text/javascript\"></script>"); ?>
 <div id='mainContainer'>
     <h3>Edit Set</h3>
     <?=$this->renderPartial('sets/add', array('oldkey' => $this->key))?>
@@ -49,4 +49,3 @@
         <?php } ?>
     </table>
 </div>
-<?=$this->renderPartial('generalmodals')?>

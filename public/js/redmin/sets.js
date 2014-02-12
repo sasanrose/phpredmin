@@ -30,17 +30,17 @@ $(document).ready(function() {
                                 location.href = baseurl + '/keys/view/' + currentServerDb + '/' + encodeURIComponent(key);
                             } else {
                                 form.find('input').val('');
-                                saved();
+                                modalPopup.alert('saved');
                             }
                         }
                     }
                     else {
-                        error();
+                        modalPopup.alert('error');
                     }
                 }
             });
         } else {
-            invalid();
+            modalPopup.alert('invalid')
         }
     });
 });

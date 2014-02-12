@@ -33,12 +33,16 @@ class Welcome_Controller extends Controller
                                                           'lastSave'   => $lastSave));
     }
 
-    public function saveAction($async = Null)
+    public function saveAction($async = 0)
     {
-        $saved    = isset($async) ? $this->db->save() : $this->db->bgSave();
+        $saved    = $async ? $this->db->bgSave() : $this->db->save();
         $filename = current($this->db->config('GET', 'dbfilename'));
 
-        Template::factory()->render('welcome/save', array('saved' => $saved, 'filename' => $filename));
+        Template::factory('json')->render(array(
+            'status' => $saved, 
+            'async' => $async,
+            'filename' => $filename,
+        ));
     }
 
     public function slowlogAction()

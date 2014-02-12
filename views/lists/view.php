@@ -49,4 +49,3 @@
         </ul>
     <?php } ?>
 </div>
-<?=$this->renderPartial('generalmodals')?>
