@@ -1,5 +1,26 @@
 $(document).ready(function() {
+
+    function getCookie(name) {
+        var value = "; " + document.cookie;
+        var parts = value.split("; " + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+
     var prompt = "redis " + currentHost + ":" + currentPort + ">";
+
+    if (getCookie('term_theme') == 'dark') { $("#mainContainer").addClass('dark_theme'); }
+
+    $("#term_light").on("click", function(e) {
+        e.preventDefault();
+        $("#mainContainer").removeClass('dark_theme');
+        document.cookie = "term_theme=light; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+    })
+
+    $("#term_dark").on("click", function(e) {
+        e.preventDefault();
+        $("#mainContainer").addClass('dark_theme');
+        document.cookie = "term_theme=dark; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+    })
 
     $(".terminal-clear").tooltip({title: "Clear", placement: "right"});
 
@@ -8,7 +29,6 @@ $(document).ready(function() {
         $(".terminal-console").html(prompt);
         $('#terminal-input').focus();
     })
-
     $('#terminal-input').focus();
 
     $('.terminal-prompt').ajaxStart(function() {

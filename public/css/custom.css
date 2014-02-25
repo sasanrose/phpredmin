@@ -47,6 +47,13 @@ textarea {
     background-color: #f5f5f5;
     border: 0px;
 }
+.dark_theme  #terminal-input { background-color: #696969 !important; color: #D2D2D2; }
+.dark_theme .terminal { background-color: #3C3C3C !important; color: #D2D2D2; }
+.dark_theme .terminal-console { border: #2D2D2D 1px solid !important; }
+.dark_theme .terminal-command-line {
+    background-color: #696969 !important;
+    border-color:  #2D2D2D !important;
+}
 .terminal-prompt {
     padding-top: 5px;
     padding-left: 4px;
@@ -55,6 +62,34 @@ textarea {
     background-image: url(../img/ajax-loader.gif);
     background-repeat: no-repeat;
     background-position: left center;
+}
+.term_theme {
+    display: inline-block;
+    font-size: 1px;
+    overflow: hidden;
+    text-indent: 100px;
+    width: 12px;
+    height: 12px;
+}
+#term_light, #term_dark {
+    outline: 1px solid #B4B4B4;
+    border: 1px solid #fff;
+    margin-left: 7px;
+}
+#term_light:hover, #term_dark:hover {
+    outline-color: #3C3C3C;
+}
+#term_light {
+    background-color: #A5A5A5;
+    background: -moz-linear-gradient(left top, #fff, #A5A5A5);
+    background: -ms-linear-gradient(left top, #fff, #A5A5A5);
+    background: -webkit-linear-gradient(left top, #fff, #A5A5A5);
+}
+#term_dark {
+    background-color: #000;
+    background: -moz-linear-gradient(left top, #A5A5A5, #000);
+    background: -ms-linear-gradient(left top, #A5A5A5, #000);
+    background: -webkit-linear-gradient(left top, #A5A5A5, #000);
 }
 .terminal-clear {
     color: #657b83;
