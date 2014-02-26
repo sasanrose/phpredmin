@@ -66,7 +66,7 @@
                     <?=$this->info['connected_slaves']?>
                 </td>
             </tr>
-        <? } ?>
+        <?php } ?>
         <tr>
             <td>
                 Used Memory:
