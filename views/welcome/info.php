@@ -57,7 +57,7 @@
                 <?=$this->info['connected_clients']?>
             </td>
         </tr>
-        <?php if ($this->info['role'] == 'master') {?>
+        <?php if ($this->info['role'] == 'master'): ?>
             <tr>
                 <td>
                     Slaves:
@@ -66,7 +66,7 @@
                     <?=$this->info['connected_slaves']?>
                 </td>
             </tr>
-        <? } ?>
+        <?php endif; ?>
         <tr>
             <td>
                 Used Memory:

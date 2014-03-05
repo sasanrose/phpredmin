@@ -10,7 +10,7 @@
             <th>Delete</th>
             <th></th>
         </tr>
-        <?php foreach ($this->values as $member => $value) { ?>
+        <?php foreach ($this->values as $member => $value): ?>
             <tr>
                 <td>
                     <?=$member?>
@@ -27,8 +27,8 @@
                     <input type="checkbox" name="keys[]" value="<?=$member?>" />
                 </td>
             </tr>
-        <?php } ?>
-        <?php if (!empty($this->values)) { ?>
+        <?php endforeach; ?>
+        <?php if (!empty($this->values)): ?>
             <tr>
                 <td colspan="2">
                 </td>
@@ -41,18 +41,16 @@
                     <input type="checkbox" name="checkall" id="checkall" />
                 </td>
             </tr>
-        <?php } ?>
+        <?php endif; ?>
     </table>
-    <?php if ($this->count > 30) {
-        $ceil = floor($this->count / 30);
-    ?>
+    <?php if ($this->count > 30): ?>
         <ul class="pager">
             <li class="previous <?php if ($this->page == 0) echo "disabled";?>">
                 <a href="<?=$this->router->url?>/zsets/view/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($this->key)?>/<?=$this->page - 1?>">&larr; Previous</a>
             </li>
-            <li class="next <?php if ($this->page == $ceil) echo "disabled";?>">
+            <li class="next <?php if ($this->page == floor($this->count / 30)) echo "disabled";?>">
                 <a href="<?=$this->router->url?>/zsets/view/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($this->key)?>/<?=$this->page + 1?>">Next &rarr;</a>
             </li>
         </ul>
-    <?php } ?>
+    <?php endif; ?>
 </div>
