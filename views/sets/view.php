@@ -11,7 +11,7 @@
             <th></th>
 
         </tr>
-        <?php foreach ($this->members as $member) { ?>
+        <?php foreach ($this->members as $member): ?>
             <tr>
                 <td>
                     <?=$member?>
@@ -30,8 +30,8 @@
                     <input type="checkbox" name="keys[]" value="<?=$member?>" />
                 </td>
             </tr>
-        <?php } ?>
-        <?php if (!empty($this->members)) { ?>
+        <?php endforeach; ?>
+        <?php if (!empty($this->members)): ?>
             <tr>
                 <td colspan="3">
                 </td>
@@ -46,6 +46,6 @@
                     </a>
                 </td>
             </tr>
-        <?php } ?>
+        <?php endif; ?>
     </table>
 </div>

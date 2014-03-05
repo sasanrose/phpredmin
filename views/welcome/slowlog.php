@@ -4,7 +4,7 @@
         <a class="close" data-dismiss="alert" href="#">×</a>
         PHPRedmin uses Eval to fetch slowlogs
     </div>
-    <?php if ($this->support) { ?>
+    <?php if ($this->support): ?>
         <form class="form-inline" action="<?=$this->router->url?>/welcome/slowlog/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
             <div class="input-prepend">
                 <span class="add-on"><i class="icon-search"></i></span>
@@ -24,18 +24,18 @@
                     Info
                 </th>
             </tr>
-            <?php foreach ($this->slowlogs as $log) { ?>
+            <?php foreach ($this->slowlogs as $log): ?>
                     <tr>
                         <td><?=date('Y-m-d H:i:s', $log[1])?></td>
                         <td><?=$log[2]?></td>
                         <td><?=implode($log[3], ', ')?></td>
                     </tr>
-            <?php } ?>
+            <?php endforeach; ?>
         </table>
-    <?php } else { ?>
+    <?php else: ?>
         <div class="alert alert-danger">
             <a class="close" data-dismiss="alert" href="#">×</a>
             Eval has been available since redis version 2.6.0 but your redis version is <?=$this->version?>
         </div>
-    <?php } ?>
+    <?php endif; ?>
 </div>
