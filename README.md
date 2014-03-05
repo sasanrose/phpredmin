@@ -9,13 +9,13 @@ PHPRedMin is a simple web interface to manage and monitor your Redis.
 
 [Nanophp](https://github.com/sasanrose/NanoPHP) framework
 
-[phpredis](https://github.com/nicolasff/phpredis) redis module for PHP
-
 [Bootstrap](http://twitter.github.com/bootstrap) front-end framework
 
 [JQuery](http://jquery.com/) JavaScript library
 
 [Nvd3](https://github.com/novus/nvd3) reusable chart library for d3.JS
+
+_Note:_ PHPRedmin is mostly compatible with [phpredis](https://github.com/nicolasff/phpredis) redis module for PHP
 
 ## Installation
 
@@ -229,7 +229,7 @@ user=sasan
 
 ## License
 
-BSD License
+BSD 3-Clause License
 
 Copyright © 2013, Sasan Rose
 

@@ -12,6 +12,8 @@
 	<link rel="stylesheet" media="all" type="text/css" href="<?=$this->router->baseUrl?>/js/jquery-ui/css/jquery-ui.min.css" />
     <script type="text/javascript" src="<?=$this->router->baseUrl?>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?=$this->router->baseUrl?>/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?=$this->router->baseUrl?>/js/redmin/main.js"></script>
+    <script type="text/javascript" src="<?=$this->router->baseUrl?>/js/redmin/modal.js"></script>
     <?php foreach($this->getHeaders() as $header) {
         echo $header."\n";
     } ?>
@@ -19,76 +21,8 @@
         baseurl = "<?=$this->router->url?>";
         currentHost = "<?= $this->app->current['host'] ?>";
         currentPort = "<?= $this->app->current['port'] ?>";
+        currentServer = "<?= $this->app->current['serverId'] ?>";
         currentServerDb = "<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>";
-        $(document).ready(function() {
-            $('.disabled').click(function(e) {
-                e.preventDefault();
-            });
-
-            $('#reset_stats').click(function(e) {
-                e.preventDefault();
-
-                $('.modal-footer .save').unbind();
-                $('.modal-footer .save').click(function() {
-                    $.ajax({
-                        url: '<?=$this->router->url?>/actions/reset/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>',
-                        dataType: 'json',
-                        success: function(data) {
-                            location.href = '<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>';
-                        }
-                    });
-                });
-
-                $('#confirmation').modal('show');
-            });
-
-            $('#flush_all').click(function(e) {
-                e.preventDefault();
-
-                $('.modal-footer .save').unbind();
-                $('.modal-footer .save').click(function() {
-                    $.ajax({
-                        url: '<?=$this->router->url?>/actions/fall/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>',
-                        dataType: 'json',
-                        success: function(data) {
-                            location.href = '<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/0' ?>';
-                        }
-                    });
-
-                });
-
-                $('#confirmation').modal('show');
-            });
-            
-            $('#flush_db').click(function(e) {
-                e.preventDefault();
-
-                $('.modal-footer .save').unbind();
-                $('.modal-footer .save').click(function() {
-                    $.ajax({
-                        url: '<?=$this->router->url?>/actions/fdb/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>',
-                        dataType: 'json',
-                        success: function(data) {
-                            location.href = '<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/0' ?>';
-                        }
-                    });
-                });
-
-                $('#confirmation').modal('show');
-            });
-                        
-            $('#add_db').click(function(e) {
-                e.preventDefault();
-
-                $('.modal-footer .save').unbind();
-                $('.modal-footer .save').click(function() {
-                    var dbIdx = parseInt($('#dbIdx').val());
-                    location.href = '<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' ?>'+dbIdx;
-                });
-
-                $('#addDB').modal('show');
-            });
-        });
     </script>
 </head>
 <body>
@@ -149,29 +83,29 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#" id="flush_db">
+                                            <a class="danger-action" href="#" id="flush_db">
                                                 <i class="icon-trash"></i> Flush Db
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" id="flush_all">
+                                            <a class="danger-action" href="#" id="flush_all">
                                                 <i class="icon-remove"></i> Flush All
                                             </a>
                                         </li>
                                         <li class="divider"></li>
                                         <li>
-                                            <a href="<?=$this->router->url?>/welcome/save/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/1" target="_blank">
+                                            <a id="save_async" href="#">
                                                 <i class="icon-save"></i> Asynchronous Save
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="<?=$this->router->url?>/welcome/save/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" target="_blank">
+                                            <a class="warning-action" id="save_sync" href="#">
                                                 <i class="icon-save"></i> Synchronous Save
                                             </a>
                                         </li>
                                         <li class="divider"></li>
                                         <li>
-                                            <a href="#" id="reset_stats">
+                                            <a class="warning-action" href="#" id="reset_stats">
                                                 <i class="icon-refresh"></i> Reset Stats
                                             </a>
                                         </li>
@@ -207,49 +141,6 @@
             </div>
         </div>
     </div>
-    <div id="confirmation" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="confirmation" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3>Are you sure?</h3>
-        </div>
-        <div class="modal-body">
-            <p>You can not undo this action</p>
-        </div>
-        <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-danger save">I am sure</button>
-        </div>
-    </div>
-    
-    <div id="addDB" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addDb" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3>Add Database</h3>
-        </div>
-        <div class="modal-body">
-            <p>Databases are not created until data is added and they are initialized. To begin, 
-            specify the database index you want to initialize. You will be redirected and able to 
-            add data to the database</p>
-            <hr />
-            <form class="form-horizontal">
-                <div class="control-group">
-                    <label class="control-label" for="inputEmail">Database: </label>
-                    <div class="controls">
-                        <select name="dbIdx" id="dbIdx">
-                        <?php for ($x=0; $x < $this->app->current['max_databases']; $x++): ?>
-                            <?php if (!array_key_exists($x, $this->app->current['dbs'])): ?>
-                            <option value='<?=$x?>'>DB <?=$x?></option>
-                            <?php endif; ?>
-                        <?php endfor; ?>
-                        </select>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-primary save">Create</button>
-        </div>
-    </div>
+    <?= $this->renderPartial('generalmodals') ?>
 </body>
 </html>

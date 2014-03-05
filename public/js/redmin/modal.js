@@ -1,35 +1,91 @@
-var error = function() {
-    $('#generalmodal').find('h3').text('Error');
-    $('#generalmodal').find('p').text('There was a problem saving the value');
-    $('#generalmodal').find('button').removeClass('btn-success');
-    $('#generalmodal').find('button').addClass('btn-danger');
+var modalPopup = {
+    
+    // link modals to the template ids
+    _modals : {
+        alert : 'generalmodal',
+        confirm : 'confirmation',
+        addDb : 'addDB',
+        moveKeys : 'move_confirmation'
+    },
+            
+    _alertDefault : {
+        saved : {
+            title : 'Saved',
+            message : 'New value inserted',
+            btn_class : 'btn-success'
+        },
+        error : {
+            title : 'Error',
+            message : 'There was a problem saving the value',
+            btn_class : 'btn-danger'
+        },
+        invalid : {
+            title : 'Invalid',
+            message : 'Please enter a valid input',
+            btn_class : 'btn-danger'
+        }
+    },
+            
+    _getModal : function(type) {
+        return $('#' + this._modals[type]);
+    },
+    
+    hide : function(type) {
+        if (typeof type === 'undefined') {
+            type = 'alert';
+        }
+        
+        this._getModal(type).modal('hide');
+    },
+        
+    alert : function(type, message, title) {
+        if (typeof type === 'undefined') {
+            type = 'saved';
+        }
+        if (typeof title === 'undefined') {
+            title = this._alertDefault[type]['title'];
+        }
+        if (typeof message === 'undefined') {
+            message = this._alertDefault[type]['message'];
+        }
+        
+        this._getModal('alert').find('h3').text(title);
+        this._getModal('alert').find('p').text(message);
+        this._getModal('alert').find('button').attr('class', 'btn ' + this._alertDefault[type]['btn_class']);
 
-    $('#generalmodal').modal('show');
-}
+        this._getModal('alert').modal('show');
+    },
+    
+    confirm : function(action, message, title) {
+        if (typeof title === 'undefined') {
+            title = 'Are you sure?';
+        }
+        if (typeof message === 'undefined') {
+            message = 'You can not undo this action';
+        }
 
-var saved = function() {
-    $('#generalmodal').find('h3').text('Saved');
-    $('#generalmodal').find('p').text('New value inserted');
-    $('#generalmodal').find('button').removeClass('btn-danger');
-    $('#generalmodal').find('button').addClass('btn-success');
+        this._getModal('confirm').find('.modal-footer .save').unbind();
+        this._getModal('confirm').find('.modal-footer .save').click(action);
+        this._getModal('confirm').find('h3').text(title);
+        this._getModal('confirm').find('p').text(message);
 
-    $('#generalmodal').modal('show');
-}
+        this._getModal('confirm').modal('show');
+    },
+    
+    addDb : function(action) {
+        this._getModal('addDb').find('.modal-footer .save').unbind();
+        this._getModal('addDb').find('.modal-footer .save').click(action);
 
-var invalid = function() {
-    $('#generalmodal').find('h3').text('Invalid');
-    $('#generalmodal').find('p').text('Please enter a valid input');
-    $('#generalmodal').find('button').removeClass('btn-success');
-    $('#generalmodal').find('button').addClass('btn-danger');
+        this._getModal('addDb').modal('show');
+    },
+            
+    moveKeys : function(action, title, tip) {
+        this._getModal('moveKeys').find('.modal-footer .movekey').unbind();
+        this._getModal('moveKeys').find('.modal-footer .movekey').click(action);
+        this._getModal('moveKeys').find('h3').text(title);
+        this._getModal('moveKeys').find('input').attr('placeholder', tip);
 
-    $('#generalmodal').modal('show');
-}
-
-var runerror = function() {
-    $('#generalmodal').find('h3').text('Error');
-    $('#generalmodal').find('p').text('Could not run the command');
-    $('#generalmodal').find('button').removeClass('btn-success');
-    $('#generalmodal').find('button').addClass('btn-danger');
-
-    $('#generalmodal').modal('show');
+        this._getModal('moveKeys').modal('show');
+    }    
+    
 }

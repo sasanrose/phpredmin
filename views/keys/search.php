@@ -1,4 +1,4 @@
-<?=$this->renderPartial('actions')?>
+<?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/actions.js\" type=\"text/javascript\"></script>"); ?>
 <div id='mainContainer'>
     <h3>Search Results <small><?=count($this->keys)?> result(s) found</small></h3>
 
