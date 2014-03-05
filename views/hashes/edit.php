@@ -1,4 +1,5 @@
-<div>
+<div id='mainContainer'>
+    <h3>Edit hash key</h3>
     <?php if (isset($this->edited) && $this->edited): ?>
         <div class="alert alert-info">
             <a class="close" data-dismiss="alert" href="#">×</a>
@@ -11,7 +12,6 @@
         </div>
     <?php endif ?>
     <form class="form" action="<?=$this->router->url?>/hashes/edit/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
-        <legend>Edit hash key</legend>
         <h5><?=$this->key?> / <?=$this->member?></h5>
         <div>
             <textarea name="newvalue"><?=$this->value?></textarea>
