@@ -32,8 +32,6 @@
             <th>Key</th>
             <th>Type</th>
             <th>TTL</th>
-            <th>Ref Count</th>
-            <th>Idle Time</th>
             <th>Encoding</th>
             <th>Size</th>
             <th>Expire</th>
@@ -53,12 +51,6 @@
             </td>
             <td>
                 <?=Redis_Helper::instance()->getTTL($key)?>
-            </td>
-            <td>
-                <?=Redis_Helper::instance()->getCount($key)?>
-            </td>
-            <td>
-                <?=Redis_Helper::instance()->getIdleTime($key)?>
             </td>
             <td>
                 <?=Redis_Helper::instance()->getEncoding($key)?>
@@ -97,7 +89,7 @@
         </tr>
         <?php endforeach; ?>
         <tr>
-            <td colspan="10">
+            <td colspan="8">
             </td>
             <td>
                 <a href="#" class="action moveall">
