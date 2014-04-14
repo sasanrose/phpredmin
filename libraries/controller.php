@@ -24,8 +24,10 @@ class Controller
         $info = $this->db->info();
         $dbs = $this->infoModel->getDbs($info);
 
-        $databasesConfig = $this->_objects['db']->config('GET', 'databases');
-        $current['max_databases'] = $databasesConfig['databases'];
+        if (!isset($current['max_databases'])) {
+            $databasesConfig = $this->_objects['db']->config('GET', 'databases');
+            $current['max_databases'] = $databasesConfig['databases'];
+        }
 
         // Take care of invalid dbId's. If invalid, set to first available database
         if (!is_numeric($config['dbId'])
