@@ -118,6 +118,7 @@
                     <input type="text" placeholder="Key" name="key">
                 </div>
                 <button type="submit" class="btn"><i class="icon-search"></i> Search</button>
+            or <a href="<?=$this->router->url?>/keys/search/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>?key=*">Show All</a>
             </form>
             <div class="alert alert-success">
                 <a class="close" data-dismiss="alert" href="#">×</a>
