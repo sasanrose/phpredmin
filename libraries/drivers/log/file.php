@@ -10,10 +10,9 @@ class FileLog
         if (!$config_dir)
             die('Please provide a log directory in your config file');
         else {
-            $this->_dir = dirname(__FILE__).'/../../../'.$config_dir.'/'.PHP_SAPI.'/';
+            $this->_dir = $config_dir;
 
             if (!is_writable($this->_dir))
-                if (!mkdir($this->_dir, 0755, True))
                     die("{$this->_dir} does not exist or is not writable");
         }
     }
