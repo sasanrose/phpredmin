@@ -6,12 +6,14 @@ final class Session
 
     protected function __construct()
     {
+        if (PHP_SAPI != 'cli') {
         ini_set('session.gc_probability', App::instance()->config['session']['gc_probability']);
         ini_set('session.gc_divisor', 100);
         ini_set('session.gc_maxlifetime', App::instance()->config['session']['lifetime']);
 
         session_name(App::instance()->config['session']['name']);
         session_start();
+        }
     }
 
     public static function instance()
@@ -26,7 +28,8 @@ final class Session
     {
         $_SESSION[$key] = $value;
 
-        session_write_close();
+        if (PHP_SAPI != 'cli')
+            session_write_close();
     }
 
     public function get($key, $default = Null)
