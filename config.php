@@ -2,6 +2,7 @@
 $config = Array(
     'default_controller' => 'Welcome',
     'default_action'     => 'Index',
+    'url_path_prefix'    => '/phpredmin',
     'production'         => True,
     'default_layout'     => 'layout',
     'timezone'           => 'Europe/Amsterdam',

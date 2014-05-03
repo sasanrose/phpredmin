@@ -28,14 +28,24 @@ final class Router
     protected function parse()
     {
         $this->method   = $_SERVER['REQUEST_METHOD'];
-        $this->protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']) ? 'https' : 'http'; 
+        $this->protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']) ? 'https' : 'http';
         $this->host     = $_SERVER['HTTP_HOST'];
         $this->baseUrl  = $this->protocol.'://'.$this->host;
-        $this->url      = $this->protocol.'://'.$this->host.$_SERVER['SCRIPT_NAME'];
+        $this->url      = $this->baseUrl.$_SERVER['SCRIPT_NAME'];
         $this->path     = '';
 
+        $url_path_prefix    = App::instance()->config['url_path_prefix'];
+        if ($url_path_prefix) {
+            $this->baseUrl .= $url_path_prefix;
+            $this->url = $this->baseUrl;
+        }
+
         if (PHP_SAPI != 'cli') {
-            $this->path = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
+            if ($url_path_prefix)
+                $this->path = preg_replace('|^'.$url_path_prefix.'|', '', $_SERVER['REQUEST_URI'], 1);
+            else
+                $this->path = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
+
             Log::factory()->write(Log::INFO, $_SERVER['REQUEST_URI'], 'Router');
 
             if ($this->path == $_SERVER['REQUEST_URI'])
@@ -64,10 +74,10 @@ final class Router
 
         if (!$this->action = array_shift($this->_params))
             $this->action = App::instance()->config['default_action'];
-        
+
         if (!$this->serverId = array_shift($this->_params))
             $this->serverId = 0;
-        
+
         if (!$this->dbId = array_shift($this->_params))
             $this->dbId = 0;
     }
@@ -101,7 +111,7 @@ final class Router
             );
             if (method_exists($controller, $method)) {
                 call_user_func_array(array($controller, $method), $this->_params);
-            }    
+            }
 
             return;
         }
