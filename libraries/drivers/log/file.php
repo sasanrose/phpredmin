@@ -22,7 +22,7 @@ class FileLog
         if (App::instance()->config['log']['threshold'] < Log::instance()->$type)
             return;
 
-        $logfile = $this->_dir.date('Y-m-d').'.log';
+        $logfile = $this->_dir.'/phpredmin.log';
 
         if (($file = fopen($logfile, 'a+')) === False)
             die('Can not open file: '.$logfile);
