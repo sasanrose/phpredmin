@@ -19,8 +19,8 @@ class Stats_Controller extends Controller
         $misses      = $this->statsModel->getKeys('misses', $from, $to);
         $expiredKeys = $this->statsModel->getKeys('expired_keys', $from, $to);
 
-        $result[] = Array('key' => 'Keyspace Misses', 'values' => $hits);
-        $result[] = Array('key' => 'Keyspace Hits', 'values' => $misses);
+        $result[] = Array('key' => 'Keyspace Misses', 'values' => $misses);
+        $result[] = Array('key' => 'Keyspace Hits', 'values' => $hits);
         $result[] = Array('key' => 'Expired Keys', 'values' => $expiredKeys);
 
         $this->template->render($result);
