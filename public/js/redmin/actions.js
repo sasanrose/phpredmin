@@ -34,6 +34,16 @@ $(document).ready(function() {
         deleteRow(e);
     });
 
+    $('.keys-table td').click(function(e) {
+        if ($(e.target).hasClass('icon') || $(e.target).hasClass('key-checkbox'))
+            return;
+
+        var input = $($(e.target).parents('tr')[0]).find("input[name=keys\\[\\]]");
+
+        if (!input.hasClass('all-key-checkbox'))
+            input.attr('checked', !input.is(':checked'));
+    });
+
     $('#checkall').click(function(e) {
         $("input[name=keys\\[\\]]").attr('checked', $(e.target).is(':checked'));
     });

@@ -18,16 +18,16 @@
         Please enter valid search criteria
     </div>
     <?php endif; ?>
-    <h5><i class="icon-key"></i> Redis Keys</h5>
+    <h5><i class="icon icon-key"></i> Redis Keys</h5>
     <form class="form-search" action="<?=$this->router->url?>/keys/search/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="get">
         <div class="input-prepend">
-            <span class="add-on"><i class="icon-key"></i></span>
+            <span class="add-on"><i class="icon icon-key"></i></span>
             <input type="text" value="<?=$this->search?>" name="key">
         </div>
-        <button type="submit" class="btn"><i class="icon-search"></i> Search</button>
+        <button type="submit" class="btn"><i class="icon icon-search"></i> Search</button>
     </form>
     <?php if (count($this->keys)): ?>
-    <table class="table table-striped">
+    <table class="table table-striped keys-table">
         <tr>
             <th>Key</th>
             <th>Type</th>
@@ -60,31 +60,31 @@
             </td>
             <td>
                 <a href="<?=$this->router->url?>/keys/expire/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($key)?>" target="_blank" class="action">
-                    <i class="icon-time"></i>
+                    <i class="icon icon-time"></i>
                 </a>
             </td>
             <td>
                 <a href="<?=$this->router->url?>/keys/rename/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($key)?>" target="_blank" class="action">
-                    <i class="icon-edit"></i>
+                    <i class="icon icon-edit"></i>
                 </a>
             </td>
             <td>
                 <a href="<?=$this->router->url?>/keys/view/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($key)?>" target="_blank" class="action">
-                    <i class="icon-folder-open-alt"></i>
+                    <i class="icon icon-folder-open-alt"></i>
                 </a>
             </td>
             <td>
                 <a href="<?=$this->router->url?>/keys/move/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($key)?>" target="_blank" class="action">
-                    <i class="icon-move"></i>
+                    <i class="icon icon-move"></i>
                 </a>
             </td>
             <td>
                 <a href="#" class="action del">
-                    <i class="icon-trash" id="<?=$key?>" keytype="keys"></i>
+                    <i class="icon icon-trash" id="<?=$key?>" keytype="keys"></i>
                 </a>
             </td>
             <td>
-                <input type="checkbox" name="keys[]" value="<?=$key?>" />
+                <input type="checkbox" name="keys[]" value="<?=$key?>" class="key-checkbox" />
             </td>
         </tr>
         <?php endforeach; ?>
@@ -93,16 +93,16 @@
             </td>
             <td>
                 <a href="#" class="action moveall">
-                    <i class="icon-move" keytype="keys" modaltitle="Move key to?" modaltip="Database Number"></i>
+                    <i class="icon icon-move" keytype="keys" modaltitle="Move key to?" modaltip="Database Number"></i>
                 </a>
             </td>
             <td>
                 <a href="#" class="action delall">
-                    <i class="icon-trash" keytype="keys"></i>
+                    <i class="icon icon-trash" keytype="keys"></i>
                 </a>
             </td>
             <td>
-                <input type="checkbox" name="checkall" id="checkall" />
+                <input type="checkbox" name="checkall" id="checkall" class="all-key-checkbox" />
             </td>
         </tr>
     </table>

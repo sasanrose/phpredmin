@@ -2,8 +2,8 @@
 <div id='mainContainer'>
     <h3>Edit Sorted Set</h3>
     <?=$this->renderPartial('zsets/add', array('oldkey' => $this->key))?>
-    <h5><i class="icon-key"></i> <?=$this->key?></h5>
-    <table class="table table-striped settable">
+    <h5><i class="icon icon-key"></i> <?=$this->key?></h5>
+    <table class="table table-striped settable keys-table">
         <tr>
             <th>Value</th>
             <th>Score</th>
@@ -20,11 +20,11 @@
                 </td>
                 <td>
                     <a href="#" class="action del">
-                        <i class="icon-trash" id="<?=$member?>" keytype="zsets" keyinfo="<?=$this->key?>"></i>
+                        <i class="icon icon-trash" id="<?=$member?>" keytype="zsets" keyinfo="<?=$this->key?>"></i>
                     </a>
                 </td>
                 <td>
-                    <input type="checkbox" name="keys[]" value="<?=$member?>" />
+                    <input type="checkbox" name="keys[]" value="<?=$member?>" class="key-checkbox" />
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -34,11 +34,11 @@
                 </td>
                 <td>
                     <a href="#" class="action delall">
-                        <i class="icon-trash" keytype="zsets" keyinfo="<?=$this->key?>"></i>
+                        <i class="icon icon-trash" keytype="zsets" keyinfo="<?=$this->key?>"></i>
                     </a>
                 </td>
                 <td>
-                    <input type="checkbox" name="checkall" id="checkall" />
+                    <input type="checkbox" name="checkall" id="checkall" class="all-key-checkbox" />
                 </td>
             </tr>
         <?php endif; ?>
