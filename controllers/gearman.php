@@ -32,11 +32,12 @@ class Gearman_Controller extends Controller
             $db->del("phpredmin:gearman:requests:{$data['key']}");
 
             foreach ($keys as $key) {
-                if ($db->delete($key) !== False) {
+                if ($db->delete($key) !== false) {
                     $db->incrBy("phpredmin:gearman:deleted:{$data['key']}", 1);
                     $db->expireAt("phpredmin:gearman:deleted:{$data['key']}", strtotime('+10 minutes'));
-                } else
+                } else {
                     Log::factory()->write(Log::INFO, "Unable to delete {$key}", 'Gearman');
+                }
             }
 
             $db->del("phpredmin:gearman:deletecount:{$data['key']}");

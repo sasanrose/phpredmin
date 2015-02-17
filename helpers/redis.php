@@ -2,19 +2,20 @@
 
 class Redis_Helper
 {
-    protected static $_instance = Null;
+    protected static $_instance = null;
 
-    protected $db = Null;
+    protected $db = null;
 
     protected function __construct()
     {
-       $this->db = Db::factory(App::instance()->current);
+        $this->db = Db::factory(App::instance()->current);
     }
 
     public static function instance()
     {
-        if (!isset(self::$_instance))
+        if (!isset(self::$_instance)) {
             self::$_instance = new self;
+        }
 
         return self::$_instance;
     }
@@ -40,7 +41,6 @@ class Redis_Helper
     public function getTTL($key)
     {
         return $this->_time($this->db->ttl($key));
-
     }
 
     public function getIdleTime($key)
@@ -85,9 +85,9 @@ class Redis_Helper
 
     protected function _time($time)
     {
-        if ($time <= 0)
+        if ($time <= 0) {
             return '-';
-        else {
+        } else {
             $days = floor($time / 86400);
 
             return ($days > 0 ? "{$days} Days " : '') . gmdate('H:i:s', $time);

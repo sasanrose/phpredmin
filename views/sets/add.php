@@ -16,5 +16,5 @@
     <button type="submit" class="btn" id="add_set"><i class="icon-plus"></i> Add</button>
     <?php if (!isset($this->oldkey)): ?>
         <button type="submit" class="btn" id="add_edit_set"><i class="icon-plus-sign"></i> Add & Edit</button>
-    <?php endif; ?> 
+    <?php endif; ?>
 </form>

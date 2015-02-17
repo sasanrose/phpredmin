@@ -1,7 +1,7 @@
 <?php
-class Controller
+class controller
 {
-    private $_objects = Null;
+    private $_objects = null;
 
     public function __construct($config)
     {
@@ -37,7 +37,7 @@ class Controller
             $config['dbId'] = $dbs[0];
         }
 
-        $current['newDB'] = (!in_array($config['dbId'], $dbs) ? true : false );
+        $current['newDB'] = (!in_array($config['dbId'], $dbs) ? true : false);
 
         $current['database'] = $config['dbId'];
 
@@ -47,7 +47,7 @@ class Controller
                 $current['dbs'][$i] = array(
                     'id' => $i,
                     'keys' => $matches[1],
-                    'name' => (isset($current['dbNames'][$i]) ? $current['dbNames'][$i] : null ),
+                    'name' => (isset($current['dbNames'][$i]) ? $current['dbNames'][$i] : null),
                 );
             }
         }
@@ -58,6 +58,6 @@ class Controller
 
     public function __get($object)
     {
-        return isset($this->_objects[$object]) ? $this->_objects[$object] : Null;
+        return isset($this->_objects[$object]) ? $this->_objects[$object] : null;
     }
 }

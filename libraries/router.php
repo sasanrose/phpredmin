@@ -1,16 +1,16 @@
 <?php
-final class Router
+final class router
 {
     const POST   = 'POST';
     const GET    = 'GET';
     const DELETE = 'DELETE';
     const PUT    = 'PUT';
 
-    protected $_data          = Array();
-    protected $_params        = Array();
-    protected $_query_strings = Array();
+    protected $_data          = array();
+    protected $_params        = array();
+    protected $_query_strings = array();
 
-    protected static $_instance = Null;
+    protected static $_instance = null;
 
     protected function __construct()
     {
@@ -19,8 +19,9 @@ final class Router
 
     public static function instance()
     {
-        if (!self::$_instance)
+        if (!self::$_instance) {
             self::$_instance = new self;
+        }
 
         return self::$_instance;
     }
@@ -28,7 +29,7 @@ final class Router
     protected function parse()
     {
         $this->method   = $_SERVER['REQUEST_METHOD'];
-        $this->protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']) ? 'https' : 'http'; 
+        $this->protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']) ? 'https' : 'http';
         $this->host     = $_SERVER['HTTP_HOST'];
         $this->baseUrl  = $this->protocol.'://'.$this->host;
         $this->url      = $this->protocol.'://'.$this->host.$_SERVER['SCRIPT_NAME'];
@@ -38,43 +39,53 @@ final class Router
             $this->path = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
             Log::factory()->write(Log::INFO, $_SERVER['REQUEST_URI'], 'Router');
 
-            if ($this->path == $_SERVER['REQUEST_URI'])
+            if ($this->path == $_SERVER['REQUEST_URI']) {
                 $this->path = '';
-        } else if (isset($_SERVER['argv'][1]))
-                $this->path = $_SERVER['argv'][1];
+            }
+        } elseif (isset($_SERVER['argv'][1])) {
+            $this->path = $_SERVER['argv'][1];
+        }
 
         $this->request = $this->url.$this->path;
 
-        if (preg_match('/^(.*)\/(.*)$/', $_SERVER['SCRIPT_NAME'], $matches))
+        if (preg_match('/^(.*)\/(.*)$/', $_SERVER['SCRIPT_NAME'], $matches)) {
             $this->baseUrl .= $matches[1];
+        }
 
         if (preg_match('/^(.*)\?(.*)$/', $this->path, $matches)) {
             $this->path = $matches[1];
 
-            foreach(explode('&', $matches[2]) as $match)
-                if (preg_match('/^(.*)=(.*)$/', $match, $strings))
-                    if ($strings[2])
+            foreach (explode('&', $matches[2]) as $match) {
+                if (preg_match('/^(.*)=(.*)$/', $match, $strings)) {
+                    if ($strings[2]) {
                         $this->_query_strings[$strings[1]] = urldecode($strings[2]);
+                    }
+                }
+            }
         }
 
         $this->_params = explode('/', trim($this->path, '/'));
 
-        if (!$this->controller = ucwords(strtolower(array_shift($this->_params))))
+        if (!$this->controller = ucwords(strtolower(array_shift($this->_params)))) {
             $this->controller = App::instance()->config['default_controller'];
+        }
 
-        if (!$this->action = array_shift($this->_params))
+        if (!$this->action = array_shift($this->_params)) {
             $this->action = App::instance()->config['default_action'];
+        }
         
-        if (!$this->serverId = array_shift($this->_params))
+        if (!$this->serverId = array_shift($this->_params)) {
             $this->serverId = 0;
+        }
         
-        if (!$this->dbId = array_shift($this->_params))
+        if (!$this->dbId = array_shift($this->_params)) {
             $this->dbId = 0;
+        }
     }
 
     public function __get($key)
     {
-        return isset($this->_data[$key]) ? $this->_data[$key] : Null;
+        return isset($this->_data[$key]) ? $this->_data[$key] : null;
     }
 
     public function __set($key, $value)
@@ -82,7 +93,7 @@ final class Router
         $this->_data[$key] = $value;
     }
 
-    public function query($key, $default = Null)
+    public function query($key, $default = null)
     {
         return isset($this->_query_strings[$key]) ? filter_var($this->_query_strings[$key], FILTER_SANITIZE_STRING) : $default;
     }
@@ -101,7 +112,7 @@ final class Router
             );
             if (method_exists($controller, $method)) {
                 call_user_func_array(array($controller, $method), $this->_params);
-            }    
+            }
 
             return;
         }

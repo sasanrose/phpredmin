@@ -45,8 +45,8 @@
         <h3>Add Database</h3>
     </div>
     <div class="modal-body">
-        <p>Databases are not created until data is added and they are initialized. To begin, 
-        specify the database index you want to initialize. You will be redirected and able to 
+        <p>Databases are not created until data is added and they are initialized. To begin,
+        specify the database index you want to initialize. You will be redirected and able to
         add data to the database</p>
         <hr />
         <form class="form-horizontal">

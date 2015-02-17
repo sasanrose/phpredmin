@@ -1,18 +1,17 @@
 <?php
 
-final class Log
+final class log
 {
-    protected static $_instances = Array();
-    protected static $_instance  = Null;
+    protected static $_instances = array();
+    protected static $_instance  = null;
 
-	protected $_levels = array
-	(
-		'error'   => 1,
-		'notice'  => 2,
-		'info'    => 3,
+    protected $_levels = array(
+        'error'   => 1,
+        'notice'  => 2,
+        'info'    => 3,
         'warning' => 4,
-		'debug'   => 5
-	);
+        'debug'   => 5
+    );
 
     const INFO    = 'info';
     const DEBUG   = 'debug';
@@ -22,13 +21,14 @@ final class Log
 
     public static function instance()
     {
-        if (!isset(self::$_instance))
+        if (!isset(self::$_instance)) {
             self::$_instance = new self;
+        }
 
         return self::$_instance;
     }
 
-    public static function factory($driver = Null)
+    public static function factory($driver = null)
     {
         $driver = isset($driver) ? $driver : App::instance()->config['log']['driver'];
 

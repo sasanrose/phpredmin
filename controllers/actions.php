@@ -14,20 +14,20 @@ class Actions_Controller extends Controller
     {
         $this->statsModel->resetStats();
 
-        $this->template->render(True);
+        $this->template->render(true);
     }
 
     public function fallAction()
     {
         $this->db->flushAll();
 
-        $this->template->render(True);
+        $this->template->render(true);
     }
 
     public function fdbAction()
     {
         $this->db->flushDB();
 
-        $this->template->render(True);
+        $this->template->render(true);
     }
 }

@@ -1,11 +1,12 @@
 <?php
 
-final class Error
+final class error
 {
     public function __construct()
     {
-        if (App::instance()->config['production'])
+        if (App::instance()->config['production']) {
             ini_set('display_errors', 0);
+        }
 
         // Set a custom error Handler
         set_error_handler(array($this, 'errorHandler'));
@@ -25,11 +26,13 @@ final class Error
         }
     }
 
-    public function exceptionHandler(Exception $e) {
+    public function exceptionHandler(Exception $e)
+    {
         Log::factory()->write(Log::ERROR, "{$e->getMessage()} on {$e->getFile()}:{$e->getLine()}");
     }
 
-    public function errorHandler($no, $str, $file, $line, $context) {
+    public function errorHandler($no, $str, $file, $line, $context)
+    {
         if (!(error_reporting() & $no)) {
             // This error code is not included in error_reporting
             return;
@@ -42,7 +45,7 @@ final class Error
 
     protected static function _getError($type)
     {
-        switch($type) {
+        switch ($type) {
             case E_WARNING: // 2 //
                 return Log::WARNING;
             case E_NOTICE: // 8 //

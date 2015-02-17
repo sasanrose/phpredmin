@@ -26,7 +26,7 @@ class Terminal_Controller extends Controller
             die;
         }
 
-        $command = $this->inputs->post('command', Null);
+        $command = $this->inputs->post('command', null);
 
         if (isset($command)) {
             $historylimit = $this->config['history'];
@@ -38,8 +38,9 @@ class Terminal_Controller extends Controller
                 $this->db->lTrim($historykey, $historylimit * -1, -1);
 
                 $this->db->set("phpredmin:terminal:history:pointer", -1);
-            } else
+            } else {
                 $this->db->del($historykey);
+            }
 
             $command = escapeshellcmd($command);
             exec("redis-cli -h {$this->app->current['host']} -p {$this->app->current['port']} {$command}", $result);
@@ -54,7 +55,7 @@ class Terminal_Controller extends Controller
         $historykey   = "phpredmin:terminal:history";
         $historylen   = $this->db->lLen($historykey);
         $command      = '';
-        $reset        = False;
+        $reset        = false;
 
         if ($historylimit > 0 && $historylen > 0) {
             $navigation = $this->inputs->get('navigation', self::NAVIGATION_UP);
@@ -67,14 +68,16 @@ class Terminal_Controller extends Controller
             }
 
             if ($navigation == self::NAVIGATION_UP) {
-                if ($historylen <= ($pointer * -1))
+                if ($historylen <= ($pointer * -1)) {
                     $pointer = $historylen * -1;
-                elseif (!isset($start))
+                } elseif (!isset($start)) {
                     $pointer--;
-            } elseif ($pointer != -1)
+                }
+            } elseif ($pointer != -1) {
                 $pointer++;
-            else
-                $reset = True;
+            } else {
+                $reset = true;
+            }
 
             $command = $this->db->lRange($historykey, $pointer, $pointer);
 

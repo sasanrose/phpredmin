@@ -5,7 +5,7 @@
             <a class="close" data-dismiss="alert" href="#">×</a>
             Key moved successfuly
         </div>
-    <?php elseif(isset($this->moved)): ?>
+    <?php elseif (isset($this->moved)): ?>
         <div class="alert alert-danger">
             <a class="close" data-dismiss="alert" href="#">×</a>
             There was a problem moving the key

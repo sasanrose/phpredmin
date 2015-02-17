@@ -4,7 +4,7 @@
             <a class="close" data-dismiss="alert" href="#">×</a>
             Set Key member edited successfully
         </div>
-    <?php elseif(isset($this->edited)): ?>
+    <?php elseif (isset($this->edited)): ?>
         <div class="alert alert-danger">
             <a class="close" data-dismiss="alert" href="#">×</a>
             There was a problem editing the Set Key member

@@ -31,7 +31,7 @@
 </div>
 <?php if (count($this->app->config['database']['redis']) > 1) : ?>
     <ul class="nav nav-pills nav-stacked" id="srvList">
-        <li class="nav-header">Other servers</li>    
+        <li class="nav-header">Other servers</li>
         <?php foreach ($this->app->config['database']['redis'] as $serverId => $server): ?>
             <?php if ($serverId != $this->app->current['serverId']) : ?>
                 <li class="server">
@@ -40,6 +40,6 @@
                     </a>
                 </li>
             <?php endif; ?>
-        <?php endforeach; ?>  
-    </ul>    
+        <?php endforeach; ?>
+    </ul>
 <?php endif; ?>

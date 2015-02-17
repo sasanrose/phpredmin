@@ -4,19 +4,19 @@ class Lists_Controller extends Controller
 {
     public function addAction()
     {
-        $added = False;
+        $added = false;
 
         if ($this->router->method == Router::POST) {
-            $value = $this->inputs->post('value', Null);
-            $key   = $this->inputs->post('key', Null);
-            $type  = $this->inputs->post('type', Null);
-            $pivot = $this->inputs->post('pivot', Null);
+            $value = $this->inputs->post('value', null);
+            $key   = $this->inputs->post('key', null);
+            $type  = $this->inputs->post('type', null);
+            $pivot = $this->inputs->post('pivot', null);
 
             if (isset($value) && trim($value) != '' && isset($key) && trim($key) != '' &&
-                (isset($type) && in_array($type, array('before', 'after', 'prepend', 'append'))))
-                if (($type == 'before' || $type == 'after') && (!isset($pivot) || $pivot == ''))
-                    $added = False;
-                else
+                (isset($type) && in_array($type, array('before', 'after', 'prepend', 'append')))) {
+                if (($type == 'before' || $type == 'after') && (!isset($pivot) || $pivot == '')) {
+                    $added = false;
+                } else {
                     switch ($type) {
                         case 'prepend':
                             $added = (boolean) $this->db->lPush($key, $value);
@@ -31,6 +31,8 @@ class Lists_Controller extends Controller
                             $added = (boolean) $this->db->lInsert($key, Redis::AFTER, $pivot, $value);
                             break;
                     }
+                }
+            }
         }
 
         Template::factory('json')->render($added);

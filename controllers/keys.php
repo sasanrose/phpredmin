@@ -4,29 +4,30 @@ class Keys_Controller extends Controller
 {
     public function searchAction()
     {
-        $key = $this->inputs->get('key', Null);
+        $key = $this->inputs->get('key', null);
         $keys = array();
 
         if (isset($key) && trim($key) != '') {
             $keys = $this->db->keys($key);
             asort($keys);
-        } 
+        }
 
-        Template::factory()->render('keys/search', Array('keys' => $keys, 'search' => $key));
+        Template::factory()->render('keys/search', array('keys' => $keys, 'search' => $key));
     }
 
     public function moveAction($key)
     {
-        $moved = Null;
+        $moved = null;
 
         if ($this->router->method == Router::POST) {
-            $db  = $this->inputs->post('db', Null);
-            $key = $this->inputs->post('key', Null);
+            $db  = $this->inputs->post('db', null);
+            $key = $this->inputs->post('key', null);
 
-            if (!isset($db) || trim($db) == '' || !isset($key) || trim($key) == '')
-                $moved = False;
-            else
+            if (!isset($db) || trim($db) == '' || !isset($key) || trim($key) == '') {
+                $moved = false;
+            } else {
                 $moved = $this->db->move($key, $db);
+            }
         }
 
         Template::factory()->render('keys/move', array('moved' => $moved, 'key' => urldecode($key)));
@@ -34,16 +35,17 @@ class Keys_Controller extends Controller
 
     public function renameAction($key)
     {
-        $renamed = Null;
+        $renamed = null;
 
         if ($this->router->method == Router::POST) {
-            $newkey = $this->inputs->post('newkey', Null);
-            $key    = $this->inputs->post('key', Null);
+            $newkey = $this->inputs->post('newkey', null);
+            $key    = $this->inputs->post('key', null);
 
-            if (!isset($newkey) || trim($newkey) == '' || !isset($key) || trim($key) == '')
-                $renamed = False;
-            else
+            if (!isset($newkey) || trim($newkey) == '' || !isset($key) || trim($key) == '') {
+                $renamed = false;
+            } else {
                 $renamed = $this->db->rename($key, $newkey);
+            }
         }
 
         Template::factory()->render('keys/rename', array('renamed' => $renamed, 'key' => urldecode($key)));
@@ -51,23 +53,22 @@ class Keys_Controller extends Controller
 
     public function expireAction($key)
     {
-        $updated = Null;
+        $updated = null;
         $oldttl  = $this->db->ttl(urldecode($key));
 
         if ($this->router->method == Router::POST) {
-            $ttl = $this->inputs->post('ttl', Null);
-            $key = $this->inputs->post('key', Null);
+            $ttl = $this->inputs->post('ttl', null);
+            $key = $this->inputs->post('key', null);
 
-            if (!isset($ttl) || trim($ttl) == '' || !isset($key) || trim($key) == '')
-                $updated = False;
-            else
-                if ((int)$ttl > 0)
-                    $updated = $this->db->expire($key, $ttl);
-                else
-                    if ($oldttl > 0)
-                        $updated = $this->db->persist($key);
-                    else
-                        $updated = True;
+            if (!isset($ttl) || trim($ttl) == '' || !isset($key) || trim($key) == '') {
+                $updated = false;
+            } elseif ((int)$ttl > 0) {
+                $updated = $this->db->expire($key, $ttl);
+            } elseif ($oldttl > 0) {
+                $updated = $this->db->persist($key);
+            } else {
+                $updated = true;
+            }
         }
 
 
@@ -78,12 +79,13 @@ class Keys_Controller extends Controller
     public function moveallAction()
     {
         if ($this->router->method == Router::POST) {
-            $results     = Array();
+            $results     = array();
             $values      = $this->inputs->post('values', array());
             $destination = $this->inputs->post('destination');
 
-            foreach ($values as $key => $value)
+            foreach ($values as $key => $value) {
                 $results[$value] = $this->db->move($value, $destination);
+            }
 
             Template::factory('json')->render($results);
         }
@@ -92,11 +94,12 @@ class Keys_Controller extends Controller
     public function delallAction()
     {
         if ($this->router->method == Router::POST) {
-            $results = Array();
+            $results = array();
             $values  = $this->inputs->post('values', array());
 
-            foreach ($values as $key => $value)
+            foreach ($values as $key => $value) {
                 $results[$value] = $this->db->del($value);
+            }
 
             Template::factory('json')->render($results);
         }
@@ -105,18 +108,18 @@ class Keys_Controller extends Controller
     public function bulkdeleteAction()
     {
         if ($this->router->method == Router::POST) {
-            $key = $this->inputs->post('key', Null);
+            $key = $this->inputs->post('key', null);
 
             if (isset($key) && trim($key) != '') {
                 $config = App::instance()->config;
                 $client = new GearmanClient();
 
                 $client->addServer($config['gearman']['host'], $config['gearman']['port']);
-                $client->doBackground('delete_keys', 
+                $client->doBackground('delete_keys',
                     serialize(array(
                         'key' => $key,
                         'server' => $this->app->current,
-                    ))               
+                    ))
                 );
             }
         }
@@ -134,7 +137,7 @@ class Keys_Controller extends Controller
 
         if ($total === false && $count !== false && $requests == 1) {
             $total = $count;
-        }    
+        }
 
         $result = array($total, $count);
 

@@ -9,7 +9,7 @@
             <a class="close" data-dismiss="alert" href="#">×</a>
             Key updated successfuly
         </div>
-    <?php elseif(isset($this->updated)): ?>
+    <?php elseif (isset($this->updated)): ?>
         <div class="alert alert-danger">
             <a class="close" data-dismiss="alert" href="#">×</a>
             There was a problem updating the key
@@ -17,7 +17,7 @@
     <?php endif; ?>
     <?php if (!isset($this->updated) || (isset($this->updated) && !$this->updated)): ?>
         <form class="form-search" action="<?=$this->router->url?>/keys/expire/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
-            <?php if ($this->ttl !== False && $this->ttl > 0): ?>
+            <?php if ($this->ttl !== false && $this->ttl > 0): ?>
                 <div>
                     Time in seconds
                 </div>

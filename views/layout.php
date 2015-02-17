@@ -14,9 +14,9 @@
     <script type="text/javascript" src="<?=$this->router->baseUrl?>/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?=$this->router->baseUrl?>/js/redmin/main.js"></script>
     <script type="text/javascript" src="<?=$this->router->baseUrl?>/js/redmin/modal.js"></script>
-    <?php foreach($this->getHeaders() as $header) {
-        echo $header."\n";
-    } ?>
+    <?php foreach ($this->getHeaders() as $header) {
+    echo $header."\n";
+} ?>
     <script type="text/javascript">
         baseurl = "<?=$this->router->url?>";
         currentHost = "<?= $this->app->current['host'] ?>";

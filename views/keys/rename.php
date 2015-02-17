@@ -5,7 +5,7 @@
             <a class="close" data-dismiss="alert" href="#">×</a>
             Key renamed successfuly
         </div>
-    <?php elseif(isset($this->renamed)): ?>
+    <?php elseif (isset($this->renamed)): ?>
         <div class="alert alert-danger">
             <a class="close" data-dismiss="alert" href="#">×</a>
             There was a problem renaming the key

@@ -1,9 +1,9 @@
 <?php
 class JsonTemplate
 {
-    public function render($data, $setHeader = False)
+    public function render($data, $setHeader = false)
     {
-        $setHeader AND ($data ? header('HTTP/1.0 200 OK') : header('HTTP/1.0 404 Not Found'));
+        $setHeader and ($data ? header('HTTP/1.0 200 OK') : header('HTTP/1.0 404 Not Found'));
 
         header('Content-Type: application/json');
 

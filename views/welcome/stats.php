@@ -22,7 +22,7 @@
             // in hidden div graph has zero width
             $(selector).find('svg').each(function(index) {
                 $(this).data('chart').update();
-            }); 
+            });
         });
 
         $("#from").datepicker({dateFormat: "yy-mm-dd"});

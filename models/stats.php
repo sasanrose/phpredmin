@@ -10,7 +10,8 @@ class Stats_Model extends Model
      */
     private $currentServer;
     
-    public function __construct($config) {
+    public function __construct($config)
+    {
         parent::__construct($config);
         
         $this->currentServer = $config;
@@ -22,9 +23,9 @@ class Stats_Model extends Model
         
         $keys = $this->db->keys(self::STATS_MODEL_KEY . '*');
         
-        foreach($keys as $key) {
+        foreach ($keys as $key) {
             $this->db->del($key);
-        }       
+        }
         
         $this->db->changeDB($this->currentServer['database']);
     }
@@ -45,8 +46,8 @@ class Stats_Model extends Model
     {
         $this->db->changeDB($this->currentServer['stats']['database']);
         
-        $results = Array();
-        $keys = $this->db->zRevRangeByScore(self::STATS_MODEL_KEY . $key, $to, $from, Array('withscores' => True));
+        $results = array();
+        $keys = $this->db->zRevRangeByScore(self::STATS_MODEL_KEY . $key, $to, $from, array('withscores' => true));
 
         foreach ($keys as $value => $time) {
             $value = explode(':', $value);

@@ -38,7 +38,7 @@
                             }
                         });
                     }
-                );    
+                );
             }
         });
     });
@@ -127,7 +127,7 @@
                     <li>h*llo matches hllo and heeeello</li>
                     <li>h[ae]llo matches hello and hallo, but not hillo</li>
                     <li>* matches the all keys</li>
-                </ul>    
+                </ul>
                 Use \ to escape special characters if you want to match them verbatim.
             </div>
         </div>

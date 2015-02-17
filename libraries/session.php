@@ -1,8 +1,8 @@
 <?php
 
-final class Session
+final class session
 {
-    protected static $_instance = Null;
+    protected static $_instance = null;
 
     protected function __construct()
     {
@@ -16,8 +16,9 @@ final class Session
 
     public static function instance()
     {
-        if (!isset(self::$_instance))
+        if (!isset(self::$_instance)) {
             self::$_instance = new self;
+        }
 
         return self::$_instance;
     }
@@ -29,12 +30,12 @@ final class Session
         session_write_close();
     }
 
-    public function get($key, $default = Null)
+    public function get($key, $default = null)
     {
         return isset($_SESSION[$key]) ? $_SESSION[$key] : $default;
     }
 
-    public function get_once($key, $default = Null)
+    public function get_once($key, $default = null)
     {
         $result = $this->get($key, $default);
 

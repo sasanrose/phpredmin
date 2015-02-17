@@ -45,10 +45,14 @@
     </table>
     <?php if ($this->count > 30): ?>
         <ul class="pager">
-            <li class="previous <?php if ($this->page == 0) echo "disabled";?>">
+            <li class="previous <?php if ($this->page == 0) {
+    echo "disabled";
+}?>">
                 <a href="<?=$this->router->url?>/zsets/view/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($this->key)?>/<?=$this->page - 1?>">&larr; Previous</a>
             </li>
-            <li class="next <?php if ($this->page == floor($this->count / 30)) echo "disabled";?>">
+            <li class="next <?php if ($this->page == floor($this->count / 30)) {
+    echo "disabled";
+}?>">
                 <a href="<?=$this->router->url?>/zsets/view/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/<?=urlencode($this->key)?>/<?=$this->page + 1?>">Next &rarr;</a>
             </li>
         </ul>

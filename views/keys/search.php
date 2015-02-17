@@ -41,7 +41,7 @@
             <th>Delete</th>
             <th></th>
         </tr>
-        <?php foreach($this->keys as $key): ?>
+        <?php foreach ($this->keys as $key): ?>
         <tr>
             <td>
                 <?=$key?>

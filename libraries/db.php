@@ -1,9 +1,9 @@
 <?php
-final class Db
+final class db
 {
-    protected static $_instances = Array();
+    protected static $_instances = array();
 
-    public static function factory($config, $driver = Null)
+    public static function factory($config, $driver = null)
     {
         $driver = isset($driver) ? $driver : App::instance()->config['database']['driver'];
 

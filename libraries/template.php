@@ -1,7 +1,7 @@
 <?php
-final class Template
+final class template
 {
-    protected static $_instances = Array();
+    protected static $_instances = array();
 
     public static function factory($driver = 'php')
     {

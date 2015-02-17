@@ -1,9 +1,9 @@
 <?php
-final class App
+final class app
 {
-    protected static $_instance = Null;
+    protected static $_instance = null;
 
-    protected $_data = Array();
+    protected $_data = array();
 
     protected function __construct()
     {
@@ -13,15 +13,16 @@ final class App
 
     public static function instance()
     {
-        if (!self::$_instance)
+        if (!self::$_instance) {
             self::$_instance = new self;
+        }
 
         return self::$_instance;
     }
 
     public function __get($key)
     {
-        return isset($this->_data[$key]) ? $this->_data[$key] : Null;
+        return isset($this->_data[$key]) ? $this->_data[$key] : null;
     }
     
     public function __set($key, $value)

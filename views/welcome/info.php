@@ -46,7 +46,9 @@
                 Uptime:
             </td>
             <td>
-                <?php if ($this->uptimeDays > 0) echo "{$this->uptimeDays} days&nbsp;"; echo gmdate('H:i:s', $this->info['uptime_in_seconds']);?>
+                <?php if ($this->uptimeDays > 0) {
+    echo "{$this->uptimeDays} days&nbsp;";
+} echo gmdate('H:i:s', $this->info['uptime_in_seconds']);?>
             </td>
         </tr>
         <tr>

@@ -12,14 +12,16 @@ function __autoload($class)
     } elseif (preg_match('/^(.*)_Helper$/', $class, $matches)) {
         $class = $matches[1];
         $dir   = 'helpers';
-    } else
+    } else {
         $dir = 'libraries';
+    }
 
     include_once($path.$dir.'/'.(strtolower($class)).'.php');
 }
 
-if (isset(App::instance()->config['timezone']))
+if (isset(App::instance()->config['timezone'])) {
     date_default_timezone_set(App::instance()->config['timezone']);
+}
 
 $error = new Error();
 
