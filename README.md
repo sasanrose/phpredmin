@@ -89,7 +89,7 @@ _Note:_ If you want this feature to work, you have to setup the cron to gather d
 
 ### Console
 
-PHPRedMin provides you with a web-base redis console. This functionaliy takes advantage of PHP's exec function. Although, all the commands are escaped for security, you can disable terminal from configuration file. In addition, you can set history limit or disable history by setting it to 0:
+PHPRedMin provides you with a web-base redis console. This functionality takes advantage of PHP's `exec` function. Although, all the commands are escaped for security, you can disable terminal from configuration file. In addition, you can set history limit or disable history by setting it to 0:
 
 ![](http://dl.dropbox.com/u/5413590/phpredmin/console.jpg)
 
