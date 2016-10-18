@@ -7,7 +7,7 @@ final class app
 
     protected function __construct()
     {
-        $this->_data['config']  = include_once('../config.php');
+        $this->_data['config']  = include_once(file_exists('../config.dist.php') ? '../config.dist.php' : '../config.php');
         $this->_data['drivers'] = 'drivers/';
     }
 
@@ -24,7 +24,7 @@ final class app
     {
         return isset($this->_data[$key]) ? $this->_data[$key] : null;
     }
-    
+
     public function __set($key, $value)
     {
         $this->_data[$key] = $value;
