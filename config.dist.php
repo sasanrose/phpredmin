@@ -7,7 +7,7 @@ $config = array(
     'timezone'           => 'Europe/Amsterdam',
     'auth' => array(
 	    'username' => 'admin',
-        'password' => 'admin'
+        'password' => password_hash('admin', PASSWORD_DEFAULT)
 	),
     'log' => array(
         'driver'    => 'file',
