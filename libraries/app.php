@@ -11,6 +11,7 @@ final class app
 		$this->_data['drivers'] = 'drivers/';
 
 		$this->readEnvConfig();
+        $this->_data['drivers'] = 'drivers/';
     }
 
     public static function instance()
