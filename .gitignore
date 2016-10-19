@@ -1,5 +1,2 @@
-*.swp
-*.swo
-*~
+vendor/
 logs/
-/nbproject/private/
