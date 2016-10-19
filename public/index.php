@@ -47,7 +47,7 @@ if(isset($auth['username']) && isset($auth['password']))
 }
 
 if ($authenticated) {
-    $error = new Error();
+    $error = new PRA_Error();
     Router::instance()->route();
 } else {
     header('WWW-Authenticate: Basic realm="PHPRedis Administrator"');

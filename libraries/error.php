@@ -1,6 +1,6 @@
 <?php
 
-final class error
+final class PRA_error
 {
     public function __construct()
     {
