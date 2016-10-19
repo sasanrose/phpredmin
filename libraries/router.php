@@ -120,7 +120,7 @@ final class router
             return;
         }
 
-        header("HTTP/1.0 404 Not Found");
+        header('HTTP/1.0 404 Not Found');
         Template::factory()->render('404');
     }
 

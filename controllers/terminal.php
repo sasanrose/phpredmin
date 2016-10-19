@@ -14,7 +14,7 @@ class Terminal_Controller extends Controller
 
     public function indexAction()
     {
-        $this->db->set("phpredmin:terminal:history:pointer", -1);
+        $this->db->set('phpredmin:terminal:history:pointer', -1);
 
         Template::factory()->render('terminal/index');
     }
@@ -22,7 +22,7 @@ class Terminal_Controller extends Controller
     public function runAction()
     {
         if (!$this->config['enable']) {
-            echo "Terminal is not enabled";
+            echo 'Terminal is not enabled';
             die;
         }
 
@@ -30,14 +30,14 @@ class Terminal_Controller extends Controller
 
         if (isset($command)) {
             $historylimit = $this->config['history'];
-            $historykey   = "phpredmin:terminal:history";
+            $historykey   = 'phpredmin:terminal:history';
 
             if ($historylimit > 0) {
                 $this->db->lRem($historykey, $command, 0);
                 $this->db->rPush($historykey, $command);
                 $this->db->lTrim($historykey, $historylimit * -1, -1);
 
-                $this->db->set("phpredmin:terminal:history:pointer", -1);
+                $this->db->set('phpredmin:terminal:history:pointer', -1);
             } else {
                 $this->db->del($historykey);
             }
@@ -52,7 +52,7 @@ class Terminal_Controller extends Controller
     public function historyAction()
     {
         $historylimit = $this->config['history'];
-        $historykey   = "phpredmin:terminal:history";
+        $historykey   = 'phpredmin:terminal:history';
         $historylen   = $this->db->lLen($historykey);
         $command      = '';
         $reset        = false;
@@ -60,7 +60,7 @@ class Terminal_Controller extends Controller
         if ($historylimit > 0 && $historylen > 0) {
             $navigation = $this->inputs->get('navigation', self::NAVIGATION_UP);
             $start      = $this->inputs->get('start');
-            $pointer    = $this->db->get("phpredmin:terminal:history:pointer");
+            $pointer    = $this->db->get('phpredmin:terminal:history:pointer');
 
             if ($historylen > $historylimit) {
                 $this->db->lTrim($historykey, $historylimit * -1, -1);
@@ -71,17 +71,17 @@ class Terminal_Controller extends Controller
                 if ($historylen <= ($pointer * -1)) {
                     $pointer = $historylen * -1;
                 } elseif (!isset($start)) {
-                    $pointer--;
+                    --$pointer;
                 }
             } elseif ($pointer != -1) {
-                $pointer++;
+                ++$pointer;
             } else {
                 $reset = true;
             }
 
             $command = $this->db->lRange($historykey, $pointer, $pointer);
 
-            $this->db->set("phpredmin:terminal:history:pointer", $pointer);
+            $this->db->set('phpredmin:terminal:history:pointer', $pointer);
         }
 
         Template::factory('json')->render(array('command' => $command, 'reset' => $reset));

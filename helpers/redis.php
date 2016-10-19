@@ -45,17 +45,17 @@ class Redis_Helper
 
     public function getIdleTime($key)
     {
-        return $this->_time($this->db->object("idletime", $key));
+        return $this->_time($this->db->object('idletime', $key));
     }
 
     public function getCount($key)
     {
-        return $this->db->object("refcount", $key);
+        return $this->db->object('refcount', $key);
     }
 
     public function getEncoding($key)
     {
-        return $this->db->object("encoding", $key);
+        return $this->db->object('encoding', $key);
     }
 
     public function getSize($key)

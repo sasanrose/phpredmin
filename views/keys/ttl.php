@@ -24,7 +24,7 @@
             <?php endif; ?>
             <div class="input-prepend">
                 <span class="add-on"><i class="icon-time"></i></span>
-                <input type="text" value="<?= ($this->ttl > 0) ? $this->ttl : "0" ?>" name="ttl">
+                <input type="text" value="<?= ($this->ttl > 0) ? $this->ttl : '0' ?>" name="ttl">
             </div>
             <input name="key" value="<?=$this->key?>" type="hidden" />
             <button type="submit" class="btn"><i class="icon-pencil"></i> Update</button>

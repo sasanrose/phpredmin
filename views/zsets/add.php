@@ -1,9 +1,9 @@
 <?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/zsets.js\" type=\"text/javascript\"></script>"); ?>
 <form class="form">
     <legend><?php if (isset($this->oldkey)) {
-    echo "";
+    echo '';
 } else {
-    echo "Add Sorted Set";
+    echo 'Add Sorted Set';
 } ?></legend>
     <div class="input-prepend">
         <span class="add-on"><i class="icon-key"></i></span>

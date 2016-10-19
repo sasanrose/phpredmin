@@ -18,7 +18,6 @@ function __autoload($class)
 }
 if (isset(App::instance()->config['timezone'])) {
     date_default_timezone_set(App::instance()->config['timezone']);
-
 }
 
 $authenticated = true;

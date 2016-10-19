@@ -58,7 +58,7 @@ class inputs
 
     public function put($key, $default = null)
     {
-        parse_str(file_get_contents("php://input"), $vars);
+        parse_str(file_get_contents('php://input'), $vars);
         return isset($vars[$key]) ? filter_var($vars[$key], FILTER_SANITIZE_STRING) : $default;
     }
 }

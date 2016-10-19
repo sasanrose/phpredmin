@@ -1,6 +1,6 @@
 <?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/lists.js\" type=\"text/javascript\"></script>"); ?>
 <form class="form">
-    <legend><?= isset($this->oldkey) ? "" : "Add List" ?></legend>
+    <legend><?= isset($this->oldkey) ? '' : 'Add List' ?></legend>
     <div class="input-prepend">
         <span class="add-on"><i class="icon-key"></i></span>
         <?php if (isset($this->oldkey)): ?>

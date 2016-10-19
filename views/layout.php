@@ -39,33 +39,33 @@
                         <a class="brand" href="<?=$this->router->url?>">PHPRedmin</a>
                         <div class="nav-collapse collapse navbar-responsive-collapse">
                             <ul class="nav">
-                                <li<?= (strstr($this->router->request, "/welcome/index/") ? ' class="active"' :null)?>>
+                                <li<?= (strstr($this->router->request, '/welcome/index/') ? ' class="active"' :null)?>>
                                     <a href="<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
                                         <i class="icon-white icon-home"></i> Home
                                     </a>
                                 </li>
-                                <li<?= (strstr($this->router->request, "/welcome/info/") ? ' class="active"' :null)?>>
+                                <li<?= (strstr($this->router->request, '/welcome/info/') ? ' class="active"' :null)?>>
                                     <a href="<?=$this->router->url?>/welcome/info/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
                                         <i class="icon-white icon-info-sign"></i> Info
                                     </a>
                                 </li>
-                                <li<?= (strstr($this->router->request, "/welcome/config/") ? ' class="active"' :null)?>>
+                                <li<?= (strstr($this->router->request, '/welcome/config/') ? ' class="active"' :null)?>>
                                     <a href="<?=$this->router->url?>/welcome/config/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
                                         <i class="icon-white icon-cogs"></i> Configurations
                                     </a>
                                 </li>
-                                <li<?= (strstr($this->router->request, "/welcome/stats/") ? ' class="active"' :null)?>>
+                                <li<?= (strstr($this->router->request, '/welcome/stats/') ? ' class="active"' :null)?>>
                                     <a href="<?=$this->router->url?>/welcome/stats/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
                                         <i class="icon-white icon-bar-chart"></i> Stats
                                     </a>
                                 </li>
-                                <li<?= (strstr($this->router->request, "/welcome/slowlog/") ? ' class="active"' :null)?>>
+                                <li<?= (strstr($this->router->request, '/welcome/slowlog/') ? ' class="active"' :null)?>>
                                     <a href="<?=$this->router->url?>/welcome/slowlog/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
                                         <i class="icon-white icon-warning-sign"></i> Slow Log
                                     </a>
                                 </li>
                                 <?php if (App::instance()->config['terminal']['enable']): ?>
-                                    <li<?= (strstr($this->router->request, "/terminal/") ? ' class="active"' :null)?>>
+                                    <li<?= (strstr($this->router->request, '/terminal/') ? ' class="active"' :null)?>>
                                         <a href="<?=$this->router->url?>/terminal/index/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
                                             <i class="icon-white icon-terminal"></i> Terminal
                                         </a>

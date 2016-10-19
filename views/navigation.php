@@ -11,7 +11,7 @@
         <?php foreach ($this->app->current['dbs'] as $database): ?>
             <li class="database <?= ($database['id'] == $this->app->current['database'] ? 'active':null) ?>">
                 <a href="<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $database['id'] ?>">
-                    <?= ($database['name'] !== null ? $database['name'] : "DB ".$database['id']) ?>
+                    <?= ($database['name'] !== null ? $database['name'] : 'DB '.$database['id']) ?>
                     <span class="label pull-right" title="Number of keys"><?= $database['keys'] ?></span>
                 </a>
             </li>
