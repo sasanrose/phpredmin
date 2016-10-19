@@ -1,0 +1,38 @@
+{
+    "name": "faktiva/php-redmin-admin",
+    "description": "PHPRedMin is a simple web interface to manage and monitor your Redis.",
+    "type": "project",
+    "homepage": "https://github.com/faktiva/php-redmin-admin",
+    "license": [
+		"BSD-3-Clause",
+		"CC-BY-SA-4.0"
+	],
+    "authors": [
+        {
+            "name": "Sasan Rose",
+            "email": "sasan.rose@gmail.com",
+			"homepage": "http://pioneermind.ir",
+            "role": "Developer"
+        },
+        {
+            "name": "Emiliano Gabrielli",
+            "email": "albert@faktiva.com",
+			"homepage": "http://faktiva.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "config": {
+        "github-protocols": ["https"],
+        "archive-format": "zip",
+        "optimize-autoloader": true
+    },
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^1.11",
+        "symfony/var-dumper": "^2.8|^3.0",
+        "symfony/debug": "^2.8|^3.0"
+    }
+}
