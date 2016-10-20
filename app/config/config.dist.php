@@ -22,7 +22,7 @@
 $config = array(
     'default_controller' => 'Welcome',
     'default_action'     => 'Index',
-    'debug'              => true,
+    'debug'              => false,
     'default_layout'     => 'layout',
     'timezone'           => 'Europe/Rome',
     'auth' => array(
