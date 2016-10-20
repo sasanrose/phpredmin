@@ -33,7 +33,7 @@ class PhpTemplate
         ini_set('output_buffering', 'On');
         ini_set('short_open_tag', 'On');
 
-        $this->_dir   = '../views/';
+        $this->_dir   = ROOT_DIR.'/src/views/';
         $this->app    = App::instance();
         $this->router = Router::instance();
     }
@@ -48,7 +48,7 @@ class PhpTemplate
         $this->_data = array_merge($__data, $this->_data);
 
         ob_start();
-        
+
         include($this->_dir.$__view.'.php');
 
         $content = ob_get_contents();

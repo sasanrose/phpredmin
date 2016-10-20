@@ -124,7 +124,7 @@ class Stats_Controller extends Controller
 
         $this->template->render($result);
     }
-    
+
     public function aofAction()
     {
         $result     = array();

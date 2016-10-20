@@ -19,12 +19,13 @@
  * @source   https://github.com/faktiva/php-redis-admin
  */
 
-final class PRA_error
+final class PRA_Error
 {
     public function __construct()
     {
-        if (App::instance()->config['production']) {
-            ini_set('display_errors', 0);
+        ini_set('display_errors', 0);
+        if (App::instance()->config['debug']) {
+            ini_set('display_errors', 1);
         }
 
         // Set a custom error Handler

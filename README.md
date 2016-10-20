@@ -48,7 +48,7 @@ Apache configuration example (/etc/httpd/conf.d/phpredmin.conf):
 #
 # Allows only localhost by default
 
-Alias /phpredmin /var/www/phpredmin/public
+Alias /phpredmin /var/www/phpredmin/web
 
 <Directory /var/www/phpredmin/>
    AllowOverride All
@@ -113,7 +113,7 @@ We must credit [Eugene Fidelin](https://github.com/eugef) for his great contribu
 _Note:_ If you want this feature to work, you have to setup the cron to gather data from your redis server as follows:
 
 ```bash
-* * * * * root cd /var/www/phpredmin/public && php index.php cron/index
+* * * * * root cd /var/www/phpredmin/web && php index.php cron/index
 ```
 
 #### Memory
@@ -262,7 +262,7 @@ You can also setup a service for this command. I prefer supervisord to make it a
 
 ```ini
 [program:phpredmin]
-directory=/var/www/phpredmin/public
+directory=/var/www/phpredmin/web
 command=php index.php gearman/index
 process_name=%(program_name)s
 numprocs=1

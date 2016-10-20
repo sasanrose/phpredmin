@@ -45,14 +45,16 @@ return Symfony\CS\Config\Config::create()
     ->level(Symfony\CS\FixerInterface::PSR2_LEVEL)
     ->fixers(array(
         'header_comment',
+        'whitespacy_lines',
         'long_array_syntax',
         'single_quote',
         'unused_use',
         'pre_increment',
+        '-psr0', /*XXX*/
     ))
     ->finder(
         Symfony\CS\Finder\DefaultFinder::create()
-            ->exclude('vendor')
+            ->exclude(array('vendor', 'var', 'bin'))
             ->in(__DIR__)
     )
 ;

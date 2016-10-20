@@ -4,38 +4,48 @@
     "type": "project",
     "homepage": "https://github.com/faktiva/php-redis-admin",
     "license": [
-		"BSD-3-Clause",
-		"CC-BY-SA-4.0"
-	],
+        "BSD-3-Clause",
+        "CC-BY-SA-4.0"
+    ],
     "authors": [
         {
             "name": "Sasan Rose",
             "email": "sasan.rose@gmail.com",
-			"homepage": "http://pioneermind.ir",
+            "homepage": "http://pioneermind.ir",
             "role": "Developer"
         },
         {
             "name": "Emiliano Gabrielli",
             "email": "albert@faktiva.com",
-			"homepage": "http://faktiva.com",
+            "homepage": "http://faktiva.com",
             "role": "Developer"
         }
     ],
-    "minimum-stability": "stable",
-    "config": {
-        "github-protocols": ["https"],
-        "archive-format": "zip",
-        "optimize-autoloader": true
+    "support": {
+        "issues": "https://github.com/faktiva/php-redis-admin/issues",
+        "source": "https://github.com/faktiva/php-redis-admin/releases/latest"
     },
+
+    "minimum-stability": "stable",
     "replace": {
         "sasanrose/phpredmin": "*"
     },
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "ext-redis": "*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^1.11",
         "symfony/var-dumper": "^2.8|^3.0",
         "symfony/debug": "^2.8|^3.0"
+    },
+    "config": {
+        "github-protocols": ["https"],
+        "archive-format": "zip",
+        "optimize-autoloader": true,
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "classmap": ["src/"]
     }
 }

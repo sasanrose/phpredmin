@@ -19,7 +19,7 @@
  * @source   https://github.com/faktiva/php-redis-admin
  */
 
-class inputs
+class Inputs
 {
     protected static $_instance = null;
 

@@ -19,19 +19,19 @@
  * @source   https://github.com/faktiva/php-redis-admin
  */
 
-final class app
+final class App
 {
     protected static $_instance = null;
 
     protected $_data = array();
+    protected $_config_dir = ROOT_DIR.'/app/config';
 
     protected function __construct()
     {
-        $this->_data['config']  = include_once(file_exists('../config.php') ? '../config.php' : '../config.dist.php');
-		$this->_data['drivers'] = 'drivers/';
+        $this->_data['config']  = require_once(file_exists($this->_config_dir.'/config.php') ? $this->_config_dir.'/config.php' : $this->_config_dir.'/config.dist.php');
+        $this->_data['drivers'] = 'drivers/';
 
 		$this->readEnvConfig();
-        $this->_data['drivers'] = 'drivers/';
     }
 
     public static function instance()

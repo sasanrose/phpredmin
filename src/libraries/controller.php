@@ -19,7 +19,7 @@
  * @source   https://github.com/faktiva/php-redis-admin
  */
 
-class controller
+class Controller
 {
     private $_objects = null;
 
@@ -30,17 +30,17 @@ class controller
         $this->_objects['inputs']  = Inputs::instance();
         $this->_objects['session'] = Session::instance();
         $this->_objects['log']     = Log::factory();
-        
+
         if (!isset($this->app->config['database']['redis'][$config['serverId']])) {
             $config['serverId'] = 0;
         }
-        
+
         $current = $this->app->config['database']['redis'][$config['serverId']];
         $current['serverId'] = $config['serverId'];
-        
+
         $this->_objects['db']      = Db::factory($current);
         $this->_objects['infoModel'] = new Info_Model($current);
-        
+
         $info = $this->db->info();
         $dbs = $this->infoModel->getDbs($info);
 

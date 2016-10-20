@@ -19,7 +19,7 @@
  * @source   https://github.com/faktiva/php-redis-admin
  */
 
-final class session
+final class Session
 {
     protected static $_instance = null;
 

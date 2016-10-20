@@ -1,3 +1,4 @@
 vendor/
-logs/
+bin/
+var/logs/*
 .php_cs.cache

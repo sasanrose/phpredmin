@@ -19,7 +19,7 @@
  * @source   https://github.com/faktiva/php-redis-admin
  */
 
-final class router
+final class Router
 {
     const POST   = 'POST';
     const GET    = 'GET';
@@ -96,11 +96,11 @@ final class router
         if (!$this->action = array_shift($this->_params)) {
             $this->action = App::instance()->config['default_action'];
         }
-        
+
         if (!$this->serverId = array_shift($this->_params)) {
             $this->serverId = 0;
         }
-        
+
         if (!$this->dbId = array_shift($this->_params)) {
             $this->dbId = 0;
         }

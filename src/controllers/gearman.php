@@ -38,10 +38,10 @@ class Gearman_Controller extends Controller
         $data = unserialize($job->workload());
 
         Log::factory()->write(Log::NOTICE, "Try to delete: {$data['key']} at {$data['server']['host']}:{$data['server']['port']}, DB: {$data['server']['database']}", 'Gearman');
-        
+
         $db = Db::factory($data['server']);
         $db->changeDB($data['server']['database']);
-        
+
         $keys  = $db->keys($data['key']);
         $count = count($keys);
 

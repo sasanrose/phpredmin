@@ -19,21 +19,21 @@
  * @source   https://github.com/faktiva/php-redis-admin
  */
 
-class model
+final class Template
 {
-    private $_objects = null;
+    protected static $_instances = array();
 
-    public function __construct($config)
+    public static function factory($driver = 'php')
     {
-        $this->_objects['app']     = App::instance();
-        $this->_objects['router']  = Router::instance();
-        $this->_objects['session'] = Session::instance();
-        $this->_objects['db']      = Db::factory($config);
-        $this->_objects['log']     = Log::factory();
-    }
+        ini_set('short_open_tag', 'On');
 
-    public function __get($object)
-    {
-        return isset($this->_objects[$object]) ? $this->_objects[$object] : null;
+        if (!isset(self::$_instances[$driver])) {
+            include_once(App::instance()->drivers.'template/'.(strtolower($driver)).'.php');
+
+            $class  = ucwords(strtolower($driver)).'Template';
+            self::$_instances[$driver] = new $class;
+        }
+
+        return self::$_instances[$driver];
     }
 }

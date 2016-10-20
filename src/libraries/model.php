@@ -19,23 +19,21 @@
  * @source   https://github.com/faktiva/php-redis-admin
  */
 
-final class db
+class Model
 {
-    protected static $_instances = array();
+    private $_objects = null;
 
-    public static function factory($config, $driver = null)
+    public function __construct($config)
     {
-        $driver = isset($driver) ? $driver : App::instance()->config['database']['driver'];
+        $this->_objects['app']     = App::instance();
+        $this->_objects['router']  = Router::instance();
+        $this->_objects['session'] = Session::instance();
+        $this->_objects['db']      = Db::factory($config);
+        $this->_objects['log']     = Log::factory();
+    }
 
-        $instanceName = $driver . ':' . $config['host'] . ':' . $config['port'];
-
-        if (!isset(self::$_instances[$instanceName])) {
-            include_once(App::instance()->drivers.'db/'.(strtolower($driver)).'.php');
-
-            $class = ucwords(strtolower($driver)).'Db';
-            self::$_instances[$instanceName] = new $class($config);
-        }
-
-        return self::$_instances[$instanceName];
+    public function __get($object)
+    {
+        return isset($this->_objects[$object]) ? $this->_objects[$object] : null;
     }
 }

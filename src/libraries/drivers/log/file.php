@@ -27,14 +27,14 @@ class FileLog
     public function __construct()
     {
         $config_dir = App::instance()->config['log']['file']['directory'];
-        
+
         $this->threshold = App::instance()->config['log']['threshold'];
-        
+
         if ($this->threshold > 0) {
             if (!$config_dir) {
                 die('Please provide a log directory in your config file');
             } else {
-                $this->_dir = dirname(__FILE__).'/../../../'.$config_dir.'/'.PHP_SAPI.'/';
+                $this->_dir = ROOT_DIR.'/'.$config_dir.'/'.PHP_SAPI.'/';
 
                 if (!is_writable($this->_dir)) {
                     if (!mkdir($this->_dir, 0755, true)) {

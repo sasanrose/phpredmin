@@ -22,18 +22,18 @@
 $config = array(
     'default_controller' => 'Welcome',
     'default_action'     => 'Index',
-    'production'         => true,
+    'debug'              => true,
     'default_layout'     => 'layout',
-    'timezone'           => 'Europe/Amsterdam',
+    'timezone'           => 'Europe/Rome',
     'auth' => array(
         'username' => 'admin',
         'password' => password_hash('admin', PASSWORD_DEFAULT)
     ),
     'log' => array(
         'driver'    => 'file',
-        'threshold' => 1, /* 0: Disable Logging 1: Error 2: Notice 3: Info 4: Warning 5: Debug */
+        'threshold' => 2, /* 0: Disable Logging, 1: Error, 2: Warning, 3: Notice, 4: Info, 5: Debug */
         'file'      => array(
-            'directory' => 'logs'
+            'directory' => 'var/logs'
         )
     ),
     'database'  => array(

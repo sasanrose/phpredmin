@@ -19,16 +19,16 @@
  * @source   https://github.com/faktiva/php-redis-admin
  */
 
-final class log
+final class Log
 {
     protected static $_instances = array();
     protected static $_instance  = null;
 
     protected $_levels = array(
         'error'   => 1,
-        'notice'  => 2,
-        'info'    => 3,
-        'warning' => 4,
+        'warning' => 2,
+        'notice'  => 3,
+        'info'    => 4,
         'debug'   => 5
     );
 

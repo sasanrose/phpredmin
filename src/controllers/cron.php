@@ -26,7 +26,7 @@ class Cron_Controller extends Controller
         foreach ($this->app->config['database']['redis'] as $serverId => $server) {
             if (!empty($server['stats']['enable'])) {
                 $time = time();
-                
+
                 $db = Db::factory($server);
                 $info = $db->info();
 
@@ -44,7 +44,7 @@ class Cron_Controller extends Controller
                     $statsModel->addKey('aof_size', $info['aof_current_size'], $time);
                     $statsModel->addKey('aof_base', $info['aof_base_size'], $time);
                 }
-               
+
                 foreach ($this->infoModel->getDbs($info) as $i) {
                     if (preg_match('/^keys=([0-9]+),expires=([0-9]+)$/', $info["db{$i}"], $matches)) {
                         $statsModel->addKey("db{$i}:keys", $matches[1], $time);
