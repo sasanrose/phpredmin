@@ -29,17 +29,20 @@ if (isset(App::instance()->config['auth'])) {
 
     $auth = App::instance()->config['auth'];
 
-    // mod_php
-    if (isset($_SERVER['PHP_AUTH_USER'])) {
-        $username = $_SERVER['PHP_AUTH_USER'];
-        $password = $_SERVER['PHP_AUTH_PW'];
-    // most other servers
-    } elseif (isset($_SERVER['HTTP_AUTHORIZATION']) && strpos(strtolower($_SERVER['HTTP_AUTHORIZATION']), 'basic') === 0) {
-		list($username, $password) = explode(':', base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
-	}
+if(isset($auth['username']) && isset($auth['password']))
+    {
+        // mod_php
+        if (isset($_SERVER['PHP_AUTH_USER'])) {
+            $username = $_SERVER['PHP_AUTH_USER'];
+            $password = $_SERVER['PHP_AUTH_PW'];
+            // most other servers
+        } elseif (isset($_SERVER['HTTP_AUTHORIZATION']) && strpos(strtolower($_SERVER['HTTP_AUTHORIZATION']), 'basic') === 0) {
+      		list($username, $password) = explode(':', base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
+        }
 
-    if ($username != $auth['username'] || !password_verify($password, $auth['password'])) {
-        $authenticated = false;
+        if ($username != $auth['username'] || !password_verify($password, $auth['password'])) {
+            $authenticated = false;
+        }
     }
 }
 
