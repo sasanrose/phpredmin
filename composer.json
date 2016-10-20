@@ -27,6 +27,9 @@
         "archive-format": "zip",
         "optimize-autoloader": true
     },
+    "replace": {
+        "sasanrose/phpredmin": "*"
+    },
     "require": {
         "php": ">=5.4.0"
     },
