@@ -25,13 +25,13 @@ Apache configuration example (/etc/httpd/conf.d/phpredmin.conf):
 
 ```ApacheConf
 # phpredmin - Simple web interface to manage and monitor your Redis
-# 
+#
 # Allows only localhost by default
 
 Alias /phpredmin /var/www/phpredmin/public
 
 <Directory /var/www/phpredmin/>
-   AllowOverride All 
+   AllowOverride All
 
    <IfModule mod_authz_core.c>
      # Apache 2.4
@@ -52,6 +52,31 @@ Alias /phpredmin /var/www/phpredmin/public
 ```
 
 _Note:_ If your redis server is on an IP or port other than defaults (localhost:6379), you should edit config.php file
+
+## Configuration
+
+### Basic Authentication
+
+By default, the dashboard is password protected using Basic Authentication Mechanism, with the default username and password set to ```admin```.
+
+You can find the ```auth``` config section inside the ```config.dist.php``` file, below is the default configuration:
+
+```
+...
+$config = array(
+...
+'auth' => array(
+  'username' => 'admin',
+  'password' => password_hash('admin', PASSWORD_DEFAULT)
+),
+...
+);
+...
+```
+
+Remove the ```auth``` section in the config file to disable the protection.
+
+_Note:_ You should use the [password_hash](http://php.net/manual/en/function.password-hash.php) function with your desired password and store the result in the ```password``` key, instead of storing the plaintext password as in the code above.
 
 ## Features
 
