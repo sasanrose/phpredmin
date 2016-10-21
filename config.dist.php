@@ -6,7 +6,7 @@ $config = array(
     'default_layout'     => 'layout',
     'timezone'           => 'Europe/Amsterdam',
     'auth' => array(
-	    'username' => 'admin',
+        'username' => 'admin',
         'password' => password_hash('admin', PASSWORD_DEFAULT)
 	),
     'log' => array(
