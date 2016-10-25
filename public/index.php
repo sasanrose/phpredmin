@@ -23,7 +23,7 @@ if (isset(App::instance()->config['timezone'])) {
 
 $authenticated = true;
 
-if (isset(App::instance()->config['auth'])) {
+if (PHP_SAPI !== 'cli' && isset(App::instance()->config['auth'])) {
     $username = null;
     $password = null;
 
