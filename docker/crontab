@@ -1,0 +1,2 @@
+# Cron tab for phpredmin to collect redis statistics
+* * * * * root cd /var/www/html/phpredmin/public && /usr/local/bin/php index.php cron/index

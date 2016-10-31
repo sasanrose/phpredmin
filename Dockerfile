@@ -3,6 +3,7 @@ FROM php:5.6-apache
 MAINTAINER sasan.rose@gmail.com
 
 RUN apt-get update && apt-get install -y \
+	cron \
 	gearman-job-server \
 	git-core \
 	libgearman-dev \
@@ -11,10 +12,13 @@ RUN apt-get update && apt-get install -y \
 
 EXPOSE 80
 
-
 COPY docker/default.conf /etc/apache2/sites-available/000-default.conf
 COPY docker/php.ini /usr/local/etc/php/
 COPY docker/start.sh /usr/src/start.sh
+
+WORKDIR /etc/cron.d
+COPY docker/crontab phpredmin
+RUN chmod 0644 phpredmin
 
 WORKDIR /usr/src
 
