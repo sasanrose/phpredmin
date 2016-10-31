@@ -19,6 +19,36 @@ _Note:_ PHPRedmin is mostly compatible with [phpredis](https://github.com/nicola
 
 ## Installation
 
+### Docker
+
+You can use docker to run PHPRedmin as a one-liner program:
+
+```Bash
+docker run -p 8080:80 -d --name phpredmin -e "PHPREDMIN_DATABASE_REDIS_0_HOST=192.168.1.6" -e "PHPREDMIN_AUTH_USERNAME=root" sasanrose/phpredmin
+```
+And then you can just easily point your broswer to http://localhost:8080
+
+_Note:_ As you can see you can use ENV variables to override any configuration directive of PHPRedmin. For instance in the aforementioned command we changed the redis host and authentication username.
+
+Moreover, you can just use docker compose to also setup a redis container:
+
+```Yaml
+version: '2'
+services:
+    phpredmin:
+        image: sasanrose/phpredmin
+        environment:
+            - PHPREDMIN_DATABASE_REDIS_0_HOST=redis
+        ports:
+            - "8080:80"
+        depends_on:
+            - redis
+    redis:
+        image: redis
+```
+
+### Manual installation
+
 Just drop phpredmin in your webserver's root directory and point your browser to it (You also need [phpredis](https://github.com/nicolasff/phpredis) installed)
 
 Apache configuration example (/etc/httpd/conf.d/phpredmin.conf):
