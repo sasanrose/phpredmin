@@ -1,0 +1,2 @@
+global_exclude_dirs:
+    - js
