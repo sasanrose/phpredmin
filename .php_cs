@@ -52,7 +52,6 @@ return Symfony\CS\Config\Config::create()
         'header_comment',
         'empty_return',
         'long_array_syntax',
-        'newline_after_open_tag',
         'short_echo_tag',
         '-psr0', /*XXX*/
     ))
