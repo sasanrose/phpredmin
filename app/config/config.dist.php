@@ -60,9 +60,7 @@ $config = array(
         ),
     ),
     'session' => array(
-        'lifetime' => 7200,
-        'gc_probability' => 2,
-        'name' => 'phpredminsession',
+        'name' => 'php-redis-admin-session',
     ),
     'gearman' => array(
         'host' => '127.0.0.1',

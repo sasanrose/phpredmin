@@ -19,9 +19,6 @@
  * @source   https://github.com/faktiva/php-redis-admin
  */
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 define('ROOT_DIR', dirname(__DIR__)); //XXX
 require_once ROOT_DIR.'/vendor/autoload.php';
 

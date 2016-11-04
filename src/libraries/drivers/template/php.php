@@ -30,9 +30,6 @@ class PhpTemplate
 
     public function __construct()
     {
-        ini_set('output_buffering', 'On');
-        ini_set('short_open_tag', 'On');
-
         $this->_dir = ROOT_DIR.'/src/views/';
         $this->app = App::instance();
         $this->router = Router::instance();
