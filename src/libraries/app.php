@@ -31,7 +31,7 @@ final class App
         $this->_data['config'] = require_once file_exists($this->_config_dir.'/config.php') ? $this->_config_dir.'/config.php' : $this->_config_dir.'/config.dist.php';
         $this->_data['drivers'] = 'drivers/';
 
-		$this->readEnvConfig();
+        $this->readEnvConfig();
     }
 
     public static function instance()
@@ -51,38 +51,41 @@ final class App
     public function __set($key, $value)
     {
         $this->_data[$key] = $value;
-	}
+    }
 
-	protected function readEnvConfig() {
-		$envConf = preg_grep('/^PHPREDMIN_/', array_keys($_ENV));
+    protected function readEnvConfig()
+    {
+        $envConf = preg_grep('/^PHPREDMIN_/', array_keys($_ENV));
 
-		if (!empty($envConf)) {
-			foreach ($envConf as $conf) {
-				$keys = explode('_', $conf);
+        if (!empty($envConf)) {
+            foreach ($envConf as $conf) {
+                $keys = explode('_', $conf);
 
-				if (!empty($keys)) {
-					array_shift($keys);
+                if (!empty($keys)) {
+                    array_shift($keys);
 
-					self::setConfig($this->_data['config'], $keys, $_ENV[$conf]);
-				}
-			}
-		}
-	}
+                    self::setConfig($this->_data['config'], $keys, $_ENV[$conf]);
+                }
+            }
+        }
+    }
 
-	protected static function setConfig(&$config, $keys, $value) {
-		$key = array_shift($keys);
+    protected static function setConfig(&$config, $keys, $value)
+    {
+        $key = array_shift($keys);
 
-		$key = strtolower($key);
+        $key = strtolower($key);
 
-		if (isset($config[$key])) {
-			if (is_array($config[$key])) {
-				return self::setConfig($config[$key], $keys, $value);
-			} else {
-				$config[$key] = $value;
-				return True;
-			}
-		}
+        if (isset($config[$key])) {
+            if (is_array($config[$key])) {
+                return self::setConfig($config[$key], $keys, $value);
+            } else {
+                $config[$key] = $value;
 
-		return False;
-	}
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

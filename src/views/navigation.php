@@ -9,9 +9,9 @@
 <div class="tabbable tabs-left" id="dbTabs">
     <ul class="nav nav-tabs">
         <?php foreach ($this->app->current['dbs'] as $database): ?>
-            <li class="database <?php echo ($database['id'] == $this->app->current['database'] ? 'active' : null) ?>">
+            <li class="database <?php echo $database['id'] == $this->app->current['database'] ? 'active' : null ?>">
                 <a href="<?php echo $this->router->url?>/welcome/index/<?php echo $this->app->current['serverId'].'/'.$database['id'] ?>">
-                    <?php echo ($database['name'] !== null ? $database['name'] : 'DB '.$database['id']) ?>
+                    <?php echo $database['name'] !== null ? $database['name'] : 'DB '.$database['id'] ?>
                     <span class="label pull-right" title="Number of keys"><?php echo $database['keys'] ?></span>
                 </a>
             </li>

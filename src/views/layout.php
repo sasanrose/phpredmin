@@ -39,33 +39,33 @@
                         <a class="brand" href="<?php echo $this->router->url?>">PHPRedmin</a>
                         <div class="nav-collapse collapse navbar-responsive-collapse">
                             <ul class="nav">
-                                <li<?php echo (strstr($this->router->request, '/welcome/index/') ? ' class="active"' : null)?>>
+                                <li<?php echo strstr($this->router->request, '/welcome/index/') ? ' class="active"' : null?>>
                                     <a href="<?php echo $this->router->url?>/welcome/index/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>">
                                         <i class="icon-white icon-home"></i> Home
                                     </a>
                                 </li>
-                                <li<?php echo (strstr($this->router->request, '/welcome/info/') ? ' class="active"' : null)?>>
+                                <li<?php echo strstr($this->router->request, '/welcome/info/') ? ' class="active"' : null?>>
                                     <a href="<?php echo $this->router->url?>/welcome/info/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>">
                                         <i class="icon-white icon-info-sign"></i> Info
                                     </a>
                                 </li>
-                                <li<?php echo (strstr($this->router->request, '/welcome/config/') ? ' class="active"' : null)?>>
+                                <li<?php echo strstr($this->router->request, '/welcome/config/') ? ' class="active"' : null?>>
                                     <a href="<?php echo $this->router->url?>/welcome/config/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>">
                                         <i class="icon-white icon-cogs"></i> Configurations
                                     </a>
                                 </li>
-                                <li<?php echo (strstr($this->router->request, '/welcome/stats/') ? ' class="active"' : null)?>>
+                                <li<?php echo strstr($this->router->request, '/welcome/stats/') ? ' class="active"' : null?>>
                                     <a href="<?php echo $this->router->url?>/welcome/stats/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>">
                                         <i class="icon-white icon-bar-chart"></i> Stats
                                     </a>
                                 </li>
-                                <li<?php echo (strstr($this->router->request, '/welcome/slowlog/') ? ' class="active"' : null)?>>
+                                <li<?php echo strstr($this->router->request, '/welcome/slowlog/') ? ' class="active"' : null?>>
                                     <a href="<?php echo $this->router->url?>/welcome/slowlog/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>">
                                         <i class="icon-white icon-warning-sign"></i> Slow Log
                                     </a>
                                 </li>
                                 <?php if (App::instance()->config['terminal']['enable']): ?>
-                                    <li<?php echo (strstr($this->router->request, '/terminal/') ? ' class="active"' : null)?>>
+                                    <li<?php echo strstr($this->router->request, '/terminal/') ? ' class="active"' : null?>>
                                         <a href="<?php echo $this->router->url?>/terminal/index/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>">
                                             <i class="icon-white icon-terminal"></i> Terminal
                                         </a>
@@ -125,7 +125,7 @@
                         <?php echo $this->app->current['host'] ?>:<?php echo $this->app->current['port'] ?> <span class="divider">/</span>
                     </li>
                     <li>
-                        <?php echo ($this->app->current['dbs'][$this->app->current['database']]['name'] ? $this->app->current['dbs'][$this->app->current['database']]['name']." (DB {$this->app->current['database']})" : "DB {$this->app->current['database']}") ?>
+                        <?php echo $this->app->current['dbs'][$this->app->current['database']]['name'] ? $this->app->current['dbs'][$this->app->current['database']]['name']." (DB {$this->app->current['database']})" : "DB {$this->app->current['database']}" ?>
                     </li>
                 </ul>
             </div>
