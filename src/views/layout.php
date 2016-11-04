@@ -4,8 +4,8 @@
     <title>PHPRedmin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?php echo $this->router->baseUrl?>/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="<?php echo $this->router->baseUrl?>/favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" media="all" type="text/css" href="<?php echo $this->router->baseUrl?>/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" media="all" type="text/css" href="<?php echo $this->router->baseUrl?>/bootstrap/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" media="all" type="text/css" href="<?php echo $this->router->baseUrl?>/font-awesome/css/font-awesome.min.css">
