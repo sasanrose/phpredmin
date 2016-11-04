@@ -1,23 +1,20 @@
 {
     "name": "faktiva/php-redis-admin",
     "description": "PHP Redis Admin is a simple web interface to manage and monitor your Redis server(s).",
-    "type": "project",
     "homepage": "https://github.com/faktiva/php-redis-admin",
-    "license": [
-        "BSD-3-Clause",
-        "CC-BY-SA-4.0"
-    ],
+    "license": [ "BSD-3-Clause", "CC-BY-SA-4.0" ],
+    "type": "project",
     "authors": [
+        {
+            "name": "Emiliano 'AlberT' Gabrielli",
+            "email": "albert@faktiva.com",
+            "homepage": "http://faktiva.com",
+            "role": "Developer"
+        },
         {
             "name": "Sasan Rose",
             "email": "sasan.rose@gmail.com",
             "homepage": "http://pioneermind.ir",
-            "role": "Developer"
-        },
-        {
-            "name": "Emiliano Gabrielli",
-            "email": "albert@faktiva.com",
-            "homepage": "http://faktiva.com",
             "role": "Developer"
         }
     ],
@@ -27,23 +24,43 @@
     },
 
     "minimum-stability": "stable",
+    "config": {
+        "bin-dir": "bin",
+        "github-protocols": ["https"],
+        "archive-format": "zip",
+        "preferred-install": "dist",
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "5.4"
+        }
+    },
     "replace": {
         "sasanrose/phpredmin": "*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^1.12",
+        "symfony/var-dumper": "^2.8||^3.0",
+        "symfony/debug": "^2.8||^3.0",
+        "sensiolabs/security-checker": "^4.0"
     },
     "require": {
         "php": ">=5.4.0",
         "ext-redis": "*"
     },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^1.11",
-        "symfony/var-dumper": "^2.8|^3.0",
-        "symfony/debug": "^2.8|^3.0"
-    },
-    "config": {
-        "github-protocols": ["https"],
-        "archive-format": "zip",
-        "optimize-autoloader": true,
-        "bin-dir": "bin"
+    "scripts": {
+        "chk-cs": [
+            "bin/php-cs-fixer -vvv fix --dry-run"
+        ],
+        "chk-sec": [
+            "php bin/security-checker -vv security:check"
+        ],
+        "check": [
+            "@chk-cs",
+            "@chk-sec"
+        ],
+        "fix-cs": [
+            "bin/php-cs-fixer -vvv fix"
+        ]
     },
     "autoload": {
         "classmap": ["src/"]
