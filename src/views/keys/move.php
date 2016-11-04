@@ -12,8 +12,8 @@
         </div>
     <?php endif; ?>
     <?php if (!isset($this->moved) || (isset($this->moved) && !$this->moved)): ?>
-        <form class="form-search" action="<?=$this->router->url?>/keys/move/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
-            <input name="key" value="<?=$this->key?>" type="hidden" />
+        <form class="form-search" action="<?php echo $this->router->url?>/keys/move/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>" method="post">
+            <input name="key" value="<?php echo $this->key?>" type="hidden" />
             <div class="input-prepend">
                 <span class="add-on"><i class="icon-book"></i></span>
                 <input type="text" placeholder="DB Number" name="db">

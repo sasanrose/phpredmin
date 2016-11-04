@@ -27,8 +27,8 @@ class Lists_Controller extends Controller
 
         if ($this->router->method == Router::POST) {
             $value = $this->inputs->post('value', null);
-            $key   = $this->inputs->post('key', null);
-            $type  = $this->inputs->post('type', null);
+            $key = $this->inputs->post('key', null);
+            $type = $this->inputs->post('type', null);
             $pivot = $this->inputs->post('pivot', null);
 
             if (isset($value) && trim($value) != '' && isset($key) && trim($key) != '' &&
@@ -38,16 +38,16 @@ class Lists_Controller extends Controller
                 } else {
                     switch ($type) {
                         case 'prepend':
-                            $added = (boolean) $this->db->lPush($key, $value);
+                            $added = (bool) $this->db->lPush($key, $value);
                             break;
                         case 'append':
-                            $added = (boolean) $this->db->rPush($key, $value);
+                            $added = (bool) $this->db->rPush($key, $value);
                             break;
                         case 'before':
-                            $added = (boolean) $this->db->lInsert($key, Redis::BEFORE, $pivot, $value);
+                            $added = (bool) $this->db->lInsert($key, Redis::BEFORE, $pivot, $value);
                             break;
                         case 'after':
-                            $added = (boolean) $this->db->lInsert($key, Redis::AFTER, $pivot, $value);
+                            $added = (bool) $this->db->lInsert($key, Redis::AFTER, $pivot, $value);
                             break;
                     }
                 }
@@ -59,20 +59,20 @@ class Lists_Controller extends Controller
 
     public function viewAction($key, $page = 0)
     {
-        $count  = $this->db->lSize(urldecode($key));
-        $start  = $page * 30;
+        $count = $this->db->lSize(urldecode($key));
+        $start = $page * 30;
         $values = $this->db->lRange(urldecode($key), $start, $start + 29);
 
         Template::factory()->render('lists/view', array('count' => $count, 'values' => $values, 'key' => urldecode($key),
-                                                        'page'  => $page));
+                                                        'page' => $page, ));
     }
 
     public function delAction()
     {
         if ($this->router->method == Router::POST) {
-            $key   = $this->inputs->post('key');
+            $key = $this->inputs->post('key');
             $value = $this->inputs->post('value');
-            $type  = $this->inputs->post('type_options');
+            $type = $this->inputs->post('type_options');
 
             if ($type == 'all') {
                 $this->db->lRem($key, $value, 0);
@@ -82,6 +82,6 @@ class Lists_Controller extends Controller
             }
         }
 
-        $this->router->redirect("lists/view/{$this->app->current['serverId']}/{$this->app->current['database']}/" . urlencode($key));
+        $this->router->redirect("lists/view/{$this->app->current['serverId']}/{$this->app->current['database']}/".urlencode($key));
     }
 }

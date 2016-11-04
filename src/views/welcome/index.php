@@ -7,7 +7,7 @@
 
         $('#bulkdelete').submit(function(e) {
             e.preventDefault();
-            var url = baseurl+'/keys/bulkdelete/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>';
+            var url = baseurl+'/keys/bulkdelete/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>';
             var val = $('#bulkkey').val();
 
             if ($('#delete_interval').val().trim() != '') {
@@ -44,7 +44,7 @@
     });
 
     var updateDeleteInfo = function(key) {
-        var url = baseurl+'/keys/deleteinfo/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/'+key;
+        var url = baseurl+'/keys/deleteinfo/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>/'+key;
         int = window.setInterval(function() {
             $.ajax({
                 url: url,
@@ -112,7 +112,7 @@
                 <a class="close" data-dismiss="alert" href="#">×</a>
                 Since this doesn't support pagination yet, try to limit your search. Otherwise your browser might crash
             </div>
-            <form class="form-search" action="<?=$this->router->url?>/keys/search/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="get">
+            <form class="form-search" action="<?php echo $this->router->url?>/keys/search/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>" method="get">
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-key"></i></span>
                     <input type="text" placeholder="Key" name="key">
@@ -163,19 +163,19 @@
             <input type="hidden" id="delete_interval" value="" />
         </div>
         <div class="tab-pane fade" id="strings">
-            <?=$this->renderPartial('strings/add')?>
+            <?php echo $this->renderPartial('strings/add')?>
         </div>
         <div class="tab-pane fade" id="hashes">
-            <?=$this->renderPartial('hashes/add')?>
+            <?php echo $this->renderPartial('hashes/add')?>
         </div>
         <div class="tab-pane fade" id="lists">
-            <?=$this->renderPartial('lists/add')?>
+            <?php echo $this->renderPartial('lists/add')?>
         </div>
         <div class="tab-pane fade" id="sets">
-            <?=$this->renderPartial('sets/add')?>
+            <?php echo $this->renderPartial('sets/add')?>
         </div>
         <div class="tab-pane fade" id="sorted_sets">
-            <?=$this->renderPartial('zsets/add')?>
+            <?php echo $this->renderPartial('zsets/add')?>
         </div>
     </div>
 </div>

@@ -25,11 +25,11 @@ class Model
 
     public function __construct($config)
     {
-        $this->_objects['app']     = App::instance();
-        $this->_objects['router']  = Router::instance();
+        $this->_objects['app'] = App::instance();
+        $this->_objects['router'] = Router::instance();
         $this->_objects['session'] = Session::instance();
-        $this->_objects['db']      = Db::factory($config);
-        $this->_objects['log']     = Log::factory();
+        $this->_objects['db'] = Db::factory($config);
+        $this->_objects['log'] = Log::factory();
     }
 
     public function __get($object)

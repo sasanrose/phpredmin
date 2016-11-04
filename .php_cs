@@ -19,7 +19,7 @@
  * @source   https://github.com/faktiva/php-redis-admin
  */
 
-$header = <<<EOF
+$header = <<<'EOF'
 This file is part of the "PHP Redis Admin" package.
 
 (c) Faktiva (http://faktiva.com)
@@ -40,23 +40,23 @@ EOF;
 
 Symfony\CS\Fixer\Contrib\HeaderCommentFixer::setHeader($header);
 
+$finder = Symfony\CS\Finder::create()
+    ->exclude(array('vendor', 'var', 'bin'))
+    ->in(__DIR__)
+    ;
+
 return Symfony\CS\Config\Config::create()
     ->setUsingCache(true)
-    ->level(Symfony\CS\FixerInterface::PSR2_LEVEL)
+    ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
     ->fixers(array(
         'header_comment',
-        'whitespacy_lines',
+        'empty_return',
         'long_array_syntax',
-        'single_quote',
-        'unused_use',
-        'pre_increment',
+        'newline_after_open_tag',
+        'short_echo_tag',
         '-psr0', /*XXX*/
     ))
-    ->finder(
-        Symfony\CS\Finder\DefaultFinder::create()
-            ->exclude(array('vendor', 'var', 'bin'))
-            ->in(__DIR__)
-    )
+    ->finder($finder)
 ;
 
 // vim:ft=php

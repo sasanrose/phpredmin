@@ -28,7 +28,7 @@ final class App
 
     protected function __construct()
     {
-        $this->_data['config']  = require_once(file_exists($this->_config_dir.'/config.php') ? $this->_config_dir.'/config.php' : $this->_config_dir.'/config.dist.php');
+        $this->_data['config'] = require_once file_exists($this->_config_dir.'/config.php') ? $this->_config_dir.'/config.php' : $this->_config_dir.'/config.dist.php';
         $this->_data['drivers'] = 'drivers/';
 
 		$this->readEnvConfig();
@@ -37,7 +37,7 @@ final class App
     public static function instance()
     {
         if (!self::$_instance) {
-            self::$_instance = new self;
+            self::$_instance = new self();
         }
 
         return self::$_instance;

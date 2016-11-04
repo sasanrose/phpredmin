@@ -27,7 +27,7 @@ class Sets_Controller extends Controller
 
         if ($this->router->method == Router::POST) {
             $value = $this->inputs->post('value', null);
-            $key   = $this->inputs->post('key', null);
+            $key = $this->inputs->post('key', null);
 
             if (isset($value) && trim($value) != '' && isset($key) && trim($key) != '') {
                 $added = $this->db->sAdd($key, $value);
@@ -45,20 +45,19 @@ class Sets_Controller extends Controller
     }
 
     /**
-     * Edit action ( edit members in Sets )
+     * Edit action ( edit members in Sets ).
      *
      * @param string $key
      * @param string $member
      */
-
     public function editAction($key, $member)
     {
         $edited = null;
 
         if ($this->router->method == Router::POST) {
-            $member    = $this->inputs->post('oldmember', null);
+            $member = $this->inputs->post('oldmember', null);
             $newmember = $this->inputs->post('newmember', null);
-            $key       = $this->inputs->post('key', null);
+            $key = $this->inputs->post('key', null);
 
             if (!isset($newmember) || trim($newmember) == '' || !isset($key) || trim($key) == '') {
                 $edited = false;
@@ -79,7 +78,7 @@ class Sets_Controller extends Controller
     {
         if ($this->router->method == Router::POST) {
             $results = array();
-            $values  = $this->inputs->post('values', array());
+            $values = $this->inputs->post('values', array());
             $keyinfo = $this->inputs->post('keyinfo', null);
 
             foreach ($values as $key => $value) {
@@ -93,10 +92,10 @@ class Sets_Controller extends Controller
     public function moveallAction()
     {
         if ($this->router->method == Router::POST) {
-            $results     = array();
-            $values      = $this->inputs->post('values', array());
+            $results = array();
+            $values = $this->inputs->post('values', array());
             $destination = $this->inputs->post('destination');
-            $keyinfo     = $this->inputs->post('keyinfo');
+            $keyinfo = $this->inputs->post('keyinfo');
 
             foreach ($values as $key => $value) {
                 $results[$value] = $this->db->sMove($value, $keyinfo, $destination);

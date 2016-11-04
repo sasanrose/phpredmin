@@ -4,10 +4,10 @@
         <?php foreach ($this->config as $key => $value): ?>
             <tr>
                 <td>
-                    <?=$key?>
+                    <?php echo $key?>
                 </td>
                 <td>
-                    <?=is_numeric($value) ? number_format($value) : $value?>
+                    <?php echo is_numeric($value) ? number_format($value) : $value?>
                 </td>
             </tr>
         <?php endforeach; ?>

@@ -6,7 +6,7 @@
                 Version:
             </td>
             <td>
-                <?=$this->info['redis_version']?>
+                <?php echo $this->info['redis_version']?>
             </td>
         </tr>
         <tr>
@@ -14,7 +14,7 @@
                 Mode:
             </td>
             <td>
-                <?=$this->info['redis_mode']?>
+                <?php echo $this->info['redis_mode']?>
             </td>
         </tr>
         <tr>
@@ -22,7 +22,7 @@
                 Role:
             </td>
             <td>
-                <?=$this->info['role']?>
+                <?php echo $this->info['role']?>
             </td>
         </tr>
         <tr>
@@ -30,7 +30,7 @@
                 OS:
             </td>
             <td>
-                <?=$this->info['os']?>
+                <?php echo $this->info['os']?>
             </td>
         </tr>
         <tr>
@@ -38,7 +38,7 @@
                 Process ID:
             </td>
             <td>
-                <?=$this->info['process_id']?>
+                <?php echo $this->info['process_id']?>
             </td>
         </tr>
         <tr>
@@ -48,7 +48,7 @@
             <td>
                 <?php if ($this->uptimeDays > 0) {
     echo "{$this->uptimeDays} days&nbsp;";
-} echo gmdate('H:i:s', $this->info['uptime_in_seconds']);?>
+} echo gmdate('H:i:s', $this->info['uptime_in_seconds']); ?>
             </td>
         </tr>
         <tr>
@@ -56,7 +56,7 @@
                 Clients:
             </td>
             <td>
-                <?=$this->info['connected_clients']?>
+                <?php echo $this->info['connected_clients']?>
             </td>
         </tr>
         <?php if ($this->info['role'] == 'master'): ?>
@@ -65,7 +65,7 @@
                     Slaves:
                 </td>
                 <td>
-                    <?=$this->info['connected_slaves']?>
+                    <?php echo $this->info['connected_slaves']?>
                 </td>
             </tr>
         <?php endif; ?>
@@ -74,7 +74,7 @@
                 Used Memory:
             </td>
             <td>
-                <?=$this->info['used_memory_human']?>
+                <?php echo $this->info['used_memory_human']?>
             </td>
         </tr>
         <tr>
@@ -82,7 +82,7 @@
                 Used Memory Peak:
             </td>
             <td>
-                <?=$this->info['used_memory_peak_human']?>
+                <?php echo $this->info['used_memory_peak_human']?>
             </td>
         </tr>
         <tr>
@@ -90,7 +90,7 @@
                 Memory Fragmentation Ratio:
             </td>
             <td>
-                <?=$this->info['mem_fragmentation_ratio']?>
+                <?php echo $this->info['mem_fragmentation_ratio']?>
             </td>
         </tr>
         <tr>
@@ -98,7 +98,7 @@
                 Last Save Time:
             </td>
             <td>
-                <?=date('Y-m-d H:i:s', isset($this->info['last_save_time']) ? $this->info['last_save_time']
+                <?php echo date('Y-m-d H:i:s', isset($this->info['last_save_time']) ? $this->info['last_save_time']
                                                                             : $this->info['rdb_last_save_time'])?>
             </td>
         </tr>
@@ -107,7 +107,7 @@
                 Total Connections Received:
             </td>
             <td>
-                <?=number_format($this->info['total_connections_received'])?>
+                <?php echo number_format($this->info['total_connections_received'])?>
             </td>
         </tr>
         <tr>
@@ -115,7 +115,7 @@
                 Total Commands Processed:
             </td>
             <td>
-                <?=number_format($this->info['total_commands_processed'])?>
+                <?php echo number_format($this->info['total_commands_processed'])?>
             </td>
         </tr>
         <tr>
@@ -123,7 +123,7 @@
                 Expired Keys:
             </td>
             <td>
-                <?=number_format($this->info['expired_keys'])?>
+                <?php echo number_format($this->info['expired_keys'])?>
             </td>
         </tr>
         <tr>
@@ -131,7 +131,7 @@
                 Keyspace Hits:
             </td>
             <td>
-                <?=number_format($this->info['keyspace_hits'])?>
+                <?php echo number_format($this->info['keyspace_hits'])?>
             </td>
         </tr>
         <tr>
@@ -139,7 +139,7 @@
                 Keyspace Misses:
             </td>
             <td>
-                <?=number_format($this->info['keyspace_misses'])?>
+                <?php echo number_format($this->info['keyspace_misses'])?>
             </td>
         </tr>
         <tr>
@@ -147,7 +147,7 @@
                 System CPU Usage:
             </td>
             <td>
-                <?=$this->info['used_cpu_sys']?>
+                <?php echo $this->info['used_cpu_sys']?>
             </td>
         </tr>
         <tr>
@@ -155,7 +155,7 @@
                 User CPU Usage:
             </td>
             <td>
-                <?=$this->info['used_cpu_user']?>
+                <?php echo $this->info['used_cpu_user']?>
             </td>
         </tr>
         <tr>
@@ -163,7 +163,7 @@
                 Database Size:
             </td>
             <td>
-                <?=number_format($this->dbSize)?>
+                <?php echo number_format($this->dbSize)?>
             </td>
         </tr>
         <tr>
@@ -171,7 +171,7 @@
                 Last save to disk:
             </td>
             <td>
-                <?=date('Y-m-d H:i:s', $this->lastSave)?>
+                <?php echo date('Y-m-d H:i:s', $this->lastSave)?>
             </td>
         </tr>
     </table>

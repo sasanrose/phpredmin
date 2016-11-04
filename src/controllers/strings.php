@@ -27,7 +27,7 @@ class Strings_Controller extends Controller
 
         if ($this->router->method == Router::POST) {
             $newvalue = $this->inputs->post('newvalue', null);
-            $key      = $this->inputs->post('key', null);
+            $key = $this->inputs->post('key', null);
 
             if (!isset($newvalue) || trim($newvalue) == '' || !isset($key) || trim($key) == '') {
                 $edited = false;
@@ -47,7 +47,7 @@ class Strings_Controller extends Controller
 
         if ($this->router->method == Router::POST) {
             $value = $this->inputs->post('value', null);
-            $key   = $this->inputs->post('key', null);
+            $key = $this->inputs->post('key', null);
 
             if (isset($value) && trim($value) != '' && isset($key) && trim($key) != '') {
                 $added = $this->db->set($key, $value);

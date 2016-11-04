@@ -26,7 +26,7 @@ class Actions_Controller extends Controller
         parent::__construct($config);
 
         $this->statsModel = new Stats_Model($this->app->current);
-        $this->template   = Template::factory('json');
+        $this->template = Template::factory('json');
     }
 
     public function resetAction()

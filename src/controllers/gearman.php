@@ -42,7 +42,7 @@ class Gearman_Controller extends Controller
         $db = Db::factory($data['server']);
         $db->changeDB($data['server']['database']);
 
-        $keys  = $db->keys($data['key']);
+        $keys = $db->keys($data['key']);
         $count = count($keys);
 
         if ($count) {

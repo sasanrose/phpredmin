@@ -11,14 +11,14 @@
         </div>
     <?php endif; ?>
     <?php if (!isset($this->edited) || (isset($this->edited) && !$this->edited)):  ?>
-        <form class="form" action="<?=$this->router->url?>/sets/edit/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
+        <form class="form" action="<?php echo $this->router->url?>/sets/edit/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>" method="post">
             <legend>Edit Set key</legend>
-            <h5><?=$this->key?> / <?=$this->member?></h5>
+            <h5><?php echo $this->key?> / <?php echo $this->member?></h5>
             <div>
-                <textarea name="newmember"><?=$this->member?></textarea>
+                <textarea name="newmember"><?php echo $this->member?></textarea>
             </div>
-            <input name="key" value="<?=$this->key?>" type="hidden" />
-            <input name="oldmember" value="<?=$this->member?>" type="hidden" />
+            <input name="key" value="<?php echo $this->key?>" type="hidden" />
+            <input name="oldmember" value="<?php echo $this->member?>" type="hidden" />
             <button type="submit" class="btn"><i class="icon-edit"></i> Edit</button>
         </form>
     <?php endif; ?>

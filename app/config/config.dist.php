@@ -21,57 +21,57 @@
 
 $config = array(
     'default_controller' => 'Welcome',
-    'default_action'     => 'Index',
-    'debug'              => false,
-    'default_layout'     => 'layout',
-    'timezone'           => 'Europe/Rome',
+    'default_action' => 'Index',
+    'debug' => false,
+    'default_layout' => 'layout',
+    'timezone' => 'Europe/Rome',
     'auth' => array(
         'username' => 'admin',
-        'password' => password_hash('admin', PASSWORD_DEFAULT)
+        'password' => password_hash('admin', PASSWORD_DEFAULT),
     ),
     'log' => array(
-        'driver'    => 'file',
+        'driver' => 'file',
         'threshold' => 2, /* 0: Disable Logging, 1: Error, 2: Warning, 3: Notice, 4: Info, 5: Debug */
-        'file'      => array(
-            'directory' => 'var/logs'
-        )
+        'file' => array(
+            'directory' => 'var/logs',
+        ),
     ),
-    'database'  => array(
+    'database' => array(
         'driver' => 'redis',
-        'mysql'  => array(
-            'host'     => 'localhost',
+        'mysql' => array(
+            'host' => 'localhost',
             'username' => 'root',
-            'password' => 'root'
+            'password' => 'root',
         ),
         'redis' => array(
             array(
-                'host'     => 'localhost',
-                'port'     => '6379',
+                'host' => 'localhost',
+                'port' => '6379',
                 'password' => null,
                 'database' => 0,
                 'max_databases' => 16, /* Manual configuration of max databases for Redis < 2.6 */
-                'stats'    => array(
-                    'enable'   => 1,
+                'stats' => array(
+                    'enable' => 1,
                     'database' => 0,
                 ),
-                'dbNames' => array( /* Name databases. key should be database id and value is the name */
+                'dbNames' => array(/* Name databases. key should be database id and value is the name */
                 ),
             ),
         ),
     ),
     'session' => array(
-        'lifetime'       => 7200,
+        'lifetime' => 7200,
         'gc_probability' => 2,
-        'name'           => 'phpredminsession'
+        'name' => 'phpredminsession',
     ),
     'gearman' => array(
         'host' => '127.0.0.1',
-        'port' => 4730
+        'port' => 4730,
     ),
     'terminal' => array(
-        'enable'  => true,
-        'history' => 200
-    )
+        'enable' => true,
+        'history' => 200,
+    ),
 );
 
 return $config;

@@ -40,7 +40,7 @@ class Stats_Model extends Model
     {
         $this->db->changeDB($this->currentServer['stats']['database']);
 
-        $keys = $this->db->keys(self::STATS_MODEL_KEY . '*');
+        $keys = $this->db->keys(self::STATS_MODEL_KEY.'*');
 
         foreach ($keys as $key) {
             $this->db->del($key);
@@ -56,7 +56,7 @@ class Stats_Model extends Model
         // add value with timestamp prefix to make it unique
         // in other case non-unique value won't be added
         // @see http://redis.io/commands/zadd
-        $this->db->zAdd(self::STATS_MODEL_KEY . $key, $time, $time . ':' . $value);
+        $this->db->zAdd(self::STATS_MODEL_KEY.$key, $time, $time.':'.$value);
 
         $this->db->changeDB($this->currentServer['database']);
     }
@@ -66,11 +66,11 @@ class Stats_Model extends Model
         $this->db->changeDB($this->currentServer['stats']['database']);
 
         $results = array();
-        $keys = $this->db->zRevRangeByScore(self::STATS_MODEL_KEY . $key, $to, $from, array('withscores' => true));
+        $keys = $this->db->zRevRangeByScore(self::STATS_MODEL_KEY.$key, $to, $from, array('withscores' => true));
 
         foreach ($keys as $value => $time) {
             $value = explode(':', $value);
-            $results[] = array($time, (float)$value[1]);
+            $results[] = array($time, (float) $value[1]);
         }
 
         $this->db->changeDB($this->currentServer['database']);

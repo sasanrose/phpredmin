@@ -36,7 +36,7 @@ final class Session
     public static function instance()
     {
         if (!isset(self::$_instance)) {
-            self::$_instance = new self;
+            self::$_instance = new self();
         }
 
         return self::$_instance;

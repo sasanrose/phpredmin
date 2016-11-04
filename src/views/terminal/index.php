@@ -3,7 +3,7 @@
     <h3>Terminal<div class="pull-right"><a id="term_light" class="term_theme" title="Light Theme" href="#">Light</a><a id="term_dark" class="term_theme" title="Dark Theme" href="#">Dark</a></div></h3>
     <?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/terminal.js\" type=\"text/javascript\"></script>"); ?>
     <div class="terminal terminal-console">
-        redis <?= $this->app->current['host'] ?>:<?= $this->app->current['port'] ?>>
+        redis <?php echo $this->app->current['host'] ?>:<?php echo $this->app->current['port'] ?>>
     </div>
     <div class="clearfix"></div>
     <div>

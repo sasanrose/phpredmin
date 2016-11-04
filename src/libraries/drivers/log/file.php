@@ -57,9 +57,9 @@ class FileLog
             die('Can not open file: '.$logfile);
         }
 
-        $ip        = isset($_SERVER['REMOTE_ADDR']) ? "[{$_SERVER['REMOTE_ADDR']}]" : '';
+        $ip = isset($_SERVER['REMOTE_ADDR']) ? "[{$_SERVER['REMOTE_ADDR']}]" : '';
         $namespace = isset($namespace) ? '['.ucwords(strtolower($namespace)).']' : '';
-        $date      = '['.date('Y-m-d H:i:s').']';
+        $date = '['.date('Y-m-d H:i:s').']';
 
         fwrite($file, "{$date} {$ip} {$namespace} [{$type}]: {$msg}\n");
         fclose($file);

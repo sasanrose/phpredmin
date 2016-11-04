@@ -11,13 +11,13 @@
             There was a problem editing the hash key
         </div>
     <?php endif ?>
-    <form class="form" action="<?=$this->router->url?>/hashes/edit/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
-        <h5><?=$this->key?> / <?=$this->member?></h5>
+    <form class="form" action="<?php echo $this->router->url?>/hashes/edit/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>" method="post">
+        <h5><?php echo $this->key?> / <?php echo $this->member?></h5>
         <div>
-            <textarea name="newvalue"><?=$this->value?></textarea>
+            <textarea name="newvalue"><?php echo $this->value?></textarea>
         </div>
-        <input name="key" value="<?=$this->key?>" type="hidden" />
-        <input name="member" value="<?=$this->member?>" type="hidden" />
+        <input name="key" value="<?php echo $this->key?>" type="hidden" />
+        <input name="member" value="<?php echo $this->member?>" type="hidden" />
         <button type="submit" class="btn"><i class="icon-edit"></i> Edit</button>
     </form>
 </div>

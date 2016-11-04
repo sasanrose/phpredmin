@@ -26,8 +26,8 @@ class Hashes_Controller extends Controller
         $added = false;
 
         if ($this->router->method == Router::POST) {
-            $value   = $this->inputs->post('value', null);
-            $key     = $this->inputs->post('key', null);
+            $value = $this->inputs->post('value', null);
+            $key = $this->inputs->post('key', null);
             $hashkey = $this->inputs->post('hashkey', null);
 
             if (isset($value) && trim($value) != '' && isset($key) && trim($key) != '' && isset($hashkey) && trim($hashkey) != '') {
@@ -56,7 +56,7 @@ class Hashes_Controller extends Controller
     {
         if ($this->router->method == Router::POST) {
             $results = array();
-            $values  = $this->inputs->post('values', array());
+            $values = $this->inputs->post('values', array());
             $keyinfo = $this->inputs->post('keyinfo', null);
 
             foreach ($values as $key => $value) {
@@ -73,8 +73,8 @@ class Hashes_Controller extends Controller
 
         if ($this->router->method == Router::POST) {
             $newvalue = $this->inputs->post('newvalue', null);
-            $member   = $this->inputs->post('member', null);
-            $key      = $this->inputs->post('key', null);
+            $member = $this->inputs->post('member', null);
+            $key = $this->inputs->post('key', null);
 
             if (!isset($newvalue) || trim($newvalue) == '' || !isset($key) || trim($key) == '' ||
                 !isset($member) || trim($member) == '') {

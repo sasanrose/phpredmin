@@ -21,11 +21,11 @@
 
 class PhpTemplate
 {
-    protected $_dir     = null;
-    protected $_data    = array();
+    protected $_dir = null;
+    protected $_data = array();
     protected $_headers = array();
 
-    public $app    = null;
+    public $app = null;
     public $router = null;
 
     public function __construct()
@@ -33,8 +33,8 @@ class PhpTemplate
         ini_set('output_buffering', 'On');
         ini_set('short_open_tag', 'On');
 
-        $this->_dir   = ROOT_DIR.'/src/views/';
-        $this->app    = App::instance();
+        $this->_dir = ROOT_DIR.'/src/views/';
+        $this->app = App::instance();
         $this->router = Router::instance();
     }
 
@@ -49,7 +49,7 @@ class PhpTemplate
 
         ob_start();
 
-        include($this->_dir.$__view.'.php');
+        include $this->_dir.$__view.'.php';
 
         $content = ob_get_contents();
 

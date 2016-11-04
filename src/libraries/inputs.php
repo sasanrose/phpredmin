@@ -26,7 +26,7 @@ class Inputs
     public static function instance()
     {
         if (!self::$_instance) {
-            self::$_instance = new self;
+            self::$_instance = new self();
         }
 
         return self::$_instance;
@@ -73,12 +73,14 @@ class Inputs
     public function get($key, $default = null)
     {
         $result = Router::instance()->query($key, $default);
+
         return $result ? $result : $default;
     }
 
     public function put($key, $default = null)
     {
         parse_str(file_get_contents('php://input'), $vars);
+
         return isset($vars[$key]) ? filter_var($vars[$key], FILTER_SANITIZE_STRING) : $default;
     }
 }

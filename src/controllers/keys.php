@@ -39,7 +39,7 @@ class Keys_Controller extends Controller
         $moved = null;
 
         if ($this->router->method == Router::POST) {
-            $db  = $this->inputs->post('db', null);
+            $db = $this->inputs->post('db', null);
             $key = $this->inputs->post('key', null);
 
             if (!isset($db) || trim($db) == '' || !isset($key) || trim($key) == '') {
@@ -58,7 +58,7 @@ class Keys_Controller extends Controller
 
         if ($this->router->method == Router::POST) {
             $newkey = $this->inputs->post('newkey', null);
-            $key    = $this->inputs->post('key', null);
+            $key = $this->inputs->post('key', null);
 
             if (!isset($newkey) || trim($newkey) == '' || !isset($key) || trim($key) == '') {
                 $renamed = false;
@@ -73,7 +73,7 @@ class Keys_Controller extends Controller
     public function expireAction($key)
     {
         $updated = null;
-        $oldttl  = $this->db->ttl(urldecode($key));
+        $oldttl = $this->db->ttl(urldecode($key));
 
         if ($this->router->method == Router::POST) {
             $ttl = $this->inputs->post('ttl', null);
@@ -81,7 +81,7 @@ class Keys_Controller extends Controller
 
             if (!isset($ttl) || trim($ttl) == '' || !isset($key) || trim($key) == '') {
                 $updated = false;
-            } elseif ((int)$ttl > 0) {
+            } elseif ((int) $ttl > 0) {
                 $updated = $this->db->expire($key, $ttl);
             } elseif ($oldttl > 0) {
                 $updated = $this->db->persist($key);
@@ -90,16 +90,14 @@ class Keys_Controller extends Controller
             }
         }
 
-
-
         Template::factory()->render('keys/ttl', array('updated' => $updated, 'key' => urldecode($key), 'ttl' => $oldttl));
     }
 
     public function moveallAction()
     {
         if ($this->router->method == Router::POST) {
-            $results     = array();
-            $values      = $this->inputs->post('values', array());
+            $results = array();
+            $values = $this->inputs->post('values', array());
             $destination = $this->inputs->post('destination');
 
             foreach ($values as $key => $value) {
@@ -114,7 +112,7 @@ class Keys_Controller extends Controller
     {
         if ($this->router->method == Router::POST) {
             $results = array();
-            $values  = $this->inputs->post('values', array());
+            $values = $this->inputs->post('values', array());
 
             foreach ($values as $key => $value) {
                 $results[$value] = $this->db->del($value);
@@ -149,9 +147,9 @@ class Keys_Controller extends Controller
         $this->db->incrBy("phpredmin:gearman:requests:{$key}", 1);
         $this->db->expireAt("phpredmin:gearman:requests:{$key}", strtotime('+10 minutes'));
 
-        $key      = urldecode($key);
-        $total    = $this->db->get("phpredmin:gearman:deletecount:{$key}");
-        $count    = $this->db->get("phpredmin:gearman:deleted:{$key}");
+        $key = urldecode($key);
+        $total = $this->db->get("phpredmin:gearman:deletecount:{$key}");
+        $count = $this->db->get("phpredmin:gearman:deleted:{$key}");
         $requests = $this->db->get("phpredmin:gearman:requests:{$key}");
 
         if ($total === false && $count !== false && $requests == 1) {

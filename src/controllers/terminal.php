@@ -21,7 +21,7 @@
 
 class Terminal_Controller extends Controller
 {
-    const NAVIGATION_UP   = 'up';
+    const NAVIGATION_UP = 'up';
     const NAVIGATION_DOWN = 'down';
 
     public function __construct($config)
@@ -49,7 +49,7 @@ class Terminal_Controller extends Controller
 
         if (isset($command)) {
             $historylimit = $this->config['history'];
-            $historykey   = 'phpredmin:terminal:history';
+            $historykey = 'phpredmin:terminal:history';
 
             if ($historylimit > 0) {
                 $this->db->lRem($historykey, $command, 0);
@@ -71,15 +71,15 @@ class Terminal_Controller extends Controller
     public function historyAction()
     {
         $historylimit = $this->config['history'];
-        $historykey   = 'phpredmin:terminal:history';
-        $historylen   = $this->db->lLen($historykey);
-        $command      = '';
-        $reset        = false;
+        $historykey = 'phpredmin:terminal:history';
+        $historylen = $this->db->lLen($historykey);
+        $command = '';
+        $reset = false;
 
         if ($historylimit > 0 && $historylen > 0) {
             $navigation = $this->inputs->get('navigation', self::NAVIGATION_UP);
-            $start      = $this->inputs->get('start');
-            $pointer    = $this->db->get('phpredmin:terminal:history:pointer');
+            $start = $this->inputs->get('start');
+            $pointer = $this->db->get('phpredmin:terminal:history:pointer');
 
             if ($historylen > $historylimit) {
                 $this->db->lTrim($historykey, $historylimit * -1, -1);

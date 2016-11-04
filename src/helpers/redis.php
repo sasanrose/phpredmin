@@ -33,7 +33,7 @@ class Redis_Helper
     public static function instance()
     {
         if (!isset(self::$_instance)) {
-            self::$_instance = new self;
+            self::$_instance = new self();
         }
 
         return self::$_instance;
@@ -99,7 +99,7 @@ class Redis_Helper
                 $size = '-';
         }
 
-        return $size <=0 ? '-' : $size;
+        return $size <= 0 ? '-' : $size;
     }
 
     protected function _time($time)
@@ -109,7 +109,7 @@ class Redis_Helper
         } else {
             $days = floor($time / 86400);
 
-            return ($days > 0 ? "{$days} Days " : '') . gmdate('H:i:s', $time);
+            return ($days > 0 ? "{$days} Days " : '').gmdate('H:i:s', $time);
         }
     }
 }

@@ -21,13 +21,13 @@
 
 final class Router
 {
-    const POST   = 'POST';
-    const GET    = 'GET';
+    const POST = 'POST';
+    const GET = 'GET';
     const DELETE = 'DELETE';
-    const PUT    = 'PUT';
+    const PUT = 'PUT';
 
-    protected $_data          = array();
-    protected $_params        = array();
+    protected $_data = array();
+    protected $_params = array();
     protected $_query_strings = array();
 
     protected static $_instance = null;
@@ -40,7 +40,7 @@ final class Router
     public static function instance()
     {
         if (!self::$_instance) {
-            self::$_instance = new self;
+            self::$_instance = new self();
         }
 
         return self::$_instance;
@@ -48,15 +48,15 @@ final class Router
 
     protected function parse()
     {
-        $this->method   = $_SERVER['REQUEST_METHOD'];
+        $this->method = $_SERVER['REQUEST_METHOD'];
         $this->protocol = (
             (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && $_SERVER['HTTPS'] !== 'off')
             || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
         ) ? 'https' : 'http';
-        $this->host     = $_SERVER['HTTP_HOST'];
-        $this->baseUrl  = $this->protocol.'://'.$this->host;
-        $this->url      = $this->protocol.'://'.$this->host.$_SERVER['SCRIPT_NAME'];
-        $this->path     = '';
+        $this->host = $_SERVER['HTTP_HOST'];
+        $this->baseUrl = $this->protocol.'://'.$this->host;
+        $this->url = $this->protocol.'://'.$this->host.$_SERVER['SCRIPT_NAME'];
+        $this->path = '';
 
         if (PHP_SAPI != 'cli') {
             $this->path = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
@@ -123,7 +123,7 @@ final class Router
 
     public function route()
     {
-        $class  = $this->controller.'_Controller';
+        $class = $this->controller.'_Controller';
         $method = $this->action.'Action';
 
         if (class_exists($class)) {

@@ -22,26 +22,26 @@
 final class Log
 {
     protected static $_instances = array();
-    protected static $_instance  = null;
+    protected static $_instance = null;
 
     protected $_levels = array(
-        'error'   => 1,
+        'error' => 1,
         'warning' => 2,
-        'notice'  => 3,
-        'info'    => 4,
-        'debug'   => 5
+        'notice' => 3,
+        'info' => 4,
+        'debug' => 5,
     );
 
-    const INFO    = 'info';
-    const DEBUG   = 'debug';
-    const ERROR   = 'error';
+    const INFO = 'info';
+    const DEBUG = 'debug';
+    const ERROR = 'error';
     const WARNING = 'warning';
-    const NOTICE  = 'notice';
+    const NOTICE = 'notice';
 
     public static function instance()
     {
         if (!isset(self::$_instance)) {
-            self::$_instance = new self;
+            self::$_instance = new self();
         }
 
         return self::$_instance;
@@ -52,10 +52,10 @@ final class Log
         $driver = isset($driver) ? $driver : App::instance()->config['log']['driver'];
 
         if (!isset(self::$_instances[$driver])) {
-            include_once(App::instance()->drivers.'log/'.(strtolower($driver)).'.php');
+            include_once App::instance()->drivers.'log/'.(strtolower($driver)).'.php';
 
-            $class  = ucwords(strtolower($driver)).'Log';
-            self::$_instances[$driver] = new $class;
+            $class = ucwords(strtolower($driver)).'Log';
+            self::$_instances[$driver] = new $class();
         }
 
         return self::$_instances[$driver];
