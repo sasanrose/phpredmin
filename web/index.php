@@ -27,10 +27,6 @@ require_once ROOT_DIR.'/vendor/autoload.php';
 
 $config = App::instance()->config;
 
-if (isset($config['debug']) && $config['debug']) {
-    Symfony\Component\Debug\Debug::enable();
-}
-
 if (isset($config['timezone'])) {
     date_default_timezone_set($config['timezone']);
 }
@@ -60,7 +56,10 @@ if (PHP_SAPI !== 'cli' && isset(App::instance()->config['auth'])) {
 }
 
 if ($authenticated) {
-    new PRA_Error();
+    if (1 || isset($config['debug']) && $config['debug']) {
+        Symfony\Component\Debug\Debug::enable();
+    }
+
     Router::instance()->route();
 } else {
     header('WWW-Authenticate: Basic realm="PHPRedis Administrator"');
