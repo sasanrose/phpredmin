@@ -11,22 +11,23 @@ _Note:_ PHP Redis Admin is mostly compatible with [phpredis](https://github.com/
 
 ### Docker
 
-You can use docker to run PHPRedmin as a one-liner program:
+You can use **[docker](https://www.docker.com)** to run PHP Redis Admin:
 
 ```Bash
-docker run -p 8080:80 -d --name phpredmin -e "PHPREDMIN_DATABASE_REDIS_0_HOST=192.168.1.6" -e "PHPREDMIN_AUTH_USERNAME=root" sasanrose/phpredmin
+docker run -p 8080:80 -d --name php-redis-admin faktiva/php-redis-admin
 ```
-And then you can just easily point your broswer to http://localhost:8080
+And then you can just easily point your broswer to [http://localhost:8080](http://localhost:8080)
 
-_Note:_ As you can see you can use ENV variables to override any configuration directive of PHPRedmin. For instance in the aforementioned command we changed the redis host and authentication username.
+**Note:**
+_You can use **ENV variables** to override any configuration directive of PHP Redis Admin._
 
-Moreover, you can just use docker compose to also setup a redis container:
+Moreover, you can just use **docker compose** to also setup a redis container:
 
 ```Yaml
 version: '2'
 services:
-    phpredmin:
-        image: sasanrose/phpredmin
+    php-redis-admin:
+        image: faktiva/php-redis-admin
         environment:
             - PHPREDMIN_DATABASE_REDIS_0_HOST=redis
         ports:
@@ -39,7 +40,7 @@ services:
 
 ### Manual installation
 
-Just drop phpredmin in your webserver's root directory and point your browser to it (You also need [phpredis](https://github.com/nicolasff/phpredis) installed)
+Just drop PHP Redis Admin in your webserver's root directory and point your browser to it (You also need [phpredis](https://github.com/phpredis/phpredis) installed)
 
 ## Configuration
 

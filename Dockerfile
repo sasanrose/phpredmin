@@ -1,40 +1,29 @@
 FROM php:5.6-apache
-
-MAINTAINER sasan.rose@gmail.com
+MAINTAINER albert@faktiva.com
+EXPOSE 80
 
 RUN apt-get update && apt-get install -y \
 	cron \
 	gearman-job-server \
 	git-core \
-	libgearman-dev \
-	&& pecl install gearman \
+	libgearman-dev
+RUN pecl install gearman \
 	&& docker-php-ext-enable gearman
-
-EXPOSE 80
+RUN pecl install redis \
+	&& docker-php-ext-enable redis
 
 COPY docker/default.conf /etc/apache2/sites-available/000-default.conf
 COPY docker/php.ini /usr/local/etc/php/
 COPY docker/start.sh /usr/src/start.sh
 
 WORKDIR /etc/cron.d
-COPY docker/crontab phpredmin
-RUN chmod 0644 phpredmin
-
-WORKDIR /usr/src
-
-RUN git clone https://github.com/phpredis/phpredis.git
-WORKDIR /usr/src/phpredis
-RUN phpize \
-	&& ./configure \
-	&& make \
-	&& make install \
-	&& docker-php-ext-enable redis
+COPY docker/crontab php-redis-admin
+RUN chmod 0644 php-redis-admin
 
 WORKDIR /var/www/html
-COPY . phpredmin/
-RUN mkdir phpredmin/logs && chown www-data:www-data phpredmin/logs -R
+COPY . php-redis-admin/
+RUN mkdir php-redis-admin/logs && chown -R www-data:www-data php-redis-admin/logs
 
-WORKDIR /var/www/html/phpredmin/public
-
+WORKDIR /var/www/html/php-redis-admin/web
 RUN chmod u+x /usr/src/start.sh
 CMD ["/usr/src/start.sh"]
