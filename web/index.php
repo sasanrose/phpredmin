@@ -53,7 +53,7 @@ if (PHP_SAPI !== 'cli' && isset(App::instance()->config['auth'])) {
 }
 
 if ($authenticated) {
-    if (1 || isset($config['debug']) && $config['debug']) {
+    if (isset($config['debug']) && $config['debug']) {
         Symfony\Component\Debug\Debug::enable();
     }
 
