@@ -59,12 +59,12 @@ class Redis_Helper
 
     public function getTTL($key)
     {
-        return $this->_time($this->db->ttl($key));
+        return $this->getFormattedTime($this->db->ttl($key));
     }
 
     public function getIdleTime($key)
     {
-        return $this->_time($this->db->object('idletime', $key));
+        return $this->getFormattedTime($this->db->object('idletime', $key));
     }
 
     public function getCount($key)
@@ -102,7 +102,7 @@ class Redis_Helper
         return $size <= 0 ? '-' : $size;
     }
 
-    protected function _time($time)
+    protected function getFormattedTime($time)
     {
         if ($time <= 0) {
             return '-';

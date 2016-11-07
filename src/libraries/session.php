@@ -50,15 +50,6 @@ final class Session
         return isset($_SESSION[$key]) ? $_SESSION[$key] : $default;
     }
 
-    public function get_once($key, $default = null)
-    {
-        $result = $this->get($key, $default);
-
-        unset($_SESSION[$key]);
-
-        return $result;
-    }
-
     public function del($key)
     {
         unset($_SESSION[$key]);
