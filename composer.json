@@ -2,7 +2,7 @@
     "name": "faktiva/php-redis-admin",
     "description": "PHP Redis Admin is a simple web interface to manage and monitor your Redis server(s).",
     "homepage": "https://github.com/faktiva/php-redis-admin",
-    "license": [ "BSD-3-Clause", "CC-BY-SA-4.0" ],
+    "license": [ "CC-BY-SA-4.0", "BSD-3-Clause" ],
     "type": "project",
     "authors": [
         {
@@ -39,13 +39,13 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^1.12",
-        "symfony/var-dumper": "^2.8||^3.0",
+        "symfony/var-dumper": "^2.8 || ^3.0",
         "sensiolabs/security-checker": "^4.0"
     },
     "require": {
         "php": ">=5.4.0",
         "ext-redis": "*",
-        "symfony/debug": "^2.8||^3.0"
+        "symfony/debug": "^2.8 || ^3.0"
     },
     "scripts": {
         "chk-cs": [
