@@ -58,18 +58,8 @@ final class Router
         $this->url = $this->baseUrl.$_SERVER['SCRIPT_NAME'];
         $this->path = '';
 
-        $url_path_prefix = App::instance()->config['url_path_prefix'];
-        if ($url_path_prefix) {
-            $this->baseUrl .= $url_path_prefix;
-            $this->url = $this->baseUrl;
-        }
-
         if (PHP_SAPI != 'cli') {
-            if ($url_path_prefix) {
-                $this->path = preg_replace('|^'.$url_path_prefix.'|', '', $_SERVER['REQUEST_URI'], 1);
-            } else {
-                $this->path = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
-            }
+            $this->path = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
 
             Log::factory()->write(Log::INFO, $_SERVER['REQUEST_URI'], 'Router');
 
