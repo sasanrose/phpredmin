@@ -25,8 +25,10 @@ final class Session
 
     protected function __construct()
     {
-        session_name(App::instance()->config['session']['name']);
-        session_start();
+        if (PHP_SAPI != 'cli') {
+            session_name(App::instance()->config['session']['name']);
+            session_start();
+        }
     }
 
     public static function instance()
@@ -42,7 +44,9 @@ final class Session
     {
         $_SESSION[$key] = $value;
 
-        session_write_close();
+        if (PHP_SAPI != 'cli') {
+            session_write_close();
+        }
     }
 
     public function get($key, $default = null)

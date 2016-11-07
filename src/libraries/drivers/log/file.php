@@ -35,13 +35,11 @@ class FileLog
                 echo 'Please provide a log directory in your config file';
                 throw new ExitException();
             } else {
-                $this->_dir = ROOT_DIR.'/'.$config_dir.'/'.PHP_SAPI.'/';
+                $this->_dir = $config_dir;
 
                 if (!is_writable($this->_dir)) {
-                    if (!mkdir($this->_dir, 0755, true)) {
-                        echo "{$this->_dir} does not exist or is not writable";
-                        throw new ExitException();
-                    }
+                    echo "{$this->_dir} does not exist or is not writable";
+                    throw new ExitException();
                 }
             }
         }
@@ -53,7 +51,7 @@ class FileLog
             return;
         }
 
-        $logfile = $this->_dir.date('Y-m-d').'.log';
+        $logfile = $this->_dir.'php-redis-admin.log';
 
         if (($file = fopen($logfile, 'a+')) === false) {
             echo 'Can not open file: '.$logfile;
