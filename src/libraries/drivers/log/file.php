@@ -32,13 +32,15 @@ class FileLog
 
         if ($this->threshold > 0) {
             if (!$config_dir) {
-                die('Please provide a log directory in your config file');
+                echo 'Please provide a log directory in your config file';
+                throw new ExitException();
             } else {
                 $this->_dir = ROOT_DIR.'/'.$config_dir.'/'.PHP_SAPI.'/';
 
                 if (!is_writable($this->_dir)) {
                     if (!mkdir($this->_dir, 0755, true)) {
-                        die("{$this->_dir} does not exist or is not writable");
+                        echo "{$this->_dir} does not exist or is not writable";
+                        throw new ExitException();
                     }
                 }
             }
@@ -54,7 +56,8 @@ class FileLog
         $logfile = $this->_dir.date('Y-m-d').'.log';
 
         if (($file = fopen($logfile, 'a+')) === false) {
-            die('Can not open file: '.$logfile);
+            echo 'Can not open file: '.$logfile;
+            throw new ExitException();
         }
 
         $ip = isset($_SERVER['REMOTE_ADDR']) ? "[{$_SERVER['REMOTE_ADDR']}]" : '';

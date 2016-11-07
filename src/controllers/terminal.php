@@ -42,7 +42,7 @@ class Terminal_Controller extends Controller
     {
         if (!$this->config['enable']) {
             echo 'Terminal is not enabled';
-            die;
+            throw new ExitException();
         }
 
         $command = $this->inputs->post('command', null);

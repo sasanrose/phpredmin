@@ -38,6 +38,7 @@ class PhpTemplate
     public function render($__view, $data = array())
     {
         echo $this->renderPartial(App::instance()->config['default_layout'], array('content' => $this->renderPartial($__view, $data)));
+        throw new ExitException();
     }
 
     public function renderPartial($__view, $__data = array())

@@ -19,15 +19,9 @@
  * @source   https://github.com/faktiva/php-redis-admin
  */
 
-class JsonTemplate
+/**
+ * Used to handle die() or exit() in a bit graceful way.
+ */
+class ExitException extends Exception
 {
-    public function render($data, $setHeader = false)
-    {
-        $setHeader and ($data ? header('HTTP/1.0 200 OK') : header('HTTP/1.0 404 Not Found'));
-
-        header('Content-Type: application/json');
-
-        echo json_encode($data);
-        throw new ExitException();
-    }
 }

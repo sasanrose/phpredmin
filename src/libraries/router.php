@@ -147,6 +147,6 @@ final class Router
     public function redirect($url)
     {
         header("Location: {$this->url}/{$url}");
-        exit;
+        throw new ExitException();
     }
 }
