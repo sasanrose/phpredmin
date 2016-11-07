@@ -25,6 +25,7 @@
             <input type="text" value="<?php echo $this->search?>" name="key">
         </div>
         <button type="submit" class="btn"><i class="icon icon-search"></i> Search</button>
+        or <a href="<?php echo $this->router->url?>/keys/search/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>?key=*">Show All</a>
     </form>
     <?php if (count($this->keys)): ?>
     <table class="table table-striped keys-table">
