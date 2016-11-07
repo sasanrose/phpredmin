@@ -74,7 +74,7 @@
                                     </li>
                                 <?php endif; ?>
                                 <li>
-                                    <a href="https://github.com/sasanrose/phpredmin" target="_blank">
+                                    <a href="https://github.com/faktiva/php-redis-admin" target="_blank">
                                         <i class="icon-white icon-github"></i> GitHub
                                     </a>
                                 </li>

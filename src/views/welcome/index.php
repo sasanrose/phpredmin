@@ -137,7 +137,7 @@
 				<?php if (!extension_loaded('gearman')): ?>
 					<div class="alert alert-warning">
 						<a class="close" data-dismiss="alert" href="#">×</a>
-						This uses gearman. You need to install <a href="http://www.php.net/manual/en/gearman.setup.php" target="_blank">gearman extionsion for php</a> and <a href="https://github.com/sasanrose/phpredmin#gearman-worker" target="_blank">setup gearman worker</a>
+						This uses gearman. You need to install <a href="http://www.php.net/manual/en/gearman.setup.php" target="_blank">gearman extionsion for PHP</a> and <a href="https://github.com/faktiva/php-redis-admin/blob/master/Features.md#gearman-worker" target="_blank">setup gearman worker</a>
 					</div>
 				<?php endif ?>
                 <div class="alert alert-danger delete_error_exists delete_error" style="display: none;">
