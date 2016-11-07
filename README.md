@@ -1,11 +1,30 @@
-PHP Redis Admin
-=========
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/8f0587c9-1ed7-44fe-8a36-1bce6b50632b/small.png)](https://insight.sensiolabs.com/projects/8f0587c9-1ed7-44fe-8a36-1bce6b50632b)
+[PHP Redis Admin](https://github.com/faktiva/php-redis-admin)
+===
 
-A web interface to manage and monitor your Redis server(s).
+[![GitHub release](https://img.shields.io/github/release/faktiva/php-redis-admin.svg?style=flat&label=latest)](https://github.com/faktiva/php-redis-admin/releases/latest)
+[![Project Status](http://opensource.box.com/badges/active.svg?style=flat)](http://opensource.box.com/badges)
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/faktiva/php-redis-admin.svg?style=flat)](http://isitmaintained.com/project/faktiva/php-redis-admin "Percentage of issues still open")
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/faktiva/php-redis-admin.svg?style=flat)](http://isitmaintained.com/project/faktiva/php-redis-admin "Average time to resolve an issue")
+[![composer.lock](https://poser.pugx.org/faktiva/php-redis-admin/composerlock?style=flat)](https://packagist.org/packages/faktiva/php-redis-admin)
+[![Dependencies Status](https://img.shields.io/librariesio/github/faktiva/php-redis-admin.svg?maxAge=3600&style=flat)](https://libraries.io/github/faktiva/php-redis-admin)
+[![License](https://img.shields.io/packagist/l/faktiva/php-redis-admin.svg?style=flat)](https://creativecommons.org/licenses/by-sa/4.0/)
 
-This is a maintained fork of [PHPRedMin](https://github.com/sasanrose/phpredmin), by [Sasan Rose](https://github.com/sasanrose) (_Thanks for the great job!_).
+[![Join the chat at https://gitter.im/faktiva/php-redis-admin](https://img.shields.io/badge/Gitter-CHAT%20NOW-brightgreen.svg?style=flat)](https://gitter.im/faktiva/php-redis-admin)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/faktiva/php-redis-admin.svg?style=social)](https://twitter.com/intent/tweet?text=Look at this: #Faktiva "PHP Redis Admin"&url=https://github.com/faktiva/php-redis-admin)
 
-_Note:_ PHP Redis Admin is mostly compatible with [phpredis](https://github.com/nicolasff/phpredis) redis module for PHP
+____
+
+**A web interface to manage and monitor your Redis server(s).**
+
+>
+>    For production use the **latest stable [release](https://github.com/faktiva/php-redis-admin/releases/latest)**
+>
+>    This is a maintained fork of [PHPRedMin](https://github.com/sasanrose/phpredmin).
+>    We are going to migrate to Symfony shortly.
+>
+>    _Note:_ PHP Redis Admin is mostly compatible with [phpredis](https://github.com/nicolasff/phpredis) redis module for PHP
+>
 
 ## Installation
 
