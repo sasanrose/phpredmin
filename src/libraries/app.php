@@ -24,10 +24,11 @@ final class App
     protected static $_instance = null;
 
     protected $_data = array();
-    protected $_config_dir = ROOT_DIR.'/app/config';
+    protected $_config_dir = '';
 
     protected function __construct()
     {
+        $this->_config_dir = ROOT_DIR.'/app/config';
         $this->_data['config'] = require_once file_exists($this->_config_dir.'/config.php') ? $this->_config_dir.'/config.php' : $this->_config_dir.'/config.dist.php';
         $this->_data['drivers'] = 'drivers/';
 
