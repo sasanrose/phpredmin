@@ -2,7 +2,7 @@
     <h3>Redis Slow Log <small>(<?php echo $this->count?> most recent)</small></h3>
     <div class="alert alert-info">
         <a class="close" data-dismiss="alert" href="#">×</a>
-        PHPRedmin uses Eval to fetch slowlogs
+        PHP Redis Admin uses Eval to fetch slowlogs
     </div>
     <?php if ($this->support): ?>
         <form class="form-inline" action="<?php echo $this->router->url?>/welcome/slowlog/<?php echo $this->app->current['serverId'].'/'.$this->app->current['database'] ?>" method="post">

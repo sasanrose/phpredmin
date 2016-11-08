@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PHPRedmin</title>
+    <title>PHP Redis Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" href="<?php echo $this->router->baseUrl?>/favicon.ico" type="image/x-icon" />
@@ -38,7 +38,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </a>
-                        <a class="brand" href="<?php echo $this->router->url?>">PHPRedmin</a>
+                        <a class="brand" href="<?php echo $this->router->url?>">PHP Redis Admin</a>
                         <div class="nav-collapse collapse navbar-responsive-collapse">
                             <ul class="nav">
                                 <li<?php echo strstr($this->router->request, '/welcome/index/') ? ' class="active"' : null?>>
