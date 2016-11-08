@@ -11,7 +11,7 @@
 [![License](https://img.shields.io/packagist/l/faktiva/php-redis-admin.svg?style=flat)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 [![Join the chat at https://gitter.im/faktiva/php-redis-admin](https://img.shields.io/badge/Gitter-CHAT%20NOW-brightgreen.svg?style=flat)](https://gitter.im/faktiva/php-redis-admin)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/faktiva/php-redis-admin.svg?style=social)](https://twitter.com/intent/tweet?text=Look at this: #Faktiva "PHP Redis Admin"&url=https://github.com/faktiva/php-redis-admin)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/faktiva/php-redis-admin.svg?style=social)](https://twitter.com/intent/tweet?text=Look at this: %23Faktiva "PHP Redis Admin"&url=https://github.com/faktiva/php-redis-admin)
 
 ____
 
