@@ -1,16 +1,17 @@
-FROM php:5.6-alpine
+FROM php:5.6-apache
 MAINTAINER albert@faktiva.com
 EXPOSE 80
 
-RUN apk update && apk upgrade && \
-    apk add --update \
-	    cron \
-	    gearman-job-server \
-	    git-core \
-	    libgearman-dev
+RUN apt-get update && apt-get install -y \
+	cron \
+	gearman-job-server \
+	git-core \
+	libgearman-dev
+    
 RUN pecl install gearman \
 	&& docker-php-ext-enable gearman
-RUN pecl install redis \
+
+RUN pecl install -o -f redis \
 	&& docker-php-ext-enable redis
 
 COPY docker/default.conf /etc/apache2/sites-available/000-default.conf
