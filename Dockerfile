@@ -2,8 +2,7 @@ FROM php:5.6-alpine
 MAINTAINER albert@faktiva.com
 EXPOSE 80
 
-RUN apk update && \
-	apk upgrade &&
+RUN apk update && apk upgrade && \
     apk add --update \
 	    cron \
 	    gearman-job-server \
