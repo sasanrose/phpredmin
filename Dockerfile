@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     \
     && pecl install gearman \
-	&& docker-php-ext-enable gearman \
+    && docker-php-ext-enable gearman \
     && pecl install redis-2.2.8 \
     && docker-php-ext-enable redis
 
