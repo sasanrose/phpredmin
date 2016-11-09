@@ -2,17 +2,17 @@ FROM php:5.6-apache
 MAINTAINER albert@faktiva.com
 EXPOSE 80
 
-RUN apt-get update && apt-get install -y \
-	cron \
-	gearman-job-server \
-	git-core \
-	libgearman-dev
-    
-RUN pecl install gearman \
-	&& docker-php-ext-enable gearman
-
-RUN pecl install redis-2.2.8
-RUN docker-php-ext-enable redis
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	    cron \
+	    gearman-job-server \
+	    git-core \
+	    libgearman-dev \
+    && rm -rf /var/lib/apt/lists/* \
+    \
+    && pecl install gearman \
+	&& docker-php-ext-enable gearman \
+    && pecl install redis-2.2.8 \
+    && docker-php-ext-enable redis
 
 COPY docker/default.conf /etc/apache2/sites-available/000-default.conf
 COPY docker/php.ini /usr/local/etc/php/
