@@ -1,4 +1,4 @@
-FROM php:5.6-apache
+FROM php:7.0-apache
 MAINTAINER albert@faktiva.com
 EXPOSE 80
 
