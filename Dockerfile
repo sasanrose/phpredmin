@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y \
 RUN pecl install gearman \
 	&& docker-php-ext-enable gearman
 
-RUN pecl install -o -f redis \
-	&& docker-php-ext-enable redis
+RUN pecl install -o -f redis
+RUN docker-php-ext-enable redis
 
 COPY docker/default.conf /etc/apache2/sites-available/000-default.conf
 COPY docker/php.ini /usr/local/etc/php/
