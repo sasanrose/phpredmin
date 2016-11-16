@@ -22,13 +22,13 @@ final class error
 
         if ($error) {
             $type = self::_getError($error['type']);
-            Log::factory()->write($type, "{$error['message']} on {$error['file']}:{$error['line']}");
+            Log::factory()->write($type, "{$error['message']} on {$error['file']}:{$error['line']}", 'Shutdown Handler');
         }
     }
 
     public function exceptionHandler(Exception $e)
     {
-        Log::factory()->write(Log::ERROR, "{$e->getMessage()} on {$e->getFile()}:{$e->getLine()}");
+        Log::factory()->write(Log::ERROR, "{$e->getMessage()} on {$e->getFile()}:{$e->getLine()}", 'Exception Handler');
     }
 
     public function errorHandler($no, $str, $file, $line, $context)
@@ -40,7 +40,7 @@ final class error
 
         $type = self::_getError($no);
 
-        Log::factory()->write($type, "{$str} on {$file}:{$line}");
+        Log::factory()->write($type, "{$str} on {$file}:{$line}", 'Error Handler');
     }
 
     protected static function _getError($type)
