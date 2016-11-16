@@ -27,7 +27,7 @@ class Cron_Controller extends Controller
                 }
                
                 foreach ($this->infoModel->getDbs($info) as $i) {
-                    if (preg_match('/^keys=([0-9]+),expires=([0-9]+)$/', $info["db{$i}"], $matches)) {
+                    if (preg_match('/keys=([0-9]+),expires=([0-9]+)/', $info["db{$i}"], $matches)) {
                         $statsModel->addKey("db{$i}:keys", $matches[1], $time);
                         $statsModel->addKey("db{$i}:expired_keys", $matches[2], $time);
                     }

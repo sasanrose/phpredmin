@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
 	gearman-job-server \
 	git-core \
 	libgearman-dev \
+	redis-tools \
 	&& pecl install gearman \
 	&& docker-php-ext-enable gearman
 
@@ -24,7 +25,9 @@ WORKDIR /usr/src
 
 RUN git clone https://github.com/phpredis/phpredis.git
 WORKDIR /usr/src/phpredis
-RUN phpize \
+# Version 3 has a bug with zAdd so checkout to 2.2.8
+RUN git checkout tags/2.2.8 \
+	&& phpize \
 	&& ./configure \
 	&& make \
 	&& make install \
