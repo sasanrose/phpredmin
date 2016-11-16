@@ -54,11 +54,13 @@
                 <label class="control-label" for="inputEmail">Database: </label>
                 <div class="controls">
                     <select name="dbIdx" id="dbIdx">
+					<?php if (isset($this->app->current['dbs']) && !empty($this->app->current['dbs'])): ?>
                     <?php for ($x=0; $x < $this->app->current['max_databases']; $x++): ?>
                         <?php if (!array_key_exists($x, $this->app->current['dbs'])): ?>
                         <option value='<?=$x?>'>DB <?=$x?></option>
                         <?php endif; ?>
-                    <?php endfor; ?>
+					<?php endfor; ?>
+					<?php endif; ?>
                     </select>
                 </div>
             </div>

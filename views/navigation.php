@@ -8,6 +8,7 @@
 </ul>
 <div class="tabbable tabs-left" id="dbTabs">
     <ul class="nav nav-tabs">
+		<?php if (isset($this->app->current['dbs']) && !empty($this->app->current['dbs'])): ?>
         <?php foreach ($this->app->current['dbs'] as $database): ?>
             <li class="database <?= ($database['id'] == $this->app->current['database'] ? 'active':null) ?>">
                 <a href="<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $database['id'] ?>">
@@ -15,7 +16,7 @@
                     <span class="label pull-right" title="Number of keys"><?= $database['keys'] ?></span>
                 </a>
             </li>
-        <?php endforeach; if ($this->app->current['newDB']): ?>
+        <?php endforeach; endif; if ($this->app->current['newDB']): ?>
             <li class="database active">
                 <a href="<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
                    <i class="icon-plus"></i> DB <?=$this->app->current['database']?>
