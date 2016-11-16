@@ -1,14 +1,15 @@
 #! /bin/sh
 
+# Copy PHPREDMIN env variables to .profile for cron jobs
+printenv | grep PHPREDMIN | xargs -rl echo "export$1" >> $HOME/.profile
+
 # Run gearman job server
 gearmand -d
 # Run cron daemon
 cron
-# Run gearman work
-php index.php gearman/index &
-# Start web server
-apache2-foreground &
 
+# Trap sigkill
 trap "pkill gearmand && pkill -WINCH apache2" TERM
 
-wait
+# Run gearman work & Start web server
+php index.php gearman/index & apache2-foreground

@@ -32,7 +32,9 @@ RUN phpize \
 
 WORKDIR /var/www/html
 COPY . phpredmin/
-RUN mkdir phpredmin/logs && chown www-data:www-data phpredmin/logs -R
+
+ENV PHPREDMIN_LOG_DRIVER="std"
+ENV PHPREDMIN_LOG_THRESHOLD="4"
 
 WORKDIR /var/www/html/phpredmin/public
 
