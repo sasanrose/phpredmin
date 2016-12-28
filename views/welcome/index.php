@@ -5,6 +5,7 @@
             $(this).tab('show');
         });
 
+        <?php if (App::instance()->config['action']['bulk_delete']): ?>
         $('#bulkdelete').submit(function(e) {
             e.preventDefault();
             var url = baseurl+'/keys/bulkdelete/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>';
@@ -41,8 +42,9 @@
                 );
             }
         });
+        <?php endif; ?>
     });
-
+    <?php if (App::instance()->config['action']['bulk_delete']): ?>
     var updateDeleteInfo = function(key) {
         var url = baseurl+'/keys/deleteinfo/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>/'+key;
         int = window.setInterval(function() {
@@ -79,6 +81,7 @@
 
         $('#delete_interval').val(int);
     }
+    <?php endif; ?>
 
 </script>
 <div>
@@ -86,9 +89,11 @@
         <li class="active">
             <a href="#keys">Keys</a>
         </li>
+        <?php if (App::instance()->config['action']['bulk_delete']): ?>
         <li>
             <a href="#delete">Bulk Delete</a>
         </li>
+        <?php endif; if (App::instance()->config['action']['add_value']): ?>
         <li class='pull-right'>
             <a href="#sorted_sets">Sorted Sets</a>
         </li>
@@ -104,14 +109,17 @@
         <li class='pull-right'>
             <a href="#strings">Strings</a>
         </li>
+        <?php endif; ?>
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade active in" id="keys">
             <legend>Search keys</legend>
+            <!--
             <div class="alert alert-warning">
                 <a class="close" data-dismiss="alert" href="#">×</a>
                 Since this doesn't support pagination yet, try to limit your search. Otherwise your browser might crash
             </div>
+            -->
             <form class="form-search" action="<?=$this->router->url?>/keys/search/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="get">
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-key"></i></span>
@@ -131,15 +139,16 @@
                 Use \ to escape special characters if you want to match them verbatim.
             </div>
         </div>
+        <?php if (App::instance()->config['action']['bulk_delete']): ?>
         <div class="tab-pane fade" id="delete">
             <form class="form-search" id="bulkdelete">
                 <legend>Delete keys</legend>
-				<?php if (!extension_loaded('gearman')) { ?>
-					<div class="alert alert-warning">
-						<a class="close" data-dismiss="alert" href="#">×</a>
-						This uses gearman. You need to install <a href="http://www.php.net/manual/en/gearman.setup.php" target="_blank">gearman extionsion for php</a> and <a href="https://github.com/sasanrose/phpredmin#gearman-worker" target="_blank">setup gearman worker</a>
-					</div>
-				<?php } ?>
+                <?php if (!extension_loaded('gearman')) { ?>
+                    <div class="alert alert-warning">
+                        <a class="close" data-dismiss="alert" href="#">×</a>
+                        This uses gearman. You need to install <a href="http://www.php.net/manual/en/gearman.setup.php" target="_blank">gearman extionsion for php</a> and <a href="https://github.com/sasanrose/phpredmin#gearman-worker" target="_blank">setup gearman worker</a>
+                    </div>
+                <?php } ?>
                 <div class="alert alert-danger delete_error_exists delete_error" style="display: none;">
                     <a class="close" data-dismiss="alert" href="#">×</a>
                     No keys found
@@ -162,6 +171,7 @@
             </div>
             <input type="hidden" id="delete_interval" value="" />
         </div>
+        <?php endif; if (App::instance()->config['action']['add_value']): ?>
         <div class="tab-pane fade" id="strings">
             <?=$this->renderPartial('strings/add')?>
         </div>
@@ -177,5 +187,6 @@
         <div class="tab-pane fade" id="sorted_sets">
             <?=$this->renderPartial('zsets/add')?>
         </div>
+        <?php endif; ?>
     </div>
 </div>

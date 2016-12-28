@@ -1,6 +1,12 @@
-<?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/remlists.js\" type=\"text/javascript\"></script>"); ?>
+<?php if (App::instance()->config['action']['edit_value'] || App::instance()->config['action']['delete_value']) {
+    $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/remlists.js\" type=\"text/javascript\"></script>");
+} ?>
 <div id='mainContainer'>
+    <?php if (App::instance()->config['action']['edit_value']): ?>
     <h3>Edit List</h3>
+    <?php else: ?>
+    <h3>View List</h3>
+    <?php endif; if (App::instance()->config['action']['edit_value']): ?>
     <?=$this->renderPartial('lists/add', array('oldkey' => $this->key))?>
     <form class="form" action="<?=$this->router->url?>/lists/del/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="post">
         <legend>Remove from List</legend>
@@ -19,6 +25,7 @@
         </div>
         <button type="submit" class="btn" id="rem_list"><i class="icon-minus"></i> Remove</button>
     </form>
+    <?php endif; ?>
     <h5><i class="icon-key"></i> <?=$this->key?></h5>
     <table class="table table-striped settable">
         <tr>

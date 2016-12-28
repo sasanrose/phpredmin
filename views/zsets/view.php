@@ -1,14 +1,23 @@
-<?php $this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/actions.js\" type=\"text/javascript\"></script>"); ?>
+<?php if (App::instance()->config['action']['edit_value'] || App::instance()->config['action']['delete_value']) {
+	$this->addHeader("<script src=\"{$this->router->baseUrl}/js/redmin/actions.js\" type=\"text/javascript\"></script>"); 
+} ?>
 <div id='mainContainer'>
+    <?php if (App::instance()->config['action']['edit_value']): ?>
     <h3>Edit Sorted Set</h3>
+    <?php else: ?>
+    <h3>View Sorted Set</h3>
+    <?php endif; if (App::instance()->config['action']['edit_value']): ?>
     <?=$this->renderPartial('zsets/add', array('oldkey' => $this->key))?>
+    <?php endif; ?>
     <h5><i class="icon icon-key"></i> <?=$this->key?></h5>
     <table class="table table-striped settable keys-table">
         <tr>
             <th>Value</th>
             <th>Score</th>
+            <?php if (App::instance()->config['action']['delete_value']): ?>
             <th>Delete</th>
             <th></th>
+            <?php endif; ?>
         </tr>
         <?php foreach ($this->values as $member => $value): ?>
             <tr>
@@ -18,6 +27,7 @@
                 <td>
                     <?=$value?>
                 </td>
+                <?php if (App::instance()->config['action']['delete_value']): ?>
                 <td>
                     <a href="#" class="action del">
                         <i class="icon icon-trash" id="<?=$member?>" keytype="zsets" keyinfo="<?=$this->key?>"></i>
@@ -26,9 +36,10 @@
                 <td>
                     <input type="checkbox" name="keys[]" value="<?=$member?>" class="key-checkbox" />
                 </td>
+                <?php endif; ?>
             </tr>
         <?php endforeach; ?>
-        <?php if (!empty($this->values)): ?>
+        <?php if (App::instance()->config['action']['delete_value'] && !empty($this->values)): ?>
             <tr>
                 <td colspan="2">
                 </td>

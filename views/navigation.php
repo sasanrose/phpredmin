@@ -23,7 +23,7 @@
                     <span class="label pull-right" title="Number of keys">0</span>
                 </a>
             </li>
-        <?php else: ?>
+        <?php elseif (App::instance()->config['action']['add_database']): ?>
             <li class="database">
                 <a href="#" id="add_db"><i class="icon-plus"></i> Add DB</a>
             </li>
