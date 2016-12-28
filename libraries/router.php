@@ -34,8 +34,8 @@ final class router
             || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
         ) ? 'https' : 'http';
         $this->host     = $_SERVER['HTTP_HOST'];
-        $this->baseUrl  = $this->protocol.'://'.$this->host;
-        $this->url      = $this->protocol.'://'.$this->host.$_SERVER['SCRIPT_NAME'];
+        $this->baseUrl  = '//'.$this->host;
+        $this->url      = '//'.$this->host.$_SERVER['SCRIPT_NAME'];
         $this->path     = '';
 
         if (PHP_SAPI != 'cli') {
