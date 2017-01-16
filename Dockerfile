@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
 	&& pecl install gearman \
 	&& docker-php-ext-enable gearman
 
+RUN apt-get clean
+
 EXPOSE 80
 
 COPY docker/default.conf /etc/apache2/sites-available/000-default.conf
