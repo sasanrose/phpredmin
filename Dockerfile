@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install -y \
 	&& pecl install gearman \
 	&& docker-php-ext-enable gearman
 
-RUN apt-get clean
 
 EXPOSE 80
 
@@ -37,6 +36,12 @@ RUN git checkout tags/2.2.8 \
 
 WORKDIR /var/www/html
 COPY . phpredmin/
+
+# Clean up
+RUN rm -rf /usr/src/phpredis
+
+RUN apt-get --purge remove -y git-core \
+	&& apt-get clean
 
 ENV PHPREDMIN_LOG_DRIVER="std"
 ENV PHPREDMIN_LOG_THRESHOLD="4"
