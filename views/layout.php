@@ -125,7 +125,7 @@
                         <?= $this->app->current['host'] ?>:<?= $this->app->current['port'] ?> <span class="divider">/</span>
                     </li>
                     <li>
-                        <?= ($this->app->current['dbs'][$this->app->current['database']]['name'] ? $this->app->current['dbs'][$this->app->current['database']]['name'] . " (DB {$this->app->current['database']})" : "DB {$this->app->current['database']}") ?>
+                        <?= (isset($this->app->current['dbs'][$this->app->current['database']]['name']) ? $this->app->current['dbs'][$this->app->current['database']]['name'] . " (DB {$this->app->current['database']})" : "DB {$this->app->current['database']}") ?>
                     </li>
                 </ul>
             </div>
