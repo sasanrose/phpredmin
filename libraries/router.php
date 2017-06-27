@@ -28,13 +28,14 @@ final class router
 
     protected function parse()
     {
-        $this->method   = $_SERVER['REQUEST_METHOD'];
-        $this->host     = $_SERVER['HTTP_HOST'];
-        $this->baseUrl  = '//'.$this->host;
-        $this->url      = '//'.$this->host.$_SERVER['SCRIPT_NAME'];
         $this->path     = '';
+        $this->host     = '';
+        $this->method   = self::GET;
 
         if (PHP_SAPI != 'cli') {
+            $this->host     = $_SERVER['HTTP_HOST'];
+            $this->method   = $_SERVER['REQUEST_METHOD'];
+
             $this->path = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
             Log::factory()->write(Log::INFO, $_SERVER['REQUEST_URI'], 'Router');
 
@@ -45,6 +46,8 @@ final class router
             $this->path = $_SERVER['argv'][1];
         }
 
+        $this->baseUrl  = '//'.$this->host;
+        $this->url      = '//'.$this->host.$_SERVER['SCRIPT_NAME'];
         $this->request = $this->url.$this->path;
 
         if (preg_match('/^(.*)\/(.*)$/', $_SERVER['SCRIPT_NAME'], $matches)) {
