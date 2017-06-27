@@ -6,7 +6,7 @@ class Hashes_Controller extends Controller
     {
         $added = false;
 
-        if ($this->router->method == Router::POST) {
+        if (App::instance()->config['action']['add_value'] && $this->router->method == Router::POST) {
             $value   = $this->inputs->post('value', null);
             $key     = $this->inputs->post('key', null);
             $hashkey = $this->inputs->post('hashkey', null);

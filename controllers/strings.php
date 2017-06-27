@@ -6,7 +6,7 @@ class Strings_Controller extends Controller
     {
         $edited = null;
 
-        if ($this->router->method == Router::POST) {
+        if (App::instance()->config['action']['add_value'] && $this->router->method == Router::POST) {
             $newvalue = $this->inputs->post('newvalue', null);
             $key      = $this->inputs->post('key', null);
 
@@ -26,12 +26,14 @@ class Strings_Controller extends Controller
     {
         $added = false;
 
-        if ($this->router->method == Router::POST) {
-            $value = $this->inputs->post('value', null);
-            $key   = $this->inputs->post('key', null);
+        if (App::instance()->config['action']['add_value']) {
+            if ($this->router->method == Router::POST) {
+                $value = $this->inputs->post('value', null);
+                $key   = $this->inputs->post('key', null);
 
-            if (isset($value) && trim($value) != '' && isset($key) && trim($key) != '') {
-                $added = $this->db->set($key, $value);
+                if (isset($value) && trim($value) != '' && isset($key) && trim($key) != '') {
+                    $added = $this->db->set($key, $value);
+                }
             }
         }
 

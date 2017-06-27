@@ -19,7 +19,7 @@ class Keys_Controller extends Controller
     {
         $moved = null;
 
-        if ($this->router->method == Router::POST) {
+        if (App::instance()->config['action']['move_value'] && $this->router->method == Router::POST) {
             $db  = $this->inputs->post('db', null);
             $key = $this->inputs->post('key', null);
 
@@ -37,7 +37,7 @@ class Keys_Controller extends Controller
     {
         $renamed = null;
 
-        if ($this->router->method == Router::POST) {
+        if (App::instance()->config['action']['rename_value'] && $$this->router->method == Router::POST) {
             $newkey = $this->inputs->post('newkey', null);
             $key    = $this->inputs->post('key', null);
 
@@ -56,7 +56,7 @@ class Keys_Controller extends Controller
         $updated = null;
         $oldttl  = $this->db->ttl(urldecode($key));
 
-        if ($this->router->method == Router::POST) {
+        if (App::instance()->config['action']['expire_value'] && $this->router->method == Router::POST) {
             $ttl = $this->inputs->post('ttl', null);
             $key = $this->inputs->post('key', null);
 
@@ -78,7 +78,7 @@ class Keys_Controller extends Controller
 
     public function moveallAction()
     {
-        if ($this->router->method == Router::POST) {
+        if (App::instance()->config['action']['move_value'] && $this->router->method == Router::POST) {
             $results     = array();
             $values      = $this->inputs->post('values', array());
             $destination = $this->inputs->post('destination');
@@ -93,7 +93,7 @@ class Keys_Controller extends Controller
 
     public function delallAction()
     {
-        if ($this->router->method == Router::POST) {
+        if (App::instance()->config['action']['delete_value'] && $this->router->method == Router::POST) {
             $results = array();
             $values  = $this->inputs->post('values', array());
 
@@ -107,7 +107,7 @@ class Keys_Controller extends Controller
 
     public function bulkdeleteAction()
     {
-        if ($this->router->method == Router::POST) {
+        if (App::instance()->config['action']['bulk_delete'] && $this->router->method == Router::POST) {
             $key = $this->inputs->post('key', null);
 
             if (isset($key) && trim($key) != '') {

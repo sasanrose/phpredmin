@@ -8,10 +8,10 @@ $config = array(
     'auth' => array(
         'username' => 'admin',
         'password' => password_hash('admin', PASSWORD_DEFAULT)
-	),
+    ),
     'log' => array(
         'driver'    => 'file',
-        'threshold' => 1, /* 0: Disable Logging 1: Error 2: Notice 3: Info 4: Warning 5: Debug */
+        'threshold' => 0, /* 0: Disable Logging 1: Error 2: Notice 3: Info 4: Warning 5: Debug */
         'file'      => array(
             'directory' => 'logs'
         )

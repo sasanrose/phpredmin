@@ -9,18 +9,33 @@ class Welcome_Controller extends Controller
 
     public function configAction()
     {
-        $config = $this->db->config('GET', '*');
+        if (!App::instance()->config['config']['enable']) {
+            echo "Config is not enabled";
+	    die;
+	}
+
+	$config = $this->db->config('GET', '*');
 
         Template::factory()->render('welcome/config', array('config' => $config));
     }
 
     public function statsAction()
     {
+        if (!App::instance()->config['stats']['enable']) {
+            echo "Stats is not enabled";
+            die;
+        }
+
         Template::factory()->render('welcome/stats');
     }
 
     public function infoAction()
     {
+        if (!App::instance()->config['info']['enable']) {
+            echo "Info is not enabled";
+            die;
+        }
+
         $info       = $this->db->info();
         $uptimeDays = floor($info['uptime_in_seconds'] / 86400);
         $dbSize     = $this->db->dbSize();
@@ -35,6 +50,11 @@ class Welcome_Controller extends Controller
 
     public function saveAction($async = 0)
     {
+        if (!App::instance()->config['database']['redis'][$this->app->current['database']]['save']['enable']) {
+            echo "Save is not enabled";
+            die;
+        }
+
         $saved    = $async ? $this->db->bgSave() : $this->db->save();
         $filename = current($this->db->config('GET', 'dbfilename'));
 
@@ -47,6 +67,11 @@ class Welcome_Controller extends Controller
 
     public function slowlogAction()
     {
+        if (!App::instance()->config['slowlog']['enable']) {
+            echo "Slowlog is not enabled";
+            die;
+        }
+
         $support    = false;
         $slowlogs   = array();
         $serverInfo = $this->db->info('server');
