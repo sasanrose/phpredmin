@@ -1,2 +1,0 @@
-# Cron tab for phpredmin to collect redis statistics
-* * * * * root . /root/.profile; cd /var/www/html/phpredmin/public && /usr/local/bin/php index.php cron/index > /dev/stdout 2>&1

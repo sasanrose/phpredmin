@@ -1,0 +1,26 @@
+{
+    "authors": [
+        {
+            "name": "Sasan Rose",
+            "email": "sasan.rose@gmail.com"
+        }
+    ],
+    "name": "sasanrose/phpredmin",
+    "description": "Yet another web interface for Redis",
+    "version": "2.0.0-dev",
+    "config": {
+        "bin-dir": "bin"
+    },
+    "license": "MIT",
+    "require": {
+        "php": ">=7.0",
+        "ext-redis": "*",
+        "pimple/pimple": "^3.0",
+        "league/route": "^3.0.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.1",
+        "phpmd/phpmd": "^2.0",
+        "friendsofphp/php-cs-fixer": "^2.1"
+    }
+}

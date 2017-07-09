@@ -1,5 +1,5 @@
 *.swp
 *.swo
 *~
-logs/
-/nbproject/private/
+vendor/
+bin/
