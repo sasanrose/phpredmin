@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+source .githooks/base
+
+run "Syntax check" "php -l %file%"

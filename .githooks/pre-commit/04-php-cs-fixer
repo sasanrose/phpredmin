@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+source .githooks/base
+
+run "CS Violations check (php-cs-fixer)" "bin/php-cs-fixer fix %file% --no-ansi --dry-run --config .php_cs.dist"

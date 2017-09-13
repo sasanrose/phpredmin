@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+source .githooks/base
+
+run "CS Violations check (phpcs)" "bin/phpcs --standard=.phpcs.xml %file%"

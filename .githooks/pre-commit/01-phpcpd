@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+source .githooks/base
+
+display-name "Copy/Paste check"
+
+out=$(bin/phpcpd src src-test 2>&1)
+if [ $? -ne 0 ]; then
+	echo "FAILED"
+	echo "$out"
+	exit 1
+fi
+
+echo "0K"
+exit 0

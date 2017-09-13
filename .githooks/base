@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+function display-name {
+    name="$1"
+	dash=$(printf '.%.0s' {1..62})
+	echo -n "$name ${dash:${#name}} "
+}
+
+function run {
+    display-name "$1"
+
+    # Return if there is nothing to test
+	if [ -z "$(git diff --cached)" ]; then
+		echo "N/A"
+		return 0
+	fi
+
+    cmd="$2"
+    returnStatus=0
+
+    # Stash unstaged changes
+    restore=false
+
+	if [ ! -z "$(git diff)" ]; then
+        git stash save -q --keep-index
+        restore=true
+    fi
+
+	for file in $(git diff --name-only --cached | grep -e '\.php$');
+	do
+		cmd="${cmd//%file%/$file}"
+		out=$($cmd 2>&1)
+		if [ "$?" -ne 0 ]; then
+			echo "FAILED"
+			echo "$out"
+            returnStatus=1
+            break
+		fi
+	done
+
+    # Restore stashed changes if required
+    if [ "$restore" = true ]; then
+        git stash apply --index -q >/dev/null 2>&1 && git stash drop -q
+    fi
+
+    if [ "$returnStatus" = 0 ]; then
+        echo "OK"
+    fi
+
+    return $returnStatus
+}

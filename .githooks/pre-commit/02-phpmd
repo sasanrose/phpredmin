@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+source .githooks/base
+
+run "Mess detection check" "bin/phpmd %file% text .phpmd.xml"

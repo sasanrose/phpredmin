@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ruleset name="PHPRedmin">
+    <description>The PHPRedmin coding standard. Based on PSR-2 with a couple of exceptions.</description>
+    <rule ref="PSR2">
+        <exclude name="Generic.PHP.LowerCaseConstant"/>
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing"/>
+        <exclude name="PSR2.Methods.FunctionCallSignature.SpaceBeforeCloseBracket"/>
+        <exclude name="PSR2.Methods.FunctionCallSignature.SpaceAfterOpenBracket"/>
+    </rule>
+    <rule ref="PSR1.Files.SideEffects" />
+
+    <!-- The PHP constants true, false, and null MUST be in upper case. -->
+    <rule ref="Generic.PHP.UpperCaseConstant"/>
+    <config name="colors" value="1"/>
+    <config name="colors" value="1"/>
+</ruleset>

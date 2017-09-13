@@ -19,8 +19,10 @@
         "league/route": "^3.0.4"
     },
     "require-dev": {
+        "sebastian/phpcpd": "^2.0",
         "phpunit/phpunit": "^6.1",
         "phpmd/phpmd": "^2.0",
-        "friendsofphp/php-cs-fixer": "^2.1"
+        "friendsofphp/php-cs-fixer": "^2.1",
+        "squizlabs/php_codesniffer": "^2.0"
     }
 }
