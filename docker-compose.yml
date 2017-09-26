@@ -1,0 +1,16 @@
+version: '2'
+services:
+    phpredmin:
+        image: sasanrose/phpredmin:2.0
+        volumes:
+            - ./:/var/www/html/phpredmin:z
+        environment:
+            - PHPREDMIN_REDIS_SERVERS_ADDR_0=redis
+            - PHPREDMIN_REDIS_SERVERS_PORT_0=6379
+            - PHPREDMIN_TEMPLATES_CACHE_DIR=/tmp/php-redmin-cache
+        ports:
+            - "8080:80"
+        depends_on:
+            - redis
+    redis:
+        image: redis

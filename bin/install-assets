@@ -1,0 +1,35 @@
+#!/bin/bash
+
+JQUERYVER="3.2.1"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"   )" && pwd   )"
+
+echo "Preparing the assets directory"
+
+if [ -e $DIR/../public/assets ]; then
+    rm $DIR/../public/assets -rf;
+fi
+
+mkdir -p $DIR/../public/assets/foundation
+mkdir -p $DIR/../public/assets/jquery
+
+echo "Creating zurb foundation assets";
+
+if [ ! -e $DIR/../vendor/zurb/foundation/dist ]; then
+    echo "Could not find zurb dist directory"
+    exit 1
+fi
+
+cp $DIR/../vendor/zurb/foundation/dist/js/foundation.min.js $DIR/../public/assets/foundation
+cp $DIR/../vendor/zurb/foundation/dist/css/foundation.min.css $DIR/../public/assets/foundation
+
+echo "Downloading jQuery";
+
+wget "https://code.jquery.com/jquery-$JQUERYVER.min.js" -O $DIR/../public/assets/jquery/jquery.min.js
+
+if [ $? -ne 0 ]; then
+    echo "Could not download jquery"
+    exit 1
+fi
+
+echo "Assets prepared successfully"
+exit 0

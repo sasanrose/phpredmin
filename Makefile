@@ -21,3 +21,6 @@ setup-dev:
 install:
 	$(call install_composer,) \
 	bin/composer install --no-dev
+
+docker:
+	docker build -t sasanrose/phpredmin:2.0 -f .docker/Dockerfile .

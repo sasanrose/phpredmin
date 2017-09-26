@@ -1,6 +1,8 @@
+*.cache
 *.swp
 *.swo
 *~
+public/assets/
+bin/*
+!bin/install-assets
 vendor/
-bin/
-*.cache

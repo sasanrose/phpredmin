@@ -12,11 +12,37 @@
         "bin-dir": "bin"
     },
     "license": "MIT",
+    "autoload": {
+        "files": [
+            "src-func/dependencies.php",
+            "src-func/envs.php",
+            "src-func/controllers.php",
+            "src-func/routes.php"
+        ],
+        "psr-4": {
+            "PhpRedmin\\": [
+                "src"
+            ]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhpRedmin\\Test\\": [
+                "src-test"
+            ]
+        }
+    },
     "require": {
         "php": ">=7.0",
         "ext-redis": "*",
+        "ext-http": "^3.1",
+        "kriswallsmith/assetic": "^1.4",
+        "league/route": "^3.0",
+        "psr/http-message": "^1.0",
         "pimple/pimple": "^3.0",
-        "league/route": "^3.0.4"
+        "twig/twig": "~2.0",
+        "zendframework/zend-diactoros": "^1.6",
+        "zurb/foundation": "^6.4"
     },
     "require-dev": {
         "sebastian/phpcpd": "^2.0",
@@ -24,5 +50,9 @@
         "phpmd/phpmd": "^2.0",
         "friendsofphp/php-cs-fixer": "^2.1",
         "squizlabs/php_codesniffer": "^2.0"
+    },
+    "scripts": {
+        "post-install-cmd": "./bin/install-assets",
+        "post-update-cmd": "./bin/install-assets"
     }
 }

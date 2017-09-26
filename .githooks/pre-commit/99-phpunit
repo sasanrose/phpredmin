@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [ ! -z "$(git diff)" ]; then
+    git stash save -q --keep-index
+    restore=true
+fi
+
+bin/phpunit --colors=never --stderr src-test/
+status=$?
+
+# Restore stashed changes if required
+if [ "$restore" = true ]; then
+    git stash apply --index -q >/dev/null 2>&1 && git stash drop -q
+fi
+
+exit $status
