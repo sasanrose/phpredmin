@@ -6,3 +6,4 @@ public/assets/
 bin/*
 !bin/install-assets
 vendor/
+cover/
