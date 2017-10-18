@@ -1,0 +1,21 @@
+{% extends "main.twig" %}
+
+{% block head %}
+    {{ parent() }}
+    <link href="assets/phpredmin/css/installer-page.css" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block page %}
+    <div class="grid-container fluid">
+        <div class="grid-x">
+            <div class="large-4 medium-3 small-2 cell">
+            </div>
+            <div class="large-4 medium-6 small-8 cell">
+                {% block content %}
+                {% endblock %}
+            </div>
+            <div class="large-4 medium-3 small-2 cell">
+            </div>
+        </div>
+    </div>
+{% endblock %}

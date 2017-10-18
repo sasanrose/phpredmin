@@ -1,7 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+REQUIRED_COMMANDS=( "tar" "wget" )
+
+for COMMAND in "${REQUIRED_COMMANDS[@]}"
+do
+    if [ ! "$( type "$COMMAND" )" ]; then
+        echo "This script needs $COMMAND. You can run the script again using ./bin/install-assets";
+        exit 1;
+    fi
+done
 
 JQUERYVER="3.2.1"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"   )" && pwd   )"
+JQUERYFILE="jquery-$JQUERYVER.min.js"
 
 echo "Preparing the assets directory"
 
@@ -11,6 +22,7 @@ fi
 
 mkdir -p $DIR/../public/assets/foundation
 mkdir -p $DIR/../public/assets/jquery
+mkdir -p $DIR/../public/assets/phpredmin/font
 
 echo "Creating zurb foundation assets";
 
@@ -22,14 +34,35 @@ fi
 cp $DIR/../vendor/zurb/foundation/dist/js/foundation.min.js $DIR/../public/assets/foundation
 cp $DIR/../vendor/zurb/foundation/dist/css/foundation.min.css $DIR/../public/assets/foundation
 
-echo "Downloading jQuery";
+if [ ! -e ".$JQUERYFILE.cache" ]; then
+    echo "Downloading jQuery";
 
-wget "https://code.jquery.com/jquery-$JQUERYVER.min.js" -O $DIR/../public/assets/jquery/jquery.min.js
+    wget "https://code.jquery.com/jquery-$JQUERYVER.min.js" -O ".$JQUERYFILE.cache"
+
+    if [ $? -ne 0 ]; then
+        echo "Could not download jquery"
+        exit 1
+    fi
+else
+    echo "Using cache for jQuery"
+fi
+
+cp ".$JQUERYFILE.cache" $DIR/../public/assets/jquery/jquery.min.js
+
+echo "Creating phpredmin assets";
+
+cp -r $DIR/../assets/img $DIR/../public/assets/phpredmin/
+cp -r $DIR/../assets/css $DIR/../public/assets/phpredmin/
+cp -r $DIR/../assets/favicon.ico $DIR/../public/assets/phpredmin/
+
+echo "Extract webfonts"
+
+tar -xf $DIR/../assets/Merriweather.tar.gz -C $DIR/../public/assets/phpredmin/font
 
 if [ $? -ne 0 ]; then
-    echo "Could not download jquery"
+    echo "Could not extract webfonts"
     exit 1
 fi
 
-echo "Assets prepared successfully"
+echo "Assets installed successfully"
 exit 0

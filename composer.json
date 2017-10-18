@@ -14,9 +14,12 @@
     "license": "MIT",
     "autoload": {
         "files": [
+            "src-func/controllers.php",
             "src-func/dependencies.php",
             "src-func/envs.php",
-            "src-func/controllers.php",
+            "src-func/i18n.php",
+            "src-func/logger.php",
+            "src-func/models.php",
             "src-func/routes.php"
         ],
         "psr-4": {
@@ -34,14 +37,17 @@
     },
     "require": {
         "php": ">=7.0",
-        "ext-redis": "*",
+        "ext-gettext": "*",
         "ext-http": "^3.1",
+        "ext-redis": "*",
         "kriswallsmith/assetic": "^1.4",
         "league/route": "^3.0",
         "psr/http-message": "^1.0",
         "pimple/pimple": "^3.0",
         "twig/twig": "~2.0",
+        "twig/extensions": "^1.5",
         "zendframework/zend-diactoros": "^1.6",
+        "zendframework/zend-log": "^2.9",
         "zurb/foundation": "^6.4"
     },
     "require-dev": {

@@ -1,0 +1,22 @@
+@font-face {
+    font-family: "phpredmin";
+    src: url('/assets/phpredmin/font/Merriweather-Regular.ttf');
+}
+
+@font-face {
+    font-family: "phpredmin-black";
+    src: url('/assets/phpredmin/font/Merriweather-Black.ttf');
+}
+
+body {
+    font-family: "phpredmin";
+    background-color: #77D2EF;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "phpredmin-black";
+}
+
+.form_error {
+    border-color: #f00;
+}

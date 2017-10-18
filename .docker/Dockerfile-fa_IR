@@ -1,0 +1,13 @@
+FROM sasanrose/phpredmin:2.0
+
+RUN apt-get clean \
+    && apt-get update \
+    && apt-get install -y locales \
+    && dpkg-reconfigure --frontend=noninteractive locales \
+    && echo "fa_IR UTF-8" > /etc/locale.gen \
+    && locale-gen \
+    && update-locale LANG=fa_IR
+
+ENV PHPREDMIN_UI_LANG=fa
+ENV PHPREDMIN_UI_LANG_DIR=rtl
+ENV PHPREDMIN_LOCALE=fa_IR

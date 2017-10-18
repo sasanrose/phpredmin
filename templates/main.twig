@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% if ( lang is defined ) and ( dir is defined ) %}
+    <html class="no-js" lang="{{ lang }}" dir="{{ dir }}">
+{% else %}
+    <html>
+{% endif %}
+        <head>
+            {% block head %}
+                <meta charset="utf-8" />
+                <meta http-equiv="x-ua-compatible" content="ie=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="shortcut icon" href="assets/phpredmin/favicon.ico" />
+                <title>PHPRedmin - {% block title %}{% endblock %}</title>
+                <link href="assets/foundation/foundation.min.css" type="text/css" rel="stylesheet" />
+
+            {% endblock %}
+        </head>
+        <body>
+            {% block page %}{% endblock %}
+			<script src="assets/jquery/jquery.min.js"></script>
+			<script src="assets/foundation/foundation.min.js"></script>
+			<script>
+			  $(document).foundation();
+			</script>
+        </body>
+</html>

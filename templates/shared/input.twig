@@ -1,0 +1,1 @@
+<input {% if errors[name] is defined %}class="form_error"{% endif %} {% if type != 'password' and type != 'repassword' and fields[name] is defined %}value="{{ fields[name] }}"{% endif %} name="{{ name }}" type="{{ type }}" id="phpredmin-{{ name }}" placeholder="{% block placeholder %}{% endblock %}" {% if describedby is defined %}aria-describedby="{{ describedby }}"{% endif %}/>

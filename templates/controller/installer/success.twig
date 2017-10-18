@@ -1,0 +1,32 @@
+{% extends "page/installer.twig" %}
+
+{% block title %}System info{% endblock %}
+{% block content %}
+<div class="grid-y grid-padding-y">
+    <div class="cell shrink small-cell-block-container">
+        <div class="grid-x grid-padding-x">
+            <div class="shrink cell">
+                <img src="assets/phpredmin/img/phpredmin.png" />
+            </div>
+            <div class="auto cell align-self-middle align-center">
+                <h3>{% trans %}Install PHPRedmin{% endtrans %}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="cell shrink small-cell-block-container">
+        <div class="grid-x grid-padding-x">
+            <div class="small-12 callout success">
+                {% trans %}
+                    {{ firstname }} {{ lastname }}, Thankyou for using PHPRedmin
+                {% endtrans %}<br/>
+                {% trans "PHPRedmin is installed successfuly" %}<br/>
+                <a href="/login">
+                    {% trans %}
+                        Click here to login to PHPRedmin
+                    {% endtrans %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
