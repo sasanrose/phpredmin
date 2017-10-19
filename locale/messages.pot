@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the phpredmin package.
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpredmin 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-19 07:16+1100\n"
+"POT-Creation-Date: 2017-10-19 20:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,30 +29,35 @@ msgstr ""
 #: /tmp/phpredmin-gettext/21/2114233a84efae1c269af8a1ab115962607ff7d09c5581b6c9f02c74b48daf73.php:88
 #: /tmp/phpredmin-gettext/1d/1d0381b1c6a116ddd2884d6d7b27bb45905b27ee845bcdbdcbc8549d615c75ef.php:88
 #: /home/sasan/Project/phpredmin/bin/gettext/../../src/Controller/Installer.php:96
+#: /phpredmin/bin/gettext/../../src/Controller/Installer.php:103
 msgid "Name"
 msgstr ""
 
 #: /tmp/phpredmin-gettext/21/2114233a84efae1c269af8a1ab115962607ff7d09c5581b6c9f02c74b48daf73.php:100
 #: /tmp/phpredmin-gettext/1d/1d0381b1c6a116ddd2884d6d7b27bb45905b27ee845bcdbdcbc8549d615c75ef.php:100
 #: /home/sasan/Project/phpredmin/bin/gettext/../../src/Controller/Installer.php:97
+#: /phpredmin/bin/gettext/../../src/Controller/Installer.php:104
 msgid "Firstname"
 msgstr ""
 
 #: /tmp/phpredmin-gettext/21/2114233a84efae1c269af8a1ab115962607ff7d09c5581b6c9f02c74b48daf73.php:112
 #: /tmp/phpredmin-gettext/1d/1d0381b1c6a116ddd2884d6d7b27bb45905b27ee845bcdbdcbc8549d615c75ef.php:112
 #: /home/sasan/Project/phpredmin/bin/gettext/../../src/Controller/Installer.php:98
+#: /phpredmin/bin/gettext/../../src/Controller/Installer.php:105
 msgid "Lastname"
 msgstr ""
 
 #: /tmp/phpredmin-gettext/21/2114233a84efae1c269af8a1ab115962607ff7d09c5581b6c9f02c74b48daf73.php:124
 #: /tmp/phpredmin-gettext/1d/1d0381b1c6a116ddd2884d6d7b27bb45905b27ee845bcdbdcbc8549d615c75ef.php:124
 #: /home/sasan/Project/phpredmin/bin/gettext/../../src/Controller/Installer.php:99
+#: /phpredmin/bin/gettext/../../src/Controller/Installer.php:106
 msgid "Email"
 msgstr ""
 
 #: /tmp/phpredmin-gettext/21/2114233a84efae1c269af8a1ab115962607ff7d09c5581b6c9f02c74b48daf73.php:136
 #: /tmp/phpredmin-gettext/1d/1d0381b1c6a116ddd2884d6d7b27bb45905b27ee845bcdbdcbc8549d615c75ef.php:136
 #: /home/sasan/Project/phpredmin/bin/gettext/../../src/Controller/Installer.php:104
+#: /phpredmin/bin/gettext/../../src/Controller/Installer.php:111
 msgid "Password"
 msgstr ""
 
@@ -66,6 +71,7 @@ msgstr ""
 #: /tmp/phpredmin-gettext/21/2114233a84efae1c269af8a1ab115962607ff7d09c5581b6c9f02c74b48daf73.php:154
 #: /tmp/phpredmin-gettext/1d/1d0381b1c6a116ddd2884d6d7b27bb45905b27ee845bcdbdcbc8549d615c75ef.php:154
 #: /home/sasan/Project/phpredmin/bin/gettext/../../src/Controller/Installer.php:109
+#: /phpredmin/bin/gettext/../../src/Controller/Installer.php:116
 msgid "Password repeat"
 msgstr ""
 
@@ -116,29 +122,35 @@ msgid ""
 msgstr ""
 
 #: /home/sasan/Project/phpredmin/bin/gettext/../../src/Model/Systeminfo.php:100
+#: /phpredmin/bin/gettext/../../src/Model/Systeminfo.php:105
 msgid "Administrators"
 msgstr ""
 
 #: /home/sasan/Project/phpredmin/bin/gettext/../../src/Controller/Installer.php:121
+#: /phpredmin/bin/gettext/../../src/Controller/Installer.php:128
 msgid "Passwords do not match"
 msgstr ""
 
 #: /home/sasan/Project/phpredmin/bin/gettext/../../src/Validator/Traits/Password.php:43
+#: /phpredmin/bin/gettext/../../src/Validator/Traits/Password.php:52
 #, php-format
 msgid "%s does not match the password policy"
 msgstr ""
 
 #: /home/sasan/Project/phpredmin/bin/gettext/../../src/Validator/Traits/Error.php:21
+#: /phpredmin/bin/gettext/../../src/Validator/Traits/Error.php:30
 #, php-format
 msgid "%s is invalid."
 msgstr ""
 
 #: /home/sasan/Project/phpredmin/bin/gettext/../../src/Validator/Traits/Error.php:25
+#: /phpredmin/bin/gettext/../../src/Validator/Traits/Error.php:34
 #, php-format
 msgid "%s is required."
 msgstr ""
 
 #: /home/sasan/Project/phpredmin/bin/gettext/../../src/Validator/Traits/Error.php:28
+#: /phpredmin/bin/gettext/../../src/Validator/Traits/Error.php:37
 #, php-format
 msgid "%s is an invalid email address."
 msgstr ""
