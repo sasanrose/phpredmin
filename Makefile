@@ -12,14 +12,17 @@ define run_in_docker
 	docker rm $(randname)
 endef
 
+tagname = sasanrose/phpredmin:2.0
+dockerfile = .docker/Dockerfile
+ifdef DOCKERTAG
+	tagname = sasanrose/phpredmin:2.0-$(DOCKERTAG)
+	dockerfile = .docker/Dockerfile-$(DOCKERTAG)
+endif
+
+localeDockerfile = sasanrose/phpredmin:2.0-dev-$(LOCALE)
+
 docker:
-	docker build -t sasanrose/phpredmin:2.0 -f .docker/Dockerfile .
-
-docker-dev:
-	docker build -t sasanrose/phpredmin:2.0-dev -f .docker/Dockerfile-dev .
-
-docker-fa-ir:
-	docker build -t sasanrose/phpredmin:2.0-fa -f .docker/Dockerfile-fa_IR .
+	docker build -t $(tagname) -f $(dockerfile) .
 
 fmt:
 	$(call fmt,)
@@ -35,6 +38,9 @@ install:
 
 install-assets:
 	./bin/install-assets
+
+locale-files:
+	$(call run_in_docker,$(localeDockerfile),./bin/gettext/extract && ./bin/gettext/locale -l $(LOCALE) && ./bin/gettext/compile -l $(LOCALE),$(shell id -u):$(shell id -u))
 
 setup-dev:
 	$(call install_composer)
