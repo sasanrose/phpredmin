@@ -19,6 +19,7 @@
             "src-func/envs.php",
             "src-func/i18n.php",
             "src-func/logger.php",
+            "src-func/middlewares.php",
             "src-func/models.php",
             "src-func/routes.php"
         ],

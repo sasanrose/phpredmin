@@ -16,11 +16,11 @@ $container = new \Pimple\Container();
 $container = \PhpRedmin\envs($container);
 $container = \PhpRedmin\i18n($container);
 $container = \PhpRedmin\logger($container);
+$container = \PhpRedmin\middlewares($container);
 $container = \PhpRedmin\dependencies($container);
 $container = \PhpRedmin\models($container);
 $container = \PhpRedmin\controllers($container);
 $container = \PhpRedmin\routing($container);
-//$container = \PhpRedmin\middlewares($container);
 
 $response = $container[\League\Route\RouteCollectionInterface::class]->dispatch(
     $container[\Psr\Http\Message\ServerRequestInterface::class],

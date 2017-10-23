@@ -13,6 +13,7 @@ namespace PhpRedmin;
 
 use League\Route;
 use PhpRedmin\Integration\Twig\Extension\GlobalVars;
+use PhpRedmin\Middleware\Redis as RedisMiddleware;
 use PhpRedmin\Url\Builder\Pecl as PeclUrlBuilder;
 use PhpRedmin\Url\UrlBuilderInterface;
 use PhpRedmin\Validator\FormValidator;
@@ -39,14 +40,17 @@ function dependencies(Container $c)
     $c[Redis::class] = function($c)
     {
         $redis = new Redis();
-        $redis->connect($c['REDIS_SERVERS'][0]['ADDR'], $c['REDIS_SERVERS'][0]['PORT']);
 
         return $redis;
     };
 
     $c[Route\RouteCollectionInterface::class] = function($c)
     {
-        return new Route\RouteCollection($c[Psr11\Container::class]);
+        $router = new Route\RouteCollection($c[Psr11\Container::class]);
+
+        $router->middleware($c[RedisMiddleware::class]);
+
+        return $router;
     };
 
     $c[ResponseInterface::class] = function($c)

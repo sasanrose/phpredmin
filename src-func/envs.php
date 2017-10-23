@@ -34,6 +34,8 @@ function envs(Container $c) {
 
     $c['REDIS_SERVERS'] = $servers;
 
+    $c['REDIS_DEFAULT_SERVER'] = getenv('PHPREDMIN_REDIS_DEFAULT_SERVER') ?: 0;
+
     $c['JQUERY_VERSION'] = getenv('PHPREDMIN_JQUERY_VER') ?: '3.2.1';
 
     $c['TEMPLATES_DIR'] = getenv('PHPREDMIN_TEMPLATES_DIR') ?: __DIR__ . '/../templates';
