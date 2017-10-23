@@ -34,6 +34,11 @@ class Redis implements MiddlewareInterface
     protected $redis;
 
     /**
+     * Default paths that should use default server and db.
+     */
+    protected $pathsWithDefault = ['/login', '/logout', '/install'];
+
+    /**
      * Instantiates Redis middleware.
      *
      * @param Container $container
@@ -68,6 +73,12 @@ class Redis implements MiddlewareInterface
             $this->container['REDIS_SERVERS'][$redisIndex]['PORT']
         );
 
+        if (isset($this->container['REDIS_SERVERS'][$redisIndex]['PASS'])) {
+            $this->redis->auth($this->container['REDIS_SERVERS'][$redisIndex]['PASS']);
+        }
+
+        $this->redis->select($this->getDbIndex($path, $query));
+
         return $next($request, $response);
     }
 
@@ -81,14 +92,10 @@ class Redis implements MiddlewareInterface
      */
     protected function getRedisIndex(string $path, array $query = [])
     {
-        $pathsWithDefault = ['/login', '/logout', '/install'];
-
         $defaultRedis = $this->container['REDIS_DEFAULT_SERVER'];
 
-        foreach ($pathsWithDefault as $pathWithDefault) {
-            if (preg_match('/^'.preg_quote($pathWithDefault, '/').'/', $path)) {
-                return $defaultRedis;
-            }
+        if ($this->isDefaultPath($path)) {
+            return $defaultRedis;
         }
 
         if (isset($query['redis']) && isset($this->container['REDIS_SERVERS'][$query['redis']])) {
@@ -96,5 +103,46 @@ class Redis implements MiddlewareInterface
         }
 
         return $defaultRedis;
+    }
+
+    /**
+     * Return the db server that should be used.
+     *
+     * @param string $path
+     * @param array  $query
+     *
+     * @return int
+     */
+    protected function getDbIndex(string $path, array $query = [])
+    {
+        $defaultDb = $this->container['REDIS_DEFAULT_DB'];
+
+        if ($this->isDefaultPath($path)) {
+            return $defaultDb;
+        }
+
+        if (isset($query['db'])) {
+            return $query['db'];
+        }
+
+        return $defaultDb;
+    }
+
+    /**
+     * Checks if path in the list of default paths or not.
+     *
+     * @param string $path
+     *
+     * @return bool
+     */
+    protected function isDefaultPath(string $path)
+    {
+        foreach ($this->pathsWithDefault as $pathWithDefault) {
+            if (preg_match('/^'.preg_quote($pathWithDefault, '/').'/', $path)) {
+                return TRUE;
+            }
+        }
+
+        return FALSE;
     }
 }

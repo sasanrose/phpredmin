@@ -1,5 +1,5 @@
 define fmt
-	bin/php-cs-fixer fix --config=.php_cs.dist $(1) || true
+	bin/php-cs-fixer fix --config=.php_cs_fmt.dist $(1) || true
 endef
 
 define install_composer

@@ -14,32 +14,44 @@ namespace PhpRedmin;
 use Pimple\Container;
 use Zend\Log\Logger;
 
-function envs(Container $c) {
-
+/**
+ * @SuppressWarnings(CyclomaticComplexity)
+ * @SuppressWarnings(NPath)
+ */
+function envs(Container $c)
+{
     $servers = [];
 
     $i = 0;
 
     while (TRUE) {
-        $addr = getenv('PHPREDMIN_REDIS_SERVERS_ADDR_' . $i);
-        $port = getenv('PHPREDMIN_REDIS_SERVERS_PORT_' . $i);
+        $addr = getenv('PHPREDMIN_REDIS_SERVERS_ADDR_'.$i);
+        $port = getenv('PHPREDMIN_REDIS_SERVERS_PORT_'.$i);
 
-        if ($addr === FALSE || $port === FALSE) {
+        if (FALSE === $addr || FALSE === $port) {
             break;
         }
 
         $servers[$i] = ['ADDR' => $addr, 'PORT' => $port];
-        $i++;
+
+        $pass = getenv('PHPREDMIN_REDIS_SERVERS_PASS_'.$i);
+
+        if (FALSE !== $pass) {
+            $servers[$i]['PASS'] = $pass;
+        }
+
+        ++$i;
     }
 
     $c['REDIS_SERVERS'] = $servers;
 
     $c['REDIS_DEFAULT_SERVER'] = getenv('PHPREDMIN_REDIS_DEFAULT_SERVER') ?: 0;
+    $c['REDIS_DEFAULT_DB'] = getenv('PHPREDMIN_REDIS_DEFAULT_DB') ?: 0;
 
     $c['JQUERY_VERSION'] = getenv('PHPREDMIN_JQUERY_VER') ?: '3.2.1';
 
-    $c['TEMPLATES_DIR'] = getenv('PHPREDMIN_TEMPLATES_DIR') ?: __DIR__ . '/../templates';
-    $c['TEMPLATES_CACHE_DIR'] = getenv('PHPREDMIN_TEMPLATES_CACHE_DIR') ?: __DIR__ . '/../templates-cache';
+    $c['TEMPLATES_DIR'] = getenv('PHPREDMIN_TEMPLATES_DIR') ?: __DIR__.'/../templates';
+    $c['TEMPLATES_CACHE_DIR'] = getenv('PHPREDMIN_TEMPLATES_CACHE_DIR') ?: __DIR__.'/../templates-cache';
 
     $c['DEVELOPMENT_MODE'] = getenv('PHPREDMIN_DEVELOPMENT_MODE') ?: FALSE;
 

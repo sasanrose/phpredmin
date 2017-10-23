@@ -14,15 +14,15 @@ namespace PhpRedmin;
 use PhpRedmin\Controller\Installer;
 use PhpRedmin\Controller\InstallerInterface;
 use PhpRedmin\Model\Systeminfo;
-use PhpRedmin\Validator\FormValidatorInterface;
 use PhpRedmin\Url\UrlBuilderInterface;
+use PhpRedmin\Validator\FormValidatorInterface;
 use Pimple\Container;
 use Psr\Log\LoggerInterface;
 use Twig\Environment;
 
 function controllers(Container $c)
 {
-    $c[InstallerInterface::class] = function($c) {
+    $c[InstallerInterface::class] = function ($c) {
         return new Installer(
             $c[Environment::class],
             $c[UrlBuilderInterface::class],

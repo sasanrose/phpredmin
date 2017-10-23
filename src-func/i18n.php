@@ -13,9 +13,10 @@ namespace PhpRedmin;
 
 use Pimple\Container;
 
-function i18n(Container $c) {
+function i18n(Container $c)
+{
     if ($c['LOCALE']) {
-        \putenv('LANGUAGE=' . $c['LOCALE']);
+        \putenv('LANGUAGE='.$c['LOCALE']);
         \setlocale(LC_ALL, $c['LOCALE']);
 
         $domain = 'messages'; // which language file to use

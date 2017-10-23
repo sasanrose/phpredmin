@@ -9,7 +9,7 @@ This source file is subject to the MIT license that is bundled
 with this source code in the file LICENSE.
 EOF;
 
-return (new PhpCsFixer\Config('PHPRedmin'))
+$fixer = (new PhpCsFixer\Config('PHPRedmin'))
     ->setRiskyAllowed(TRUE)
     ->setRules([
         '@Symfony' => TRUE,
@@ -32,13 +32,5 @@ return (new PhpCsFixer\Config('PHPRedmin'))
         // Exclude
         'lowercase_constants' => FALSE,
     ])
-    ->setFinder(
-        PhpCsFixer\Finder::create()
-            ->exclude('vendor')
-            ->exclude('.git')
-            ->in(__DIR__.'/src')
-            ->in(__DIR__.'/public')
-            ->in(__DIR__.'/src-test')
-    )
     ->setCacheFile(__DIR__.'/.php_cs.cache')
 ;

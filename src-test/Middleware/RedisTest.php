@@ -33,9 +33,10 @@ class RedisTest extends MiddlewareTestcase
         $this->container = new Container();
 
         $this->container['REDIS_DEFAULT_SERVER'] = 1;
+        $this->container['REDIS_DEFAULT_DB'] = 0;
 
         $this->container['REDIS_SERVERS'] = [
-            ['ADDR' => 'redis0', 'PORT' => 63790],
+            ['ADDR' => 'redis0', 'PORT' => 63790, 'PASS' => 'alpha'],
             ['ADDR' => 'redis1', 'PORT' => 63791],
         ];
     }
@@ -72,6 +73,10 @@ class RedisTest extends MiddlewareTestcase
                 $this->container['REDIS_SERVERS'][$redisIndex]['PORT']
             );
 
+        $this->redis
+            ->expects($this->exactly($count))
+            ->method('select');
+
         for ($i = 0; $i < $count; ++$i) {
             $middleware = new RedisMiddleware($this->container, $this->redis);
             $middleware($this->request, $this->response, $this->next);
@@ -80,7 +85,7 @@ class RedisTest extends MiddlewareTestcase
 
     public function testQuery()
     {
-        $this->query(0, 0);
+        $this->query(0, 0, 1);
 
         $middleware = new RedisMiddleware($this->container, $this->redis);
         $middleware($this->request, $this->response, $this->next);
@@ -94,13 +99,24 @@ class RedisTest extends MiddlewareTestcase
         $middleware($this->request, $this->response, $this->next);
     }
 
-    protected function query($queryIndex, $expectedIndex)
+    protected function query($queryIndex, $expectedIndex, $db = NULL)
     {
+        $queryString = "redis={$queryIndex}";
+
+        if (isset($db)) {
+            $this->redis
+                ->expects($this->once())
+                ->method('select')
+                ->with($db);
+
+            $queryString .= "&db={$db}";
+        }
+
         $url = $this->createMock(UriInterface::class);
         $url
             ->expects($this->once())
             ->method('getQuery')
-            ->willReturn("redis={$queryIndex}");
+            ->willReturn($queryString);
 
         $url
             ->expects($this->once())

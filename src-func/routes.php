@@ -11,8 +11,8 @@
 
 namespace PhpRedmin;
 
-use PhpRedmin\Controller\InstallerInterface;
 use League\Route\RouteCollectionInterface;
+use PhpRedmin\Controller\InstallerInterface;
 use Pimple\Container;
 
 function routing(Container $c)

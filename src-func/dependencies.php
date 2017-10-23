@@ -23,9 +23,9 @@ use Pimple\Psr11;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Redis;
-use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 use Twig\Extensions\I18nExtension;
+use Twig\Loader\FilesystemLoader;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\EmitterInterface;
 use Zend\Diactoros\Response\SapiEmitter;
@@ -37,15 +37,13 @@ function dependencies(Container $c)
         return new Psr11\Container($c);
     });
 
-    $c[Redis::class] = function($c)
-    {
+    $c[Redis::class] = function ($c) {
         $redis = new Redis();
 
         return $redis;
     };
 
-    $c[Route\RouteCollectionInterface::class] = function($c)
-    {
+    $c[Route\RouteCollectionInterface::class] = function ($c) {
         $router = new Route\RouteCollection($c[Psr11\Container::class]);
 
         $router->middleware($c[RedisMiddleware::class]);
@@ -53,24 +51,21 @@ function dependencies(Container $c)
         return $router;
     };
 
-    $c[ResponseInterface::class] = function($c)
-    {
-        return new Response;
+    $c[ResponseInterface::class] = function ($c) {
+        return new Response();
     };
 
-    $c[ServerRequestInterface::class] = $c->factory(function($c) {
-		return ServerRequestFactory::fromGlobals(
-			$_SERVER, $_GET, $_POST, $_COOKIE, $_FILES
-		);
+    $c[ServerRequestInterface::class] = $c->factory(function ($c) {
+        return ServerRequestFactory::fromGlobals(
+            $_SERVER, $_GET, $_POST, $_COOKIE, $_FILES
+        );
     });
 
-    $c[EmitterInterface::class] = function($c)
-    {
-        return new SapiEmitter;
+    $c[EmitterInterface::class] = function ($c) {
+        return new SapiEmitter();
     };
 
-    $c[Environment::class] = function($c)
-    {
+    $c[Environment::class] = function ($c) {
         $loader = new FilesystemLoader($c['TEMPLATES_DIR']);
 
         $options = [];
@@ -88,13 +83,13 @@ function dependencies(Container $c)
 
         $twig->addExtension(new GlobalVars($globalVars));
 
-        $twig->addExtension(new I18nExtension);
+        $twig->addExtension(new I18nExtension());
 
         return $twig;
     };
 
-    $c[UrlBuilderInterface::class] = $c->factory(function($c) {
-        $builder = new PeclUrlBuilder;
+    $c[UrlBuilderInterface::class] = $c->factory(function ($c) {
+        $builder = new PeclUrlBuilder();
 
         $builder->setHost($_SERVER['HTTP_HOST']);
         $builder->setScheme($_SERVER['REQUEST_SCHEME']);
@@ -102,8 +97,8 @@ function dependencies(Container $c)
         return $builder;
     });
 
-    $c[FormValidatorInterface::class] = $c->factory(function($c) {
-        return new FormValidator;
+    $c[FormValidatorInterface::class] = $c->factory(function ($c) {
+        return new FormValidator();
     });
 
     return $c;
