@@ -11,30 +11,33 @@
 
 namespace PhpRedmin;
 
-use PhpRedmin\Model\Group;
-use PhpRedmin\Model\Systeminfo;
-use PhpRedmin\Model\User;
 use Pimple\Container;
 use Redis;
 
 function models(Container $c)
 {
-    $c[Systeminfo::class] = function ($c) {
-        return new Systeminfo(
-            $c[User::class],
-            $c[Group::class],
+    $c[Model\Systeminfo::class] = function ($c) {
+        return new Model\Systeminfo(
+            $c[Model\User::class],
+            $c[Model\Group::class],
             $c[Redis::class]
         );
     };
 
-    $c[User::class] = function ($c) {
-        return new User(
+    $c[Model\User::class] = function ($c) {
+        return new Model\User(
             $c[Redis::class]
         );
     };
 
-    $c[Group::class] = function ($c) {
-        return new Group(
+    $c[Model\Group::class] = function ($c) {
+        return new Model\Group(
+            $c[Redis::class]
+        );
+    };
+
+    $c[Model\Auth::class] = function ($c) {
+        return new Model\Auth(
             $c[Redis::class]
         );
     };
