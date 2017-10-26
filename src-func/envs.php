@@ -61,5 +61,8 @@ function envs(Container $c)
 
     $c['LOG_LEVEL'] = getenv('PHPREDMIN_LOG_LEVEL') ?: Logger::INFO;
 
+    $c['SESSION_KEY'] = getenv('PHPREDMIN_SESSION_KEY') ?: NULL;
+    $c['SESSION_LIFETIME'] = getenv('PHPREDMIN_SESSION_LIFETIME') ?: 1200;
+
     return $c;
 }

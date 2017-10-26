@@ -5,7 +5,7 @@ MAINTAINER sasan.rose@gmail.com
 EXPOSE 80
 
 RUN apt-get update \
-    && apt-get install zlib1g-dev \
+    && apt-get install -y zlib1g-dev openssl \
     && pecl install redis-3.1.2 \
     && docker-php-ext-enable redis \
     && pecl install raphf-2.0.0 \
