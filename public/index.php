@@ -14,6 +14,7 @@ require_once implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'vendor', 'autoload
 $container = new \Pimple\Container();
 
 $container = \PhpRedmin\envs($container);
+$container = \PhpRedmin\secrets($container);
 $container = \PhpRedmin\i18n($container);
 $container = \PhpRedmin\logger($container);
 $container = \PhpRedmin\middlewares($container);

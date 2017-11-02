@@ -105,14 +105,4 @@ class Pecl implements UrlBuilderInterface
 
         return $url->toString();
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @codeCoverageIgnore
-     */
-    public function redirect()
-    {
-        header('Location: '.$this->toString());
-    }
 }

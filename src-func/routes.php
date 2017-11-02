@@ -13,6 +13,7 @@ namespace PhpRedmin;
 
 use League\Route\RouteCollectionInterface;
 use PhpRedmin\Controller\InstallerInterface;
+use PhpRedmin\Controller\LoginInterface;
 use Pimple\Container;
 
 function routing(Container $c)
@@ -27,6 +28,16 @@ function routing(Container $c)
     $routeCollection->post('/install', [
         $c[InstallerInterface::class],
         'doInstall',
+    ]);
+
+    $routeCollection->get('/login', [
+        $c[LoginInterface::class],
+        'login',
+    ]);
+
+    $routeCollection->post('/login', [
+        $c[LoginInterface::class],
+        'doLogin',
     ]);
 
     return $c;

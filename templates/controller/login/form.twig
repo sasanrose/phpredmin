@@ -1,0 +1,55 @@
+{% extends "page/center.twig" %}
+
+{% block title %}System info{% endblock %}
+
+{% block content %}
+<div class="grid-y grid-padding-y">
+    <div class="cell shrink small-cell-block-container">
+        <div class="grid-x grid-padding-x">
+            <div class="shrink cell">
+                <img src="assets/phpredmin/img/phpredmin.png" />
+            </div>
+            <div class="auto cell align-self-middle align-center">
+                <h3>{% trans %}Login to PHPRedmin{% endtrans %}</h3>
+            </div>
+        </div>
+    </div>
+    {% if errors|length > 0 %}
+        <div class="cell shrink small-cell-block-container">
+            <div class="grid-x grid-padding-x">
+                <div class="small-12 callout alert">
+                    <ul>
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="cell auto">
+        <form method="post" action="login">
+            <div class="grid-x grid-padding-x">
+                <div class="small-12 medium-5 large-3 cell">
+                    <label for="phpredmin-email" class="text-left middle">{% trans %}Email{% endtrans %}:</label>
+                </div>
+                <div class="small-12 medium-7 large-9 cell">
+                    {% embed "shared/input.twig" with {'name': 'email', 'type': 'text'} %}
+                        {% block placeholder %}{% trans %}Email address{% endtrans %}{% endblock %}
+                    {% endembed %}
+                </div>
+                <div class="small-12 medium-5 large-3 cell">
+                    <label for="phpredmin-password" class="text-left middle">{% trans %}Password{% endtrans %}:</label>
+                </div>
+                <div class="small-12 medium-7 large-9 cell">
+                    {% embed "shared/input.twig" with {'name': 'password', 'type': 'password'} %}
+                    {% endembed %}
+                </div>
+                <div class="small-12 medium-12 large-12 text-right">
+                    <input type="submit" class="button" value="{% trans %}Login{% endtrans %}" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

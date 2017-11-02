@@ -11,9 +11,9 @@
 
 namespace PhpRedmin\Test\Phpunit;
 
+use PhpRedmin\Integration\Zend\Diactoros\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 
 class MiddlewareTestcase extends TestCase
 {
@@ -34,7 +34,7 @@ class MiddlewareTestcase extends TestCase
     /**
      * Response mock.
      *
-     * @var ResponseInterface
+     * @var Response
      */
     protected $response;
 
@@ -51,6 +51,6 @@ class MiddlewareTestcase extends TestCase
         };
 
         $this->request = $this->createMock(RequestInterface::class);
-        $this->response = $this->createMock(ResponseInterface::class);
+        $this->response = $this->createMock(Response::class);
     }
 }

@@ -13,6 +13,7 @@ namespace PhpRedmin\Test\Traits;
 
 use PhpRedmin\Traits;
 use PHPUnit\Framework\TestCase;
+use Pimple\Container;
 use Redis as PhpRedis;
 
 class RedisTest extends TestCase
@@ -114,5 +115,32 @@ class RedisTest extends TestCase
             ->method('exec');
 
         $this->commitTransaction($redis);
+    }
+
+    public function testConnect()
+    {
+        $redis = $this->createMock(PhpRedis::class);
+        $container = new Container();
+
+        $container['REDIS_SERVERS'] = [
+            ['ADDR' => 'redis0', 'PORT' => 63790, 'PASS' => 'alpha'],
+        ];
+
+        $redis
+            ->expects($this->once())
+            ->method('connect')
+            ->with('redis0', 63790);
+
+        $redis
+            ->expects($this->once())
+            ->method('auth')
+            ->with('alpha');
+
+        $redis
+            ->expects($this->once())
+            ->method('select')
+            ->with(1);
+
+        $this->connect($redis, $container, 0, 1);
     }
 }

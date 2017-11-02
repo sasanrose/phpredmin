@@ -21,7 +21,8 @@
             "src-func/logger.php",
             "src-func/middlewares.php",
             "src-func/models.php",
-            "src-func/routes.php"
+            "src-func/routes.php",
+            "src-func/secrets.php"
         ],
         "psr-4": {
             "PhpRedmin\\": [

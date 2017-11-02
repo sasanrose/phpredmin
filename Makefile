@@ -51,3 +51,8 @@ setup-dev:
 		bin/git-hooks --uninstall && bin/git-hooks --install bin; \
 	fi;
 	docker build -t sasanrose/phpredmin:2.0-dev -f .docker/Dockerfile-dev .
+
+self-signed-ssl:
+	rm ssl/ -rf
+	mkdir ssl
+	$(call run_in_docker,frapsoft/openssl,req -nodes -new -x509 -keyout ssl/key.pem -out ssl/cert.pem -days 365,$(shell id -u):$(shell id -u))

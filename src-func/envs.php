@@ -34,12 +34,6 @@ function envs(Container $c)
 
         $servers[$i] = ['ADDR' => $addr, 'PORT' => $port];
 
-        $pass = getenv('PHPREDMIN_REDIS_SERVERS_PASS_'.$i);
-
-        if (FALSE !== $pass) {
-            $servers[$i]['PASS'] = $pass;
-        }
-
         ++$i;
     }
 
@@ -61,7 +55,6 @@ function envs(Container $c)
 
     $c['LOG_LEVEL'] = getenv('PHPREDMIN_LOG_LEVEL') ?: Logger::INFO;
 
-    $c['SESSION_KEY'] = getenv('PHPREDMIN_SESSION_KEY') ?: NULL;
     $c['SESSION_LIFETIME'] = getenv('PHPREDMIN_SESSION_LIFETIME') ?: 1200;
 
     return $c;

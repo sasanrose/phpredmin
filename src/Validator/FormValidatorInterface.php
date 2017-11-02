@@ -48,7 +48,7 @@ interface FormValidatorInterface
         string $fieldName,
         string $fieldLabel,
         int $required = self::REQUIRED,
-        array $filters = NULL,
+        array $filters = [],
         $options = NULL
     );
 

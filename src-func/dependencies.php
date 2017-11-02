@@ -13,6 +13,8 @@ namespace PhpRedmin;
 
 use League\Route;
 use PhpRedmin\Integration\Twig\Extension\GlobalVars;
+use PhpRedmin\Integration\Zend\Diactoros\Response;
+use PhpRedmin\Middleware\Install as InstallMiddleware;
 use PhpRedmin\Middleware\Redis as RedisMiddleware;
 use PhpRedmin\Url\Builder\Pecl as PeclUrlBuilder;
 use PhpRedmin\Url\UrlBuilderInterface;
@@ -22,11 +24,11 @@ use Pimple\Container;
 use Pimple\Psr11;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use PSR7Sessions\Storageless\Http\SessionMiddleware;
 use Redis;
 use Twig\Environment;
 use Twig\Extensions\I18nExtension;
 use Twig\Loader\FilesystemLoader;
-use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\EmitterInterface;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Diactoros\ServerRequestFactory;
@@ -46,6 +48,8 @@ function dependencies(Container $c)
     $c[Route\RouteCollectionInterface::class] = function ($c) {
         $router = new Route\RouteCollection($c[Psr11\Container::class]);
 
+        $router->middleware($c[SessionMiddleware::class]);
+        $router->middleware($c[InstallMiddleware::class]);
         $router->middleware($c[RedisMiddleware::class]);
 
         return $router;

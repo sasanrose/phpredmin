@@ -67,11 +67,13 @@ class LoginTest extends TestCase
 
         $this->urlBuilder
             ->expects($this->once())
-            ->method('toString');
+            ->method('toString')
+            ->willReturn('test-uri');
 
-        $this->urlBuilder
+        $this->response
             ->expects($this->once())
-            ->method('redirect');
+            ->method('withRedirect')
+            ->with('test-uri');
 
         $this->logger
             ->expects($this->once())
@@ -112,7 +114,13 @@ class LoginTest extends TestCase
 
         $this->urlBuilder
             ->expects($this->once())
-            ->method('redirect');
+            ->method('toString')
+            ->willReturn('test-uri');
+
+        $this->response
+            ->expects($this->once())
+            ->method('withRedirect')
+            ->with('test-uri');
 
         $login = $this->getController();
         $login->doLogin($this->request, $this->response);
@@ -172,6 +180,13 @@ class LoginTest extends TestCase
                 $values['password']
             )
             ->willReturn($result);
+
+        if ($result) {
+            $this->session
+                ->expects($this->once())
+                ->method('set')
+                ->with('email', $values['email']);
+        }
     }
 
     protected function getController()

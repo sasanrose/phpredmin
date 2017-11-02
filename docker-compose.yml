@@ -1,4 +1,4 @@
-version: '2'
+version: '3.1'
 services:
     phpredmin:
         image: sasanrose/phpredmin:2.0
@@ -11,7 +11,7 @@ services:
             - PHPREDMIN_DEVELOPMENT_MODE=1
             - PHPREDMIN_LOG_LEVEL=7
         ports:
-            - "8080:80"
+            - "8443:443"
         depends_on:
             - redis
     redis:

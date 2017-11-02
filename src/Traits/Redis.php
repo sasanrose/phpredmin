@@ -11,6 +11,7 @@
 
 namespace PhpRedmin\Traits;
 
+use Pimple\Container;
 use Redis as PhpRedis;
 
 trait Redis
@@ -104,5 +105,31 @@ trait Redis
         $this->redisTransaction = FALSE;
 
         return $result;
+    }
+
+    /**
+     * Connects to a redis server and selects a db.
+     *
+     * @param Redis     $redis
+     * @param Container $container
+     * @param int       $serverIndex
+     * @param int       $dbIndex
+     */
+    protected function connect(
+        PhpRedis $redis,
+        Container $container,
+        int $serverIndex,
+        int $dbIndex
+    ) {
+        $redis->connect(
+            $container['REDIS_SERVERS'][$serverIndex]['ADDR'],
+            $container['REDIS_SERVERS'][$serverIndex]['PORT']
+        );
+
+        if (isset($container['REDIS_SERVERS'][$serverIndex]['PASS'])) {
+            $redis->auth($container['REDIS_SERVERS'][$serverIndex]['PASS']);
+        }
+
+        $redis->select($dbIndex);
     }
 }

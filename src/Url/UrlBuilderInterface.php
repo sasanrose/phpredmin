@@ -55,9 +55,4 @@ interface UrlBuilderInterface
      * @return string
      */
     public function toString();
-
-    /**
-     * Redirects to the url.
-     */
-    public function redirect();
 }

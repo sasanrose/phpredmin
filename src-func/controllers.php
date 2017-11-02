@@ -13,6 +13,9 @@ namespace PhpRedmin;
 
 use PhpRedmin\Controller\Installer;
 use PhpRedmin\Controller\InstallerInterface;
+use PhpRedmin\Controller\Login;
+use PhpRedmin\Controller\LoginInterface;
+use PhpRedmin\Model\Auth;
 use PhpRedmin\Model\Systeminfo;
 use PhpRedmin\Url\UrlBuilderInterface;
 use PhpRedmin\Validator\FormValidatorInterface;
@@ -28,6 +31,16 @@ function controllers(Container $c)
             $c[UrlBuilderInterface::class],
             $c[FormValidatorInterface::class],
             $c[Systeminfo::class],
+            $c[LoggerInterface::class]
+        );
+    };
+
+    $c[LoginInterface::class] = function ($c) {
+        return new Login(
+            $c[Environment::class],
+            $c[UrlBuilderInterface::class],
+            $c[FormValidatorInterface::class],
+            $c[Auth::class],
             $c[LoggerInterface::class]
         );
     };

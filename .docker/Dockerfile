@@ -15,7 +15,8 @@ RUN apt-get update \
     && pecl install pecl_http-3.1.0 \
     && docker-php-ext-enable http \
     && docker-php-ext-install gettext \
-    && a2enmod rewrite
+    && a2enmod rewrite \
+    && a2enmod ssl
 
 COPY .docker/apache/default.conf /etc/apache2/sites-available/000-default.conf
 
@@ -27,5 +28,7 @@ COPY .docker/apache/.htaccess /root/.htaccess
 COPY .docker/start.sh /root/start.sh
 
 RUN chmod u+x /root/start.sh
+
+VOLUME ["/secrets"]
 
 CMD ["/root/start.sh"]

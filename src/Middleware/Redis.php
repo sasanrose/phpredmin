@@ -12,6 +12,7 @@
 namespace PhpRedmin\Middleware;
 
 use PhpRedmin\MiddlewareInterface;
+use PhpRedmin\Traits;
 use Pimple\Container;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -19,6 +20,8 @@ use Redis as PhpRedis;
 
 class Redis implements MiddlewareInterface
 {
+    use Traits\Redis;
+
     /**
      * Dependency injection container.
      *
@@ -66,18 +69,15 @@ class Redis implements MiddlewareInterface
             parse_str($queryString, $query);
         }
 
-        $redisIndex = $this->getRedisIndex($path, $query);
+        $serverIndex = $this->getRedisIndex($path, $query);
+        $dbIndex = $this->getDbIndex($path, $query);
 
-        $this->redis->connect(
-            $this->container['REDIS_SERVERS'][$redisIndex]['ADDR'],
-            $this->container['REDIS_SERVERS'][$redisIndex]['PORT']
+        $this->connect(
+            $this->redis,
+            $this->container,
+            $serverIndex,
+            $dbIndex
         );
-
-        if (isset($this->container['REDIS_SERVERS'][$redisIndex]['PASS'])) {
-            $this->redis->auth($this->container['REDIS_SERVERS'][$redisIndex]['PASS']);
-        }
-
-        $this->redis->select($this->getDbIndex($path, $query));
 
         return $next($request, $response);
     }

@@ -83,7 +83,9 @@ class Installer implements InstallerInterface
     public function install(ServerRequestInterface $request, ResponseInterface $response)
     {
         if ($this->checkSystemInstallation()) {
-            return;
+            $url = $this->urlBuilder->toString();
+
+            return $response->withRedirect($url);
         }
 
         $response->getBody()->write($this->twig->render('controller/installer/form.twig'));
@@ -97,7 +99,9 @@ class Installer implements InstallerInterface
     public function doInstall(ServerRequestInterface $request, ResponseInterface $response)
     {
         if ($this->checkSystemInstallation()) {
-            return;
+            $url = $this->urlBuilder->toString();
+
+            return $response->withRedirect($url);
         }
 
         $this->validator->addField('name', _('Name'), FormValidator::REQUIRED, [FILTER_SANITIZE_STRING]);
@@ -167,9 +171,7 @@ class Installer implements InstallerInterface
     protected function checkSystemInstallation()
     {
         if ($this->model->isInstalled()) {
-            $url = $this->urlBuilder->toString();
-            $this->logger->debug("PhpRedmins is already installed. Redirecting to '{$url}'");
-            $this->urlBuilder->redirect();
+            $this->logger->debug('PhpRedmins is already installed.');
 
             return TRUE;
         }

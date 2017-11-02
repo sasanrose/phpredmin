@@ -11,8 +11,8 @@
 
 namespace PhpRedmin\Test\Phpunit\Traits;
 
+use PhpRedmin\Integration\Zend\Diactoros\Response;
 use PhpRedmin\Validator\FormValidatorInterface;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Log\LoggerInterface;
@@ -45,7 +45,7 @@ trait Controller
     /**
      * Response mock.
      *
-     * @var ResponseInterface
+     * @var Response
      */
     protected $response;
 
@@ -78,7 +78,7 @@ trait Controller
         $this->logger = $this->createMock(LoggerInterface::class);
         $this->redis = $this->createMock(Redis::class);
         $this->request = $this->createMock(ServerRequestInterface::class);
-        $this->response = $this->createMock(ResponseInterface::class);
+        $this->response = $this->createMock(Response::class);
         $this->responseBody = $this->createMock(StreamInterface::class);
         $this->twig = $this->createMock(Environment::class);
         $this->validator = $this->createMock(FormValidatorInterface::class);

@@ -85,7 +85,7 @@ class Login implements LoginInterface
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
         if ($this->isAlreadyLoggedIn($session)) {
-            return;
+            return $response->withRedirect($this->urlBuilder->toString());
         }
 
         $response->getBody()->write($this->twig->render('controller/login/form.twig'));
@@ -101,7 +101,7 @@ class Login implements LoginInterface
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
         if ($this->isAlreadyLoggedIn($session)) {
-            return;
+            return $response->withRedirect($this->urlBuilder->toString());
         }
 
         $this->validator->addField('email', _('Email'), FormValidator::REQUIRED, [
@@ -129,15 +129,15 @@ class Login implements LoginInterface
             return $response;
         }
 
+        $session->set('email', $fields['email']);
+
         $path = $session->get('redirect-path', NULL);
 
         if (isset($path)) {
             $this->urlBuilder->setPath($path);
         }
 
-        $this->urlBuilder->redirect();
-
-        return $response;
+        return $response->withRedirect($this->urlBuilder->toString());
     }
 
     /**
@@ -150,9 +150,7 @@ class Login implements LoginInterface
     protected function isAlreadyLoggedIn(SessionInterface $session)
     {
         if ($session->has('email')) {
-            $url = $this->urlBuilder->toString();
             $this->logger->debug('Already logged in. Redirecting to the main page');
-            $this->urlBuilder->redirect();
 
             return TRUE;
         }
