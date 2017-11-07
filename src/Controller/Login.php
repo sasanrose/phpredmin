@@ -80,7 +80,7 @@ class Login implements LoginInterface
     /**
      * {@inheritdoc}
      */
-    public function login(ServerRequestInterface $request, ResponseInterface $response)
+    public function login(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface
     {
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
@@ -96,7 +96,7 @@ class Login implements LoginInterface
     /**
      * {@inheritdoc}
      */
-    public function doLogin(ServerRequestInterface $request, ResponseInterface $response)
+    public function doLogin(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface
     {
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
@@ -147,7 +147,7 @@ class Login implements LoginInterface
      *
      * @return bool
      */
-    protected function isAlreadyLoggedIn(SessionInterface $session)
+    protected function isAlreadyLoggedIn(SessionInterface $session) : bool
     {
         if ($session->has('email')) {
             $this->logger->debug('Already logged in. Redirecting to the main page');

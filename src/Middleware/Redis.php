@@ -58,7 +58,7 @@ class Redis implements MiddlewareInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next)
+    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next) : ResponseInterface
     {
         $query = [];
         $uri = $request->getUri();
@@ -90,7 +90,7 @@ class Redis implements MiddlewareInterface
      *
      * @return int
      */
-    protected function getRedisIndex(string $path, array $query = [])
+    protected function getRedisIndex(string $path, array $query = []) : int
     {
         $defaultRedis = $this->container['REDIS_DEFAULT_SERVER'];
 
@@ -113,7 +113,7 @@ class Redis implements MiddlewareInterface
      *
      * @return int
      */
-    protected function getDbIndex(string $path, array $query = [])
+    protected function getDbIndex(string $path, array $query = []) : int
     {
         $defaultDb = $this->container['REDIS_DEFAULT_DB'];
 
@@ -135,7 +135,7 @@ class Redis implements MiddlewareInterface
      *
      * @return bool
      */
-    protected function isDefaultPath(string $path)
+    protected function isDefaultPath(string $path) : bool
     {
         foreach ($this->pathsWithDefault as $pathWithDefault) {
             if (preg_match('/^'.preg_quote($pathWithDefault, '/').'/', $path)) {

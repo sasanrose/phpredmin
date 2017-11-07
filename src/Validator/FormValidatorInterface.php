@@ -50,7 +50,7 @@ interface FormValidatorInterface
         int $required = self::REQUIRED,
         array $filters = [],
         $options = NULL
-    );
+    ) : FormValidatorInterface;
 
     /**
      * Validates the form based on fields and server request.
@@ -60,19 +60,19 @@ interface FormValidatorInterface
      *
      * @return bool
      */
-    public function validate(ServerRequestInterface $request);
+    public function validate(ServerRequestInterface $request) : bool;
 
     /**
      * Returns a list of errors if any.
      *
      * @return array
      */
-    public function getErrors();
+    public function getErrors() : array;
 
     /**
      * Returns a list of values of form fields.
      *
      * @return array
      */
-    public function getValues();
+    public function getValues() : array;
 }

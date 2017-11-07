@@ -38,7 +38,7 @@ trait Redis
      *
      * @return string
      */
-    protected function prepareKey($prefix, string $key = NULL)
+    protected function prepareKey($prefix, string $key = NULL) : string
     {
         $prefix = (array) $prefix;
 
@@ -64,7 +64,7 @@ trait Redis
      *
      * @return bool
      */
-    protected function startTransaction(PhpRedis $redis, $keys = [], callable $watchCheck = NULL)
+    protected function startTransaction(PhpRedis $redis, $keys = [], callable $watchCheck = NULL) : bool
     {
         $keys = (array) $keys;
 
@@ -120,7 +120,7 @@ trait Redis
         Container $container,
         int $serverIndex,
         int $dbIndex
-    ) {
+    ) : void {
         $redis->connect(
             $container['REDIS_SERVERS'][$serverIndex]['ADDR'],
             $container['REDIS_SERVERS'][$serverIndex]['PORT']

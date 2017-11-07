@@ -99,7 +99,8 @@ class GroupTest extends TestCase
         $this->redis
             ->expects($this->once())
             ->method('sismember')
-            ->with($groupsKey, $groupKey);
+            ->with($groupsKey, $groupKey)
+            ->willReturn(TRUE);
 
         $this->model->exists($groupKey);
     }

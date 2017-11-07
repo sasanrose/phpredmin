@@ -52,7 +52,8 @@ class SysteminfoTest extends TestCase
         $this->redis
             ->expects($this->once())
             ->method('exists')
-            ->with($systemInfoKey);
+            ->with($systemInfoKey)
+            ->willReturn(TRUE);
 
         $this->model->isInstalled();
     }

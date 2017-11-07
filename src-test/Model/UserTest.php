@@ -109,7 +109,8 @@ class UserTest extends TestCase
         $this->redis
             ->expects($this->once())
             ->method('sismember')
-            ->with($usersKey, $userKey);
+            ->with($usersKey, $userKey)
+            ->willReturn(TRUE);
 
         $this->model->exists($userKey);
     }

@@ -41,7 +41,7 @@ class Group
      * @param string name
      * @param string desc
      *
-     * @return bool
+     * @return mixed
      */
     public function create(
         string $name,
@@ -74,7 +74,7 @@ class Group
      *
      * @return bool
      */
-    public function exists(string $group)
+    public function exists(string $group) : bool
     {
         $groupsKey = $this->prepareKey('groups');
 

@@ -47,7 +47,7 @@ trait Password
      *
      * @return string
      */
-    public function getPasswordValidationErrorMsg(string $label, array $options = [])
+    public function getPasswordValidationErrorMsg(string $label, array $options = []) : string
     {
         return sprintf(_('%s does not match the password policy'), $label);
     }

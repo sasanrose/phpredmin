@@ -41,12 +41,12 @@ class Auth
      * @param string $email
      * @param string $password
      *
-     * @return mixed
+     * @return bool
      */
     public function authenticate(
         string $email,
         string $password
-    ) {
+    ) : bool {
         $userKey = $this->prepareKey('user', $email);
 
         $this->startTransaction($this->redis, $userKey);

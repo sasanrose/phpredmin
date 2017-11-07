@@ -80,7 +80,7 @@ class Installer implements InstallerInterface
     /**
      * {@inheritdoc}
      */
-    public function install(ServerRequestInterface $request, ResponseInterface $response)
+    public function install(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface
     {
         if ($this->checkSystemInstallation()) {
             $url = $this->urlBuilder->toString();
@@ -96,7 +96,7 @@ class Installer implements InstallerInterface
     /**
      * {@inheritdoc}
      */
-    public function doInstall(ServerRequestInterface $request, ResponseInterface $response)
+    public function doInstall(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface
     {
         if ($this->checkSystemInstallation()) {
             $url = $this->urlBuilder->toString();
@@ -168,7 +168,7 @@ class Installer implements InstallerInterface
      *
      * @return bool
      */
-    protected function checkSystemInstallation()
+    protected function checkSystemInstallation() : bool
     {
         if ($this->model->isInstalled()) {
             $this->logger->debug('PhpRedmins is already installed.');

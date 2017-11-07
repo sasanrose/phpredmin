@@ -50,7 +50,7 @@ class FormValidator implements FormValidatorInterface
         int $required = self::REQUIRED,
         array $filters = [],
         $options = NULL
-    ) {
+    ) : FormValidatorInterface {
         if (isset($this->fields[$fieldName])) {
             throw new \Exception("Duplicated field: {$fieldName}");
         }
@@ -68,7 +68,7 @@ class FormValidator implements FormValidatorInterface
     /**
      * {@inheritdoc}
      */
-    public function validate(ServerRequestInterface $request)
+    public function validate(ServerRequestInterface $request) : bool
     {
         $body = $request->getParsedBody();
 
@@ -127,7 +127,7 @@ class FormValidator implements FormValidatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getErrors()
+    public function getErrors() : array
     {
         return $this->errors;
     }
@@ -135,7 +135,7 @@ class FormValidator implements FormValidatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getValues()
+    public function getValues() : array
     {
         return $this->fieldValues;
     }
@@ -148,7 +148,7 @@ class FormValidator implements FormValidatorInterface
      *
      * @return bool
      */
-    protected function hasField(array $body, string $fieldName)
+    protected function hasField(array $body, string $fieldName) : bool
     {
         return isset($body[$fieldName]) &&
             !empty($body[$fieldName]) &&

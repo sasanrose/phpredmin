@@ -24,7 +24,7 @@ trait Error
      *
      * @return string
      */
-    protected function getMessage(int $filter, string $fieldLabel, $options = NULL)
+    protected function getMessage(int $filter, string $fieldLabel, $options = NULL) : string
     {
         // Default error message
         $msg = _('%s is invalid.');

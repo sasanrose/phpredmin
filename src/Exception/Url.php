@@ -26,10 +26,10 @@ class Url extends \Exception
     /**
      * Constructor for url Exceptions.
      *
-     * @param string       $message
-     * @param array|string $url
-     * @param int          $code
-     * @param \Exception   $previous
+     * @param string        $message
+     * @param object|string $url
+     * @param int           $code
+     * @param \Exception    $previous
      */
     public function __construct($message, $url, $code = 0, \Exception $previous = NULL)
     {
@@ -41,10 +41,10 @@ class Url extends \Exception
     /**
      * Returns the details of the url that caused this exception.
      *
-     * @return array|string
+     * @return string
      */
-    public function getUrlDetails()
+    public function getUrl() : string
     {
-        return $this->url;
+        return (string) $this->url;
     }
 }

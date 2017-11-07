@@ -21,14 +21,18 @@ interface LoginInterface
      *
      * @param ServerRequestInterface
      * @param ResponseInterface
+     *
+     * @return ResponseInterface
      */
-    public function login(ServerRequestInterface $request, ResponseInterface $response);
+    public function login(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface;
 
     /**
      * Process the login form.
      *
      * @param ServerRequestInterface
      * @param ResponseInterface
+     *
+     * @return ResponseInterface
      */
-    public function doLogin(ServerRequestInterface $request, ResponseInterface $response);
+    public function doLogin(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface;
 }

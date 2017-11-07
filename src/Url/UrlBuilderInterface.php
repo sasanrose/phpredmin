@@ -18,41 +18,41 @@ interface UrlBuilderInterface
      *
      * @param string $host
      *
-     * @return UrlInterface
+     * @return UrlBuilderInterface
      */
-    public function setHost(string $host);
+    public function setHost(string $host) : UrlBuilderInterface;
 
     /**
      * Sets the http scheme for a url.
      *
      * @param string $scheme
      *
-     * @return UrlInterface
+     * @return UrlBuilderInterface
      */
-    public function setScheme(string $scheme);
+    public function setScheme(string $scheme) : UrlBuilderInterface;
 
     /**
      * Sets the path for a url.
      *
      * @param string $path
      *
-     * @return UrlInterface
+     * @return UrlBuilderInterface
      */
-    public function setPath(string $path);
+    public function setPath(string $path) : UrlBuilderInterface;
 
     /**
      * Sets the query string of a url. Accepts a map of key, values.
      *
      * @param array $query
      *
-     * @return UrlInterface
+     * @return UrlBuilderInterface
      */
-    public function setQuery(array $query);
+    public function setQuery(array $query) : UrlBuilderInterface;
 
     /**
      * Returns the string representation of the URL.
      *
      * @return string
      */
-    public function toString();
+    public function toString() : string;
 }

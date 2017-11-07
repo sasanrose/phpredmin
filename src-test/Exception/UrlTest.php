@@ -21,7 +21,7 @@ class UrlTest extends TestCase
         try {
             throw new Url('Test message', 'Test details');
         } catch (\Exception $e) {
-            $this->assertEquals('Test details', $e->getUrlDetails());
+            $this->assertEquals('Test details', $e->getUrl());
         }
     }
 }
