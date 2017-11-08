@@ -14,8 +14,6 @@ namespace PhpRedmin;
 use League\Route;
 use PhpRedmin\Integration\Twig\Extension\GlobalVars;
 use PhpRedmin\Integration\Zend\Diactoros\Response;
-use PhpRedmin\Middleware\Install as InstallMiddleware;
-use PhpRedmin\Middleware\Redis as RedisMiddleware;
 use PhpRedmin\Url\Builder\Pecl as PeclUrlBuilder;
 use PhpRedmin\Url\UrlBuilderInterface;
 use PhpRedmin\Validator\FormValidator;
@@ -33,6 +31,11 @@ use Zend\Diactoros\Response\EmitterInterface;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Diactoros\ServerRequestFactory;
 
+/**
+ * @SuppressWarnings(ExcessiveMethodLength)
+ * @SuppressWarnings(StaticAccess)
+ * @SuppressWarnings(Superglobals)
+ */
 function dependencies(Container $c)
 {
     $c[Psr11\Container::class] = $c->factory(function ($c) {
@@ -49,8 +52,9 @@ function dependencies(Container $c)
         $router = new Route\RouteCollection($c[Psr11\Container::class]);
 
         $router->middleware($c[SessionMiddleware::class]);
-        $router->middleware($c[InstallMiddleware::class]);
-        $router->middleware($c[RedisMiddleware::class]);
+        $router->middleware($c[Middleware\Install::class]);
+        $router->middleware($c[Middleware\Auth::class]);
+        $router->middleware($c[Middleware\Redis::class]);
 
         return $router;
     };
@@ -61,7 +65,11 @@ function dependencies(Container $c)
 
     $c[ServerRequestInterface::class] = $c->factory(function ($c) {
         return ServerRequestFactory::fromGlobals(
-            $_SERVER, $_GET, $_POST, $_COOKIE, $_FILES
+            $_SERVER,
+            $_GET,
+            $_POST,
+            $_COOKIE,
+            $_FILES
         );
     });
 

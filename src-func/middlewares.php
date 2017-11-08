@@ -11,8 +11,6 @@
 
 namespace PhpRedmin;
 
-use PhpRedmin\Middleware\Install;
-use PhpRedmin\Middleware\Redis as RedisMiddleware;
 use PhpRedmin\Model\Systeminfo;
 use PhpRedmin\Url\UrlBuilderInterface;
 use Pimple\Container;
@@ -21,8 +19,14 @@ use Redis;
 
 function middlewares(Container $c)
 {
-    $c[Install::class] = function ($c) {
-        return new Install(
+    $c[Middleware\Auth::class] = function ($c) {
+        return new Middleware\Auth(
+            $c[UrlBuilderInterface::class]
+        );
+    };
+
+    $c[Middleware\Install::class] = function ($c) {
+        return new Middleware\Install(
             $c[Systeminfo::class],
             $c[UrlBuilderInterface::class],
             $c[Redis::class],
@@ -30,8 +34,8 @@ function middlewares(Container $c)
         );
     };
 
-    $c[RedisMiddleware::class] = function ($c) {
-        return new RedisMiddleware($c, $c[Redis::class]);
+    $c[Middleware\Redis::class] = function ($c) {
+        return new Middleware\Redis($c, $c[Redis::class]);
     };
 
     $c[SessionMiddleware::class] = function ($c) {

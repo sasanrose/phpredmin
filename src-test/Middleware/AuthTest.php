@@ -11,80 +11,60 @@
 
 namespace PhpRedmin\Test\Middleware;
 
-use PhpRedmin\Middleware\Install;
-use PhpRedmin\Model\Systeminfo;
+use PhpRedmin\Middleware\Auth;
 use PhpRedmin\Test\Phpunit\MiddlewareTestCase;
 use PhpRedmin\Url\UrlBuilderInterface;
-use Pimple\Container;
 use Psr\Http\Message\UriInterface;
-use Redis as PhpRedis;
+use PSR7Sessions\Storageless\Http\SessionMiddleware;
+use PSR7Sessions\Storageless\Session\SessionInterface;
 
 /**
  * @group middleware
  */
-class InstallTest extends MiddlewareTestCase
+class AuthTest extends MiddlewareTestCase
 {
+    protected $session;
     protected $url;
-    protected $model;
-    protected $container;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->model = $this->createMock(Systeminfo::class);
-        $this->redis = $this->createMock(PhpRedis::class);
         $this->url = $this->createMock(UrlBuilderInterface::class);
-        $this->container = new Container();
+        $this->session = $this->createMock(SessionInterface::class);
 
-        $this->container['REDIS_DEFAULT_SERVER'] = 0;
-        $this->container['REDIS_DEFAULT_DB'] = 1;
-
-        $this->container['REDIS_SERVERS'] = [
-            ['ADDR' => 'redis0', 'PORT' => 63790, 'PASS' => 'alpha'],
-        ];
-
-        $this->redis
+        $this->request
             ->expects($this->once())
-            ->method('connect')
-            ->with('redis0', 63790);
-
-        $this->redis
-            ->expects($this->once())
-            ->method('auth')
-            ->with('alpha');
-
-        $this->redis
-            ->expects($this->once())
-            ->method('select')
-            ->with(1);
+            ->method('getAttribute')
+            ->with(SessionMiddleware::SESSION_ATTRIBUTE)
+            ->willReturn($this->session);
     }
 
-    public function testInstalled()
+    public function testLoggedin()
     {
-        $this->model
+        $this->session
             ->expects($this->once())
-            ->method('isInstalled')
+            ->method('has')
+            ->with('email')
             ->willReturn(TRUE);
 
         $this->response
             ->expects($this->never())
             ->method('withRedirect');
 
-        $middleware = new Install(
-            $this->model,
-            $this->url,
-            $this->redis,
-            $this->container
+        $middleware = new Auth(
+            $this->url
         );
+
         $middleware($this->request, $this->response, $this->next);
     }
 
-    public function testNotInstalled()
+    public function testNotLoggedIn()
     {
-        $this->model
+        $this->session
             ->expects($this->once())
-            ->method('isInstalled')
+            ->method('has')
+            ->with('email')
             ->willReturn(FALSE);
 
         $uri = $this->createMock(UriInterface::class);
@@ -101,7 +81,7 @@ class InstallTest extends MiddlewareTestCase
         $this->url
             ->expects($this->once())
             ->method('setPath')
-            ->with('install');
+            ->with('login');
 
         $this->url
             ->expects($this->once())
@@ -113,27 +93,26 @@ class InstallTest extends MiddlewareTestCase
             ->method('withRedirect')
             ->with('test-uri');
 
-        $middleware = new Install(
-            $this->model,
-            $this->url,
-            $this->redis,
-            $this->container
+        $middleware = new Auth(
+            $this->url
         );
+
         $middleware($this->request, $this->response, $this->next);
     }
 
-    public function testNotInstalledInstallPath()
+    public function testNotLoggedInLoginPath()
     {
-        $this->model
+        $this->session
             ->expects($this->once())
-            ->method('isInstalled')
+            ->method('has')
+            ->with('email')
             ->willReturn(FALSE);
 
         $uri = $this->createMock(UriInterface::class);
         $uri
             ->expects($this->once())
             ->method('getPath')
-            ->willReturn('/install');
+            ->willReturn('/login');
 
         $this->request
             ->expects($this->once())
@@ -144,12 +123,10 @@ class InstallTest extends MiddlewareTestCase
             ->expects($this->never())
             ->method('withRedirect');
 
-        $middleware = new Install(
-            $this->model,
-            $this->url,
-            $this->redis,
-            $this->container
+        $middleware = new Auth(
+            $this->url
         );
+
         $middleware($this->request, $this->response, $this->next);
     }
 }

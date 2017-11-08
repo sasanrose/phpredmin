@@ -12,7 +12,7 @@
 namespace PhpRedmin\Test\Middleware;
 
 use PhpRedmin\Middleware\Redis as RedisMiddleware;
-use PhpRedmin\Test\Phpunit\MiddlewareTestcase;
+use PhpRedmin\Test\Phpunit\MiddlewareTestCase;
 use Pimple\Container;
 use Psr\Http\Message\UriInterface;
 use Redis as PhpRedis;
@@ -20,7 +20,7 @@ use Redis as PhpRedis;
 /**
  * @group middleware
  */
-class RedisTest extends MiddlewareTestcase
+class RedisTest extends MiddlewareTestCase
 {
     protected $container;
     protected $redis;
