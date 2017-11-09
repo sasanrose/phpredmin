@@ -13,20 +13,18 @@ namespace PhpRedmin\Test\Controller;
 
 use PhpRedmin\Controller\Login;
 use PhpRedmin\Model\Auth;
-use PhpRedmin\Test\Phpunit\Traits;
+use PhpRedmin\Test\Phpunit\ControllerTestCase;
 use PhpRedmin\Traits\Redis as RedisTrait;
 use PhpRedmin\Url\UrlBuilderInterface;
-use PHPUnit\Framework\TestCase;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
 use PSR7Sessions\Storageless\Session\SessionInterface;
 
 /**
  * @group controller
  */
-class LoginTest extends TestCase
+class LoginTest extends ControllerTestCase
 {
     use RedisTrait;
-    use Traits\Controller;
 
     protected $urlBuilder;
     protected $model;
@@ -34,11 +32,11 @@ class LoginTest extends TestCase
 
     public function setUp()
     {
+        parent::setUp();
+
         $this->urlBuilder = $this->createMock(UrlBuilderInterface::class);
         $this->model = $this->createMock(Auth::class);
         $this->session = $this->createMock(SessionInterface::class);
-
-        $this->createControllerMocks();
 
         $this->request
             ->expects($this->once())

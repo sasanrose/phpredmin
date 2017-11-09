@@ -13,28 +13,26 @@ namespace PhpRedmin\Test\Controller;
 
 use PhpRedmin\Controller\Installer;
 use PhpRedmin\Model\Systeminfo as Systeminfo;
-use PhpRedmin\Test\Phpunit\Traits;
+use PhpRedmin\Test\Phpunit\ControllerTestCase;
 use PhpRedmin\Traits\Redis as RedisTrait;
 use PhpRedmin\Url\UrlBuilderInterface;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @group controller
  */
-class InstallerTest extends TestCase
+class InstallerTest extends ControllerTestCase
 {
     use RedisTrait;
-    use Traits\Controller;
 
     protected $urlBuilder;
     protected $model;
 
     public function setUp()
     {
+        parent::setUp();
+
         $this->urlBuilder = $this->createMock(UrlBuilderInterface::class);
         $this->model = $this->createMock(Systeminfo::class);
-
-        $this->createControllerMocks();
     }
 
     public function testAlreadyInstalled()

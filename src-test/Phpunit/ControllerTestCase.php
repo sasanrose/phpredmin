@@ -9,17 +9,18 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PhpRedmin\Test\Phpunit\Traits;
+namespace PhpRedmin\Test\Phpunit;
 
 use PhpRedmin\Integration\Zend\Diactoros\Response;
 use PhpRedmin\Validator\FormValidatorInterface;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Log\LoggerInterface;
 use Redis;
 use Twig\Environment;
 
-trait Controller
+class ControllerTestCase extends TestCase
 {
     /**
      * Logger.
@@ -73,7 +74,7 @@ trait Controller
     /**
      * Creates all the required mocks to test a Controller method.
      */
-    protected function createControllerMocks()
+    public function setUp()
     {
         $this->logger = $this->createMock(LoggerInterface::class);
         $this->redis = $this->createMock(Redis::class);
