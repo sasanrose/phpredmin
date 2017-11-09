@@ -80,7 +80,7 @@ class Installer implements InstallerInterface
     /**
      * {@inheritdoc}
      */
-    public function install(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface
+    public function install(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         if ($this->checkSystemInstallation()) {
             $url = $this->urlBuilder->toString();
@@ -96,7 +96,7 @@ class Installer implements InstallerInterface
     /**
      * {@inheritdoc}
      */
-    public function doInstall(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface
+    public function doInstall(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         if ($this->checkSystemInstallation()) {
             $url = $this->urlBuilder->toString();
@@ -104,30 +104,15 @@ class Installer implements InstallerInterface
             return $response->withRedirect($url);
         }
 
-        $this->validator->addField('name', _('Name'), FormValidator::REQUIRED, [FILTER_SANITIZE_STRING]);
-        $this->validator->addField('firstname', _('Firstname'), FormValidator::REQUIRED, [FILTER_SANITIZE_STRING]);
-        $this->validator->addField('lastname', _('Lastname'), FormValidator::REQUIRED, [FILTER_SANITIZE_STRING]);
-        $this->validator->addField('email', _('Email'), FormValidator::REQUIRED, [
-            FILTER_SANITIZE_EMAIL,
-            FILTER_VALIDATE_EMAIL,
-        ]);
-
-        $this->validator->addField('password', _('Password'), FormValidator::REQUIRED, [FILTER_CALLBACK], [
-            'options' => [$this, 'validatePassword'],
-            'errorMsg' => [$this, 'getPasswordValidationErrorMsg'],
-        ]);
-
-        $this->validator->addField('repassword', _('Password repeat'), FormValidator::REQUIRED);
+        $this->setupValidator();
 
         $result = $this->validator->validate($request);
         $fields = $this->validator->getValues();
         $errors = $this->validator->getErrors();
 
-        if (
-            isset($fields['password']) &&
+        if (isset($fields['password']) &&
             isset($fields['repassword']) &&
-            $fields['password'] !== $fields['repassword']
-        ) {
+            $fields['password'] !== $fields['repassword']) {
             $result = FALSE;
             $errors['password'] = _('Passwords do not match');
         }
@@ -168,7 +153,7 @@ class Installer implements InstallerInterface
      *
      * @return bool
      */
-    protected function checkSystemInstallation() : bool
+    protected function checkSystemInstallation(): bool
     {
         if ($this->model->isInstalled()) {
             $this->logger->debug('PhpRedmins is already installed.');
@@ -177,5 +162,26 @@ class Installer implements InstallerInterface
         }
 
         return FALSE;
+    }
+
+    /**
+     * Setup the installation validation.
+     */
+    protected function setupValidator(): void
+    {
+        $this->validator->addField('name', _('Name'), FormValidator::REQUIRED, [FILTER_SANITIZE_STRING]);
+        $this->validator->addField('firstname', _('Firstname'), FormValidator::REQUIRED, [FILTER_SANITIZE_STRING]);
+        $this->validator->addField('lastname', _('Lastname'), FormValidator::REQUIRED, [FILTER_SANITIZE_STRING]);
+        $this->validator->addField('email', _('Email'), FormValidator::REQUIRED, [
+            FILTER_SANITIZE_EMAIL,
+            FILTER_VALIDATE_EMAIL,
+        ]);
+
+        $this->validator->addField('password', _('Password'), FormValidator::REQUIRED, [FILTER_CALLBACK], [
+            'options' => [$this, 'validatePassword'],
+            'errorMsg' => [$this, 'getPasswordValidationErrorMsg'],
+        ]);
+
+        $this->validator->addField('repassword', _('Password repeat'), FormValidator::REQUIRED);
     }
 }

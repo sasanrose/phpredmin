@@ -74,7 +74,7 @@ class Group
      *
      * @return bool
      */
-    public function exists(string $group) : bool
+    public function exists(string $group): bool
     {
         $groupsKey = $this->prepareKey('groups');
 

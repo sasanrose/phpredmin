@@ -46,7 +46,7 @@ class Auth
     public function authenticate(
         string $email,
         string $password
-    ) : bool {
+    ): bool {
         $userKey = $this->prepareKey('user', $email);
 
         $this->startTransaction($this->redis, $userKey);

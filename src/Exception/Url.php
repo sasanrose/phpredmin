@@ -43,7 +43,7 @@ class Url extends \Exception
      *
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return (string) $this->url;
     }

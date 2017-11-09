@@ -67,7 +67,7 @@ class Install implements MiddlewareInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next) : ResponseInterface
+    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         if (!$this->model->isInstalled()) {
             $uri = $request->getUri();

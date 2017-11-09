@@ -61,7 +61,7 @@ class Systeminfo
      *
      * @return bool
      */
-    public function isInstalled() : bool
+    public function isInstalled(): bool
     {
         $systemInfoKey = $this->prepareKey('system', 'info');
 
@@ -85,7 +85,7 @@ class Systeminfo
         string $firstname,
         string $lastname,
         string $password
-    ) : bool {
+    ): bool {
         $systemInfoKey = $this->prepareKey('system', 'info');
 
         $this->startTransaction($this->redis, $systemInfoKey);

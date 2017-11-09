@@ -24,7 +24,7 @@ interface LoginInterface
      *
      * @return ResponseInterface
      */
-    public function login(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface;
+    public function login(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface;
 
     /**
      * Process the login form.
@@ -34,5 +34,5 @@ interface LoginInterface
      *
      * @return ResponseInterface
      */
-    public function doLogin(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface;
+    public function doLogin(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface;
 }

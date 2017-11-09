@@ -27,7 +27,7 @@ class Response extends ZendResponse
      *
      * @return ZendResponse
      */
-    public function withRedirect(string $uri, int $status = 302) : ZendResponse
+    public function withRedirect(string $uri, int $status = 302): ZendResponse
     {
         $new = clone $this;
         $new = $new->withStatus($status);

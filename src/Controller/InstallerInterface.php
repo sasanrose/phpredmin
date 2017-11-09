@@ -24,7 +24,7 @@ interface InstallerInterface
      *
      * @return ResponseInterface
      */
-    public function install(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface;
+    public function install(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface;
 
     /**
      * Process the installation form.
@@ -34,5 +34,5 @@ interface InstallerInterface
      *
      * @return ResponseInterface
      */
-    public function doInstall(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface;
+    public function doInstall(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface;
 }

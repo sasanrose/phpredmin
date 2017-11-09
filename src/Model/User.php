@@ -83,7 +83,7 @@ class User
      *
      * @return bool
      */
-    public function exists(string $user) : bool
+    public function exists(string $user): bool
     {
         $usersKey = $this->prepareKey('users');
 

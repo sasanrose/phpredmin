@@ -48,7 +48,7 @@ class Pecl implements UrlBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function setHost(string $host) : UrlBuilderInterface
+    public function setHost(string $host): UrlBuilderInterface
     {
         $this->host = $host;
 
@@ -58,7 +58,7 @@ class Pecl implements UrlBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function setScheme(string $scheme) : UrlBuilderInterface
+    public function setScheme(string $scheme): UrlBuilderInterface
     {
         $this->scheme = $scheme;
 
@@ -68,7 +68,7 @@ class Pecl implements UrlBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function setPath(string $path) : UrlBuilderInterface
+    public function setPath(string $path): UrlBuilderInterface
     {
         $this->path = $path;
 
@@ -78,7 +78,7 @@ class Pecl implements UrlBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuery(array $query) : UrlBuilderInterface
+    public function setQuery(array $query): UrlBuilderInterface
     {
         $this->query = http_build_query($query);
 
@@ -88,7 +88,7 @@ class Pecl implements UrlBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toString() : string
+    public function toString(): string
     {
         $data = [
             'host' => $this->host,
