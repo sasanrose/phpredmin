@@ -112,6 +112,37 @@ class UserTest extends TestCase
             ->with($usersKey, $userKey)
             ->willReturn(TRUE);
 
-        $this->model->exists($userKey);
+        $this->model->exists('alpha');
+    }
+
+    public function testGetUserData()
+    {
+        $userKey = $this->prepareKey('user', 'alpha');
+
+        $this->redis
+            ->expects($this->once())
+            ->method('sismember')
+            ->willReturn(TRUE);
+
+        $this->redis
+            ->expects($this->once())
+            ->method('hgetall')
+            ->with($userKey)
+            ->willReturn(['userdata']);
+
+        $this->model->get('alpha');
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testGetUserDataNotFound()
+    {
+        $this->redis
+            ->expects($this->once())
+            ->method('sismember')
+            ->willReturn(FALSE);
+
+        $this->model->get('alpha');
     }
 }

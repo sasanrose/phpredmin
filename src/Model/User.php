@@ -79,14 +79,35 @@ class User
     /**
      * Returns if user exists or not.
      *
-     * @param string $user
+     * @param string $email
      *
      * @return bool
      */
-    public function exists(string $user): bool
+    public function exists(string $email): bool
     {
+        $userKey = $this->prepareKey('user', $email);
         $usersKey = $this->prepareKey('users');
 
-        return $this->redis->sismember($usersKey, $user);
+        return $this->redis->sismember($usersKey, $userKey);
+    }
+
+    /**
+     * Returns user data.
+     *
+     * @param string $email
+     *
+     * @throws \Exception
+     *
+     * @return array
+     */
+    public function get(string $email): ?array
+    {
+        if (!$this->exists($email)) {
+            throw new \Exception("User with {$email} does not exist");
+        }
+
+        $userKey = $this->prepareKey('user', $email);
+
+        return $this->redis->hgetall($userKey);
     }
 }
