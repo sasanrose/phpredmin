@@ -76,9 +76,10 @@ class Group
      */
     public function exists(string $group): bool
     {
+        $groupKey = $this->prepareKey('group', $group);
         $groupsKey = $this->prepareKey('groups');
 
-        return $this->redis->sismember($groupsKey, $group);
+        return $this->redis->sismember($groupsKey, $groupKey);
     }
 
     /**
@@ -111,5 +112,21 @@ class Group
         }
 
         return $this->commitTransaction($this->redis);
+    }
+
+    /**
+     * Checks if a user is a member of a specific group or not.
+     *
+     * @param string $group
+     * @param string $email
+     *
+     * @return bool
+     */
+    public function isMember(string $group, string $email): bool
+    {
+        $userKey = $this->prepareKey('user', $email);
+        $groupKey = $this->prepareKey('group', $group);
+
+        return $this->redis->sismember($groupKey, $userKey);
     }
 }

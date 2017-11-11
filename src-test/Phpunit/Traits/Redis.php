@@ -25,7 +25,7 @@ trait Redis
      *
      * @param mixed $result
      */
-    protected function mockStartTransaction($result)
+    protected function mockStartTransaction($result): void
     {
         $this->redis
             ->expects($this->once())
@@ -39,7 +39,7 @@ trait Redis
      * @param mixed $result
      * @param mixed $keys
      */
-    protected function mockStartWatchTransaction($result, $keys)
+    protected function mockStartWatchTransaction($result, $keys): void
     {
         $keys = (array) $keys;
 
@@ -63,7 +63,7 @@ trait Redis
      * @param mixed $result
      * @param mixed $callBackResult
      */
-    protected function mockCallbackTransaction($result, $callBackResult)
+    protected function mockCallbackTransaction($result, $callBackResult): void
     {
         $this->redis
             ->expects($this->once())
@@ -88,11 +88,39 @@ trait Redis
      *
      * @param mixed $result
      */
-    protected function mockCommitTransaction($result)
+    protected function mockCommitTransaction($result): void
     {
         $this->redis
             ->expects($this->once())
             ->method('exec')
             ->willReturn($result);
+    }
+
+    /**
+     * Mocks connection to default redis server and db.
+     */
+    protected function mockDefaultConnect(): void
+    {
+        $this->container['REDIS_DEFAULT_SERVER'] = 0;
+        $this->container['REDIS_DEFAULT_DB'] = 1;
+
+        $this->container['REDIS_SERVERS'] = [
+            ['ADDR' => 'redis0', 'PORT' => 63790, 'PASS' => 'alpha'],
+        ];
+
+        $this->redis
+            ->expects($this->once())
+            ->method('connect')
+            ->with('redis0', 63790);
+
+        $this->redis
+            ->expects($this->once())
+            ->method('auth')
+            ->with('alpha');
+
+        $this->redis
+            ->expects($this->once())
+            ->method('select')
+            ->with(1);
     }
 }

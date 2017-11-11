@@ -11,80 +11,95 @@
 
 namespace PhpRedmin\Test\Middleware;
 
-use PhpRedmin\Middleware\Install;
-use PhpRedmin\Model\Systeminfo;
+use PhpRedmin\Middleware\Access;
+use PhpRedmin\Model\Group;
 use PhpRedmin\Test\Phpunit\MiddlewareTestCase;
 use PhpRedmin\Test\Phpunit\Traits;
 use PhpRedmin\Url\UrlBuilderInterface;
 use Pimple\Container;
-use Psr\Http\Message\UriInterface;
+use PSR7Sessions\Storageless\Http\SessionMiddleware;
+use PSR7Sessions\Storageless\Session\SessionInterface;
 use Redis as PhpRedis;
 
 /**
  * @group middleware
  */
-class InstallTest extends MiddlewareTestCase
+class AccessTest extends MiddlewareTestCase
 {
     use Traits\Redis;
 
-    protected $url;
-    protected $model;
     protected $container;
+    protected $logger;
+    protected $model;
+    protected $redis;
+    protected $session;
+    protected $url;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->model = $this->createMock(Systeminfo::class);
+        $this->model = $this->createMock(Group::class);
         $this->redis = $this->createMock(PhpRedis::class);
         $this->url = $this->createMock(UrlBuilderInterface::class);
+        $this->session = $this->createMock(SessionInterface::class);
         $this->container = new Container();
 
         $this->mockDefaultConnect();
+
+        $this->request
+            ->expects($this->once())
+            ->method('getAttribute')
+            ->with(SessionMiddleware::SESSION_ATTRIBUTE)
+            ->willReturn($this->session);
     }
 
-    public function testInstalled()
+    public function testAdmin()
     {
+        $this->session
+            ->expects($this->once())
+            ->method('get')
+            ->with('email')
+            ->willReturn('alpha@bravo.com');
+
         $this->model
             ->expects($this->once())
-            ->method('isInstalled')
+            ->method('isMember')
+            ->with('administrators', 'alpha@bravo.com')
             ->willReturn(TRUE);
 
         $this->response
             ->expects($this->never())
             ->method('withRedirect');
 
-        $middleware = new Install(
+        $middleware = new Access(
             $this->model,
             $this->url,
             $this->redis,
             $this->container
         );
+
         $middleware($this->request, $this->response, $this->next);
     }
 
-    public function testNotInstalled()
+    public function testNotAdmin()
     {
+        $this->session
+            ->expects($this->once())
+            ->method('get')
+            ->with('email')
+            ->willReturn('alpha@bravo.com');
+
         $this->model
             ->expects($this->once())
-            ->method('isInstalled')
+            ->method('isMember')
+            ->with('administrators', 'alpha@bravo.com')
             ->willReturn(FALSE);
-
-        $uri = $this->createMock(UriInterface::class);
-        $uri
-            ->expects($this->once())
-            ->method('getPath')
-            ->willReturn('path');
-
-        $this->request
-            ->expects($this->once())
-            ->method('getUri')
-            ->willReturn($uri);
 
         $this->url
             ->expects($this->once())
             ->method('setPath')
-            ->with('install');
+            ->with('access-denied');
 
         $this->url
             ->expects($this->once())
@@ -96,43 +111,13 @@ class InstallTest extends MiddlewareTestCase
             ->method('withRedirect')
             ->with('test-uri');
 
-        $middleware = new Install(
+        $middleware = new Access(
             $this->model,
             $this->url,
             $this->redis,
             $this->container
         );
-        $middleware($this->request, $this->response, $this->next);
-    }
 
-    public function testNotInstalledInstallPath()
-    {
-        $this->model
-            ->expects($this->once())
-            ->method('isInstalled')
-            ->willReturn(FALSE);
-
-        $uri = $this->createMock(UriInterface::class);
-        $uri
-            ->expects($this->once())
-            ->method('getPath')
-            ->willReturn('/install');
-
-        $this->request
-            ->expects($this->once())
-            ->method('getUri')
-            ->willReturn($uri);
-
-        $this->response
-            ->expects($this->never())
-            ->method('withRedirect');
-
-        $middleware = new Install(
-            $this->model,
-            $this->url,
-            $this->redis,
-            $this->container
-        );
         $middleware($this->request, $this->response, $this->next);
     }
 }

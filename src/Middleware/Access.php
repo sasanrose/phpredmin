@@ -12,22 +12,23 @@
 namespace PhpRedmin\Middleware;
 
 use PhpRedmin\MiddlewareInterface;
-use PhpRedmin\Model\Systeminfo;
+use PhpRedmin\Model\Group;
 use PhpRedmin\Traits;
 use PhpRedmin\Url\UrlBuilderInterface;
 use Pimple\Container;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use PSR7Sessions\Storageless\Http\SessionMiddleware;
 use Redis;
 
-class Install implements MiddlewareInterface
+class Access implements MiddlewareInterface
 {
     use Traits\Redis;
 
     /**
-     * System info model.
+     * Group.
      *
-     * @var Systeminfo
+     * @var Group
      */
     protected $model;
 
@@ -39,15 +40,15 @@ class Install implements MiddlewareInterface
     protected $urlBuilder;
 
     /**
-     * Instantiates Install middleware.
+     * Instantiates access middleware.
      *
-     * @param Systeminfo          $model
+     * @param Group               $model
      * @param UrlBuilderInterface $urlBuilder
      * @param Redis               $redis
      * @param Container           $container
      */
     public function __construct(
-        Systeminfo $model,
+        Group $model,
         UrlBuilderInterface $urlBuilder,
         Redis $redis,
         Container $container
@@ -68,17 +69,14 @@ class Install implements MiddlewareInterface
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
-        if (!$this->model->isInstalled()) {
-            $uri = $request->getUri();
-            $path = $uri->getPath();
+        $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
-            if (!preg_match('/^\/install/', $path)) {
-                $this->urlBuilder->setPath('install');
-
-                return $response->withRedirect($this->urlBuilder->toString());
-            }
+        if ($this->model->isMember('administrators', $session->get('email'))) {
+            return $next($request, $response);
         }
 
-        return $next($request, $response);
+        $this->urlBuilder->setPath('access-denied');
+
+        return $response->withRedirect($this->urlBuilder->toString());
     }
 }

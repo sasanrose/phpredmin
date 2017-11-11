@@ -102,7 +102,7 @@ class GroupTest extends TestCase
             ->with($groupsKey, $groupKey)
             ->willReturn(TRUE);
 
-        $this->model->exists($groupKey);
+        $this->model->exists('alpha');
     }
 
     public function testAddUser()
@@ -150,5 +150,21 @@ class GroupTest extends TestCase
             $groupName,
             $userEmail
         );
+    }
+
+    public function testIsMember()
+    {
+        $userKey = $this->prepareKey('user', 'alpha');
+        $groupKey = $this->prepareKey('group', 'bravo');
+
+        $this->redis
+            ->expects($this->once())
+            ->method('sismember')
+            ->with($groupKey, $userKey)
+            ->willReturn(TRUE);
+
+        $result = $this->model->isMember('bravo', 'alpha');
+
+        $this->assertTrue($result);
     }
 }
