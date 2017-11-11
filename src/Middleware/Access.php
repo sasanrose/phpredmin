@@ -71,7 +71,14 @@ class Access implements MiddlewareInterface
     {
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
-        if ($this->model->isMember('administrators', $session->get('email'))) {
+        if ($session && $this->model->isMember('administrators', $session->get('email'))) {
+            return $next($request, $response);
+        }
+
+        $uri = $request->getUri();
+        $path = $uri->getPath();
+
+        if (preg_match('/^\/(login|install)/', $path)) {
             return $next($request, $response);
         }
 

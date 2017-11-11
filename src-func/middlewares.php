@@ -11,7 +11,7 @@
 
 namespace PhpRedmin;
 
-use PhpRedmin\Model\Systeminfo;
+use PhpRedmin\Model;
 use PhpRedmin\Url\UrlBuilderInterface;
 use Pimple\Container;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
@@ -19,6 +19,15 @@ use Redis;
 
 function middlewares(Container $c)
 {
+    $c[Middleware\Access::class] = function ($c) {
+        return new Middleware\Access(
+            $c[Model\Group::class],
+            $c[UrlBuilderInterface::class],
+            $c[Redis::class],
+            $c
+        );
+    };
+
     $c[Middleware\Auth::class] = function ($c) {
         return new Middleware\Auth(
             $c[UrlBuilderInterface::class]
@@ -27,7 +36,7 @@ function middlewares(Container $c)
 
     $c[Middleware\Install::class] = function ($c) {
         return new Middleware\Install(
-            $c[Systeminfo::class],
+            $c[Model\Systeminfo::class],
             $c[UrlBuilderInterface::class],
             $c[Redis::class],
             $c

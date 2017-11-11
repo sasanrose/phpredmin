@@ -44,7 +44,7 @@ class Auth implements MiddlewareInterface
     {
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
-        if (!$session->has('email')) {
+        if (!$session || !$session->has('email')) {
             $uri = $request->getUri();
             $path = $uri->getPath();
 

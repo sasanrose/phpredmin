@@ -17,6 +17,8 @@ use PhpRedmin\Test\Phpunit\MiddlewareTestCase;
 use PhpRedmin\Test\Phpunit\Traits;
 use PhpRedmin\Url\UrlBuilderInterface;
 use Pimple\Container;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\UriInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
 use PSR7Sessions\Storageless\Session\SessionInterface;
 use Redis as PhpRedis;
@@ -46,16 +48,12 @@ class AccessTest extends MiddlewareTestCase
         $this->container = new Container();
 
         $this->mockDefaultConnect();
-
-        $this->request
-            ->expects($this->once())
-            ->method('getAttribute')
-            ->with(SessionMiddleware::SESSION_ATTRIBUTE)
-            ->willReturn($this->session);
     }
 
     public function testAdmin()
     {
+        $this->mockRequest($this->session);
+
         $this->session
             ->expects($this->once())
             ->method('get')
@@ -84,6 +82,8 @@ class AccessTest extends MiddlewareTestCase
 
     public function testNotAdmin()
     {
+        $this->mockRequest($this->session);
+
         $this->session
             ->expects($this->once())
             ->method('get')
@@ -111,6 +111,17 @@ class AccessTest extends MiddlewareTestCase
             ->method('withRedirect')
             ->with('test-uri');
 
+        $uri = $this->createMock(UriInterface::class);
+        $uri
+            ->expects($this->once())
+            ->method('getPath')
+            ->willReturn('path');
+
+        $this->request
+            ->expects($this->once())
+            ->method('getUri')
+            ->willReturn($uri);
+
         $middleware = new Access(
             $this->model,
             $this->url,
@@ -119,5 +130,53 @@ class AccessTest extends MiddlewareTestCase
         );
 
         $middleware($this->request, $this->response, $this->next);
+    }
+
+    public function testNoSessionLogin()
+    {
+        $this->noSession('/login');
+    }
+
+    public function testNoSessionInstall()
+    {
+        $this->noSession('/install');
+    }
+
+    protected function noSession(string $path)
+    {
+        $this->mockRequest(NULL);
+
+        $this->response
+            ->expects($this->never())
+            ->method('withRedirect');
+
+        $uri = $this->createMock(UriInterface::class);
+        $uri
+            ->expects($this->once())
+            ->method('getPath')
+            ->willReturn($path);
+
+        $this->request
+            ->expects($this->once())
+            ->method('getUri')
+            ->willReturn($uri);
+
+        $middleware = new Access(
+            $this->model,
+            $this->url,
+            $this->redis,
+            $this->container
+        );
+
+        $middleware($this->request, $this->response, $this->next);
+    }
+
+    protected function mockRequest(?SessionInterface $session)
+    {
+        $this->request
+            ->expects($this->once())
+            ->method('getAttribute')
+            ->with(SessionMiddleware::SESSION_ATTRIBUTE)
+            ->willReturn($session);
     }
 }
