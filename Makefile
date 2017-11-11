@@ -22,7 +22,8 @@ endif
 localeDockerfile = sasanrose/phpredmin:2.0-dev-$(LOCALE)
 
 docker:
-	docker build -t $(tagname) -f $(dockerfile) .
+	./bin/install-assets \
+	&& docker build -t $(tagname) -f $(dockerfile) .
 
 fmt:
 	$(call fmt,)
