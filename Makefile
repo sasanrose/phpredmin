@@ -30,7 +30,7 @@ fmt:
 gen-test-coverage:
 	rm cover/ -rf
 	mkdir -m 0755 cover/
-	$(call run_in_docker,sasanrose/phpredmin:2.0-dev,phpdbg -dmemory_limit=512M -qrr ./bin/phpunit -c .phpunit.cover.xml,$(shell id -u):www-data)
+	$(call run_in_docker,sasanrose/phpredmin:2.0-dev,phpdbg -dmemory_limit=512M -qrr ./bin/phpunit -c phpunit.cover.xml,$(shell id -u):www-data)
 
 install:
 	$(call install_composer) \
