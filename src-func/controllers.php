@@ -11,10 +11,6 @@
 
 namespace PhpRedmin;
 
-use PhpRedmin\Controller\Installer;
-use PhpRedmin\Controller\InstallerInterface;
-use PhpRedmin\Controller\Login;
-use PhpRedmin\Controller\LoginInterface;
 use PhpRedmin\Model\Auth;
 use PhpRedmin\Model\Systeminfo;
 use PhpRedmin\Url\UrlBuilderInterface;
@@ -25,8 +21,8 @@ use Twig\Environment;
 
 function controllers(Container $c)
 {
-    $c[InstallerInterface::class] = function ($c) {
-        return new Installer(
+    $c[Controller\InstallerInterface::class] = function ($c) {
+        return new Controller\Installer(
             $c[Environment::class],
             $c[UrlBuilderInterface::class],
             $c[FormValidatorInterface::class],
@@ -35,13 +31,19 @@ function controllers(Container $c)
         );
     };
 
-    $c[LoginInterface::class] = function ($c) {
-        return new Login(
+    $c[Controller\LoginInterface::class] = function ($c) {
+        return new Controller\Login(
             $c[Environment::class],
             $c[UrlBuilderInterface::class],
             $c[FormValidatorInterface::class],
             $c[Auth::class],
             $c[LoggerInterface::class]
+        );
+    };
+
+    $c[Controller\MiscInterface::class] = function ($c) {
+        return new Controller\Misc(
+            $c[Environment::class]
         );
     };
 

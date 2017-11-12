@@ -70,19 +70,20 @@ class Access implements MiddlewareInterface
     public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
-
-        if ($session && $this->model->isMember('administrators', $session->get('email'))) {
+        if ($session
+            && $session->has('email')
+            && $this->model->isMember('administrators', $session->get('email'))) {
             return $next($request, $response);
         }
 
         $uri = $request->getUri();
         $path = $uri->getPath();
 
-        if (preg_match('/^\/(login|install)/', $path)) {
+        if (preg_match('/^\/(login|install|misc\/)/', $path)) {
             return $next($request, $response);
         }
 
-        $this->urlBuilder->setPath('access-denied');
+        $this->urlBuilder->setPath('misc/access-denied');
 
         return $response->withRedirect($this->urlBuilder->toString());
     }

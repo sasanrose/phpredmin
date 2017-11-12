@@ -17,7 +17,6 @@ use PhpRedmin\Test\Phpunit\MiddlewareTestCase;
 use PhpRedmin\Test\Phpunit\Traits;
 use PhpRedmin\Url\UrlBuilderInterface;
 use Pimple\Container;
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
 use PSR7Sessions\Storageless\Session\SessionInterface;
@@ -56,6 +55,12 @@ class AccessTest extends MiddlewareTestCase
 
         $this->session
             ->expects($this->once())
+            ->method('has')
+            ->with('email')
+            ->willReturn(TRUE);
+
+        $this->session
+            ->expects($this->once())
             ->method('get')
             ->with('email')
             ->willReturn('alpha@bravo.com');
@@ -86,6 +91,12 @@ class AccessTest extends MiddlewareTestCase
 
         $this->session
             ->expects($this->once())
+            ->method('has')
+            ->with('email')
+            ->willReturn(TRUE);
+
+        $this->session
+            ->expects($this->once())
             ->method('get')
             ->with('email')
             ->willReturn('alpha@bravo.com');
@@ -99,7 +110,7 @@ class AccessTest extends MiddlewareTestCase
         $this->url
             ->expects($this->once())
             ->method('setPath')
-            ->with('access-denied');
+            ->with('misc/access-denied');
 
         $this->url
             ->expects($this->once())
@@ -140,6 +151,11 @@ class AccessTest extends MiddlewareTestCase
     public function testNoSessionInstall()
     {
         $this->noSession('/install');
+    }
+
+    public function testNoSessionMisc()
+    {
+        $this->noSession('/misc/something');
     }
 
     protected function noSession(string $path)

@@ -48,7 +48,7 @@ class Auth implements MiddlewareInterface
             $uri = $request->getUri();
             $path = $uri->getPath();
 
-            if (!preg_match('/^\/login/', $path)) {
+            if (!preg_match('/^\/(login|install)/', $path)) {
                 $this->urlBuilder->setPath('login');
 
                 return $response->withRedirect($this->urlBuilder->toString());

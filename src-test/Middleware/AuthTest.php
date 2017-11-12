@@ -102,6 +102,16 @@ class AuthTest extends MiddlewareTestCase
 
     public function testNotLoggedInLoginPath()
     {
+        $this->notLoggedIn('/login');
+    }
+
+    public function testNotLoggedInInstallPath()
+    {
+        $this->notLoggedIn('/install');
+    }
+
+    protected function notLoggedIn($path)
+    {
         $this->session
             ->expects($this->once())
             ->method('has')
@@ -112,7 +122,7 @@ class AuthTest extends MiddlewareTestCase
         $uri
             ->expects($this->once())
             ->method('getPath')
-            ->willReturn('/login');
+            ->willReturn($path);
 
         $this->request
             ->expects($this->once())

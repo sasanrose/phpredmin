@@ -11,7 +11,6 @@
 
 namespace PhpRedmin;
 
-use PhpRedmin\Model;
 use PhpRedmin\Url\UrlBuilderInterface;
 use Pimple\Container;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
