@@ -38,7 +38,7 @@
         }
     },
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.1",
         "ext-gettext": "*",
         "ext-http": "^3.1",
         "ext-redis": "*",
