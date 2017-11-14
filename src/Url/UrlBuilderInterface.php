@@ -20,7 +20,7 @@ interface UrlBuilderInterface
      *
      * @return UrlBuilderInterface
      */
-    public function setHost(string $host): UrlBuilderInterface;
+    public function setHost(string $host): self;
 
     /**
      * Sets the http scheme for a url.
@@ -29,7 +29,7 @@ interface UrlBuilderInterface
      *
      * @return UrlBuilderInterface
      */
-    public function setScheme(string $scheme): UrlBuilderInterface;
+    public function setScheme(string $scheme): self;
 
     /**
      * Sets the path for a url.
@@ -38,7 +38,7 @@ interface UrlBuilderInterface
      *
      * @return UrlBuilderInterface
      */
-    public function setPath(string $path): UrlBuilderInterface;
+    public function setPath(string $path): self;
 
     /**
      * Sets the query string of a url. Accepts a map of key, values.
@@ -47,7 +47,7 @@ interface UrlBuilderInterface
      *
      * @return UrlBuilderInterface
      */
-    public function setQuery(array $query): UrlBuilderInterface;
+    public function setQuery(array $query): self;
 
     /**
      * Returns the string representation of the URL.
