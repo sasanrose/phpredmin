@@ -12,6 +12,7 @@
 namespace PhpRedmin;
 
 use League\Route;
+use PhpRedmin\Integration\League\Route\Strategy\Application as ApplicationStrategy;
 use PhpRedmin\Integration\Twig\Extension\GlobalVars;
 use PhpRedmin\Integration\Zend\Diactoros\Response;
 use PhpRedmin\Url\Builder\Pecl as PeclUrlBuilder;
@@ -22,6 +23,7 @@ use Pimple\Container;
 use Pimple\Psr11;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\LoggerInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
 use Redis;
 use Twig\Environment;
@@ -48,6 +50,13 @@ function dependencies(Container $c)
         return $redis;
     };
 
+    $c[ApplicationStrategy::class] = function ($c) {
+        return new ApplicationStrategy(
+            $c[Environment::class],
+            $c[LoggerInterface::class]
+        );
+    };
+
     $c[Route\RouteCollectionInterface::class] = function ($c) {
         $router = new Route\RouteCollection($c[Psr11\Container::class]);
 
@@ -56,6 +65,8 @@ function dependencies(Container $c)
         $router->middleware($c[Middleware\Auth::class]);
         $router->middleware($c[Middleware\Install::class]);
         $router->middleware($c[SessionMiddleware::class]);
+
+        $router->setStrategy($c[ApplicationStrategy::class]);
 
         return $router;
     };

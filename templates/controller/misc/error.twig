@@ -1,0 +1,24 @@
+{% extends "page/center.twig" %}
+
+{% block title %}Server internal error{% endblock %}
+{% block content %}
+<div class="grid-y grid-padding-y">
+    <div class="cell shrink small-cell-block-container">
+        <div class="grid-x grid-padding-x">
+            <div class="shrink cell">
+                <img src="/assets/phpredmin/img/phpredmin.png" />
+            </div>
+            <div class="auto cell align-self-middle align-center">
+                <h3>{% trans %}PHPRedmin{% endtrans %}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="cell shrink small-cell-block-container">
+        <div class="grid-x grid-padding-x">
+            <div class="small-12 callout alert">
+                {% trans "Server internal error." %}<br/>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

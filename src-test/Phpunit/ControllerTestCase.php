@@ -11,17 +11,17 @@
 
 namespace PhpRedmin\Test\Phpunit;
 
-use PhpRedmin\Integration\Zend\Diactoros\Response;
+use PhpRedmin\Test\Phpunit\Traits\Response as ResponseTrait;
 use PhpRedmin\Validator\FormValidatorInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\StreamInterface;
 use Psr\Log\LoggerInterface;
 use Redis;
-use Twig\Environment;
 
 class ControllerTestCase extends TestCase
 {
+    use ResponseTrait;
+
     /**
      * Logger.
      *
@@ -44,27 +44,6 @@ class ControllerTestCase extends TestCase
     protected $request;
 
     /**
-     * Response mock.
-     *
-     * @var Response
-     */
-    protected $response;
-
-    /**
-     * Response body mock.
-     *
-     * @var StreamInterface
-     */
-    protected $responseBody;
-
-    /**
-     * Twig mock.
-     *
-     * @var Twig\Environment
-     */
-    protected $twig;
-
-    /**
      * Form validator.
      *
      * @var FormValidatorInterface
@@ -79,40 +58,9 @@ class ControllerTestCase extends TestCase
         $this->logger = $this->createMock(LoggerInterface::class);
         $this->redis = $this->createMock(Redis::class);
         $this->request = $this->createMock(ServerRequestInterface::class);
-        $this->response = $this->createMock(Response::class);
-        $this->responseBody = $this->createMock(StreamInterface::class);
-        $this->twig = $this->createMock(Environment::class);
         $this->validator = $this->createMock(FormValidatorInterface::class);
-    }
 
-    /**
-     * Mocks the response of a Controller method.
-     *
-     * @param string $template
-     * @param array  $variables
-     */
-    protected function mockResponse(string $template, array $variables = [])
-    {
-        $this->responseBody
-            ->expects($this->once())
-            ->method('write');
-
-        $this->response
-            ->expects($this->once())
-            ->method('getBody')
-            ->willReturn($this->responseBody);
-
-        $render = $this->twig
-            ->expects($this->once())
-            ->method('render');
-
-        if (!empty($variables)) {
-            $render->with($template, $variables);
-
-            return;
-        }
-
-        $render->with($template);
+        $this->init();
     }
 
     /**
