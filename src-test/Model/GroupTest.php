@@ -137,7 +137,7 @@ class GroupTest extends TestCase
         $this->redis
             ->expects($this->once())
             ->method('sadd')
-            ->with($groupKey, $userKey);
+            ->with($groupMembersKey, $userKey);
 
         $this->redis
             ->expects($this->once())
@@ -155,12 +155,12 @@ class GroupTest extends TestCase
     public function testIsMember()
     {
         $userKey = $this->prepareKey('user', 'alpha');
-        $groupKey = $this->prepareKey('group', 'bravo');
+        $groupMembersKey = $this->prepareKey(['group', 'members'], 'bravo');
 
         $this->redis
             ->expects($this->once())
             ->method('sismember')
-            ->with($groupKey, $userKey)
+            ->with($groupMembersKey, $userKey)
             ->willReturn(TRUE);
 
         $result = $this->model->isMember('bravo', 'alpha');

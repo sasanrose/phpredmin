@@ -105,7 +105,7 @@ class Group
 
         $this->redis->hset($userKey, 'group', $groupKey);
 
-        $this->redis->sAdd($groupKey, $userKey);
+        $this->redis->sAdd($groupMembersKey, $userKey);
 
         if (isset($currentGroup)) {
             $this->redis->sRem($currentGroup, $userKey);
@@ -125,8 +125,8 @@ class Group
     public function isMember(string $group, string $email): bool
     {
         $userKey = $this->prepareKey('user', $email);
-        $groupKey = $this->prepareKey('group', $group);
+        $groupMembersKey = $this->prepareKey(['group', 'members'], $group);
 
-        return $this->redis->sismember($groupKey, $userKey);
+        return $this->redis->sismember($groupMembersKey, $userKey);
     }
 }
