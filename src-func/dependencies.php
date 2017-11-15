@@ -13,7 +13,6 @@ namespace PhpRedmin;
 
 use League\Route;
 use PhpRedmin\Integration\League\Route\Strategy\Application as ApplicationStrategy;
-use PhpRedmin\Integration\Twig\Extension\GlobalVars;
 use PhpRedmin\Integration\Zend\Diactoros\Response;
 use PhpRedmin\Url\Builder\Pecl as PeclUrlBuilder;
 use PhpRedmin\Url\UrlBuilderInterface;
@@ -100,12 +99,8 @@ function dependencies(Container $c)
 
         $twig = new Environment($loader, $options);
 
-        $globalVars = [];
-
-        isset($c['UI_LANG']) && $globalVars['lang'] = $c['UI_LANG'];
-        isset($c['UI_LANG_DIR']) && $globalVars['dir'] = $c['UI_LANG_DIR'];
-
-        $twig->addExtension(new GlobalVars($globalVars));
+        isset($c['UI_LANG']) and $twig->addGlobal('lang', $c['UI_LANG']);
+        isset($c['UI_LANG_DIR']) and $twig->addGlobal('dir', $c['UI_LANG_DIR']);
 
         $twig->addExtension(new I18nExtension());
 
