@@ -14,7 +14,6 @@ namespace PhpRedmin\Test\Controller;
 use PhpRedmin\Controller\Installer;
 use PhpRedmin\Model\Systeminfo as Systeminfo;
 use PhpRedmin\Test\Phpunit\ControllerTestCase;
-use PhpRedmin\Traits\Redis as RedisTrait;
 use PhpRedmin\Url\UrlBuilderInterface;
 
 /**
@@ -22,8 +21,6 @@ use PhpRedmin\Url\UrlBuilderInterface;
  */
 class InstallerTest extends ControllerTestCase
 {
-    use RedisTrait;
-
     protected $urlBuilder;
     protected $model;
 

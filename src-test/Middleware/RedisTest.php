@@ -12,10 +12,10 @@
 namespace PhpRedmin\Test\Middleware;
 
 use PhpRedmin\Middleware\Redis as RedisMiddleware;
+use PhpRedmin\Redis;
 use PhpRedmin\Test\Phpunit\MiddlewareTestCase;
 use Pimple\Container;
 use Psr\Http\Message\UriInterface;
-use Redis as PhpRedis;
 
 /**
  * @group middleware
@@ -29,7 +29,7 @@ class RedisTest extends MiddlewareTestCase
     {
         parent::setUp();
 
-        $this->redis = $this->createMock(PhpRedis::class);
+        $this->redis = $this->createMock(Redis::class);
         $this->container = new Container();
 
         $this->container['REDIS_DEFAULT_SERVER'] = 1;

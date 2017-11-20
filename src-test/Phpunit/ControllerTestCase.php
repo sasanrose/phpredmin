@@ -11,12 +11,12 @@
 
 namespace PhpRedmin\Test\Phpunit;
 
+use PhpRedmin\Redis;
 use PhpRedmin\Test\Phpunit\Traits\Response as ResponseTrait;
 use PhpRedmin\Validator\FormValidatorInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
-use Redis;
 
 class ControllerTestCase extends TestCase
 {

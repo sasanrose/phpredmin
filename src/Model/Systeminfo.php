@@ -11,8 +11,8 @@
 
 namespace PhpRedmin\Model;
 
+use PhpRedmin\Redis;
 use PhpRedmin\Traits;
-use Redis;
 
 class Systeminfo
 {

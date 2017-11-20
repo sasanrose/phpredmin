@@ -92,6 +92,11 @@ trait Redis
     {
         $this->redis
             ->expects($this->once())
+            ->method('isTransactionStrated')
+            ->willReturn(TRUE);
+
+        $this->redis
+            ->expects($this->once())
             ->method('exec')
             ->willReturn($result);
     }

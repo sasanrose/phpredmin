@@ -14,7 +14,6 @@ namespace PhpRedmin\Test\Controller;
 use PhpRedmin\Controller\Login;
 use PhpRedmin\Model\Auth;
 use PhpRedmin\Test\Phpunit\ControllerTestCase;
-use PhpRedmin\Traits\Redis as RedisTrait;
 use PhpRedmin\Url\UrlBuilderInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
 use PSR7Sessions\Storageless\Session\SessionInterface;
@@ -24,8 +23,6 @@ use PSR7Sessions\Storageless\Session\SessionInterface;
  */
 class LoginTest extends ControllerTestCase
 {
-    use RedisTrait;
-
     protected $urlBuilder;
     protected $model;
     protected $session;

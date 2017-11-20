@@ -13,13 +13,13 @@ namespace PhpRedmin\Middleware;
 
 use PhpRedmin\MiddlewareInterface;
 use PhpRedmin\Model\Group;
+use PhpRedmin\Redis;
 use PhpRedmin\Traits;
 use PhpRedmin\Url\UrlBuilderInterface;
 use Pimple\Container;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
-use Redis;
 
 class Access implements MiddlewareInterface
 {

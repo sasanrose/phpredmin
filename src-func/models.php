@@ -12,7 +12,6 @@
 namespace PhpRedmin;
 
 use Pimple\Container;
-use Redis;
 
 function models(Container $c)
 {

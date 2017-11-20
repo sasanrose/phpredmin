@@ -12,10 +12,10 @@
 namespace PhpRedmin\Test\Model;
 
 use PhpRedmin\Model\Auth;
+use PhpRedmin\Redis;
 use PhpRedmin\Test\Phpunit\Traits as PhpunitTraits;
 use PhpRedmin\Traits;
 use PHPUnit\Framework\TestCase;
-use Redis;
 
 /**
  * @group model

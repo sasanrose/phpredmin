@@ -24,7 +24,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
-use Redis;
 use Twig\Environment;
 use Twig\Extensions\I18nExtension;
 use Twig\Loader\FilesystemLoader;

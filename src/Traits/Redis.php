@@ -11,8 +11,8 @@
 
 namespace PhpRedmin\Traits;
 
+use PhpRedmin\Redis as PhpRedminRedis;
 use Pimple\Container;
-use Redis as PhpRedis;
 
 trait Redis
 {
@@ -22,13 +22,6 @@ trait Redis
      * @var string
      */
     protected $globalPrefix = 'PHPREDMIN';
-
-    /**
-     * If we are inside a redis multi transaction or not.
-     *
-     * @var bool
-     */
-    protected $redisTransaction = FALSE;
 
     /**
      * Generates a key to be used in redis.
@@ -56,15 +49,15 @@ trait Redis
     /**
      * Start a redis transaction.
      *
-     * @param Redis    $redis      Redis instance
-     * @param mixed    $keys       List of keys to watch for
-     * @param callable $watchCheck A callable function that will check the
-     *                             list of keys to make sure it is not changed
-     *                             since we started watching
+     * @param PhpRedmin\Redis $redis      Redis instance
+     * @param mixed           $keys       List of keys to watch for
+     * @param callable        $watchCheck A callable function that will check the
+     *                                    list of keys to make sure it is not changed
+     *                                    since we started watching
      *
      * @return bool
      */
-    protected function startTransaction(PhpRedis $redis, $keys = [], callable $watchCheck = NULL): bool
+    protected function startTransaction(PhpRedminRedis $redis, $keys = [], callable $watchCheck = NULL): bool
     {
         $keys = (array) $keys;
 
@@ -82,7 +75,7 @@ trait Redis
             }
         }
 
-        $this->redisTransaction = TRUE;
+        $redis->startTransaction();
 
         return FALSE !== $redis->multi();
     }
@@ -90,19 +83,19 @@ trait Redis
     /**
      * Commits a transaction.
      *
-     * @param Redis $redis Redis instance
+     * @param PhpRedmin\Redis $redis Redis instance
      *
      * @return mixed
      */
-    protected function commitTransaction(PhpRedis $redis)
+    protected function commitTransaction(PhpRedminRedis $redis)
     {
-        if (!$this->redisTransaction) {
+        if (!$redis->isTransactionStrated()) {
             throw new \Exception('No redis transaction has started yet');
         }
 
         $result = $redis->exec();
 
-        $this->redisTransaction = FALSE;
+        $redis->commitTransaction();
 
         return $result;
     }
@@ -110,13 +103,13 @@ trait Redis
     /**
      * Connects to a redis server and selects a db.
      *
-     * @param Redis     $redis
-     * @param Container $container
-     * @param int       $serverIndex
-     * @param int       $dbIndex
+     * @param PhpRedmin\Redis $redis
+     * @param Container       $container
+     * @param int             $serverIndex
+     * @param int             $dbIndex
      */
     protected function connect(
-        PhpRedis $redis,
+        PhpRedminRedis $redis,
         Container $container,
         int $serverIndex,
         int $dbIndex

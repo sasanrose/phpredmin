@@ -13,6 +13,7 @@ namespace PhpRedmin\Test\Middleware;
 
 use PhpRedmin\Middleware\Access;
 use PhpRedmin\Model\Group;
+use PhpRedmin\Redis;
 use PhpRedmin\Test\Phpunit\MiddlewareTestCase;
 use PhpRedmin\Test\Phpunit\Traits;
 use PhpRedmin\Url\UrlBuilderInterface;
@@ -20,7 +21,6 @@ use Pimple\Container;
 use Psr\Http\Message\UriInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
 use PSR7Sessions\Storageless\Session\SessionInterface;
-use Redis as PhpRedis;
 
 /**
  * @group middleware
@@ -41,7 +41,7 @@ class AccessTest extends MiddlewareTestCase
         parent::setUp();
 
         $this->model = $this->createMock(Group::class);
-        $this->redis = $this->createMock(PhpRedis::class);
+        $this->redis = $this->createMock(Redis::class);
         $this->url = $this->createMock(UrlBuilderInterface::class);
         $this->session = $this->createMock(SessionInterface::class);
         $this->container = new Container();

@@ -13,12 +13,12 @@ namespace PhpRedmin\Test\Middleware;
 
 use PhpRedmin\Middleware\Install;
 use PhpRedmin\Model\Systeminfo;
+use PhpRedmin\Redis;
 use PhpRedmin\Test\Phpunit\MiddlewareTestCase;
 use PhpRedmin\Test\Phpunit\Traits;
 use PhpRedmin\Url\UrlBuilderInterface;
 use Pimple\Container;
 use Psr\Http\Message\UriInterface;
-use Redis as PhpRedis;
 
 /**
  * @group middleware
@@ -36,7 +36,7 @@ class InstallTest extends MiddlewareTestCase
         parent::setUp();
 
         $this->model = $this->createMock(Systeminfo::class);
-        $this->redis = $this->createMock(PhpRedis::class);
+        $this->redis = $this->createMock(Redis::class);
         $this->url = $this->createMock(UrlBuilderInterface::class);
         $this->container = new Container();
 

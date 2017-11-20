@@ -13,12 +13,12 @@ namespace PhpRedmin\Middleware;
 
 use PhpRedmin\MiddlewareInterface;
 use PhpRedmin\Model\Systeminfo;
+use PhpRedmin\Redis;
 use PhpRedmin\Traits;
 use PhpRedmin\Url\UrlBuilderInterface;
 use Pimple\Container;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Redis;
 
 class Install implements MiddlewareInterface
 {

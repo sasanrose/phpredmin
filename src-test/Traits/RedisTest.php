@@ -11,10 +11,10 @@
 
 namespace PhpRedmin\Test\Traits;
 
+use PhpRedmin\Redis;
 use PhpRedmin\Traits;
 use PHPUnit\Framework\TestCase;
 use Pimple\Container;
-use Redis as PhpRedis;
 
 class RedisTest extends TestCase
 {
@@ -46,7 +46,7 @@ class RedisTest extends TestCase
 
     public function testStartTransaction()
     {
-        $redis = $this->createMock(PhpRedis::class);
+        $redis = $this->createMock(Redis::class);
 
         $redis
             ->expects($this->once())
@@ -57,14 +57,16 @@ class RedisTest extends TestCase
             ->expects($this->once())
             ->method('multi');
 
-        $this->startTransaction($redis, ['key1', 'key2']);
+        $redis
+            ->expects($this->once())
+            ->method('startTransaction');
 
-        $this->assertTrue($this->redisTransaction);
+        $this->startTransaction($redis, ['key1', 'key2']);
     }
 
     public function testFailedStartTransaction()
     {
-        $redis = $this->createMock(PhpRedis::class);
+        $redis = $this->createMock(Redis::class);
 
         $redis
             ->expects($this->once())
@@ -76,7 +78,7 @@ class RedisTest extends TestCase
             ->method('unwatch')
             ->with('key1', 'key2');
 
-        $callback = function (PhpRedis $redis, $keys) {
+        $callback = function (Redis $redis, $keys) {
             $this->assertEquals(['key1', 'key2'], $keys);
 
             return FALSE;
@@ -89,13 +91,20 @@ class RedisTest extends TestCase
 
     public function testCommitTransaction()
     {
-        $redis = $this->createMock(PhpRedis::class);
+        $redis = $this->createMock(Redis::class);
 
-        $this->redisTransaction = TRUE;
+        $redis
+            ->expects($this->once())
+            ->method('isTransactionStrated')
+            ->willReturn(TRUE);
 
         $redis
             ->expects($this->once())
             ->method('exec');
+
+        $redis
+            ->expects($this->once())
+            ->method('commitTransaction');
 
         $this->commitTransaction($redis);
     }
@@ -106,9 +115,12 @@ class RedisTest extends TestCase
      */
     public function testNoCommitTransaction()
     {
-        $redis = $this->createMock(PhpRedis::class);
+        $redis = $this->createMock(Redis::class);
 
-        $this->redisTransaction = FALSE;
+        $redis
+            ->expects($this->once())
+            ->method('isTransactionStrated')
+            ->willReturn(FALSE);
 
         $redis
             ->expects($this->never())
@@ -119,7 +131,7 @@ class RedisTest extends TestCase
 
     public function testConnect()
     {
-        $redis = $this->createMock(PhpRedis::class);
+        $redis = $this->createMock(Redis::class);
         $container = new Container();
 
         $container['REDIS_SERVERS'] = [

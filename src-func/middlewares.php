@@ -14,7 +14,6 @@ namespace PhpRedmin;
 use PhpRedmin\Url\UrlBuilderInterface;
 use Pimple\Container;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
-use Redis;
 
 function middlewares(Container $c)
 {

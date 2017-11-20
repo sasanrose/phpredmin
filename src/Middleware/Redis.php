@@ -12,11 +12,11 @@
 namespace PhpRedmin\Middleware;
 
 use PhpRedmin\MiddlewareInterface;
+use PhpRedmin\Redis as PhpRedminRedis;
 use PhpRedmin\Traits;
 use Pimple\Container;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Redis as PhpRedis;
 
 class Redis implements MiddlewareInterface
 {
@@ -32,7 +32,7 @@ class Redis implements MiddlewareInterface
     /**
      * Redis instance to connect to Redis.
      *
-     * @var PhpRedis
+     * @var PhpRedmin\Redis
      */
     protected $redis;
 
@@ -44,12 +44,12 @@ class Redis implements MiddlewareInterface
     /**
      * Instantiates Redis middleware.
      *
-     * @param Container $container
-     * @param Redis     $redis
+     * @param Container       $container
+     * @param PhpRedmin\Redis $redis
      */
     public function __construct(
         Container $container,
-        PhpRedis $redis
+        PhpRedminRedis $redis
     ) {
         $this->container = $container;
         $this->redis = $redis;

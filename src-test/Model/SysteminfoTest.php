@@ -14,10 +14,10 @@ namespace PhpRedmin\Test\Model;
 use PhpRedmin\Model\Group;
 use PhpRedmin\Model\Systeminfo;
 use PhpRedmin\Model\User;
+use PhpRedmin\Redis;
 use PhpRedmin\Test\Phpunit\Traits as PhpunitTraits;
 use PhpRedmin\Traits;
 use PHPUnit\Framework\TestCase;
-use Redis;
 
 /**
  * @group model
