@@ -34,11 +34,11 @@ class RedisTest extends TestCase
         $this->assertFalse($this->redis->isTransactionStrated());
     }
 
-    public function testRedisServerIndex()
+    public function testServerIndex()
     {
-        $this->redis->setRedisServerIndex(1);
+        $this->redis->setServerIndex(1);
 
-        $this->assertEquals(1, $this->redis->getRedisServerIndex());
+        $this->assertEquals(1, $this->redis->getServerIndex());
     }
 
     public function testDbIndex()

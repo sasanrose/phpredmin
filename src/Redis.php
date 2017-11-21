@@ -27,7 +27,7 @@ class Redis extends PhpRedis
      *
      * @var int
      */
-    protected $redisServerIndex = 0;
+    protected $serverIndex = 0;
 
     /**
      * If we are inside a redis multi transaction or not.
@@ -67,9 +67,9 @@ class Redis extends PhpRedis
      *
      * @param int
      */
-    public function setRedisServerIndex(int $index): void
+    public function setServerIndex(int $index): void
     {
-        $this->redisServerIndex = $index;
+        $this->serverIndex = $index;
     }
 
     /**
@@ -77,9 +77,9 @@ class Redis extends PhpRedis
      *
      * @return int
      */
-    public function getRedisServerIndex(): int
+    public function getServerIndex(): int
     {
-        return $this->redisServerIndex;
+        return $this->serverIndex;
     }
 
     /**

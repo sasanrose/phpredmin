@@ -153,6 +153,16 @@ class RedisTest extends TestCase
             ->method('select')
             ->with(1);
 
+        $redis
+            ->expects($this->once())
+            ->method('setServerIndex')
+            ->with(0);
+
+        $redis
+            ->expects($this->once())
+            ->method('setDbIndex')
+            ->with(1);
+
         $this->connect($redis, $container, 0, 1);
     }
 }

@@ -124,5 +124,8 @@ trait Redis
         }
 
         $redis->select($dbIndex);
+
+        $redis->setServerIndex($serverIndex);
+        $redis->setDbIndex($dbIndex);
     }
 }
