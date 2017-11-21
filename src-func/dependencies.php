@@ -58,6 +58,7 @@ function dependencies(Container $c)
     $c[Route\RouteCollectionInterface::class] = function ($c) {
         $router = new Route\RouteCollection($c[Psr11\Container::class]);
 
+        $router->middleware($c[Middleware\Template::class]);
         $router->middleware($c[Middleware\Redis::class]);
         $router->middleware($c[Middleware\Access::class]);
         $router->middleware($c[Middleware\Auth::class]);

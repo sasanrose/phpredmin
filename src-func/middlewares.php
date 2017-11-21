@@ -12,8 +12,10 @@
 namespace PhpRedmin;
 
 use PhpRedmin\Url\UrlBuilderInterface;
+use PhpRedmin\Model;
 use Pimple\Container;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
+use Twig\Environment;
 
 function middlewares(Container $c)
 {
@@ -43,6 +45,14 @@ function middlewares(Container $c)
 
     $c[Middleware\Redis::class] = function ($c) {
         return new Middleware\Redis($c, $c[Redis::class]);
+    };
+
+    $c[Middleware\Template::class] = function ($c) {
+        return new Middleware\Template(
+            $c[Redis::class],
+            $c[Model\User::class],
+            $c[Environment::class]
+        );
     };
 
     $c[SessionMiddleware::class] = function ($c) {
