@@ -128,4 +128,32 @@ trait Redis
         $redis->setServerIndex($serverIndex);
         $redis->setDbIndex($dbIndex);
     }
+
+    /**
+     * Returns a list of databases.
+     *
+     * @param PhpRedminRedis $redis
+     *
+     * @return array
+     */
+    protected function getDatabases(PhpRedminRedis $redis)
+    {
+        $dbs = [];
+
+        $keyspace = $redis->info('keyspace');
+
+        foreach ($keyspace as $db => $info) {
+            preg_match('/^db(\d+)$/', $db, $matches);
+
+            $details = explode(',', $info);
+
+            foreach ($details as $detail) {
+                [$key, $value] = explode('=', $detail);
+
+                $dbs[$matches[1]][$key] = $value;
+            }
+        }
+
+        return $dbs;
+    }
 }

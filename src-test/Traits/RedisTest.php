@@ -165,4 +165,37 @@ class RedisTest extends TestCase
 
         $this->connect($redis, $container, 0, 1);
     }
+
+    public function testGetDatabases()
+    {
+        $redis = $this->createMock(Redis::class);
+
+        $redis
+            ->expects($this->once())
+            ->method('info')
+            ->with('keyspace')
+            ->willReturn(
+                [
+                    'db0' => 'keys=13,expires=0,avg_ttl=0',
+                    'db2' => 'keys=12,expires=1,avg_ttl=0',
+                ]
+            );
+
+        $expeceted = [
+            0 => [
+                'keys' => 13,
+                'expires' => 0,
+                'avg_ttl' => 0,
+            ],
+            2 => [
+                'keys' => 12,
+                'expires' => 1,
+                'avg_ttl' => 0,
+            ],
+        ];
+
+        $got = $this->getDatabases($redis);
+
+        $this->assertEquals($expeceted, $got);
+    }
 }
