@@ -14,6 +14,8 @@ namespace PhpRedmin\Middleware;
 use PhpRedmin\MiddlewareInterface;
 use PhpRedmin\Model\User;
 use PhpRedmin\Redis;
+use PhpRedmin\Traits;
+use Pimple\Container;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
@@ -21,6 +23,15 @@ use Twig\Environment;
 
 class Template implements MiddlewareInterface
 {
+    use Traits\Redis;
+
+    /**
+     * Container.
+     *
+     * @var Container
+     */
+    protected $container;
+
     /**
      * User model.
      *
@@ -45,15 +56,18 @@ class Template implements MiddlewareInterface
     /**
      * Instantiates template Middleware.
      *
+     * @param Container   $container
      * @param Redis       $redis
      * @param User        $model
      * @param Environment $twig
      */
     public function __construct(
+        Container $container,
         Redis $redis,
         User $model,
         Environment $twig
     ) {
+        $this->container = $container;
         $this->redis = $redis;
         $this->model = $model;
         $this->twig = $twig;
@@ -74,6 +88,8 @@ class Template implements MiddlewareInterface
 
         $this->twig->addGlobal('serverIndex', $this->redis->getServerIndex());
         $this->twig->addGlobal('dbIndex', $this->redis->getDbIndex());
+        $this->twig->addGlobal('servers', $this->container['REDIS_SERVERS']);
+        $this->twig->addGlobal('dbs', $this->getDatabases($this->redis));
 
         return $next($request, $response);
     }
