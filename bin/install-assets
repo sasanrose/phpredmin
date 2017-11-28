@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-REQUIRED_COMMANDS=( "tar" "wget" )
+REQUIRED_COMMANDS=( "tar" "wget" "unzip" )
 
 for COMMAND in "${REQUIRED_COMMANDS[@]}"
 do
@@ -10,9 +10,11 @@ do
     fi
 done
 
-JQUERYVER="3.2.1"
+JQUERY_VER="3.2.1"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"   )" && pwd   )"
-JQUERYFILE="jquery-$JQUERYVER.min.js"
+JQUERY_FILE="jquery-$JQUERY_VER.min.js"
+FONT_AWESOME_VER="4.7.0"
+FONT_AWESOME_FILE="font-awesome-4.7.0.zip"
 
 echo "Preparing the assets directory"
 
@@ -34,10 +36,10 @@ fi
 cp $DIR/../vendor/zurb/foundation/dist/js/foundation.min.js $DIR/../public/assets/foundation
 cp $DIR/../vendor/zurb/foundation/dist/css/foundation.min.css $DIR/../public/assets/foundation
 
-if [ ! -e ".$JQUERYFILE.cache" ]; then
+if [ ! -e ".$JQUERY_FILE.cache" ]; then
     echo "Downloading jQuery";
 
-    wget "https://code.jquery.com/jquery-$JQUERYVER.min.js" -O ".$JQUERYFILE.cache"
+    wget "https://code.jquery.com/jquery-$JQUERY_VER.min.js" -O ".$JQUERY_FILE.cache"
 
     if [ $? -ne 0 ]; then
         echo "Could not download jquery"
@@ -47,7 +49,27 @@ else
     echo "Using cache for jQuery"
 fi
 
-cp ".$JQUERYFILE.cache" $DIR/../public/assets/jquery/jquery.min.js
+cp ".$JQUERY_FILE.cache" $DIR/../public/assets/jquery/jquery.min.js
+
+if [ ! -e ".$FONT_AWESOME_FILE.cache" ]; then
+    echo "Downloading Font Awesome";
+
+    wget "http://fontawesome.io/assets/$FONT_AWESOME_FILE" -O ".$FONT_AWESOME_FILE.cache"
+
+    if [ $? -ne 0 ]; then
+        echo "Could not download Font Awesome"
+        exit 1
+    fi
+else
+    echo "Using cache for Font Awesome"
+fi
+
+if [ ! -d $DIR/../public/assets/font-awesome ]; then
+    mkdir $DIR/../public/assets/font-awesome
+fi
+
+unzip -j -u ".$FONT_AWESOME_FILE.cache" "font-awesome-$FONT_AWESOME_VER/fonts/fontawesome*"  -d $DIR/../public/assets/font-awesome/fonts
+unzip -j -u ".$FONT_AWESOME_FILE.cache" "font-awesome-$FONT_AWESOME_VER/css/font-awesome.min.css" -d $DIR/../public/assets/font-awesome/css
 
 echo "Creating phpredmin assets";
 
