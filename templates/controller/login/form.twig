@@ -29,12 +29,12 @@
     {% endif %}
     <div class="cell auto">
         <form method="post" action="login">
-            <div class="grid-x grid-padding-x">
+            <div class="grid-x">
                 <div class="small-12 medium-5 large-3 cell">
                     <label for="phpredmin-email" class="text-left middle">{% trans %}Email{% endtrans %}:</label>
                 </div>
                 <div class="small-12 medium-7 large-9 cell">
-                    {% embed "shared/input.twig" with {'name': 'email', 'type': 'text'} %}
+                    {% embed "shared/input.twig" with {'name': 'email', 'type': 'text', 'icon': 'fa-user'} %}
                         {% block placeholder %}{% trans %}Email address{% endtrans %}{% endblock %}
                     {% endembed %}
                 </div>
@@ -42,11 +42,11 @@
                     <label for="phpredmin-password" class="text-left middle">{% trans %}Password{% endtrans %}:</label>
                 </div>
                 <div class="small-12 medium-7 large-9 cell">
-                    {% embed "shared/input.twig" with {'name': 'password', 'type': 'password'} %}
+                    {% embed "shared/input.twig" with {'name': 'password', 'type': 'password', 'icon': 'fa-key'} %}
                     {% endembed %}
                 </div>
                 <div class="small-12 medium-12 large-12 text-right">
-                    <input type="submit" class="button" value="{% trans %}Login{% endtrans %}" />
+                    <button type="submit" class="button postfix"><i class="fa fa-sign-in"></i> {% trans %}Login{% endtrans %}</button>
                 </div>
             </div>
         </form>
