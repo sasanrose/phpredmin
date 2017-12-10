@@ -11,7 +11,7 @@
 
 namespace PhpRedmin\Controller;
 
-use PhpRedmin\Model\Auth;
+use PhpRedmin\Model\Auth as AuthModel;
 use PhpRedmin\Model\User;
 use PhpRedmin\Url\UrlBuilderInterface;
 use PhpRedmin\Validator\FormValidatorInterface as FormValidator;
@@ -23,7 +23,7 @@ use PSR7Sessions\Storageless\Http\SessionMiddleware;
 use PSR7Sessions\Storageless\Session\SessionInterface;
 use Twig\Environment;
 
-class Login implements LoginInterface
+class Auth implements AuthInterface
 {
     use LoggerAwareTrait;
 
@@ -68,7 +68,7 @@ class Login implements LoginInterface
      * @param Twig\Environment
      * @param UrlBuilderInterface
      * @param FromValidator
-     * @param Auth
+     * @param AuthModel
      * @param User
      * @param LoggerInterface
      */
@@ -76,7 +76,7 @@ class Login implements LoginInterface
         Environment $twig,
         UrlBuilderInterface $urlBuilder,
         FormValidator $validator,
-        Auth $authModel,
+        AuthModel $authModel,
         User $userModel,
         LoggerInterface $logger
     ) {

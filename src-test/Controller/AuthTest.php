@@ -11,8 +11,8 @@
 
 namespace PhpRedmin\Test\Controller;
 
-use PhpRedmin\Controller\Login;
-use PhpRedmin\Model\Auth;
+use PhpRedmin\Controller\Auth;
+use PhpRedmin\Model\Auth as AuthModel;
 use PhpRedmin\Model\User;
 use PhpRedmin\Test\Phpunit\ControllerTestCase;
 use PhpRedmin\Url\UrlBuilderInterface;
@@ -22,7 +22,7 @@ use PSR7Sessions\Storageless\Session\SessionInterface;
 /**
  * @group controller
  */
-class LoginTest extends ControllerTestCase
+class AuthTest extends ControllerTestCase
 {
     protected $urlBuilder;
     protected $authModel;
@@ -34,7 +34,7 @@ class LoginTest extends ControllerTestCase
         parent::setUp();
 
         $this->urlBuilder = $this->createMock(UrlBuilderInterface::class);
-        $this->authModel = $this->createMock(Auth::class);
+        $this->authModel = $this->createMock(AuthModel::class);
         $this->userModel = $this->createMock(User::class);
         $this->session = $this->createMock(SessionInterface::class);
 
@@ -204,7 +204,7 @@ class LoginTest extends ControllerTestCase
 
     protected function getController()
     {
-        return new Login(
+        return new Auth(
             $this->twig,
             $this->urlBuilder,
             $this->validator,

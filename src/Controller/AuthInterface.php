@@ -14,7 +14,7 @@ namespace PhpRedmin\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-interface LoginInterface
+interface AuthInterface
 {
     /**
      * Login method to show the login page.

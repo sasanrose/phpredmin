@@ -29,12 +29,12 @@ function routing(Container $c)
     ]);
 
     $routeCollection->get('/login', [
-        $c[Controller\LoginInterface::class],
+        $c[Controller\AuthInterface::class],
         'login',
     ]);
 
     $routeCollection->post('/login', [
-        $c[Controller\LoginInterface::class],
+        $c[Controller\AuthInterface::class],
         'doLogin',
     ]);
 

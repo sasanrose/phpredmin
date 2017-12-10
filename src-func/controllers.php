@@ -32,8 +32,8 @@ function controllers(Container $c)
         );
     };
 
-    $c[Controller\LoginInterface::class] = function ($c) {
-        return new Controller\Login(
+    $c[Controller\AuthInterface::class] = function ($c) {
+        return new Controller\Auth(
             $c[Environment::class],
             $c[UrlBuilderInterface::class],
             $c[FormValidatorInterface::class],
