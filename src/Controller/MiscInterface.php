@@ -25,4 +25,14 @@ interface MiscInterface
      * @return ResponseInterface
      */
     public function accessDenied(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface;
+
+    /**
+     * Main page.
+     *
+     * @param ServerRequestInterface
+     * @param ResponseInterface
+     *
+     * @return ResponseInterface
+     */
+    public function main(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface;
 }

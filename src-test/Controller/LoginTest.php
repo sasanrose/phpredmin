@@ -13,6 +13,7 @@ namespace PhpRedmin\Test\Controller;
 
 use PhpRedmin\Controller\Login;
 use PhpRedmin\Model\Auth;
+use PhpRedmin\Model\User;
 use PhpRedmin\Test\Phpunit\ControllerTestCase;
 use PhpRedmin\Url\UrlBuilderInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
@@ -24,15 +25,17 @@ use PSR7Sessions\Storageless\Session\SessionInterface;
 class LoginTest extends ControllerTestCase
 {
     protected $urlBuilder;
-    protected $model;
+    protected $authModel;
     protected $session;
+    protected $userModel;
 
     public function setUp()
     {
         parent::setUp();
 
         $this->urlBuilder = $this->createMock(UrlBuilderInterface::class);
-        $this->model = $this->createMock(Auth::class);
+        $this->authModel = $this->createMock(Auth::class);
+        $this->userModel = $this->createMock(User::class);
         $this->session = $this->createMock(SessionInterface::class);
 
         $this->request
@@ -167,7 +170,7 @@ class LoginTest extends ControllerTestCase
 
         $this->mockValidation(2, TRUE, $values, []);
 
-        $this->model
+        $this->authModel
             ->expects($this->once())
             ->method('authenticate')
             ->with(
@@ -178,10 +181,25 @@ class LoginTest extends ControllerTestCase
 
         if ($result) {
             $this->session
-                ->expects($this->once())
+                ->expects($this->exactly(2))
                 ->method('set')
-                ->with('email', $values['email']);
+                ->withConsecutive(
+                    ['email', $values['email']],
+                    ['user', ['userDetails']]
+                );
+
+            $this->userModel
+                ->expects($this->once())
+                ->method('get')
+                ->with('alpha@bravo.com')
+                ->willReturn(['userDetails']);
+
+            return;
         }
+
+        $this->session
+            ->expects($this->never())
+            ->method('set');
     }
 
     protected function getController()
@@ -190,7 +208,8 @@ class LoginTest extends ControllerTestCase
             $this->twig,
             $this->urlBuilder,
             $this->validator,
-            $this->model,
+            $this->authModel,
+            $this->userModel,
             $this->logger
         );
     }

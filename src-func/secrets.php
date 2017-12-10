@@ -15,6 +15,8 @@ use Pimple\Container;
 
 function secrets(Container $c)
 {
+    $redisServers = $c['REDIS_SERVERS'];
+
     foreach (scandir('/secrets/') as $secret) {
         if ('phpredmin_session_key' === $secret) {
             $c['SESSION_KEY'] = file_get_contents('/secrets/phpredmin_session_key');
@@ -27,9 +29,11 @@ function secrets(Container $c)
                 continue;
             }
 
-            $c['REDIS_SERVERS'][$serverIndex] = file_get_contents("/secrets/{$secret}");
+            $redisServers[$serverIndex]['PASS'] = trim(file_get_contents("/secrets/{$secret}"));
         }
     }
+
+    $c['REDIS_SERVERS'] = $redisServers;
 
     return $c;
 }

@@ -12,6 +12,7 @@
 namespace PhpRedmin\Controller;
 
 use PhpRedmin\Model\Auth;
+use PhpRedmin\Model\User;
 use PhpRedmin\Url\UrlBuilderInterface;
 use PhpRedmin\Validator\FormValidatorInterface as FormValidator;
 use Psr\Http\Message\ResponseInterface;
@@ -27,11 +28,11 @@ class Login implements LoginInterface
     use LoggerAwareTrait;
 
     /**
-     * Systeminfo model.
+     * Auth model.
      *
      * @var Systeminfo
      */
-    protected $model;
+    protected $authModel;
 
     /**
      * Twig Environment.
@@ -48,6 +49,13 @@ class Login implements LoginInterface
     protected $urlBuilder;
 
     /**
+     * User model.
+     *
+     * @var Systeminfo
+     */
+    protected $userModel;
+
+    /**
      * Form validator.
      *
      * @var FormValidator
@@ -60,20 +68,23 @@ class Login implements LoginInterface
      * @param Twig\Environment
      * @param UrlBuilderInterface
      * @param FromValidator
-     * @param Systeminfo
+     * @param Auth
+     * @param User
      * @param LoggerInterface
      */
     public function __construct(
         Environment $twig,
         UrlBuilderInterface $urlBuilder,
         FormValidator $validator,
-        Auth $model,
+        Auth $authModel,
+        User $userModel,
         LoggerInterface $logger
     ) {
         $this->twig = $twig;
         $this->urlBuilder = $urlBuilder;
         $this->validator = $validator;
-        $this->model = $model;
+        $this->authModel = $authModel;
+        $this->userModel = $userModel;
         $this->logger = $logger;
     }
 
@@ -116,7 +127,7 @@ class Login implements LoginInterface
         $errors = $this->validator->getErrors();
 
         if ($result &&
-            FALSE === $this->model->authenticate($fields['email'], $fields['password'])) {
+            FALSE === $this->authModel->authenticate($fields['email'], $fields['password'])) {
             $result = FALSE;
             $errors['email'] = _('Invalid email or password');
         }
@@ -130,6 +141,7 @@ class Login implements LoginInterface
         }
 
         $session->set('email', $fields['email']);
+        $session->set('user', $this->userModel->get($fields['email']));
 
         $path = $session->get('redirect-path', NULL);
 

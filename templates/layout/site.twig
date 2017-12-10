@@ -1,0 +1,122 @@
+{% extends "main.twig" %}
+
+{% block head %}
+    {{ parent() }}
+    <link href="/assets/phpredmin/css/site-layout.css" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block password_indicator %}
+    <i class="has-tip top fa fa-{% if server.PASS is defined %}key{% else %}eye{% endif %}"
+       data-tooltip aria-haspopup="true" data-click-open="false" data-disable-hover="false"
+       tabindex="2" title="{% if server.PASS is defined %}{% trans %}Password protected{% endtrans %}{% else %}{% trans %}No password{% endtrans %}{% endif %}"></i>
+{% endblock %}
+
+{% block servers %}
+    {% for serverIndex, server in servers %}
+        <li>
+            <a href="/?redis={{ serverIndex }}{% if selectedServerIndex == serverIndex %}&db={{ selectedDbIndex }}{% endif %}">
+                <i class="fa fa-server"></i> {{ block('password_indicator') }}  {{ server.ADDR }}:{{ server.PORT }}<i class="float-right fa fa-chevron-{% if selectedServerIndex == serverIndex %}down{% else %}right{% endif %}"></i>
+            </a>
+            {% if selectedServerIndex == serverIndex %}
+                <ul class="nested vertical menu">
+                    {% for dbIndex, db in dbs %}
+                        <li>
+                            <a href="/?redis={{ serverIndex }}&db={{ dbIndex }}">
+                                <i class="fa fa-database"></i> db{{ dbIndex }}&nbsp;
+                                <span class="badge alert" data-tooltip aria-haspopup="true" data-click-open="false" data-disable-hover="false" tabindex="2" title="{% trans %}Number of keys{% endtrans %}">
+                                    {{ db.keys }}
+                                </span>
+                                {% if selectedDbIndex == dbIndex %}<i class="float-right fa fa-check-square-o"></i>{% endif %}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endblock %}
+
+{% block layout %}
+    <div class="grid-container full">
+        <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium">
+            <button class="menu-icon" type="button" data-toggle="main-menu"></button>
+            <div class="title-bar-title">{% trans %}Menu{% endtrans %}</div>
+        </div>
+        <div class="top-bar" id="main-menu" data-sticky data-options="marginTop:0;">
+            <div class="top-bar-left">
+                <ul class="dropdown menu" data-dropdown-menu>
+                    <li class="menu-text">
+                        <a href="/"><img src="/assets/phpredmin/img/phpredmin.png" width="20px"/> {% trans %}PHPRedmin{% endtrans %}</a>
+                    </li>
+                    <li class="show-for-large"><a href="/"><i class="fa fa-home"></i> {% trans %}Home{% endtrans %}</a></li>
+                    <li><a href="/userman"><i class="fa fa-users"></i> {% trans %}Users{% endtrans %}</a></li>
+                    <li class="is-dropdown-submenu-parent">
+                        <a href="#"><i class="fa fa-server"></i> {% trans %}Server{% endtrans %}</a>
+                        <ul class="menu">
+                            <li><a href="/server/info"><i class="fa fa-info"></i> {% trans %}Info{% endtrans %}</a></li>
+                            <li><a href="/server/config"><i class="fa fa-cogs"></i> {% trans %}Configurations{% endtrans %}</a></li>
+                            <li><a href="/monitoring"><i class="fa fa-bar-chart"></i> {% trans %}Stats{% endtrans %}</a></li>
+                            <li><a href="/logs"><i class="fa fa-exclamation-triangle"></i> {% trans %}Slow logs{% endtrans %}</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/terminal"><i class="fa fa-terminal"></i> {% trans %}Terminal{% endtrans %}</a></li>
+                    <li class="show-for-large">
+                        <a href="https://github.com/sasanrose/phpredmin" target="_blank">
+                            <i class="fa fa-github"></i> {% trans %}Github{% endtrans %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="top-bar-right">
+                <ul class="dropdown menu" data-dropdown-menu>
+                    <li class="is-dropdown-submenu-parent">
+                        <a href="#"><i class="fa fa-magic"></i> {% trans %}Actions{% endtrans %}</a>
+                        <ul class="menu">
+                            <li><a href="/flush/db"><i class="fa fa-trash"></i> {% trans %}Flush DB{% endtrans %}</a></li>
+                            <li><a href="/flush/all"><i class="fa fa-times"></i> {% trans %}Flush All{% endtrans %}</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/save/non-blocking"><i class="fa fa-floppy-o"></i> {% trans %}Asynchronous Save{% endtrans %}</a></li>
+                            <li><a href="/save/blocking"><i class="fa fa-floppy-o"></i> {% trans %}Synchronous Save{% endtrans %}</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/monitoring/reset"><i class="fa fa-refresh"></i> {% trans %}Reset Stats{% endtrans %}</a></li>
+                            <li class="hide-for-large"><a href="/password/change"><i class="fa fa-key"></i> {% trans %}Change password{% endtrans %}</a></li>
+                            <li class="hide-for-large"><a href="/logout"><i class="fa fa-sign-out"></i> {% trans %}Sign out{% endtrans %}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="top-bar-right show-for-large">
+                <ul class="dropdown menu" data-dropdown-menu>
+                    <li class="is-dropdown-submenu-parent">
+                        <a href="#"><i class="fa fa-user-circle-o"></i> {{ user.firstname }} {{ user.lastname }}</a>
+                        <ul class="menu">
+                            <li><a href="/password/change"><i class="fa fa-key"></i> {% trans %}Change password{% endtrans %}</a></li>
+                            <li><a href="/logout"><i class="fa fa-sign-out"></i> {% trans %}Sign out{% endtrans %}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+            <div class="large-3 cell side-nav show-for-large">
+                <ul class="vertical menu" data-sticky data-margin-top="4">
+                    {{ block('servers') }}
+                </ul>
+            </div>
+            <div class="medium-4 cell side-nav show-for-medium-only hide-for-large">
+                <ul class="vertical menu" data-sticky data-margin-top="4">
+                    {{ block('servers') }}
+                </ul>
+            </div>
+            <div class="small-12 cell side-nav side-nav-small show-for-small-only hide-for-large">
+                <ul class="vertical menu">
+                    {{ block('servers') }}
+                </ul>
+            </div>
+            <div class="large-9 medium-8 small-12 cell">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

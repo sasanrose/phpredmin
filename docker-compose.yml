@@ -7,6 +7,8 @@ services:
         environment:
             - PHPREDMIN_REDIS_SERVERS_ADDR_0=redis
             - PHPREDMIN_REDIS_SERVERS_PORT_0=6379
+            - PHPREDMIN_REDIS_SERVERS_ADDR_1=redis2
+            - PHPREDMIN_REDIS_SERVERS_PORT_1=6379
             - PHPREDMIN_TEMPLATES_CACHE_DIR=/tmp/php-redmin-cache
             - PHPREDMIN_DEVELOPMENT_MODE=1
             - PHPREDMIN_LOG_LEVEL=7
@@ -14,5 +16,14 @@ services:
             - "8443:443"
         depends_on:
             - redis
+            - redis2
+        secrets:
+            - phpredmin_redis_server_pass_0
     redis:
         image: redis
+        command: ["sh", "-c", "exec redis-server --requirepass \"foobar\""]
+    redis2:
+        image: redis
+secrets:
+    phpredmin_redis_server_pass_0:
+        file: "./secret.txt"

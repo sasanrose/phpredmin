@@ -12,7 +12,6 @@
 namespace PhpRedmin\Test\Middleware;
 
 use PhpRedmin\Middleware\Template;
-use PhpRedmin\Model\User;
 use PhpRedmin\Redis;
 use PhpRedmin\Test\Phpunit\MiddlewareTestCase;
 use Pimple\Container;
@@ -29,7 +28,6 @@ class TemplateTest extends MiddlewareTestCase
     protected $redis;
     protected $session;
     protected $twig;
-    protected $user;
 
     public function setUp()
     {
@@ -38,7 +36,6 @@ class TemplateTest extends MiddlewareTestCase
         $this->container = new Container();
         $this->redis = $this->createMock(Redis::class);
         $this->session = $this->createMock(SessionInterface::class);
-        $this->user = $this->createMock(User::class);
         $this->twig = $this->createMock(Environment::class);
 
         $this->container['REDIS_SERVERS'] = [
@@ -78,24 +75,27 @@ class TemplateTest extends MiddlewareTestCase
             ->willReturn(TRUE);
 
         $this->session
-            ->expects($this->once())
+            ->expects($this->exactly(2))
             ->method('get')
-            ->with('email')
-            ->willReturn('alpha@bravo.com');
-
-        $this->user
-            ->expects($this->once())
-            ->method('get')
-            ->with('alpha@bravo.com')
-            ->willReturn(['user-details']);
+            ->withConsecutive(
+                ['email'],
+                ['user']
+            )
+            ->will(
+                $this->onConsecutiveCalls(
+                    'alpha@bravo.com',
+                    ['user-details']
+                )
+            );
 
         $this->twig
-            ->expects($this->exactly(5))
+            ->expects($this->exactly(6))
             ->method('addGlobal')
             ->withConsecutive(
+                ['email', 'alpha@bravo.com'],
                 ['user', ['user-details']],
-                ['serverIndex', '1'],
-                ['dbIndex', '2'],
+                ['selectedServerIndex', '1'],
+                ['selectedDbIndex', '2'],
                 ['servers', $this->container['REDIS_SERVERS']],
                 ['dbs', [['keys' => 13]]]
             );
@@ -103,7 +103,6 @@ class TemplateTest extends MiddlewareTestCase
         $middleware = new Template(
             $this->container,
             $this->redis,
-            $this->user,
             $this->twig
         );
 
@@ -122,16 +121,12 @@ class TemplateTest extends MiddlewareTestCase
             ->expects($this->never())
             ->method('get');
 
-        $this->user
-            ->expects($this->never())
-            ->method('get');
-
         $this->twig
             ->expects($this->exactly(4))
             ->method('addGlobal')
             ->withConsecutive(
-                ['serverIndex', '1'],
-                ['dbIndex', '2'],
+                ['selectedServerIndex', '1'],
+                ['selectedDbIndex', '2'],
                 ['servers', $this->container['REDIS_SERVERS']],
                 ['dbs', [['keys' => 13]]]
             );
@@ -139,7 +134,6 @@ class TemplateTest extends MiddlewareTestCase
         $middleware = new Template(
             $this->container,
             $this->redis,
-            $this->user,
             $this->twig
         );
 

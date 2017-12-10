@@ -12,7 +12,6 @@
 namespace PhpRedmin\Middleware;
 
 use PhpRedmin\MiddlewareInterface;
-use PhpRedmin\Model\User;
 use PhpRedmin\Redis;
 use PhpRedmin\Traits;
 use Pimple\Container;
@@ -33,13 +32,6 @@ class Template implements MiddlewareInterface
     protected $container;
 
     /**
-     * User model.
-     *
-     * @var User
-     */
-    protected $model;
-
-    /**
      * Redis instance to connect to Redis.
      *
      * @var Redis
@@ -58,18 +50,15 @@ class Template implements MiddlewareInterface
      *
      * @param Container   $container
      * @param Redis       $redis
-     * @param User        $model
      * @param Environment $twig
      */
     public function __construct(
         Container $container,
         Redis $redis,
-        User $model,
         Environment $twig
     ) {
         $this->container = $container;
         $this->redis = $redis;
-        $this->model = $model;
         $this->twig = $twig;
     }
 
@@ -81,13 +70,15 @@ class Template implements MiddlewareInterface
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
         if ($session && $session->has('email')) {
-            $user = $this->model->get($session->get('email'));
+            $email = $session->get('email');
+            $this->twig->addGlobal('email', $email);
 
+            $user = $session->get('user');
             $this->twig->addGlobal('user', $user);
         }
 
-        $this->twig->addGlobal('serverIndex', $this->redis->getServerIndex());
-        $this->twig->addGlobal('dbIndex', $this->redis->getDbIndex());
+        $this->twig->addGlobal('selectedServerIndex', $this->redis->getServerIndex());
+        $this->twig->addGlobal('selectedDbIndex', $this->redis->getDbIndex());
         $this->twig->addGlobal('servers', $this->container['REDIS_SERVERS']);
         $this->twig->addGlobal('dbs', $this->getDatabases($this->redis));
 

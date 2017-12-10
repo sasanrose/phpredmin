@@ -13,6 +13,7 @@ namespace PhpRedmin;
 
 use PhpRedmin\Model\Auth;
 use PhpRedmin\Model\Systeminfo;
+use PhpRedmin\Model\User;
 use PhpRedmin\Url\UrlBuilderInterface;
 use PhpRedmin\Validator\FormValidatorInterface;
 use Pimple\Container;
@@ -37,6 +38,7 @@ function controllers(Container $c)
             $c[UrlBuilderInterface::class],
             $c[FormValidatorInterface::class],
             $c[Auth::class],
+            $c[User::class],
             $c[LoggerInterface::class]
         );
     };

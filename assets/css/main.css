@@ -10,7 +10,6 @@
 
 body {
     font-family: "phpredmin";
-    background-color: #77D2EF;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -19,4 +18,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .form_error {
     border-color: #f00;
+}
+
+.form_icon {
+    width: 16px;
+}
+
+.selected_menu_item {
+    color: #0f0;
 }

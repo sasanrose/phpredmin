@@ -43,5 +43,10 @@ function routing(Container $c)
         'accessDenied',
     ]);
 
+    $routeCollection->get('/', [
+        $c[Controller\MiscInterface::class],
+        'main',
+    ]);
+
     return $c;
 }

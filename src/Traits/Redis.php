@@ -154,6 +154,10 @@ trait Redis
             }
         }
 
+        if (empty($dbs)) {
+            return [0 => ['keys' => 0]];
+        }
+
         return $dbs;
     }
 }

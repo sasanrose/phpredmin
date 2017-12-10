@@ -198,4 +198,19 @@ class RedisTest extends TestCase
 
         $this->assertEquals($expeceted, $got);
     }
+
+    public function testGetDefaultDatabases()
+    {
+        $redis = $this->createMock(Redis::class);
+
+        $redis
+            ->expects($this->once())
+            ->method('info')
+            ->with('keyspace')
+            ->willReturn([]);
+
+        $got = $this->getDatabases($redis);
+
+        $this->assertEquals([0 => ['keys' => 0]], $got);
+    }
 }

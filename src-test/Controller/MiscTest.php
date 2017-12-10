@@ -26,4 +26,12 @@ class MiscTest extends ControllerTestCase
         $misc = new Misc($this->twig);
         $misc->accessDenied($this->request, $this->response);
     }
+
+    public function testMain()
+    {
+        $this->mockResponse('controller/misc/main.twig');
+
+        $misc = new Misc($this->twig);
+        $misc->main($this->request, $this->response);
+    }
 }

@@ -44,4 +44,14 @@ class Misc implements MiscInterface
 
         return $response;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function main(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
+        $response->getBody()->write($this->twig->render('controller/misc/main.twig'));
+
+        return $response;
+    }
 }
