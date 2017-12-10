@@ -35,4 +35,14 @@ interface AuthInterface
      * @return ResponseInterface
      */
     public function doLogin(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface;
+
+    /**
+     * Process the logout.
+     *
+     * @param ServerRequestInterface
+     * @param ResponseInterface
+     *
+     * @return ResponseInterface
+     */
+    public function doLogout(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface;
 }

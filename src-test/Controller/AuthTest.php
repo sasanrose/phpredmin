@@ -155,6 +155,31 @@ class AuthTest extends ControllerTestCase
         $installer->doLogin($this->request, $this->response);
     }
 
+    public function testLogout()
+    {
+        $this->session
+            ->expects($this->once())
+            ->method('clear');
+
+        $this->urlBuilder
+            ->expects($this->once())
+            ->method('setPath')
+            ->with('/');
+
+        $this->urlBuilder
+            ->expects($this->once())
+            ->method('toString')
+            ->willReturn('test-uri');
+
+        $this->response
+            ->expects($this->once())
+            ->method('withRedirect')
+            ->with('test-uri');
+
+        $installer = $this->getController();
+        $installer->doLogout($this->request, $this->response);
+    }
+
     protected function login($result)
     {
         $values = [

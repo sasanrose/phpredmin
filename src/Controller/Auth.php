@@ -153,6 +153,20 @@ class Auth implements AuthInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function doLogout(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
+        $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
+
+        $session->clear();
+
+        $this->urlBuilder->setPath('/');
+
+        return $response->withRedirect($this->urlBuilder->toString());
+    }
+
+    /**
      * Is alredy logged in.
      *
      * @param SessionInterface $session

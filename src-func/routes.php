@@ -38,6 +38,11 @@ function routing(Container $c)
         'doLogin',
     ]);
 
+    $routeCollection->get('/logout', [
+        $c[Controller\AuthInterface::class],
+        'doLogout',
+    ]);
+
     $routeCollection->get('/misc/access-denied', [
         $c[Controller\MiscInterface::class],
         'accessDenied',
