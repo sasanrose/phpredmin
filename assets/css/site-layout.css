@@ -64,3 +64,13 @@
 .sticky {
     z-index: 5;
 }
+
+.tabs {
+    margin-top: 15px;
+}
+
+hr {
+    max-width: none;
+    margin-left: 0px;
+    margin-right: 0px;
+}

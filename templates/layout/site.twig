@@ -5,37 +5,6 @@
     <link href="/assets/phpredmin/css/site-layout.css" type="text/css" rel="stylesheet" />
 {% endblock %}
 
-{% block password_indicator %}
-    <i class="has-tip top fa fa-{% if server.PASS is defined %}key{% else %}eye{% endif %}"
-       data-tooltip aria-haspopup="true" data-click-open="false" data-disable-hover="false"
-       tabindex="2" title="{% if server.PASS is defined %}{% trans %}Password protected{% endtrans %}{% else %}{% trans %}No password{% endtrans %}{% endif %}"></i>
-{% endblock %}
-
-{% block servers %}
-    {% for serverIndex, server in servers %}
-        <li>
-            <a href="/?redis={{ serverIndex }}{% if selectedServerIndex == serverIndex %}&db={{ selectedDbIndex }}{% endif %}">
-                <i class="fa fa-server"></i> {{ block('password_indicator') }}  {{ server.ADDR }}:{{ server.PORT }}<i class="float-right fa fa-chevron-{% if selectedServerIndex == serverIndex %}down{% else %}right{% endif %}"></i>
-            </a>
-            {% if selectedServerIndex == serverIndex %}
-                <ul class="nested vertical menu">
-                    {% for dbIndex, db in dbs %}
-                        <li>
-                            <a href="/?redis={{ serverIndex }}&db={{ dbIndex }}">
-                                <i class="fa fa-database"></i> db{{ dbIndex }}&nbsp;
-                                <span class="badge alert" data-tooltip aria-haspopup="true" data-click-open="false" data-disable-hover="false" tabindex="2" title="{% trans %}Number of keys{% endtrans %}">
-                                    {{ db.keys }}
-                                </span>
-                                {% if selectedDbIndex == dbIndex %}<i class="float-right fa fa-check-square-o"></i>{% endif %}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </li>
-    {% endfor %}
-{% endblock %}
-
 {% block layout %}
     <div class="grid-container full">
         <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium">
@@ -100,17 +69,17 @@
         <div class="grid-x grid-padding-x">
             <div class="large-3 cell side-nav show-for-large">
                 <ul class="vertical menu" data-sticky data-margin-top="4">
-                    {{ block('servers') }}
+                    {% include 'shared/site/servers.twig' %}
                 </ul>
             </div>
             <div class="medium-4 cell side-nav show-for-medium-only hide-for-large">
                 <ul class="vertical menu" data-sticky data-margin-top="4">
-                    {{ block('servers') }}
+                    {% include 'shared/site/servers.twig' %}
                 </ul>
             </div>
             <div class="small-12 cell side-nav side-nav-small show-for-small-only hide-for-large">
                 <ul class="vertical menu">
-                    {{ block('servers') }}
+                    {% include 'shared/site/servers.twig' %}
                 </ul>
             </div>
             <div class="large-9 medium-8 small-12 cell">

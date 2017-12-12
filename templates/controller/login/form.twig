@@ -34,7 +34,7 @@
                     <label for="phpredmin-email" class="text-left middle">{% trans %}Email{% endtrans %}:</label>
                 </div>
                 <div class="small-12 medium-7 large-9 cell">
-                    {% embed "shared/input.twig" with {'name': 'email', 'type': 'text', 'icon': 'fa-user'} %}
+                    {% embed "shared/element/input.twig" with {'name': 'email', 'type': 'text', 'icon': 'fa-user'} %}
                         {% block placeholder %}{% trans %}Email address{% endtrans %}{% endblock %}
                     {% endembed %}
                 </div>
@@ -42,7 +42,7 @@
                     <label for="phpredmin-password" class="text-left middle">{% trans %}Password{% endtrans %}:</label>
                 </div>
                 <div class="small-12 medium-7 large-9 cell">
-                    {% embed "shared/input.twig" with {'name': 'password', 'type': 'password', 'icon': 'fa-key'} %}
+                    {% embed "shared/element/input.twig" with {'name': 'password', 'type': 'password', 'icon': 'fa-key'} %}
                     {% endembed %}
                 </div>
                 <div class="small-12 medium-12 large-12 text-right">

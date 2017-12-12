@@ -1,0 +1,22 @@
+{% for serverIndex, server in servers %}
+    <li>
+        <a href="/?redis={{ serverIndex }}{% if selectedServerIndex == serverIndex %}&db={{ selectedDbIndex }}{% endif %}">
+            <i class="fa fa-server"></i> {% include 'shared/site/server-password-indicator.twig' with {'server': server} %}  {{ server.ADDR }}:{{ server.PORT }}<i class="float-right fa fa-chevron-{% if selectedServerIndex == serverIndex %}down{% else %}right{% endif %}"></i>
+        </a>
+        {% if selectedServerIndex == serverIndex %}
+            <ul class="nested vertical menu">
+                {% for dbIndex, db in dbs %}
+                    <li>
+                        <a href="/?redis={{ serverIndex }}&db={{ dbIndex }}">
+                            <i class="fa fa-database"></i> db{{ dbIndex }}&nbsp;
+                            <span class="badge alert" data-tooltip aria-haspopup="true" data-click-open="false" data-disable-hover="false" tabindex="2" title="{% trans %}Number of keys{% endtrans %}">
+                                {{ db.keys }}
+                            </span>
+                            {% if selectedDbIndex == dbIndex %}<i class="float-right fa fa-check-square-o"></i>{% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}

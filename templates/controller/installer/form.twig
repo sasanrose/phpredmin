@@ -34,7 +34,7 @@
                     <label for="phpredmin-name" class="text-left middle error">{% trans %}Name{% endtrans %}:</label>
                 </div>
                 <div class="small-12 medium-7 large-9 cell">
-                    {% embed "shared/input.twig" with {'name': 'name', 'type': 'text'} %}
+                    {% embed "shared/element/input.twig" with {'name': 'name', 'type': 'text'} %}
                         {% block placeholder %}{% trans %}Name for your PHPRedmin{% endtrans %}{% endblock %}
                     {% endembed %}
                 </div>
@@ -42,7 +42,7 @@
                     <label for="phpredmin-fristname" class="text-left middle">{% trans %}Firstname{% endtrans %}:</label>
                 </div>
                 <div class="small-12 medium-7 large-9 cell">
-                    {% embed "shared/input.twig" with {'name': 'firstname', 'type': 'text'} %}
+                    {% embed "shared/element/input.twig" with {'name': 'firstname', 'type': 'text'} %}
                         {% block placeholder %}{% trans %}Admin's firstname{% endtrans %}{% endblock %}
                     {% endembed %}
                 </div>
@@ -50,7 +50,7 @@
                     <label for="phpredmin-lastname" class="text-left middle">{% trans %}Lastname{% endtrans %}:</label>
                 </div>
                 <div class="small-12 medium-7 large-9 cell">
-                    {% embed "shared/input.twig" with {'name': 'lastname', 'type': 'text'} %}
+                    {% embed "shared/element/input.twig" with {'name': 'lastname', 'type': 'text'} %}
                         {% block placeholder %}{% trans %}Admin's lastname{% endtrans %}{% endblock %}
                     {% endembed %}
                 </div>
@@ -58,7 +58,7 @@
                     <label for="phpredmin-email" class="text-left middle">{% trans %}Email{% endtrans %}:</label>
                 </div>
                 <div class="small-12 medium-7 large-9 cell">
-                    {% embed "shared/input.twig" with {'name': 'email', 'type': 'text'} %}
+                    {% embed "shared/element/input.twig" with {'name': 'email', 'type': 'text'} %}
                         {% block placeholder %}{% trans %}Admin's email address{% endtrans %}{% endblock %}
                     {% endembed %}
                 </div>
@@ -66,7 +66,7 @@
                     <label for="phpredmin-password" class="text-left middle">{% trans %}Password{% endtrans %}:</label>
                 </div>
                 <div class="small-12 medium-7 large-9 cell">
-                    {% embed "shared/input.twig" with {'name': 'password', 'type': 'password', 'describedby': 'password-help-text'} %}
+                    {% embed "shared/element/input.twig" with {'name': 'password', 'type': 'password', 'describedby': 'password-help-text'} %}
                     {% endembed %}
                     <p class="help-text" id="password-help-text">
                         {% trans %}Password policy: at least one lower case letter, one upper case letter, one digit, and no spaces (minimum of 6 chars){% endtrans %}
@@ -76,7 +76,7 @@
                     <label for="phpredmin-repassword" class="text-left middle">{% trans %}Password repeat{% endtrans %}:</label>
                 </div>
                 <div class="small-12 medium-7 large-9 cell">
-                    {% embed "shared/input.twig" with {'name': 'repassword', 'type': 'password'} %}
+                    {% embed "shared/element/input.twig" with {'name': 'repassword', 'type': 'password'} %}
                     {% endembed %}
                 </div>
                 <div class="small-12 medium-12 large-12 text-right">
