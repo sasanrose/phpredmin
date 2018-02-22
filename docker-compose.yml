@@ -1,0 +1,14 @@
+version: '3'
+services:
+    phpredmin:
+        # image: sasanrose/phpredmin
+        build: .
+        environment:
+            - PHPREDMIN_DATABASE_REDIS_0_HOST=redis
+            - PHPREDMIN_AUTH_USERNAME=root
+        ports:
+            - "8089:80"
+        depends_on:
+            - redis
+    redis:
+        image: redis

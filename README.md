@@ -106,6 +106,12 @@ $config = array(
 
 Remove the ```auth``` section in the config file to disable the protection.
 
+If you are using docker, setting a blank username and/or password will also disable the protection.
+
+```
+-e "PHPREDMIN_AUTH_USERNAME="
+```
+
 _Note:_ You should use the [password_hash](http://php.net/manual/en/function.password-hash.php) function with your desired password and store the result in the ```password``` key, instead of storing the plaintext password as in the code above.
 
 ## Features

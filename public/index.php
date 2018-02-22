@@ -29,7 +29,7 @@ if (PHP_SAPI !== 'cli' && isset(App::instance()->config['auth'])) {
 
     $auth = App::instance()->config['auth'];
 
-if(isset($auth['username']) && isset($auth['password']))
+if(isset($auth['username']) && isset($auth['password']) && !empty($auth['username']) && !empty($auth['password']))
     {
         // mod_php
         if (isset($_SERVER['PHP_AUTH_USER'])) {
