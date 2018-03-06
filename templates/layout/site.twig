@@ -5,8 +5,13 @@
     <link href="/assets/phpredmin/css/site-layout.css" type="text/css" rel="stylesheet" />
 {% endblock %}
 
+{% block scripts %}
+    {{ parent() }}
+    <script src="/assets/phpredmin/js/site.js"></script>
+{% endblock %}
+
 {% block layout %}
-    <div class="grid-container full">
+    <div class="grid-container full main-grid">
         <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium">
             <button class="menu-icon" type="button" data-toggle="main-menu"></button>
             <div class="title-bar-title">{% trans %}Menu{% endtrans %}</div>
@@ -66,7 +71,7 @@
                 </ul>
             </div>
         </div>
-        <div class="grid-x grid-padding-x">
+        <div class="grid-x grid-padding-x side-grid">
             <div class="large-3 cell side-nav show-for-large">
                 <ul class="vertical menu" data-sticky data-margin-top="4">
                     {% include 'shared/site/servers.twig' %}
@@ -82,7 +87,7 @@
                     {% include 'shared/site/servers.twig' %}
                 </ul>
             </div>
-            <div class="large-9 medium-8 small-12 cell">
+            <div class="large-9 medium-8 small-12 content-cell cell">
                 {% block content %}
                 {% endblock %}
             </div>

@@ -11,17 +11,17 @@
 
 namespace PhpRedmin;
 
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 interface MiddlewareInterface
 {
     /**
      * Process an incoming request and/or response.
      *
-     * @param RequestInterface  $request
-     * @param ResponseInterface $response
-     * @param callable          $next
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface      $response
+     * @param callable               $next
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface;
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface;
 }

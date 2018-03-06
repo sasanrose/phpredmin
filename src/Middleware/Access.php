@@ -17,8 +17,8 @@ use PhpRedmin\Redis;
 use PhpRedmin\Traits;
 use PhpRedmin\Url\UrlBuilderInterface;
 use Pimple\Container;
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
 
 class Access implements MiddlewareInterface
@@ -67,7 +67,7 @@ class Access implements MiddlewareInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
         if ($session

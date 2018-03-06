@@ -3,8 +3,8 @@
         <span class="input-group-label">
             <i class="fa {{ icon }} form_icon" aria-hidden="true"></i>
         </span>
-        <input class="input-group-field{% if errors[name] is defined %} form_error{% endif %}" {% if type != 'password' and type != 'repassword' and fields[name] is defined %}value="{{ fields[name] }}"{% endif %} name="{{ name }}" type="{{ type }}" id="phpredmin-{{ name }}" placeholder="{% block placeholder %}{% endblock %}" {% if describedby is defined %}aria-describedby="{{ describedby }}"{% endif %}/>
+        <input class="input-group-field{% if errors[name] is defined %} form_error{% endif %}" {% if type != 'password' and type != 'repassword' %}{% if value is defined %}value="{{ value }}"{% elseif fields[name] is defined %}value="{{ fields[name] }}"{% endif %}{% endif %} name="{{ name }}" type="{{ type }}" id="phpredmin-{{ name }}" placeholder="{% block placeholder %}{% endblock %}" {% if describedby is defined %}aria-describedby="{{ describedby }}"{% endif %}/>
     </div>
 {% else %}
-<input {% if errors[name] is defined %}class="form_error"{% endif %}" {% if type != 'password' and type != 'repassword' and fields[name] is defined %}value="{{ fields[name] }}"{% endif %} name="{{ name }}" type="{{ type }}" id="phpredmin-{{ name }}" placeholder="{{ block('placeholder') }}" {% if describedby is defined %}aria-describedby="{{ describedby }}"{% endif %}/>
+    <input {% if errors[name] is defined %}class="form_error"{% endif %}" {% if type != 'password' and type != 'repassword' %}{% if value is defined %}value="{{ value }}"{% elseif fields[name] is defined %}value="{{ fields[name] }}"{% endif %}{% endif %} name="{{ name }}" type="{{ type }}" id="phpredmin-{{ name }}" placeholder="{{ block('placeholder') }}" {% if describedby is defined %}aria-describedby="{{ describedby }}"{% endif %}/>
 {% endif %}

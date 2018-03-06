@@ -41,6 +41,18 @@ interface UrlBuilderInterface
     public function setPath(string $path): self;
 
     /**
+     * Sets needed query params based on redis instance.
+     *
+     * @param int    $selectedServer
+     * @param int    $selectedDb
+     * @param string $action
+     * @param array  $keys
+     *
+     * @return UrlBuilderInterface
+     */
+    public function setRedis(int $selectedServer, int $selectedDb, string $action = '', array $keys = []): self;
+
+    /**
      * Sets the query string of a url. Accepts a map of key, values.
      *
      * @param array $query

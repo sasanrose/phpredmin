@@ -13,6 +13,7 @@ namespace PhpRedmin\Url\Builder;
 
 use http\Url;
 use PhpRedmin\Exception\Url as UrlException;
+use PhpRedmin\Redis;
 use PhpRedmin\Url\UrlBuilderInterface;
 
 class Pecl implements UrlBuilderInterface
@@ -78,9 +79,42 @@ class Pecl implements UrlBuilderInterface
     /**
      * {@inheritdoc}
      */
+    public function setRedis(
+        int $selectedServer,
+        int $selectedDb,
+        string $action = '',
+        array $keys = []
+    ): UrlBuilderInterface {
+        $queryParams = [
+            'redis' => $selectedServer,
+            'db' => $selectedDb,
+        ];
+
+        if (!empty($action)) {
+            $queryParams['action'] = $action;
+        }
+
+        if (!empty($keys)) {
+            $queryParams['keys'] = $keys;
+        }
+
+        $this->setQuery($queryParams);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setQuery(array $query): UrlBuilderInterface
     {
+        $oldQuery = $this->query;
+
         $this->query = http_build_query($query);
+
+        if (!empty($oldQuery)) {
+            $this->query .= "&{$oldQuery}";
+        }
 
         return $this;
     }

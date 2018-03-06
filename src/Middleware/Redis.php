@@ -15,8 +15,9 @@ use PhpRedmin\MiddlewareInterface;
 use PhpRedmin\Redis as PhpRedminRedis;
 use PhpRedmin\Traits;
 use Pimple\Container;
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\UriInterface;
 
 class Redis implements MiddlewareInterface
 {
@@ -58,16 +59,11 @@ class Redis implements MiddlewareInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
-        $query = [];
         $uri = $request->getUri();
         $path = $uri->getPath();
-        $queryString = $uri->getQuery();
-
-        if ($queryString) {
-            parse_str($queryString, $query);
-        }
+        $query = $request->getQueryParams();
 
         $serverIndex = $this->getRedisIndex($path, $query);
         $dbIndex = $this->getDbIndex($path, $query);

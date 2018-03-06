@@ -1,5 +1,14 @@
 @import url("/assets/phpredmin/css/main.css");
 
+body {
+    height: 100vh;
+}
+
+.main-grid, .side-grid {
+    min-height: 100%;
+    height: 100%;
+}
+
 .top-bar, .top-bar ul, .title-bar {
     background-color: #262f35;
     font-size: 14px;
@@ -43,12 +52,19 @@
     height: 100vh;
 }
 
+.content-cell {
+    overflow: auto;
+    min-height: 100%;
+    height: 100vh;   
+}
+
 .side-nav .has-tip {
     border-bottom: none;
 }
 
 .side-nav-small {
     height: auto;
+    min-height: 0px;
 }
 
 .side-nav a:hover {

@@ -18,10 +18,12 @@
         </head>
         <body>
             {% block layout %}{% endblock %}
-			<script src="/assets/jquery/jquery.min.js"></script>
-			<script src="/assets/foundation/foundation.min.js"></script>
-			<script>
-			  $(document).foundation();
-			</script>
+            {% block scripts %}
+                <script src="/assets/jquery/jquery.min.js"></script>
+                <script src="/assets/foundation/foundation.min.js"></script>
+                <script>
+                  $(document).foundation();
+                </script>
+            {% endblock %}
         </body>
 </html>

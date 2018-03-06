@@ -47,11 +47,12 @@ class RedisTest extends MiddlewareTestCase
 
         $count = count($paths);
 
-        $url = $this->createMock(UriInterface::class);
-        $url
+        $this->request
             ->expects($this->exactly($count))
-            ->method('getQuery');
+            ->method('getQueryParams')
+            ->willReturn([]);
 
+        $url = $this->createMock(UriInterface::class);
         $consecutive = call_user_func_array([$this, 'onConsecutiveCalls'], $paths);
         $url
             ->expects($this->exactly($count))
@@ -101,7 +102,7 @@ class RedisTest extends MiddlewareTestCase
 
     protected function query($queryIndex, $expectedIndex, $db = NULL)
     {
-        $queryString = "redis={$queryIndex}";
+        $query['redis'] = $queryIndex;
 
         if (isset($db)) {
             $this->redis
@@ -109,15 +110,15 @@ class RedisTest extends MiddlewareTestCase
                 ->method('select')
                 ->with($db);
 
-            $queryString .= "&db={$db}";
+            $query['db'] = $db;
         }
 
-        $url = $this->createMock(UriInterface::class);
-        $url
+        $this->request
             ->expects($this->once())
-            ->method('getQuery')
-            ->willReturn($queryString);
+            ->method('getQueryParams')
+            ->willReturn($query);
 
+        $url = $this->createMock(UriInterface::class);
         $url
             ->expects($this->once())
             ->method('getPath')

@@ -17,8 +17,8 @@ use PhpRedmin\Redis;
 use PhpRedmin\Traits;
 use PhpRedmin\Url\UrlBuilderInterface;
 use Pimple\Container;
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Install implements MiddlewareInterface
 {
@@ -66,7 +66,7 @@ class Install implements MiddlewareInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         if (!$this->model->isInstalled()) {
             $uri = $request->getUri();

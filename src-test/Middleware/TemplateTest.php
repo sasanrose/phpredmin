@@ -44,10 +44,14 @@ class TemplateTest extends MiddlewareTestCase
         ];
 
         $this->request
-            ->expects($this->once())
+            ->expects($this->exactly(3))
             ->method('getAttribute')
-            ->with(SessionMiddleware::SESSION_ATTRIBUTE)
-            ->willReturn($this->session);
+            ->withConsecutive(
+                [SessionMiddleware::SESSION_ATTRIBUTE],
+                ['action'],
+                ['keys', []]
+            )
+            ->will($this->onConsecutiveCalls($this->session, 'action', ['key']));
 
         $this->redis
             ->expects($this->once())
@@ -89,7 +93,7 @@ class TemplateTest extends MiddlewareTestCase
             );
 
         $this->twig
-            ->expects($this->exactly(6))
+            ->expects($this->exactly(8))
             ->method('addGlobal')
             ->withConsecutive(
                 ['email', 'alpha@bravo.com'],
@@ -97,7 +101,9 @@ class TemplateTest extends MiddlewareTestCase
                 ['selectedServerIndex', '1'],
                 ['selectedDbIndex', '2'],
                 ['servers', $this->container['REDIS_SERVERS']],
-                ['dbs', [['keys' => 13]]]
+                ['dbs', [['keys' => 13]]],
+                ['requestedAction', 'action'],
+                ['requestedKeys', ['key']]
             );
 
         $middleware = new Template(
@@ -122,13 +128,15 @@ class TemplateTest extends MiddlewareTestCase
             ->method('get');
 
         $this->twig
-            ->expects($this->exactly(4))
+            ->expects($this->exactly(6))
             ->method('addGlobal')
             ->withConsecutive(
                 ['selectedServerIndex', '1'],
                 ['selectedDbIndex', '2'],
                 ['servers', $this->container['REDIS_SERVERS']],
-                ['dbs', [['keys' => 13]]]
+                ['dbs', [['keys' => 13]]],
+                ['requestedAction', 'action'],
+                ['requestedKeys', ['key']]
             );
 
         $middleware = new Template(
