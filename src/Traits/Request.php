@@ -19,13 +19,13 @@ trait Request
      * Extracts a value from query params or post body of a server request
      * based on a provided key.
      *
-     * @var ServerRequestInterface $request
-     * @var string                 $key
-     * @var mixed                  $default
+     * @param ServerRequestInterface $request
+     * @param string                 $key
+     * @param mixed                  $default
      *
      * @return mixed
      */
-    protected function getValueFromRequest(ServerRequestInterface $request, $key, $default = NULL)
+    protected function getValueFromRequest(ServerRequestInterface $request, string $key, $default = NULL)
     {
         $queryParams = $request->getQueryParams();
 

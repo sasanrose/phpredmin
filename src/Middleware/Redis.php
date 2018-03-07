@@ -17,7 +17,6 @@ use PhpRedmin\Traits;
 use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\UriInterface;
 
 class Redis implements MiddlewareInterface
 {

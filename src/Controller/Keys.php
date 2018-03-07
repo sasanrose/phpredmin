@@ -84,7 +84,7 @@ class Keys implements KeysInterface
             return $response;
         }
 
-        if ($attrs['action'] == 'type') {
+        if ('type' == $attrs['action']) {
             return $this->handleType(
                 $this->redis,
                 $this->urlBuilder,

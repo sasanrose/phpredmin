@@ -37,13 +37,12 @@ trait Type
         ResponseInterface $response,
         Environment $twig,
         array $attrs
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         $key = current($attrs['keys']);
 
         $type = $redis->type($key);
 
-        if ($type === PhpRedminRedis::REDIS_NOT_FOUND) {
+        if (PhpRedminRedis::REDIS_NOT_FOUND === $type) {
             $response->getBody()->write(
                 $twig->render('controller/keys/not-found.twig', ['search' => $key])
             );
