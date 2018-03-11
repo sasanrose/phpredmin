@@ -61,6 +61,7 @@ function dependencies(Container $c)
         $router->middleware($c[Middleware\Template::class]);
         $router->middleware($c[Middleware\Redis::class]);
         $router->middleware($c[Middleware\Access::class]);
+        $router->middleware($c[Middleware\Request::class]);
         $router->middleware($c[Middleware\Auth::class]);
         $router->middleware($c[Middleware\Install::class]);
         $router->middleware($c[SessionMiddleware::class]);

@@ -44,7 +44,10 @@ trait Type
 
         if (PhpRedminRedis::REDIS_NOT_FOUND === $type) {
             $response->getBody()->write(
-                $twig->render('controller/keys/not-found.twig', ['search' => $key])
+                $twig->render('controller/keys/keys.twig', [
+                    'search' => $key,
+                    'notFound' => TRUE,
+                ])
             );
 
             return $response;
@@ -71,7 +74,10 @@ trait Type
         }
 
         $response->getBody()->write(
-            $twig->render('controller/keys/unknown-type.twig', ['search' => $key])
+            $twig->render('controller/keys/keys.twig', [
+                'search' => $key,
+                'unknown' => TRUE,
+            ])
         );
 
         return $response;

@@ -41,7 +41,7 @@ class TypeTest extends ControllerTestCase
 
         $errors['key'] = 'Key is required';
 
-        $this->mockResponse('controller/keys/key.twig', ['errors' => $errors]);
+        $this->mockResponse('controller/keys/keys.twig', ['errors' => $errors]);
 
         $keys = $this->getController();
         $keys->search($this->request, $this->response);
@@ -60,7 +60,10 @@ class TypeTest extends ControllerTestCase
             ->with('key')
             ->willReturn(Redis::REDIS_NOT_FOUND);
 
-        $this->mockResponse('controller/keys/not-found.twig', ['search' => 'key']);
+        $this->mockResponse('controller/keys/keys.twig', [
+            'search' => 'key',
+            'notFound' => TRUE,
+        ]);
 
         $keys = $this->getController();
         $keys->search($this->request, $this->response);
@@ -79,7 +82,10 @@ class TypeTest extends ControllerTestCase
             ->with('key')
             ->willReturn('unknown type');
 
-        $this->mockResponse('controller/keys/unknown-type.twig', ['search' => 'key']);
+        $this->mockResponse('controller/keys/keys.twig', [
+            'search' => 'key',
+            'unknown' => TRUE,
+        ]);
 
         $keys = $this->getController();
         $keys->search($this->request, $this->response);

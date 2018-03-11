@@ -1,0 +1,15 @@
+{% extends "layout/site.twig" %}
+
+{% block title %}{% trans %}PHPRedmin{% endtrans %}{% endblock %}
+{% block content %}
+    <div class="grid-x grid-margin-x">
+        <div class="cell small-12 large-12 medium-12">
+            {% include "shared/form/keys.twig" %}
+        </div>
+        {% if notFound %}
+            <div class="cell small-12 callout alert">
+                {% trans %}No result found for "{{ search }}"{% endtrans %}
+            <div>
+        {% endif %}
+    </div>
+{% endblock %}

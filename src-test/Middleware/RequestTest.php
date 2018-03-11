@@ -29,7 +29,8 @@ class RequestTest extends MiddlewareTestCase
         $this->request
             ->expects($this->exactly(2))
             ->method('withAttribute')
-            ->withConsecutive(['action', ''], ['keys', []]);
+            ->withConsecutive(['action', ''], ['keys', []])
+            ->will($this->returnSelf());
 
         $this->request
             ->expects($this->exactly(2))
@@ -44,7 +45,8 @@ class RequestTest extends MiddlewareTestCase
         $this->request
             ->expects($this->exactly(2))
             ->method('withAttribute')
-            ->withConsecutive(['action', 'action'], ['keys', ['key']]);
+            ->withConsecutive(['action', 'action'], ['keys', ['key']])
+            ->will($this->returnSelf());
 
         $this->request
             ->expects($this->exactly(2))
@@ -62,7 +64,8 @@ class RequestTest extends MiddlewareTestCase
         $this->request
             ->expects($this->exactly(2))
             ->method('withAttribute')
-            ->withConsecutive(['action', 'action'], ['keys', ['key1', 'key2']]);
+            ->withConsecutive(['action', 'action'], ['keys', ['key1', 'key2']])
+            ->will($this->returnSelf());
 
         $this->request
             ->expects($this->exactly(2))

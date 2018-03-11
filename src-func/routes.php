@@ -28,6 +28,11 @@ function routing(Container $c)
         'doInstall',
     ]);
 
+    $routeCollection->post('/keys', [
+        $c[Controller\KeysInterface::class],
+        'search',
+    ]);
+
     $routeCollection->get('/login', [
         $c[Controller\AuthInterface::class],
         'login',

@@ -14,6 +14,7 @@ namespace PhpRedmin;
 use PhpRedmin\Model\Auth;
 use PhpRedmin\Model\Systeminfo;
 use PhpRedmin\Model\User;
+use PhpRedmin\Redis as PhpRedminRedis;
 use PhpRedmin\Url\UrlBuilderInterface;
 use PhpRedmin\Validator\FormValidatorInterface;
 use Pimple\Container;
@@ -22,12 +23,11 @@ use Twig\Environment;
 
 function controllers(Container $c)
 {
-    $c[Controller\InstallerInterface::class] = function ($c) {
-        return new Controller\Installer(
+    $c[Controller\KeysInterface::class] = function ($c) {
+        return new Controller\Keys(
             $c[Environment::class],
+            $c[PhpRedminRedis::class],
             $c[UrlBuilderInterface::class],
-            $c[FormValidatorInterface::class],
-            $c[Systeminfo::class],
             $c[LoggerInterface::class]
         );
     };
@@ -39,6 +39,16 @@ function controllers(Container $c)
             $c[FormValidatorInterface::class],
             $c[Auth::class],
             $c[User::class],
+            $c[LoggerInterface::class]
+        );
+    };
+
+    $c[Controller\InstallerInterface::class] = function ($c) {
+        return new Controller\Installer(
+            $c[Environment::class],
+            $c[UrlBuilderInterface::class],
+            $c[FormValidatorInterface::class],
+            $c[Systeminfo::class],
             $c[LoggerInterface::class]
         );
     };

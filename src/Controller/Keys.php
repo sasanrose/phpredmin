@@ -78,7 +78,9 @@ class Keys implements KeysInterface
             ];
 
             $response->getBody()->write(
-                $this->twig->render('controller/keys/key.twig', ['errors' => $errors])
+                $this->twig->render('controller/keys/keys.twig', [
+                    'errors' => $errors,
+                ])
             );
 
             return $response;

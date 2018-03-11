@@ -46,6 +46,10 @@ function middlewares(Container $c)
         return new Middleware\Redis($c, $c[Redis::class]);
     };
 
+    $c[Middleware\Request::class] = function ($c) {
+        return new Middleware\Request();
+    };
+
     $c[Middleware\Template::class] = function ($c) {
         return new Middleware\Template(
             $c,

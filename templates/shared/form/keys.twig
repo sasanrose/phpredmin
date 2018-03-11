@@ -8,6 +8,15 @@
                 Also, searching in blocking mode does not support pagination and can cause your browser to crash.
             {% endtrans %}
         </div>
+        {% if errors|length > 0 %}
+            <div class="cell small-12 callout alert">
+                <ul>
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
         <div class="small-9 medium-9 large-6 cell">
             {% embed "shared/element/input.twig" with {'name': 'keys', 'type': 'text', 'icon': 'fa-key', 'value': requestedKeys|first} %}
                 {% block placeholder %}{% trans %}Key{% endtrans %}{% endblock %}

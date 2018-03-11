@@ -26,10 +26,10 @@ class Request implements MiddlewareInterface
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         $action = (array) $this->getValueFromRequest($request, 'action', '');
-        $request->withAttribute('action', current($action));
+        $request = $request->withAttribute('action', current($action));
 
         $keys = (array) $this->getValueFromRequest($request, 'keys', []);
-        $request->withAttribute('keys', $keys);
+        $request = $request->withAttribute('keys', $keys);
 
         return $next($request, $response);
     }
