@@ -13,8 +13,8 @@ done
 JQUERY_VER="3.2.1"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"   )" && pwd   )"
 JQUERY_FILE="jquery-$JQUERY_VER.min.js"
-FONT_AWESOME_VER="4.7.0"
-FONT_AWESOME_FILE="font-awesome-4.7.0.zip"
+FONT_AWESOME_VER="5.1.0"
+FONT_AWESOME_FILE="fontawesome-free-5.1.0-web.zip"
 
 echo "Preparing the assets directory"
 
@@ -54,7 +54,7 @@ cp ".$JQUERY_FILE.cache" $DIR/../public/assets/jquery/jquery.min.js
 if [ ! -e ".$FONT_AWESOME_FILE.cache" ]; then
     echo "Downloading Font Awesome";
 
-    wget "http://fontawesome.io/assets/$FONT_AWESOME_FILE" -O ".$FONT_AWESOME_FILE.cache"
+    wget "https://use.fontawesome.com/releases/v5.1.0/$FONT_AWESOME_FILE" -O ".$FONT_AWESOME_FILE.cache"
 
     if [ $? -ne 0 ]; then
         echo "Could not download Font Awesome"
@@ -68,8 +68,8 @@ if [ ! -d $DIR/../public/assets/font-awesome ]; then
     mkdir $DIR/../public/assets/font-awesome
 fi
 
-unzip -j -u ".$FONT_AWESOME_FILE.cache" "font-awesome-$FONT_AWESOME_VER/fonts/fontawesome*"  -d $DIR/../public/assets/font-awesome/fonts
-unzip -j -u ".$FONT_AWESOME_FILE.cache" "font-awesome-$FONT_AWESOME_VER/css/font-awesome.min.css" -d $DIR/../public/assets/font-awesome/css
+unzip -j -u ".$FONT_AWESOME_FILE.cache" "fontawesome-free-$FONT_AWESOME_VER-web/webfonts/*"  -d $DIR/../public/assets/font-awesome/webfonts
+unzip -j -u ".$FONT_AWESOME_FILE.cache" "fontawesome-free-$FONT_AWESOME_VER-web/css/all.css" -d $DIR/../public/assets/font-awesome/css
 
 echo "Creating phpredmin assets";
 

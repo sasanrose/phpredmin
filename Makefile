@@ -51,7 +51,8 @@ setup-dev:
 	else \
 		bin/git-hooks --uninstall && bin/git-hooks --install bin; \
 	fi;
-	docker build -t sasanrose/phpredmin:2.0-dev -f .docker/Dockerfile-dev .
+	docker build -t sasanrose/phpredmin:2.0-dev -f .docker/Dockerfile-dev . \
+	make docker
 
 self-signed-ssl:
 	rm ssl/ -rf
