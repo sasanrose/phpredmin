@@ -16,12 +16,10 @@ use PhpRedmin\Url\UrlBuilderInterface;
 use Psr\Http\Message\ResponseInterface;
 use Twig\Environment;
 
-trait Type
+trait Keys
 {
-    use Actions;
-
     /**
-     * Handles the type action in key controller.
+     * Handles the keys action in key controller.
      *
      * @param PhpRedminRedis      $redis
      * @param UrlBuilderInterface $urlBuilder
@@ -31,16 +29,16 @@ trait Type
      *
      * @return ResponseInterface
      */
-    protected function handleType(
+    protected function handleKeys(
         PhpRedminRedis $redis,
         UrlBuilderInterface $urlBuilder,
         ResponseInterface $response,
         Environment $twig,
         string $key
     ): ResponseInterface {
-        $type = $redis->type($key);
+        $result = $redis->keys($key);
 
-        if (PhpRedminRedis::REDIS_NOT_FOUND === $type) {
+        if (!$result) {
             $response->getBody()->write(
                 $twig->render('controller/keys/keys.twig', [
                     'search' => $key,
@@ -50,34 +48,5 @@ trait Type
 
             return $response;
         }
-
-        if (isset($this->actions[$type])) {
-            $serverIndex = $redis->getServerIndex();
-            $dbIndex = $redis->getDbIndex();
-
-            // Sending the action as a query is just for checking the access
-            // levels of current user to check if the user has access to
-            // trigger the requested action or not
-            $urlBuilder->setRedis(
-                $serverIndex,
-                $dbIndex,
-                $this->actions[$type],
-                [$key]
-            );
-
-            $urlBuilder->setQuery(['keyType' => $type]);
-            $urlBuilder->setPath('view');
-
-            return $response->withRedirect($urlBuilder->toString());
-        }
-
-        $response->getBody()->write(
-            $twig->render('controller/keys/keys.twig', [
-                'search' => $key,
-                'unknown' => TRUE,
-            ])
-        );
-
-        return $response;
     }
 }

@@ -29,14 +29,14 @@
                         <ul class="menu">
                             <li><a href="/server/info"><i class="fa fa-info"></i> {% trans %}Info{% endtrans %}</a></li>
                             <li><a href="/server/config"><i class="fa fa-cogs"></i> {% trans %}Configurations{% endtrans %}</a></li>
-                            <li><a href="/monitoring"><i class="fa fa-bar-chart"></i> {% trans %}Stats{% endtrans %}</a></li>
+                            <li><a href="/monitoring"><i class="fa fa-chart-line"></i> {% trans %}Stats{% endtrans %}</a></li>
                             <li><a href="/logs"><i class="fa fa-exclamation-triangle"></i> {% trans %}Slow logs{% endtrans %}</a></li>
                         </ul>
                     </li>
                     <li><a href="/terminal"><i class="fa fa-terminal"></i> {% trans %}Terminal{% endtrans %}</a></li>
                     <li class="show-for-large">
                         <a href="https://github.com/sasanrose/phpredmin" target="_blank">
-                            <i class="fa fa-github"></i> {% trans %}Github{% endtrans %}
+                            <i class="fab fa-github"></i> {% trans %}Github{% endtrans %}
                         </a>
                     </li>
                 </ul>
@@ -49,12 +49,12 @@
                             <li><a href="/flush/db"><i class="fa fa-trash"></i> {% trans %}Flush DB{% endtrans %}</a></li>
                             <li><a href="/flush/all"><i class="fa fa-times"></i> {% trans %}Flush All{% endtrans %}</a></li>
                             <li class="divider"></li>
-                            <li><a href="/save/non-blocking"><i class="fa fa-floppy-o"></i> {% trans %}Asynchronous Save{% endtrans %}</a></li>
-                            <li><a href="/save/blocking"><i class="fa fa-floppy-o"></i> {% trans %}Synchronous Save{% endtrans %}</a></li>
+                            <li><a href="/save/non-blocking"><i class="fa fa-save"></i> {% trans %}Asynchronous Save{% endtrans %}</a></li>
+                            <li><a href="/save/blocking"><i class="fa fa-save"></i> {% trans %}Synchronous Save{% endtrans %}</a></li>
                             <li class="divider"></li>
-                            <li><a href="/monitoring/reset"><i class="fa fa-refresh"></i> {% trans %}Reset Stats{% endtrans %}</a></li>
+                            <li><a href="/monitoring/reset"><i class="fas fa-sync"></i> {% trans %}Reset Stats{% endtrans %}</a></li>
                             <li class="hide-for-large"><a href="/password/change"><i class="fa fa-key"></i> {% trans %}Change password{% endtrans %}</a></li>
-                            <li class="hide-for-large"><a href="/logout"><i class="fa fa-sign-out"></i> {% trans %}Sign out{% endtrans %}</a></li>
+                            <li class="hide-for-large"><a href="/logout"><i class="fas fa-sign-out-alt"></i> {% trans %}Sign out{% endtrans %}</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -62,10 +62,10 @@
             <div class="top-bar-right show-for-large">
                 <ul class="dropdown menu" data-dropdown-menu>
                     <li class="is-dropdown-submenu-parent">
-                        <a href="#"><i class="fa fa-user-circle-o"></i> {{ user.firstname }} {{ user.lastname }}</a>
+                        <a href="#"><i class="fa fa-user"></i> {{ user.firstname }} {{ user.lastname }}</a>
                         <ul class="menu">
                             <li><a href="/password/change"><i class="fa fa-key"></i> {% trans %}Change password{% endtrans %}</a></li>
-                            <li><a href="/logout"><i class="fa fa-sign-out"></i> {% trans %}Sign out{% endtrans %}</a></li>
+                            <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> {% trans %}Sign out{% endtrans %}</a></li>
                         </ul>
                     </li>
                 </ul>

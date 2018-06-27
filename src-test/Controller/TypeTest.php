@@ -19,34 +19,8 @@ use PhpRedmin\Url\UrlBuilderInterface;
 /**
  * @group controller
  */
-class TypeTest extends ControllerTestCase
+class TypeTest extends KeysTestCase
 {
-    protected $redis;
-    protected $urlBuilder;
-
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->redis = $this->createMock(Redis::class);
-        $this->urlBuilder = $this->createMock(UrlBuilderInterface::class);
-    }
-
-    public function testEmptyKey()
-    {
-        $this->request
-            ->expects($this->once())
-            ->method('getAttributes')
-            ->willReturn(['action' => 'type', 'keys' => []]);
-
-        $errors['key'] = 'Key is required';
-
-        $this->mockResponse('controller/keys/keys.twig', ['errors' => $errors]);
-
-        $keys = $this->getController();
-        $keys->search($this->request, $this->response);
-    }
-
     public function testKeyNotFound()
     {
         $this->request
@@ -176,15 +150,5 @@ class TypeTest extends ControllerTestCase
             $keys = $this->getController();
             $keys->search($this->request, $this->response);
         }
-    }
-
-    protected function getController()
-    {
-        return new KeysController(
-            $this->twig,
-            $this->redis,
-            $this->urlBuilder,
-            $this->logger
-        );
     }
 }

@@ -41,5 +41,11 @@ function models(Container $c)
         );
     };
 
+    $c[Model\Key::class] = function ($c) {
+        return new Model\Key(
+            $c[Redis::class]
+        );
+    };
+
     return $c;
 }

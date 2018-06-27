@@ -23,6 +23,7 @@ class Keys implements KeysInterface
 {
     use LoggerAwareTrait;
     use Traits\Keys\Type;
+    use Traits\Keys\Keys;
 
     /**
      * Redis instance to connect to Redis.
@@ -72,11 +73,9 @@ class Keys implements KeysInterface
     {
         $attrs = $request->getAttributes();
 
-        if (!isset($attrs['keys']) || empty($attrs['keys'])) {
-            $errors = [
-                'key' => _('Key is required'),
-            ];
+        $errors = $this->validate($attrs);
 
+        if (!empty($errors)) {
             $response->getBody()->write(
                 $this->twig->render('controller/keys/keys.twig', [
                     'errors' => $errors,
@@ -86,14 +85,47 @@ class Keys implements KeysInterface
             return $response;
         }
 
-        if ('type' == $attrs['action']) {
-            return $this->handleType(
-                $this->redis,
-                $this->urlBuilder,
-                $response,
-                $this->twig,
-                $attrs
-            );
+        $method = 'handleType';
+
+        if ($attrs['action'] === 'keys') {
+            $method = 'handleKeys';
         }
+
+        return $this->$method(
+            $this->redis,
+            $this->urlBuilder,
+            $response,
+            $this->twig,
+            current((array) $attrs['keys'])
+        );
+    }
+
+    /**
+     * Validates keys and action.
+     *
+     * @param array $attrs
+     *
+     * @return array
+     */
+    protected function validate(array $attrs): array {
+        if (!isset($attrs['keys']) || empty($attrs['keys'])) {
+            return [
+                'keys' => _('Key is required'),
+            ];
+        }
+
+        if (!isset($attrs['action']) || empty($attrs['action'])) {
+            return [
+                'action' => _('Action is required'),
+            ];
+        }
+
+        if (!in_array($attrs['action'], ['type', 'keys', 'scan'])) {
+            return [
+                'action' => _('Invalid action'),
+            ];
+        }
+
+        return [];
     }
 }
