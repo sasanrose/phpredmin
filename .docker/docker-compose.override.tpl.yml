@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+    phpredmin:
+        volumes:
+            - ./:/var/www/html/phpredmin:z
+        environment:
+            - PHPREDMIN_REDIS_SERVERS_ADDR_0=redis
+            - PHPREDMIN_REDIS_SERVERS_PORT_0=6379
+            - PHPREDMIN_TEMPLATES_CACHE_DIR=/tmp/php-redmin-cache
+            - PHPREDMIN_DEVELOPMENT_MODE=1
+            - PHPREDMIN_LOG_LEVEL=7
+        ports:
+            - "8443:443"
+        depends_on:
+            - redis

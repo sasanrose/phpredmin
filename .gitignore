@@ -7,3 +7,4 @@ bin/*
 !bin/install-assets
 cover/
 vendor/
+docker-compose.override.yml*
