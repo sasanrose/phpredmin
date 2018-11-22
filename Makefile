@@ -47,7 +47,7 @@ setup-dev:
 	$(call install_composer)
 	bin/composer install; \
 	if [ ! -e bin/git-hooks ]; then \
-		wget https://raw.githubusercontent.com/sasanrose/git-hooks/master/git-hooks -O bin/git-hooks && chmod u+x bin/git-hooks && bin/git-hooks --install; \
+		wget https://raw.githubusercontent.com/sasanrose/git-hooks/master/git-hooks -O bin/git-hooks && chmod u+x bin/git-hooks && bin/git-hooks --install bin; \
 	else \
 		bin/git-hooks --uninstall && bin/git-hooks --install bin; \
 	fi;
